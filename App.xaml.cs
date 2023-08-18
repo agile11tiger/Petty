@@ -1,12 +1,17 @@
-﻿namespace Petty
+﻿using Petty.Services.Navigation;
+
+namespace Petty
 {
     public partial class App : Application
     {
-        public App()
+        public App(INavigationService navigationService)
         {
-            InitializeComponent();
+            _navigationService = navigationService;
 
-            MainPage = new AppShell();
+            InitializeComponent();
+            MainPage = new AppShell(_navigationService);
         }
+
+        private readonly INavigationService _navigationService;
     }
 }
