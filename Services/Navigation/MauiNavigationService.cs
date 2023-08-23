@@ -18,7 +18,7 @@ namespace Petty.Services.Navigation
 
         //TODO: change
         public Task InitializeAsync() => NavigateToAsync(
-            string.IsNullOrEmpty("_settingsService.AuthAccessToken") ? "//Login" : "//Main/Settings");
+            string.IsNullOrEmpty("_settingsService.AuthAccessToken") ? "//Login" : "//Main");
 
         public Task NavigateToAsync(string route, IDictionary<string, object> routeParameters = null)
         {

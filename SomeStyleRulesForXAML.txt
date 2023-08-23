@@ -1,0 +1,29 @@
+0. Любой порядок элементов зависит от их длины. 
+Если она в целом у двух элементов одинакова, то берется длина до первого, второго и т.д пробела.
+
+<Style x:Key="LabelHeader" TargetType="Label">
+	<Setter Property="Margin" Value="16,0" />		первый, так как до второго пробела оказался короче
+	<Setter Property="FontSize" Value="14" />
+	<Setter Property="FontFamily" Value="OpenSansExtraBold" />
+</Style>
+
+1. Все переносятся только табами. От начала родительского элемента 1таб. Переносить пробелами по одной точки НЕ НАДО!
+2.Если элемент внутри .xaml файла имеет более 3 свойств или эти свойства не помещаются в экран, 
+то нужно делать перенос каждого свойства на новую строку.
+
+Label 
+	x:Uid="1"
+	x:Name="agile_tiger"
+	StyleId="agile_tiger"
+	ClassId="agile_tiger"
+	StyleClass="agile_tiger"
+	FontSize="15"
+	Text="Click me!)"
+	FontAttributes="Italic"
+	TextDecorations="Underline"
+	HorizontalTextAlignment="Center"/>
+
+2. Порядок свойств элемента зависит от их длины, так будет легче читать стили. Применяется только внутри группы.
+3. Свойства с префиксом "x:" пишутся в самом начале, это первая группа. 
+Затем свойства Style, StyleId, ClassId, StyleClass это вторая группа.
+После все остальные это третья группа.

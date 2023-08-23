@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <Style TargetType="Shell" ApplyToDerivedTypes="True">
+        <Setter x:Name="headerBackground" Property="Shell.BackgroundColor" Value="#cdcdcd" />
+        <!--TODO: not working https://github.com/dotnet/maui/issues/10445 -->
+        <!--<Setter Property="Background">
+            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                <GradientStop Color="red" Offset="0" />
+                <GradientStop Color="Blue" Offset="1.0" />
+            </LinearGradientBrush>
+        </Setter>-->
+        <Setter Property="Shell.ForegroundColor" Value="Black" />
+        <Setter Property="Shell.TitleColor" Value="Black" />
+        <Setter Property="Shell.DisabledColor" Value="#ccc" />
+        <Setter Property="Shell.UnselectedColor" Value="#ccc" />
+        <Setter Property="Shell.NavBarHasShadow" Value="True" />
+        <Setter Property="Shell.TabBarBackgroundColor" Value="#b0b0b0" />
+        <Setter Property="Shell.TabBarForegroundColor" Value="Black" />
+        <Setter Property="Shell.TabBarTitleColor" Value="Black" />
+        <Setter Property="Shell.TabBarUnselectedColor" Value="Black" />
+
+    </Style>
+</ResourceDictionary>

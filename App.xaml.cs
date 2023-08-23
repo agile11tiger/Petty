@@ -7,7 +7,8 @@ namespace Petty
         public App(INavigationService navigationService)
         {
             _navigationService = navigationService;
-
+            //TODO: По желанию поддержать две темы и в настройках давать выбор.
+            UserAppTheme = AppTheme.Light;
             InitializeComponent();
             MainPage = new AppShell(_navigationService);
         }

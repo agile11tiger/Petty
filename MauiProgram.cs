@@ -3,6 +3,7 @@ using Microsoft.Extensions.Logging;
 using Petty.Services.Navigation;
 using Petty.Services.Settings;
 using Petty.Views;
+using Sharpnado.Tabs;
 
 namespace Petty
 {
@@ -14,8 +15,12 @@ namespace Petty
             builder
                 .UseMauiApp<App>()
                 .UseMauiCommunityToolkit()
+                .UseSharpnadoTabs(loggerEnable: false)
                 .ConfigureFonts(fonts =>
                 {
+                    fonts.AddFont("OpenSans-Bold.ttf", "OpenSansBold");
+                    fonts.AddFont("OpenSans-ExtraBold.ttf", "OpenSansExtraBold");
+                    fonts.AddFont("OpenSans-Light.ttf", "OpenSansLight");
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 })
@@ -27,8 +32,6 @@ namespace Petty
     		builder.Logging.AddDebug();
 #endif
 
-            //TODO: По желанию поддержать две темы и в настройках давать выбор.
-            Application.Current.UserAppTheme = AppTheme.Light;
             TaskScheduler.UnobservedTaskException += HandleUnobservedException;
             AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(HandleCurrentDomainUnhandledException);
             return builder.Build();
@@ -55,6 +58,7 @@ namespace Petty
 
         private static MauiAppBuilder RegisterPagesWithViewModels(this MauiAppBuilder builder)
         {
+            builder.Services.AddTransientWithShellRoute<MainPage, MainViewModel>("Main");
             builder.Services.AddTransientWithShellRoute<SettingsPage, SettingsViewModel>("Settings");
             return builder;
         }

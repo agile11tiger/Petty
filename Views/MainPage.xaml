@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:tabs="http://sharpnado.com"
+    x:Class="Petty.Views.MainPage"
+    Style="{StaticResource PageBaseStyle}"
+    Title="Main">
+
+    <!--StyleId="appGradient"-->
+
+    <ContentPage.Resources>
+        <Style x:Key="MaterialTabStyle" TargetType="tabs:MaterialUnderlinedTabItem">
+            <Setter Property="IconSize" Value="24" />
+            <Setter Property="LabelSize" Value="14" />
+            <Setter Property="UnderlineAllTab" Value="True" />
+            <Setter Property="FontFamily" Value="OpenSansRegular" />
+            <Setter Property="SelectedTabColor" Value="{StaticResource Primary}" />
+            <Setter Property="UnselectedLabelColor" Value="{StaticResource Gray200}" />
+        </Style>
+
+        <Style x:Key="BottomTabStyle" BasedOn="{StaticResource MaterialTabStyle}" TargetType="tabs:MaterialUnderlinedTabItem">
+            <Setter Property="LabelSize" Value="12" />
+        </Style>
+
+        <Style x:Key="LabelHeader" TargetType="Label">
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="Margin" Value="16,0" />
+            <Setter Property="VerticalOptions" Value="Center" />
+            <Setter Property="FontFamily" Value="OpenSansExtraBold" />
+        </Style>
+
+        <Style x:Key="LabelDescription" TargetType="Label">
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="VerticalOptions" Value="Center" />
+            <Setter Property="FontFamily" Value="OpenSansRegular" />
+        </Style>
+
+        <Style x:Key="Card" TargetType="Border">
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="StrokeThickness" Value="2" />
+            <Setter Property="StrokeShape" Value="RoundRectangle 20" />
+            <Setter Property="Stroke" Value="{StaticResource Gray975}" />
+        </Style>
+
+        <Shadow 
+            x:Key="tabBarShadow" 
+            Radius="30" 
+            Opacity="10" 
+            Brush="#111" 
+            Offset="0,-30"/>
+
+        <Shadow
+            x:Key="circleButtonShadow"
+            Radius="99"
+            Brush="#111"
+            Offset="5,-70"/>
+        <ResourceDictionary Source="/AppCss.xaml" />
+    </ContentPage.Resources>
+
+    <Grid RowDefinitions="0.9*, 0.1*">
+        <ContentView>
+            <Label Text="LOL"/>
+        </ContentView>
+        <tabs:TabHostView 
+            x:Name="TabHostButton"
+            Margin="0"
+            Grid.Row="3"
+            Shadow="{StaticResource tabBarShadow}"
+            BackgroundColor="{StaticResource Gray900}">
+            <tabs:MaterialUnderlinedTabItem 
+                Label="Leaderboard" 
+                IconTextSpacing="0"
+                IconOptions="TopIcon"
+                IconImageSource="podium.png"
+                Style="{StaticResource BottomTabStyle}"/>
+            <tabs:TabButton 
+                x:Name="TabButton"
+                ButtonPadding="15"
+                ButtonCircleSize="80"
+                ButtonWidthRequest="100"
+                ButtonHeightRequest="100"
+                IconImageSource="play.png"
+                Shadow="{StaticResource circleButtonShadow}"
+                ButtonBackgroundColor="{StaticResource Primary}">
+            </tabs:TabButton>
+            <tabs:MaterialUnderlinedTabItem Style="{StaticResource BottomTabStyle}"
+                Label="Settings" 
+                IconTextSpacing="0"
+                IconOptions="TopIcon"
+                IconImageSource="settings.svg"/>
+        </tabs:TabHostView>
+    </Grid>
+</ContentPage>
