@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Shell ClassId="shell"
-    x:Class="Petty.AppShell"
-    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:Petty"
-    xmlns:views="clr-namespace:Petty.Views"
-    FlyoutHeaderBehavior="CollapseOnScroll"
-    FlyoutBehavior="Flyout"
-    FlyoutBackgroundColor="Green">
+       x:Class="Petty.AppShell"
+       xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:local="clr-namespace:Petty"
+       xmlns:views="clr-namespace:Petty.Views"
+       FlyoutBehavior="Flyout"
+       FlyoutBackgroundColor="WhiteSmoke"
+       FlyoutHeaderBehavior="CollapseOnScroll">
 
     <Shell.Resources>
         <ResourceDictionary Source="/AppShellCss.xaml" />
@@ -15,18 +15,93 @@
     
     <Shell.FlyoutHeaderTemplate>
         <DataTemplate>
-            <Grid HeightRequest="200">
-                <Image Source="dotnet_bot.svg"
-                       Aspect="AspectFill"
-                       Opacity="0.8"/>
-                <Label Text="Petty"
-                       TextColor="BlueViolet"
-                       FontAttributes="Bold"
-                       HorizontalTextAlignment="Center"
-                       VerticalTextAlignment="Center"/>
+            <Grid HeightRequest="250"
+                  ColumnDefinitions="*,*"
+                  BackgroundColor="#111"
+                  RowDefinitions="100,100,50">
+                <!--TODO: VerticalTextAlignment doesn`t work here. I don`t know, why?-->
+                <VerticalStackLayout Grid.Row="0"
+                                     Grid.Column="0"
+                                     Background="yellow">
+                    <Image Source="play.png" 
+                           Aspect="AspectFit" 
+                           VerticalOptions="Fill"
+                           HorizontalOptions="Fill"/>
+                    <Label Text="first"
+                           VerticalTextAlignment="Center"
+                           HorizontalTextAlignment="Center"/>
+                </VerticalStackLayout>
+                <VerticalStackLayout Grid.Row="0"
+                                     Grid.Column="1"
+                                     Background="green">
+                    <Image Source="play.png"
+                           Aspect="AspectFit"
+                           VerticalOptions="Fill"
+                           HorizontalOptions="Fill"/>
+                    <Label Text="second"
+                           VerticalTextAlignment="Center"
+                           HorizontalTextAlignment="Center"/>
+                </VerticalStackLayout>
+                <VerticalStackLayout Grid.Row="1"
+                                     Grid.Column="0"
+                                     Background="blue">
+                    <Image Source="play.png"
+                           Aspect="AspectFit"
+                           VerticalOptions="Fill"
+                           HorizontalOptions="Fill"/>
+                    <Label Text="third"
+                           VerticalTextAlignment="Center"
+                           HorizontalTextAlignment="Center"/>
+                </VerticalStackLayout>
+                <VerticalStackLayout Grid.Row="1"
+                                     Grid.Column="1"
+                                     Background="BlueViolet">
+                    <Image Source="play.png"
+                           Aspect="AspectFit"
+                           VerticalOptions="Fill"
+                           HorizontalOptions="Fill"/>
+                    <Label Text="fourth"
+                           VerticalTextAlignment="Center"
+                           HorizontalTextAlignment="Center"/>
+                </VerticalStackLayout>
+                <VerticalStackLayout Grid.RowSpan="2"
+                                     Grid.ColumnSpan="2"
+                                     WidthRequest="50"
+                                     HeightRequest="70">
+                    <Image Opacity="1"
+                           Source="moon.svg"
+                           Aspect="AspectFill"
+                           VerticalOptions="Center"
+                           HorizontalOptions="Center"/>
+                    <Label Text="Petty"
+                           FontAttributes="Bold"
+                           TextColor="Black"
+                           VerticalTextAlignment="Center"
+                           HorizontalTextAlignment="Center"/>
+                </VerticalStackLayout>
+                <Label Grid.Row="2" 
+                       Grid.ColumnSpan="2"
+                       TextColor="Pink" 
+                       HorizontalOptions="Center"
+                       VerticalTextAlignment="Center"
+                       Text="Streaming board for donations..."/>
             </Grid>            
         </DataTemplate>
     </Shell.FlyoutHeaderTemplate>
+
+    <Shell.ItemTemplate>
+        <DataTemplate>
+            <Grid ColumnDefinitions="0.2*,0.8*">
+                <Image Source="{Binding FlyoutIcon}"
+                       Margin="5"
+                       HeightRequest="45" />
+                <Label Grid.Column="1"
+                       Text="{Binding Title}"
+                       FontAttributes="Italic"
+                       VerticalTextAlignment="Center" />
+            </Grid>
+        </DataTemplate>
+    </Shell.ItemTemplate>
 
     <Shell.MenuItemTemplate>
         <DataTemplate>
@@ -34,16 +109,21 @@
                 <Image Source="{Binding Icon}"
                        Margin="5"
                        HeightRequest="45"/>
-                <Label Text="{Binding Text}"
+                <Label Grid.Column="1"
+                       Text="{Binding Text}"
                        FontAttributes="Italic"
                        VerticalTextAlignment="Center"/>
             </Grid>
         </DataTemplate>
     </Shell.MenuItemTemplate>
 
-    <MenuItem Text="SomePapges"
-              IconImageSource="dotnet_bot.svg"
-              />
+    <ShellContent Route="Main"
+                  FlyoutItemIsVisible="False"
+                  ContentTemplate="{DataTemplate views:MainPage}" />
+
+    <MenuItem x:Name="MainPage"
+              Text="SomePapges"
+              IconImageSource="dotnet_bot.svg"/>
     <MenuItem>
         <Shell.MenuItemTemplate>
             <DataTemplate>
@@ -54,42 +134,31 @@
     <MenuItem Text="Help"
               IconImageSource="settings.png"/>
     <MenuItem Text="About"
-              IconImageSource="dotnet_bot.svg"/>
+              IconImageSource="play.png"/>
 
-    <TabBar FlyoutDisplayOptions="AsSingleItem">
-        <ShellContent Title="Monkeys"
-                      Icon="dotnet_bot.svg" 
-                      ContentTemplate="{DataTemplate views:MainPage}"/>
-        <!--<ShellContent Title="Play"
-                      Icon="settings.svg" 
-                      ContentTemplate="{DataTemplate views:SettingsPage}"/>
-        <Tab Title="Settings"
-             Icon="settings.png">
-            <ShellContent Route="Settings"
-                          Title="Main"
-                          Icon="dotnet_bot.svg"
-                          ContentTemplate="{DataTemplate views:SettingsPage}" />
-            <ShellContent Title="LeaderBoard"
-                          Icon="settings.png"
-                          ContentTemplate="{DataTemplate views:SettingsPage}" />
-        </Tab>-->
-    </TabBar>
 
     <Shell.FlyoutFooterTemplate>
         <DataTemplate>
-            <StackLayout>
-                <Label 
-                    FontSize="20"
-                    Text="Donations"
-                    FontAttributes="Bold"
-                    HorizontalTextAlignment="Center"/>
-                <Label 
-                    FontSize="15"
-                    Text="Click me!)"
-                    FontAttributes="Italic"
-                    HorizontalTextAlignment="Center"
-                    TextDecorations="Underline"/>
-            </StackLayout>
+            <Grid HeightRequest="50" 
+                  VerticalOptions="Fill"
+                  HorizontalOptions="Fill"
+                  BackgroundColor="Green"
+                  ColumnDefinitions="80,*">
+                <Image Grid.Column="0"
+                       Background="red"
+                       Source="coffee.gif"
+                       HorizontalOptions="End"
+                       VerticalOptions="Center"
+                       IsAnimationPlaying="True"
+                       Margin="5"/>
+                <Label Grid.Column="1"
+                       FontSize="15"
+                       Text="Buy me a coffee, I'm tired :("
+                       FontAttributes="Bold"
+                       HorizontalTextAlignment="Start"
+                       VerticalTextAlignment="Center"
+                       TextDecorations="Underline"/>
+            </Grid>
         </DataTemplate>
     </Shell.FlyoutFooterTemplate>
 </Shell>

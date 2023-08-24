@@ -7,4 +7,6 @@
 
     <ContentPage.Resources>
     </ContentPage.Resources>
+
+    <Label Text="settings"/>
 </ContentPage>

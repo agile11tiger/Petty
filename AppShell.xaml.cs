@@ -19,7 +19,7 @@ namespace Petty
 
             if (Handler is not null)
             {
-                //await _navigationService.InitializeAsync();
+                await _navigationService.InitializeAsync();
             }
         }
     }

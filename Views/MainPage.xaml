@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage 
-    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:tabs="http://sharpnado.com"
-    x:Class="Petty.Views.MainPage"
-    Style="{StaticResource PageBaseStyle}"
-    Title="Main">
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:tabs="http://sharpnado.com"
+             x:Class="Petty.Views.MainPage"
+             Style="{StaticResource PageBaseStyle}"
+             Title="Main">
 
     <!--StyleId="appGradient"-->
 
@@ -43,18 +42,15 @@
             <Setter Property="Stroke" Value="{StaticResource Gray975}" />
         </Style>
 
-        <Shadow 
-            x:Key="tabBarShadow" 
-            Radius="30" 
-            Opacity="10" 
-            Brush="#111" 
-            Offset="0,-30"/>
+        <Shadow x:Key="tabBarShadow"
+                Radius="30"
+                Opacity="10"
+                Brush="#111"
+                Offset="0,-30"/>
 
-        <Shadow
-            x:Key="circleButtonShadow"
-            Radius="99"
-            Brush="#111"
-            Offset="5,-70"/>
+        <Shadow x:Key="circleButtonShadow"
+                Brush="#111"
+                Offset="5,-30"/>
         <ResourceDictionary Source="/AppCss.xaml" />
     </ContentPage.Resources>
 
@@ -62,33 +58,31 @@
         <ContentView>
             <Label Text="LOL"/>
         </ContentView>
-        <tabs:TabHostView 
-            x:Name="TabHostButton"
-            Margin="0"
-            Grid.Row="3"
-            Shadow="{StaticResource tabBarShadow}"
-            BackgroundColor="{StaticResource Gray900}">
-            <tabs:MaterialUnderlinedTabItem 
-                Label="Leaderboard" 
-                IconTextSpacing="0"
-                IconOptions="TopIcon"
-                IconImageSource="podium.png"
-                Style="{StaticResource BottomTabStyle}"/>
-            <tabs:TabButton 
-                x:Name="TabButton"
-                ButtonPadding="15"
-                ButtonCircleSize="80"
-                ButtonWidthRequest="100"
-                ButtonHeightRequest="100"
-                IconImageSource="play.png"
-                Shadow="{StaticResource circleButtonShadow}"
-                ButtonBackgroundColor="{StaticResource Primary}">
+        <tabs:TabHostView x:Name="TabHostButton"
+                          Margin="0"
+                          Grid.Row="3"
+                          Shadow="{StaticResource tabBarShadow}"
+                          BackgroundColor="{StaticResource Gray900}">
+            <tabs:MaterialUnderlinedTabItem Label="Leaderboard" 
+                                            IconTextSpacing="0"
+                                            IconOptions="TopIcon"
+                                            IconImageSource="podium.png"
+                                            Style="{StaticResource BottomTabStyle}"/>
+            <tabs:TabButton x:Name="TabButton"
+                            TranslationY="-20"
+                            ButtonPadding="15"
+                            ButtonCircleSize="80"
+                            ButtonWidthRequest="100"
+                            ButtonHeightRequest="100"
+                            IconImageSource="play.png"
+                            Shadow="{StaticResource circleButtonShadow}"
+                            ButtonBackgroundColor="{StaticResource Primary}">
             </tabs:TabButton>
             <tabs:MaterialUnderlinedTabItem Style="{StaticResource BottomTabStyle}"
-                Label="Settings" 
-                IconTextSpacing="0"
-                IconOptions="TopIcon"
-                IconImageSource="settings.svg"/>
+                                            Label="Settings" 
+                                            IconTextSpacing="0"
+                                            IconOptions="TopIcon"
+                                            IconImageSource="settings.png"/>
         </tabs:TabHostView>
     </Grid>
 </ContentPage>
