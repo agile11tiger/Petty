@@ -44,7 +44,7 @@
 
         <Shadow x:Key="tabBarShadow"
                 Radius="30"
-                Opacity="10"
+                Opacity="1"
                 Brush="#111"
                 Offset="0,-30"/>
 
@@ -56,7 +56,7 @@
 
     <Grid RowDefinitions="0.9*, 0.1*">
         <ContentView>
-            <Label Text="LOL"/>
+            <Label Text="LOL" />
         </ContentView>
         <tabs:TabHostView x:Name="TabHostButton"
                           Margin="0"

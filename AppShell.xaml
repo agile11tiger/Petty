@@ -4,6 +4,7 @@
        xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
        xmlns:local="clr-namespace:Petty"
+       xmlns:viewmodels="clr-namespace:Petty.ViewModels"
        xmlns:views="clr-namespace:Petty.Views"
        FlyoutBehavior="Flyout"
        FlyoutBackgroundColor="WhiteSmoke"
@@ -12,7 +13,7 @@
     <Shell.Resources>
         <ResourceDictionary Source="/AppShellCss.xaml" />
     </Shell.Resources>
-    
+
     <Shell.FlyoutHeaderTemplate>
         <DataTemplate>
             <Grid HeightRequest="250"
@@ -79,12 +80,15 @@
                            VerticalTextAlignment="Center"
                            HorizontalTextAlignment="Center"/>
                 </VerticalStackLayout>
-                <Label Grid.Row="2" 
+                <Label MaxLines ="1"
+                       Grid.Row="2" 
                        Grid.ColumnSpan="2"
-                       TextColor="Pink" 
-                       HorizontalOptions="Center"
+                       TextColor="Pink"
+                       HorizontalOptions="End"
                        VerticalTextAlignment="Center"
-                       Text="Streaming board for donations..."/>
+                       Text="{Binding RunningText}"
+                       TranslationX="{Binding RunningTextStart}"
+                       MaximumWidthRequest="{Binding RunningTextMaximumWidthRequest, Mode=OneTime}" />
             </Grid>            
         </DataTemplate>
     </Shell.FlyoutHeaderTemplate>
@@ -120,14 +124,28 @@
     <ShellContent Route="Main"
                   FlyoutItemIsVisible="False"
                   ContentTemplate="{DataTemplate views:MainPage}" />
-
+    <ShellContent Route="Settings"
+                  Title="Settings"
+                Icon="dotnet_bot.svg"
+                ContentTemplate="{DataTemplate views:SettingsPage}" />
     <MenuItem x:Name="MainPage"
-              Text="SomePapges"
+              Text="SomePage"
               IconImageSource="dotnet_bot.svg"/>
     <MenuItem>
         <Shell.MenuItemTemplate>
             <DataTemplate>
-                <Label IsEnabled="False" HeightRequest="1" BackgroundColor="LightGray"></Label>
+                <VerticalStackLayout Padding="5">
+                    <Label IsEnabled="False" 
+                           HeightRequest="1" 
+                           BackgroundColor="#ddd">
+                        <Label.Shadow>
+                            <Shadow Radius="8"
+                                    Offset="0,0"
+                                    Opacity="0.3"
+                                    Brush="#111"/>
+                        </Label.Shadow>
+                    </Label>
+                </VerticalStackLayout>
             </DataTemplate>
         </Shell.MenuItemTemplate>
     </MenuItem>
@@ -139,26 +157,34 @@
 
     <Shell.FlyoutFooterTemplate>
         <DataTemplate>
-            <Grid HeightRequest="50" 
-                  VerticalOptions="Fill"
-                  HorizontalOptions="Fill"
-                  BackgroundColor="Green"
-                  ColumnDefinitions="80,*">
-                <Image Grid.Column="0"
-                       Background="red"
-                       Source="coffee.gif"
-                       HorizontalOptions="End"
-                       VerticalOptions="Center"
-                       IsAnimationPlaying="True"
-                       Margin="5"/>
-                <Label Grid.Column="1"
-                       FontSize="15"
-                       Text="Buy me a coffee, I'm tired :("
-                       FontAttributes="Bold"
-                       HorizontalTextAlignment="Start"
-                       VerticalTextAlignment="Center"
-                       TextDecorations="Underline"/>
-            </Grid>
+            <Border StrokeThickness="0" StrokeShape="RoundRectangle 11,11,0,0">
+                <Grid HeightRequest="50" 
+                      VerticalOptions="Fill"
+                      HorizontalOptions="Fill"
+                      ColumnDefinitions="80,*"
+                      BackgroundColor="Green">
+                    <Image Margin="5"
+                           Grid.Column="0"
+                           Background="red"
+                           Source="coffee.gif"
+                           HorizontalOptions="End"
+                           VerticalOptions="Center"
+                           IsAnimationPlaying="True"/>
+                    <Label Grid.Column="1"
+                           FontSize="15"
+                           Text="Buy me a coffee, I'm tired :("
+                           FontAttributes="Bold"
+                           HorizontalTextAlignment="Start"
+                           VerticalTextAlignment="Center"
+                           TextDecorations="Underline"/>
+                </Grid>
+                <Border.Shadow>
+                    <Shadow Radius="10"
+                            Opacity="0.9"
+                            Brush="#111"
+                            Offset="0,0"/>
+                </Border.Shadow>
+            </Border>
         </DataTemplate>
     </Shell.FlyoutFooterTemplate>
 </Shell>

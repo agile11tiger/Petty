@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Maui;
 using Microsoft.Extensions.Logging;
+using Petty.Services.Logger;
 using Petty.Services.Navigation;
 using Petty.Services.Settings;
 using Petty.Views;
@@ -51,8 +52,9 @@ namespace Petty
 
         private static MauiAppBuilder RegisterAppServices(this MauiAppBuilder builder)
         {
-            builder.Services.AddSingleton<INavigationService, MauiNavigationService>();
+            builder.Services.AddSingleton<ILoggerService, LoggerService>();
             builder.Services.AddSingleton<ISettingsService, SettingsService>();
+            builder.Services.AddSingleton<INavigationService, MauiNavigationService>();
             return builder;
         }
 
@@ -65,6 +67,7 @@ namespace Petty
 
         private static MauiAppBuilder RegisterViewModels(this MauiAppBuilder builder)
         {
+            builder.Services.AddTransient<AppShellViewModel>();
             return builder;
         }
     }
