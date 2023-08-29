@@ -1,4 +1,6 @@
-﻿using Petty.Services.Navigation;
+﻿using Microsoft.Extensions.Logging;
+using Petty.Services.Logger;
+using Petty.Services.Navigation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,12 +17,16 @@ namespace Petty.ViewModels.Base
 
         public bool IsBusy => Interlocked.Read(ref _isBusy) > 0;
 
+        public ILoggerService LoggerService { get; }
         public INavigationService NavigationService { get; }
 
         public IAsyncRelayCommand InitializeAsyncCommand { get; }
 
-        public ViewModelBase(INavigationService navigationService)
+        public ViewModelBase(
+            ILoggerService logger,
+            INavigationService navigationService)
         {
+            LoggerService = logger;
             NavigationService = navigationService;
             InitializeAsyncCommand =
                 new AsyncRelayCommand(

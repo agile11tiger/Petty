@@ -66,6 +66,7 @@
     <PackageReference Include="CommunityToolkit.Maui" Version="5.3.0" />
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1" />
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="Sharpnado.Tabs.Maui" Version="3.0.1" />
   </ItemGroup>
 
@@ -84,13 +85,16 @@
 
   <ItemGroup>
     <MauiXaml Update="AppCss.xaml">
-      <Generator>MSBuild:Compile</Generator>
+      <Generator></Generator>
     </MauiXaml>
     <MauiXaml Update="AppShellCss.xaml">
-      <Generator>MSBuild:Compile</Generator>
+      <Generator></Generator>
     </MauiXaml>
     <MauiXaml Update="Views\MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Views\MainPageCss.xaml">
+      <Generator></Generator>
     </MauiXaml>
     <MauiXaml Update="Views\SettingsPage.xaml">
       <Generator>MSBuild:Compile</Generator>

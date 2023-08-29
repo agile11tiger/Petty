@@ -8,5 +8,80 @@
     <ContentPage.Resources>
     </ContentPage.Resources>
 
-    <Label Text="settings"/>
+    <ScrollView>
+        <Grid Margin="10" 
+              ColumnDefinitions="4*, 2*"
+              RowDefinitions="50,1,50,1,50,1,50,1,50,1,50,1,50,1,100">
+
+            <Label Grid.Row="0" Grid.Column="0" Text="Звук затвора"/>
+            <Switch Grid.Row="0"  Grid.Column="1" IsToggled="{Binding IsSoundShutterRelease}"/>
+            <BoxView Grid.Row="1" Grid.ColumnSpan="2"/>
+            
+            <Label Grid.Row="2" Grid.Column="0" Text="Использовать фронтальную камеру"/>
+            <Switch Grid.Row="2" Grid.Column="1" IsToggled="{Binding UseFrontCamera}"/>
+            <BoxView Grid.Row="3" Grid.ColumnSpan="2"/>
+            
+            <Label Grid.Row="4" Grid.Column="0" Text="Более глубокий взгляд на растровое изображение"/>
+            <Switch Grid.Row="4" Grid.Column="1" IsToggled="{Binding TryHarder}"/>
+            <BoxView Grid.Row="5" Grid.ColumnSpan="2"/>
+
+            <Label Grid.Row="6" Grid.Column="0" Text="Инвертировать цвет QR-кода для его анализа"/>
+            <Switch Grid.Row="6" Grid.Column="1" IsToggled="{Binding TryInverted}"/>
+            <BoxView Grid.Row="7" Grid.ColumnSpan="2"/>
+
+            <Label Grid.Row="8" Grid.Column="0" Text="Начальная задержка перед анализом кадров"/>
+            <StackLayout Spacing="0"
+                         Grid.Row="8"
+                         Grid.Column="1"
+                         VerticalOptions="Center">
+                <Label x:Name="someNumbers1"
+                       HorizontalOptions="Center"
+                       Text="{Binding SomeNumbers}" />
+                <Slider Value="{Binding SomeNumbers}"
+                        ValueChanged="SomeNumbers_ValueChanged"/>
+            </StackLayout>
+            <BoxView Grid.Row="9" Grid.ColumnSpan="2"/>
+
+            <Label Grid.Row="10" Grid.Column="0" Text="Задержка между анализом кадров"/>
+            <StackLayout Spacing="0"
+                         Grid.Row="10"
+                         Grid.Column="1"
+                         VerticalOptions="Center">
+                <Label x:Name="someNumbers2"
+                       HorizontalOptions="Center"
+                       Text="{Binding SomeNumbers}" />
+                <Slider Value="{Binding SomeNumbers}"
+                        ValueChanged="SomeNumbers_ValueChanged"/>
+            </StackLayout>
+            <BoxView Grid.Row="11" Grid.ColumnSpan="2"/>
+
+            <Label Grid.Row="12" Grid.Column="0" Text="Задержка между непрерывным сканированием"/>
+            <StackLayout Spacing="0" 
+                         Grid.Row="12" 
+                         Grid.Column="1" 
+                         VerticalOptions="Center">
+                <Label x:Name="someNumbers3"
+                       HorizontalOptions="Center"
+                       Text="{Binding SomeNumbers}" />
+                <Slider Value="{Binding SomeNumbers}" 
+                        ValueChanged="SomeNumbers_ValueChanged"/>
+            </StackLayout>
+            <BoxView Grid.Row="13" Grid.ColumnSpan="2"/>
+
+            <StackLayout Spacing="20" 
+                         Grid.Row="14" 
+                         Grid.ColumnSpan="2" 
+                         Orientation="Horizontal" 
+                         VerticalOptions="Center"
+                         HorizontalOptions="CenterAndExpand" >
+                <Button x:Name="default"
+                        Text="По умолчанию"
+                        Background="{StaticResource Gray700}"
+                        Command="{Binding DefaultSettingsCommand}"/>
+                <Button x:Name="apply"
+                        Text="Применить"
+                        Command="{Binding ApplySettingsCommand}"/>
+            </StackLayout>
+        </Grid>
+    </ScrollView>
 </ContentPage>

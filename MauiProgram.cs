@@ -3,6 +3,7 @@ using Microsoft.Extensions.Logging;
 using Petty.Services.Logger;
 using Petty.Services.Navigation;
 using Petty.Services.Settings;
+using Petty.ViewModels.Components;
 using Petty.Views;
 using Sharpnado.Tabs;
 
@@ -35,6 +36,7 @@ namespace Petty
 
             TaskScheduler.UnobservedTaskException += HandleUnobservedException;
             AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(HandleCurrentDomainUnhandledException);
+
             return builder.Build();
         }
 
@@ -68,6 +70,7 @@ namespace Petty
         private static MauiAppBuilder RegisterViewModels(this MauiAppBuilder builder)
         {
             builder.Services.AddTransient<AppShellViewModel>();
+            builder.Services.AddTransient<RunningTextViewModel>();
             return builder;
         }
     }

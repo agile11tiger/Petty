@@ -6,7 +6,13 @@ using System.Threading.Tasks;
 
 namespace Petty.Models.Settings
 {
-    internal class Settings
+    public class Settings
     {
+        public int Id { get; set; }
+
+        public Settings Clone()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

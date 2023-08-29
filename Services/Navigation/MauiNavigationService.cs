@@ -9,18 +9,15 @@ namespace Petty.Services.Navigation
 {
     internal class MauiNavigationService: INavigationService
     {
-        private readonly ISettingsService _settingsService;
-
-        public MauiNavigationService(ISettingsService settingsService)
+        public MauiNavigationService()
         {
-            _settingsService = settingsService;
         }
 
         //TODO: change
-        public Task InitializeAsync() => NavigateToAsync(
+        public Task InitializeAsync() => GoToAsync(
             string.IsNullOrEmpty("_settingsService.AuthAccessToken") ? "//Login" : "//Main");
 
-        public Task NavigateToAsync(string route, IDictionary<string, object> routeParameters = null)
+        public Task GoToAsync(string route, IDictionary<string, object> routeParameters = null)
         {
             var shellNavigation = new ShellNavigationState(route);
 
@@ -30,5 +27,10 @@ namespace Petty.Services.Navigation
         }
 
         public Task PopAsync() => Shell.Current.GoToAsync("..");
+
+        public async Task PopToMainAsync()
+        {
+            await GoToAsync("//Main");
+        }
     }
 }

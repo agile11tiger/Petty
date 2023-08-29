@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<Shell ClassId="shell"
+<Shell x:Name="shell"
        x:Class="Petty.AppShell"
+       xmlns:local="clr-namespace:Petty"
+       xmlns:views="clr-namespace:Petty.Views"
        xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-       xmlns:local="clr-namespace:Petty"
-       xmlns:viewmodels="clr-namespace:Petty.ViewModels"
-       xmlns:views="clr-namespace:Petty.Views"
+       xmlns:viewModelsComponents="clr-namespace:Petty.ViewModels.Components"
        FlyoutBehavior="Flyout"
        FlyoutBackgroundColor="WhiteSmoke"
        FlyoutHeaderBehavior="CollapseOnScroll">
@@ -16,14 +16,13 @@
 
     <Shell.FlyoutHeaderTemplate>
         <DataTemplate>
-            <Grid HeightRequest="250"
+            <Grid x:Name="grid"
+                  HeightRequest="250"
                   ColumnDefinitions="*,*"
-                  BackgroundColor="#111"
-                  RowDefinitions="100,100,50">
+                  RowDefinitions="100,100,50"
+                  Background="{StaticResource FlyoutHeaderBackground}">
                 <!--TODO: VerticalTextAlignment doesn`t work here. I don`t know, why?-->
-                <VerticalStackLayout Grid.Row="0"
-                                     Grid.Column="0"
-                                     Background="yellow">
+                <VerticalStackLayout Grid.Row="0" Grid.Column="0" Background="{StaticResource FlyoutHeaderPart1}">
                     <Image Source="play.png" 
                            Aspect="AspectFit" 
                            VerticalOptions="Fill"
@@ -32,9 +31,7 @@
                            VerticalTextAlignment="Center"
                            HorizontalTextAlignment="Center"/>
                 </VerticalStackLayout>
-                <VerticalStackLayout Grid.Row="0"
-                                     Grid.Column="1"
-                                     Background="green">
+                <VerticalStackLayout Grid.Row="0" Grid.Column="1" Background="{StaticResource FlyoutHeaderPart2}">
                     <Image Source="play.png"
                            Aspect="AspectFit"
                            VerticalOptions="Fill"
@@ -43,9 +40,7 @@
                            VerticalTextAlignment="Center"
                            HorizontalTextAlignment="Center"/>
                 </VerticalStackLayout>
-                <VerticalStackLayout Grid.Row="1"
-                                     Grid.Column="0"
-                                     Background="blue">
+                <VerticalStackLayout Grid.Row="1" Grid.Column="0" Background="{StaticResource FlyoutHeaderPart3}">
                     <Image Source="play.png"
                            Aspect="AspectFit"
                            VerticalOptions="Fill"
@@ -54,9 +49,7 @@
                            VerticalTextAlignment="Center"
                            HorizontalTextAlignment="Center"/>
                 </VerticalStackLayout>
-                <VerticalStackLayout Grid.Row="1"
-                                     Grid.Column="1"
-                                     Background="BlueViolet">
+                <VerticalStackLayout Grid.Row="1" Grid.Column="1" Background="{StaticResource FlyoutHeaderPart4}">
                     <Image Source="play.png"
                            Aspect="AspectFit"
                            VerticalOptions="Fill"
@@ -76,19 +69,19 @@
                            HorizontalOptions="Center"/>
                     <Label Text="Petty"
                            FontAttributes="Bold"
-                           TextColor="Black"
                            VerticalTextAlignment="Center"
                            HorizontalTextAlignment="Center"/>
                 </VerticalStackLayout>
-                <Label MaxLines ="1"
+                <Label x:Name="runningText"
+                       MaxLines ="1"
                        Grid.Row="2" 
                        Grid.ColumnSpan="2"
-                       TextColor="Pink"
                        HorizontalOptions="End"
                        VerticalTextAlignment="Center"
-                       Text="{Binding RunningText}"
-                       TranslationX="{Binding RunningTextStart}"
-                       MaximumWidthRequest="{Binding RunningTextMaximumWidthRequest, Mode=OneTime}" />
+                       Text="{Binding RunningTextViewModel.RunningText}"
+                       TextColor="{StaticResource FlyoutHeaderRunningText}"
+                       TranslationX="{Binding RunningTextViewModel.RunningTextStart}"
+                       MaximumWidthRequest="{Binding RunningTextViewModel.RunningTextMaximumWidthRequest, Mode=OneTime}" />
             </Grid>            
         </DataTemplate>
     </Shell.FlyoutHeaderTemplate>
@@ -96,9 +89,9 @@
     <Shell.ItemTemplate>
         <DataTemplate>
             <Grid ColumnDefinitions="0.2*,0.8*">
-                <Image Source="{Binding FlyoutIcon}"
-                       Margin="5"
-                       HeightRequest="45" />
+                <Image Margin="5"
+                       HeightRequest="45" 
+                       Source="{Binding FlyoutIcon}"/>
                 <Label Grid.Column="1"
                        Text="{Binding Title}"
                        FontAttributes="Italic"
@@ -110,9 +103,9 @@
     <Shell.MenuItemTemplate>
         <DataTemplate>
             <Grid ColumnDefinitions="0.2*,0.8*">
-                <Image Source="{Binding Icon}"
-                       Margin="5"
-                       HeightRequest="45"/>
+                <Image Margin="5"
+                       HeightRequest="45"
+                       Source="{Binding Icon}"/>
                 <Label Grid.Column="1"
                        Text="{Binding Text}"
                        FontAttributes="Italic"
@@ -126,8 +119,8 @@
                   ContentTemplate="{DataTemplate views:MainPage}" />
     <ShellContent Route="Settings"
                   Title="Settings"
-                Icon="dotnet_bot.svg"
-                ContentTemplate="{DataTemplate views:SettingsPage}" />
+                  Icon="dotnet_bot.svg"
+                  ContentTemplate="{DataTemplate views:SettingsPage}" />
     <MenuItem x:Name="MainPage"
               Text="SomePage"
               IconImageSource="dotnet_bot.svg"/>
@@ -137,13 +130,7 @@
                 <VerticalStackLayout Padding="5">
                     <Label IsEnabled="False" 
                            HeightRequest="1" 
-                           BackgroundColor="#ddd">
-                        <Label.Shadow>
-                            <Shadow Radius="8"
-                                    Offset="0,0"
-                                    Opacity="0.3"
-                                    Brush="#111"/>
-                        </Label.Shadow>
+                           BackgroundColor="{StaticResource FlyoutMenuItemSeparator}">
                     </Label>
                 </VerticalStackLayout>
             </DataTemplate>
@@ -154,7 +141,6 @@
     <MenuItem Text="About"
               IconImageSource="play.png"/>
 
-
     <Shell.FlyoutFooterTemplate>
         <DataTemplate>
             <Border StrokeThickness="0" StrokeShape="RoundRectangle 11,11,0,0">
@@ -162,27 +148,27 @@
                       VerticalOptions="Fill"
                       HorizontalOptions="Fill"
                       ColumnDefinitions="80,*"
-                      BackgroundColor="Green">
+                      BackgroundColor="{StaticResource FlyoutFooter}">
                     <Image Margin="5"
                            Grid.Column="0"
-                           Background="red"
                            Source="coffee.gif"
+                           InputTransparent="True"
                            HorizontalOptions="End"
                            VerticalOptions="Center"
-                           IsAnimationPlaying="True"/>
-                    <Label Grid.Column="1"
-                           FontSize="15"
-                           Text="Buy me a coffee, I'm tired :("
+                           IsAnimationPlaying="{Binding IsAnimationPlayingCoffeeGif}"/>
+                    <Label FontSize="15"
+                           Grid.Column="1"
                            FontAttributes="Bold"
-                           HorizontalTextAlignment="Start"
+                           TextDecorations="Underline"
                            VerticalTextAlignment="Center"
-                           TextDecorations="Underline"/>
+                           HorizontalTextAlignment="Start"
+                           Text="Buy me a coffee, I'm tired :(">
+                    </Label>
                 </Grid>
                 <Border.Shadow>
                     <Shadow Radius="10"
-                            Opacity="0.9"
-                            Brush="#111"
-                            Offset="0,0"/>
+                            Offset="0,0"
+                            Opacity="0.9"/>
                 </Border.Shadow>
             </Border>
         </DataTemplate>

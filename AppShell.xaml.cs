@@ -1,4 +1,5 @@
 ﻿using Petty.Services.Navigation;
+using Petty.ViewModels.Components;
 using Petty.Views;
 using static System.Net.Mime.MediaTypeNames;
 
@@ -6,14 +7,17 @@ namespace Petty
 {
     public partial class AppShell : Shell
     {
-        public AppShell(AppShellViewModel appShellViewModel, INavigationService navigationService)
+        public AppShell(
+            AppShellViewModel appShellViewModel,
+            INavigationService navigationService)
         {
             BindingContext = _appShellViewModel = appShellViewModel;
-            _navigationService = navigationService;
+            _navigationService = navigationService; 
             InitializeComponent();
         }
 
         private readonly AppShellViewModel _appShellViewModel;
+        public readonly RunningTextViewModel RunningTextViewModel;
         private readonly INavigationService _navigationService;
 
         protected override async void OnHandlerChanged()
@@ -26,16 +30,18 @@ namespace Petty
             }
         }
 
-        protected override void OnAppearing()
+        protected override async void OnAppearing()
         {
             base.OnAppearing();
-            _appShellViewModel.StartRunningTextCommand.Execute(null);
+            _appShellViewModel.RunningTextViewModel.StartRunningTextCommand.Execute(null);
+            await _appShellViewModel.StartCoffeGifCommand.ExecuteAsync(null);
         }
 
         protected override void OnDisappearing()
         {
             base.OnDisappearing();
-            _appShellViewModel.StartRunningTextCommand.Execute(null);
+            _appShellViewModel.RunningTextViewModel.StopRunningTextCommand.Execute(null);
+            _appShellViewModel.StopCoffeGifCommand.Execute(null);
         }
     }
 }

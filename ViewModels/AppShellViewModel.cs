@@ -1,6 +1,7 @@
 ﻿using Petty.Services.Logger;
 using Petty.Services.Navigation;
 using Petty.ViewModels.Base;
+using Petty.ViewModels.Components;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,60 +15,30 @@ namespace Petty.ViewModels
     {
         public AppShellViewModel(
             ILoggerService loggerService,
-            INavigationService navigationService) 
-            : base(navigationService)
+            INavigationService navigationService,
+            RunningTextViewModel runningTextViewModel) 
+            : base(loggerService, navigationService)
         {
-            _loggerService = loggerService;
-            _navigationService = navigationService;
-            _runningText = string.Join(";", Enumerable.Range(1, 100));
-            _runningTextStart = _runningText.Length * _runningTextStartCoefficient;
-            _runningTextMaximumWidthRequest = _runningTextStart + 5; //+ length for last chars
+            _runningTextViewModel = runningTextViewModel;
         }
 
-        [ObservableProperty] private string _runningText;
-        [ObservableProperty] private double _runningTextStart;
-        [ObservableProperty] private double _runningTextMaximumWidthRequest;
-        private volatile bool _isStopRunningTextLine;
-        private readonly ILoggerService _loggerService;
-        private readonly INavigationService _navigationService;
-        private readonly double _runningTextStartCoefficient = 6.5;
-        private readonly int _runningTextLeftBorderCoefficient = 55;
+        [ObservableProperty] private RunningTextViewModel _runningTextViewModel;
+        [ObservableProperty] private bool _isAnimationPlayingCoffeeGif;
 
         [RelayCommand]
-        private void StartRunningText()
+        private async Task StartCoffeGifAsync()
         {
-            var thread = new Thread(() =>
+            await Task.Run(async() =>
             {
-                try
-                {
-                    var translationXInitialValue = RunningTextStart;
-
-                    while (true)
-                    {
-                        RunningTextStart = translationXInitialValue;
-                        var leftTextBorder = -translationXInitialValue / RunningText.Length * _runningTextLeftBorderCoefficient;
-
-                        while (leftTextBorder < RunningTextStart--)
-                        {
-                            Thread.Sleep(15);
-
-                            if (_isStopRunningTextLine)
-                                return;
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    _loggerService.Log(default, ex);
-                }
+                await Task.Delay(3000);
+                IsAnimationPlayingCoffeeGif = true;
             });
-            thread.Start();
         }
 
         [RelayCommand]
-        private void StopRunningText()
+        private void StopCoffeGif()
         {
-            _isStopRunningTextLine = true;
+            IsAnimationPlayingCoffeeGif = false;
         }
     }
 }
