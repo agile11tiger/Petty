@@ -1,18 +1,14 @@
-﻿using Petty.Services.Logger;
-using Petty.Services.Navigation;
-using Petty.ViewModels.Base;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Petty.ViewModels.Base;
 
 namespace Petty.ViewModels
 {
     public partial class MainViewModel : ViewModelBase
     {
-        public MainViewModel(ILoggerService loggerService, INavigationService navigationService) 
-            : base(loggerService, navigationService)
+        public MainViewModel(
+            LoggerService loggerService, 
+            NavigationService navigationService,
+            LocalizationService localizationService)
+            : base(loggerService, navigationService, localizationService)
         {
         }
 

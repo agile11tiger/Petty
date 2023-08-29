@@ -1,13 +1,4 @@
-﻿using Microsoft.Extensions.Logging;
-using Petty.Services.Logger;
-using Petty.Services.Navigation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Petty.ViewModels.Base
+﻿namespace Petty.ViewModels.Base
 {
     public abstract partial class ViewModelBase : ObservableObject, IViewModelBase
     {
@@ -17,17 +8,20 @@ namespace Petty.ViewModels.Base
 
         public bool IsBusy => Interlocked.Read(ref _isBusy) > 0;
 
-        public ILoggerService LoggerService { get; }
-        public INavigationService NavigationService { get; }
+        public LoggerService LoggerService { get; }
+        public NavigationService NavigationService { get; }
+        public LocalizationService LocalizationService { get; }
 
         public IAsyncRelayCommand InitializeAsyncCommand { get; }
 
         public ViewModelBase(
-            ILoggerService logger,
-            INavigationService navigationService)
+            LoggerService logger,
+            NavigationService navigationService,
+            LocalizationService localizationService)
         {
             LoggerService = logger;
             NavigationService = navigationService;
+            LocalizationService = localizationService;
             InitializeAsyncCommand =
                 new AsyncRelayCommand(
                     async () =>

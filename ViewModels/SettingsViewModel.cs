@@ -1,29 +1,41 @@
 ﻿using Petty.Models.Settings;
-using Petty.Services.Logger;
-using Petty.Services.Navigation;
 using Petty.ViewModels.Base;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Petty.ViewModels
 {
     public partial class SettingsViewModel : ViewModelBase
     {
-        public SettingsViewModel(ILoggerService loggerService, INavigationService navigationService) 
-            : base(loggerService, navigationService)
+        public SettingsViewModel(
+            LoggerService loggerService,
+            NavigationService navigationService,
+            LocalizationService localizationService)
+            : base(loggerService, navigationService, localizationService)
         {
         }
 
 
         [ObservableProperty] private Settings _settings;
-        [ObservableProperty] private double _someNumbers;
         private Settings _tempSettings;
+        private string _slider3Text;
+        private double _slider3Value;
 
         #region Properties(OnPropertyChanged)
 
+        public string Slider3Text
+        {
+            get => LocalizationService.Get(nameof(Slider3Text), Slider3Value);
+            set => _slider3Text = value;
+        }
+
+        public double Slider3Value
+        {
+            get => _slider3Value;
+            set
+            {
+                if (SetProperty(ref _slider3Value, value))
+                    OnPropertyChanged(nameof(Slider3Text));
+            }
+        }
         public bool IsSoundShutterRelease
         {
             get => true;

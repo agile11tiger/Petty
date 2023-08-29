@@ -1,20 +1,14 @@
-﻿using Petty.Services.Logger;
-using Petty.Services.Navigation;
-using Petty.ViewModels.Base;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Petty.ViewModels.Base;
 
 namespace Petty.ViewModels.Components
 {
-    public partial class RunningTextViewModel: ViewModelBase
+    public partial class RunningTextViewModel : ViewModelBase
     {
         public RunningTextViewModel(
-            ILoggerService loggerService,
-            INavigationService navigationService)
-            : base(loggerService, navigationService)
+            LoggerService loggerService,
+            NavigationService navigationService,
+            LocalizationService localizationService)
+            : base(loggerService, navigationService, localizationService)
         {
             _runningText = string.Join(";", Enumerable.Range(1, 100));
             _runningTextStart = _runningText.Length * _runningTextStartCoefficient;

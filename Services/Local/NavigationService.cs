@@ -1,15 +1,8 @@
-﻿using Petty.Services.Settings;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Petty.Services.Navigation
+﻿namespace Petty.Services.Local
 {
-    internal class MauiNavigationService: INavigationService
+    public class NavigationService
     {
-        public MauiNavigationService()
+        public NavigationService()
         {
         }
 

@@ -1,13 +1,10 @@
-﻿using Petty.Services.Navigation;
-using Petty.ViewModels.Components;
-
-namespace Petty
+﻿namespace Petty
 {
     public partial class App : Application
     {
         public App(
             AppShellViewModel appShellViewModel,
-            INavigationService navigationService)
+            NavigationService navigationService)
         {
             //TODO: По желанию поддержать две темы и в настройках давать выбор.
             //https://learn.microsoft.com/en-us/dotnet/maui/user-interface/theming

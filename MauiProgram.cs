@@ -1,11 +1,10 @@
 ﻿using CommunityToolkit.Maui;
 using Microsoft.Extensions.Logging;
-using Petty.Services.Logger;
-using Petty.Services.Navigation;
-using Petty.Services.Settings;
 using Petty.ViewModels.Components;
 using Petty.Views;
 using Sharpnado.Tabs;
+using System.Globalization;
+using System.Threading;
 
 namespace Petty
 {
@@ -13,6 +12,9 @@ namespace Petty
     {
         public static MauiApp CreateMauiApp()
         {
+            Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US");
+
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
@@ -31,7 +33,7 @@ namespace Petty
                 .RegisterViewModels();
 
 #if DEBUG
-    		builder.Logging.AddDebug();
+            builder.Logging.AddDebug();
 #endif
 
             TaskScheduler.UnobservedTaskException += HandleUnobservedException;
@@ -54,9 +56,10 @@ namespace Petty
 
         private static MauiAppBuilder RegisterAppServices(this MauiAppBuilder builder)
         {
-            builder.Services.AddSingleton<ILoggerService, LoggerService>();
-            builder.Services.AddSingleton<ISettingsService, SettingsService>();
-            builder.Services.AddSingleton<INavigationService, MauiNavigationService>();
+            builder.Services.AddSingleton<LoggerService, LoggerService>();
+            builder.Services.AddSingleton<SettingsService, SettingsService>();
+            builder.Services.AddSingleton<NavigationService, NavigationService>();
+            builder.Services.AddSingleton<LocalizationService, LocalizationService>();
             return builder;
         }
 

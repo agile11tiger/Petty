@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Runtime.CompilerServices;
 
-namespace Petty.Services.Logger
+namespace Petty.Services.Local
 {
-    public class LoggerService : ILoggerService
+    public class LoggerService
     {
         public void Log(
             string message = default,
-            Exception exception = default, 
+            Exception exception = default,
             [CallerMemberName] string memberName = default,
             [CallerFilePath] string sourceFilePath = default,
             [CallerLineNumber] int sourceLineNumber = default)

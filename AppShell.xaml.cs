@@ -1,7 +1,4 @@
-﻿using Petty.Services.Navigation;
-using Petty.ViewModels.Components;
-using Petty.Views;
-using static System.Net.Mime.MediaTypeNames;
+﻿using Petty.ViewModels.Components;
 
 namespace Petty
 {
@@ -9,16 +6,16 @@ namespace Petty
     {
         public AppShell(
             AppShellViewModel appShellViewModel,
-            INavigationService navigationService)
+            NavigationService navigationService)
         {
             BindingContext = _appShellViewModel = appShellViewModel;
-            _navigationService = navigationService; 
+            _navigationService = navigationService;
             InitializeComponent();
         }
 
         private readonly AppShellViewModel _appShellViewModel;
         public readonly RunningTextViewModel RunningTextViewModel;
-        private readonly INavigationService _navigationService;
+        private readonly NavigationService _navigationService;
 
         protected override async void OnHandlerChanged()
         {
