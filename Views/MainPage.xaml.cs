@@ -4,9 +4,7 @@ public partial class MainPage : ContentPage
 {
     public MainPage(MainViewModel mainViewModel)
     {
-        BindingContext = _mainViewModel = mainViewModel;
+        BindingContext = mainViewModel;
         InitializeComponent();
     }
-
-    private readonly MainViewModel _mainViewModel;
 }

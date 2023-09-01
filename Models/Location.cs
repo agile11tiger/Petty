@@ -1,4 +1,4 @@
-﻿namespace Petty.Models.Location
+﻿namespace Petty.Models
 {
     public class Location
     {

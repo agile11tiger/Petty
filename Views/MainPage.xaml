@@ -5,7 +5,8 @@
              xmlns:viewModels="clr-namespace:Petty.ViewModels"
              xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             Title="Main"
+             xmlns:resources="clr-namespace:Petty.Resources.Localization"
+             Title="{x:Static resources:AppResources.Petty}"
              Style="{StaticResource PageBaseStyle}">
 
     <!--StyleId="appGradient"-->
@@ -23,7 +24,7 @@
                           Grid.Row="3"
                           Shadow="{StaticResource tabBarShadow}"
                           BackgroundColor="{StaticResource TabBarBackground}">
-            <tabs:MaterialUnderlinedTabItem Label="Leaderboard" 
+            <tabs:MaterialUnderlinedTabItem Label="{x:Static resources:AppResources.Leaderboard}" 
                                             IconTextSpacing="0"
                                             IconOptions="TopIcon"
                                             IconImageSource="podium.png"
@@ -40,7 +41,7 @@
                             ButtonBackgroundColor="{StaticResource Primary}">
             </tabs:TabButton>
             <tabs:MaterialUnderlinedTabItem Style="{StaticResource BottomTabStyle}"
-                                            Label="Settings"
+                                            Label="{x:Static resources:AppResources.Settings}"
                                             IconTextSpacing="0"
                                             IconOptions="TopIcon"
                                             IconImageSource="settings.png"

@@ -1,4 +1,6 @@
-﻿using Petty.ViewModels.Base;
+﻿using Petty.Helpres;
+using Petty.Services.Local.Localization;
+using Petty.ViewModels.Base;
 
 namespace Petty.ViewModels
 {
@@ -18,7 +20,7 @@ namespace Petty.ViewModels
         [RelayCommand]
         private async Task GoToSettingsAsync()
         {
-            await NavigationService.GoToAsync("Settings");
+            await NavigationService.GoToAsync(RoutesHelper.SETINGS);
             IsSelectedTabBarItem = false;
         }
     }

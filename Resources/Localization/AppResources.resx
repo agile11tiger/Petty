@@ -117,7 +117,43 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="About" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="Apply" xml:space="preserve">
+    <value>Apply</value>
+  </data>
+  <data name="BuyCoffee" xml:space="preserve">
+    <value>Buy me a coffee, I'm tired :(</value>
+  </data>
+  <data name="CurrentLanguage" xml:space="preserve">
+    <value>Current language:</value>
+  </data>
+  <data name="Default" xml:space="preserve">
+    <value>Default</value>
+  </data>
+  <data name="English" xml:space="preserve">
+    <value>English</value>
+  </data>
+  <data name="Help" xml:space="preserve">
+    <value>Help</value>
+  </data>
+  <data name="Leaderboard" xml:space="preserve">
+    <value>Leaderboard</value>
+  </data>
+  <data name="Logo" xml:space="preserve">
+    <value>Petty</value>
+  </data>
+  <data name="Petty" xml:space="preserve">
+    <value>Petty</value>
+  </data>
+  <data name="Russian" xml:space="preserve">
+    <value>Russian</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
   <data name="Slider3Text" xml:space="preserve">
-    <value>Выбрано: {0:F1}</value>
+    <value>Selected: {0:F1}</value>
   </data>
 </root>

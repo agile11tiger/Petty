@@ -1,4 +1,6 @@
-﻿namespace Petty.Services.Local
+﻿using Petty.Helpres;
+
+namespace Petty.Services.Local
 {
     public class NavigationService
     {
@@ -19,11 +21,9 @@
                 : Shell.Current.GoToAsync(shellNavigation);
         }
 
-        public Task PopAsync() => Shell.Current.GoToAsync("..");
-
         public async Task PopToMainAsync()
         {
-            await GoToAsync("//Main");
+            await GoToAsync($"//{RoutesHelper.MAIN}");
         }
     }
 }

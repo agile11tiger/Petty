@@ -184,12 +184,15 @@
 
     <Style TargetType="Picker">
         <Setter Property="FontSize" Value="14"/>
+        <Setter Property="WidthRequest" Value="90"/>
+        <Setter Property="HorizontalOptions" Value="End"/>
         <Setter Property="MinimumWidthRequest" Value="44"/>
         <Setter Property="MinimumHeightRequest" Value="44"/>
         <Setter Property="FontFamily" Value="OpenSansRegular"/>
         <Setter Property="BackgroundColor" Value="Transparent"/>
+        <Setter Property="HorizontalTextAlignment" Value="Center"/>
         <Setter Property="TextColor" Value="{StaticResource Gray900}"/>
-        <Setter Property="TitleColor" Value="{StaticResource Gray900}"/>
+        <Setter Property="TitleColor" Value="{StaticResource PickerTitle}"/>
         <Setter Property="VisualStateManager.VisualStateGroups">
             <VisualStateGroupList>
                 <VisualStateGroup x:Name="CommonStates">

@@ -1,5 +1,8 @@
-﻿using Petty.Models.Settings;
+﻿using Petty.Extensions;
+using Petty.Resources.Localization;
+using Petty.Services.Local.Localization;
 using Petty.ViewModels.Base;
+using System.Globalization;
 
 namespace Petty.ViewModels
 {
@@ -7,87 +10,41 @@ namespace Petty.ViewModels
     {
         public SettingsViewModel(
             LoggerService loggerService,
+            SettingsService settingsService,
             NavigationService navigationService,
             LocalizationService localizationService)
             : base(loggerService, navigationService, localizationService)
         {
+            _settingsService = settingsService;
+            _tempSettings = settingsService.Settings.CloneJson();
         }
 
-
-        [ObservableProperty] private Settings _settings;
-        private Settings _tempSettings;
-        private string _slider3Text;
-        private double _slider3Value;
-
-        #region Properties(OnPropertyChanged)
-
-        public string Slider3Text
-        {
-            get => LocalizationService.Get(nameof(Slider3Text), Slider3Value);
-            set => _slider3Text = value;
-        }
-
-        public double Slider3Value
-        {
-            get => _slider3Value;
-            set
-            {
-                if (SetProperty(ref _slider3Value, value))
-                    OnPropertyChanged(nameof(Slider3Text));
-            }
-        }
-        public bool IsSoundShutterRelease
-        {
-            get => true;
-            set => value = true;
-        }
-
-        public bool? UseFrontCamera
-        {
-            get => false;
-            set => value = false;
-        }
-
-        public bool? TryHarder
-        {
-            get => true;
-            set => value = true;
-        }
-
-        public bool? TryInverted
-        {
-            get => false;
-            set => value = false;
-        }
-
-        #endregion
+        [ObservableProperty] private Settings _tempSettings;
+        [ObservableProperty] private List<Language> _languagesDictionary = LocalizationService.SupportedCultures.Values.ToList();
+        private readonly SettingsService _settingsService;
 
         [RelayCommand]
-        private Task OnDisappearing()
+        private Task ApplyDefaultSettings()
         {
-            _tempSettings = Settings.Clone();
-            return Task.FromResult(true);
-        }
-
-        [RelayCommand]
-        private Task MakeDefaultSettings()
-        {
-            Settings = new Settings();
-            _tempSettings = new Settings();
-            return GoToMainPageAsync();
+            return GoToMainPageAsync(new Settings());
         }
 
         [RelayCommand]
         private async Task ApplySettings()
         {
-            Settings = _tempSettings.Clone();
-            await GoToMainPageAsync().ConfigureAwait(false);
+            await GoToMainPageAsync(TempSettings.CloneJson());
         }
 
-        private async Task GoToMainPageAsync()
+        private async Task GoToMainPageAsync(Settings tempSettings)
         {
-            await NavigationService.PopToMainAsync().ConfigureAwait(false);
             //await AsyncDatabase.AddOrReplaceItemAsync(Settings);
+            var needSoftRestart = _settingsService.Settings.LanguageType != tempSettings.LanguageType;
+            _settingsService.ApplySettings(tempSettings);
+
+            if (needSoftRestart)
+                LocalizationService.SetCulture(LocalizationService.SupportedCultures[_settingsService.Settings.LanguageType].CultureInfo, true);
+            else
+                await NavigationService.PopToMainAsync();
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace Petty.ViewModels.Base
+﻿using Petty.Services.Local.Localization;
+
+namespace Petty.ViewModels.Base
 {
     public abstract partial class ViewModelBase : ObservableObject, IViewModelBase
     {

@@ -1,10 +1,14 @@
 ﻿using CommunityToolkit.Maui;
 using Microsoft.Extensions.Logging;
+using Petty.Extensions;
+using Petty.Helpres;
+using Petty.Services.Local.Localization;
 using Petty.ViewModels.Components;
 using Petty.Views;
 using Sharpnado.Tabs;
 using System.Globalization;
 using System.Threading;
+using System.Xml.Xsl;
 
 namespace Petty
 {
@@ -12,9 +16,7 @@ namespace Petty
     {
         public static MauiApp CreateMauiApp()
         {
-            Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
-            Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US");
-
+            Initilize();
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
@@ -30,8 +32,10 @@ namespace Petty
                 })
                 .RegisterAppServices()
                 .RegisterPagesWithViewModels()
-                .RegisterViewModels();
+                .RegisterViewModels()
+                .RegisterModels();
 
+            builder.Services.AddDbContext<ApplicationDbContext>();
 #if DEBUG
             builder.Logging.AddDebug();
 #endif
@@ -40,6 +44,20 @@ namespace Petty
             AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(HandleCurrentDomainUnhandledException);
 
             return builder.Build();
+        }
+
+        private static void Initilize()
+        {
+            var isFirstRun = Preferences.Default.Get<bool>(PreferencesHelper.IS_FIRST_RUN, true);
+            var language = Preferences.Default.Get<string>(PreferencesHelper.LANGUAGE, null);
+
+            if (isFirstRun is true)
+            {
+                Preferences.Default.Set<bool>(PreferencesHelper.IS_FIRST_RUN, false);
+            }
+
+            if (language is not null)
+                LocalizationService.SetCulture(new CultureInfo(language));
         }
 
         private static void HandleUnobservedException(object sender, UnobservedTaskExceptionEventArgs e)
@@ -65,8 +83,8 @@ namespace Petty
 
         private static MauiAppBuilder RegisterPagesWithViewModels(this MauiAppBuilder builder)
         {
-            builder.Services.AddTransientWithShellRoute<MainPage, MainViewModel>("Main");
-            builder.Services.AddTransientWithShellRoute<SettingsPage, SettingsViewModel>("Settings");
+            builder.Services.AddTransientWithShellRoute<MainPage, MainViewModel>(RoutesHelper.MAIN);
+            builder.Services.AddTransientWithShellRoute<SettingsPage, SettingsViewModel>(RoutesHelper.SETINGS);
             return builder;
         }
 
@@ -74,6 +92,12 @@ namespace Petty
         {
             builder.Services.AddTransient<AppShellViewModel>();
             builder.Services.AddTransient<RunningTextViewModel>();
+            return builder;
+        }
+
+        private static MauiAppBuilder RegisterModels(this MauiAppBuilder builder)
+        {
+            builder.Services.AddTransient<Settings>(services => services.GetService<SettingsService>().Settings.CloneJson());
             return builder;
         }
     }

@@ -2,7 +2,7 @@
 {
     public class LocationService
     {
-        public Task UpdateUserLocation(Models.Location.Location location, string token)
+        public Task UpdateUserLocation(Models.Location location, string token)
         {
             throw new NotImplementedException();
         }

@@ -54,6 +54,7 @@
 	</ItemGroup>
 
   <ItemGroup>
+    <None Remove="Platforms\Android\AndroidManifest.xml" />
     <None Remove="Resources\Fonts\OpenSans-Bold.ttf" />
     <None Remove="Resources\Fonts\OpenSans-ExtraBold.ttf" />
     <None Remove="Resources\Fonts\OpenSans-Light.ttf" />
@@ -66,17 +67,24 @@
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.Maui" Version="5.3.0" />
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="7.0.10" />
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="Sharpnado.Tabs.Maui" Version="3.0.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Extensions\" />
-    <Folder Include="Helpres\" />
     <Folder Include="Converters\" />
     <Folder Include="Resources\Styles\Css\" />
     <Folder Include="Views\Templates\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <LinkDescription Include="Platforms\Android\AndroidManifest.xml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PettySQLite\PettySQLite.csproj" />
   </ItemGroup>
 
   <ItemGroup>

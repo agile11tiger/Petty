@@ -5,6 +5,7 @@
        xmlns:views="clr-namespace:Petty.Views"
        xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:resources="clr-namespace:Petty.Resources.Localization"
        xmlns:viewModelsComponents="clr-namespace:Petty.ViewModels.Components"
        FlyoutBehavior="Flyout"
        FlyoutBackgroundColor="WhiteSmoke"
@@ -67,7 +68,7 @@
                            Aspect="AspectFill"
                            VerticalOptions="Center"
                            HorizontalOptions="Center"/>
-                    <Label Text="Petty"
+                    <Label Text="{x:Static resources:AppResources.Logo}"
                            FontAttributes="Bold"
                            VerticalTextAlignment="Center"
                            HorizontalTextAlignment="Center"/>
@@ -118,8 +119,8 @@
                   FlyoutItemIsVisible="False"
                   ContentTemplate="{DataTemplate views:MainPage}" />
     <ShellContent Route="Settings"
-                  Title="Settings"
                   Icon="dotnet_bot.svg"
+                  Title="{x:Static resources:AppResources.Settings}"
                   ContentTemplate="{DataTemplate views:SettingsPage}" />
     <MenuItem x:Name="MainPage"
               Text="SomePage"
@@ -136,10 +137,10 @@
             </DataTemplate>
         </Shell.MenuItemTemplate>
     </MenuItem>
-    <MenuItem Text="Help"
-              IconImageSource="settings.png"/>
-    <MenuItem Text="About"
-              IconImageSource="play.png"/>
+    <MenuItem IconImageSource="settings.png"
+              Text="{x:Static resources:AppResources.Help}"/>
+    <MenuItem IconImageSource="play.png"
+              Text="{x:Static resources:AppResources.About}"/>
 
     <Shell.FlyoutFooterTemplate>
         <DataTemplate>
@@ -162,7 +163,7 @@
                            TextDecorations="Underline"
                            VerticalTextAlignment="Center"
                            HorizontalTextAlignment="Start"
-                           Text="Buy me a coffee, I'm tired :(">
+                           Text="{x:Static resources:AppResources.BuyCoffee}">
                     </Label>
                 </Grid>
                 <Border.Shadow>

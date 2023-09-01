@@ -23,7 +23,7 @@
     <Color x:Key="FlyoutHeaderPart3">blueviolet</Color>
     <Color x:Key="FlyoutHeaderPart4">green</Color>
     <Color x:Key="FlyoutHeaderBackground">#222</Color>
-    <Color x:Key="FlyoutHeaderRunningText">Pink</Color>
+    <Color x:Key="FlyoutHeaderRunningText">#f5a</Color>
     <Color x:Key="FlyoutMenuItemSeparator">#ddd</Color>
     <Color x:Key="FlyoutFooter">green</Color>
     <Color x:Key="TabBarBackground">#111</Color>
@@ -31,6 +31,7 @@
     <Color x:Key="CircleButton">green</Color>
     <Color x:Key="CircleButtonOnSurface">yellow</Color>
     <Color x:Key="CircleButtonOffSurface">#eee</Color>
+    <Color x:Key="PickerTitle">blue</Color>
     <SolidColorBrush x:Key="PrimaryBrush" Color="{StaticResource Primary}"/>
     <SolidColorBrush x:Key="SecondaryBrush" Color="{StaticResource Secondary}"/>
     <SolidColorBrush x:Key="TertiaryBrush" Color="{StaticResource Tertiary}"/>

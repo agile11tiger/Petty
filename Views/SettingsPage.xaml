@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+<ContentPage x:Class="Petty.Views.SettingsPage"
+             x:DataType="viewModels:SettingsViewModel"
+             xmlns:viewModels="clr-namespace:Petty.ViewModels"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Petty.Views.SettingsPage"
+             xmlns:resources="clr-namespace:Petty.Resources.Localization"
              Title="Settings" 
              Style="{StaticResource PageBaseStyle}">
 
@@ -13,20 +16,25 @@
               ColumnDefinitions="4*, 2*"
               RowDefinitions="50,1,50,1,50,1,50,1,50,1,50,1,50,1,100">
 
-            <Label Grid.Row="0" Grid.Column="0" Text="Звук затвора"/>
-            <Switch Grid.Row="0"  Grid.Column="1" IsToggled="{Binding IsSoundShutterRelease}"/>
+            <Label Grid.Row="0" Grid.Column="0" Text="{x:Static resources:AppResources.CurrentLanguage}"/>
+            <Picker x:Name="pickerLanguage" 
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    ItemDisplayBinding="{Binding Name}"
+                    ItemsSource="{Binding LanguagesDictionary}"
+                    SelectedIndexChanged="pickerLanguage_SelectedIndexChanged"/>
             <BoxView Grid.Row="1" Grid.ColumnSpan="2"/>
             
             <Label Grid.Row="2" Grid.Column="0" Text="Использовать фронтальную камеру"/>
-            <Switch Grid.Row="2" Grid.Column="1" IsToggled="{Binding UseFrontCamera}"/>
+            <Switch Grid.Row="2" Grid.Column="1" IsToggled="{Binding TempSettings.UseFrontCamera}"/>
             <BoxView Grid.Row="3" Grid.ColumnSpan="2"/>
             
             <Label Grid.Row="4" Grid.Column="0" Text="Более глубокий взгляд на растровое изображение"/>
-            <Switch Grid.Row="4" Grid.Column="1" IsToggled="{Binding TryHarder}"/>
+            <Switch Grid.Row="4" Grid.Column="1" IsToggled="{Binding TempSettings.TryHarder}"/>
             <BoxView Grid.Row="5" Grid.ColumnSpan="2"/>
 
             <Label Grid.Row="6" Grid.Column="0" Text="Инвертировать цвет QR-кода для его анализа"/>
-            <Switch Grid.Row="6" Grid.Column="1" IsToggled="{Binding TryInverted}"/>
+            <Switch Grid.Row="6" Grid.Column="1" IsToggled="{Binding TempSettings.TryInverted}"/>
             <BoxView Grid.Row="7" Grid.ColumnSpan="2"/>
 
             <Label Grid.Row="8" Grid.Column="0" Text="Начальная задержка перед анализом кадров"/>
@@ -36,8 +44,8 @@
                          VerticalOptions="Center">
                 <Label x:Name="slider1"
                        HorizontalOptions="Center"
-                       Text="{Binding Slider3Text}" />
-                <Slider Value="{Binding Slider3Value}"/>
+                       Text="{Binding TempSettings.Slider3Text}" />
+                <Slider Value="{Binding TempSettings.Slider3Value}"/>
             </StackLayout>
             <BoxView Grid.Row="9" Grid.ColumnSpan="2"/>
 
@@ -48,8 +56,8 @@
                          VerticalOptions="Center">
                 <Label x:Name="slider2"
                        HorizontalOptions="Center"
-                       Text="{Binding Slider3Text}" />
-                <Slider Value="{Binding Slider3Value}"/>
+                       Text="{Binding TempSettings.Slider3Text}" />
+                <Slider Value="{Binding TempSettings.Slider3Value}"/>
             </StackLayout>
             <BoxView Grid.Row="11" Grid.ColumnSpan="2"/>
 
@@ -60,8 +68,8 @@
                          VerticalOptions="Center">
                 <Label x:Name="slider3"
                        HorizontalOptions="Center"
-                       Text="{Binding Slider3Text}" />
-                <Slider Value="{Binding Slider3Value}"/>
+                       Text="{Binding TempSettings.Slider3Text}" />
+                <Slider Value="{Binding TempSettings.Slider3Value}"/>
             </StackLayout>
             <BoxView Grid.Row="13" Grid.ColumnSpan="2"/>
 
@@ -71,13 +79,13 @@
                          Orientation="Horizontal" 
                          VerticalOptions="Center"
                          HorizontalOptions="CenterAndExpand" >
-                <Button x:Name="default"
-                        Text="По умолчанию"
+                <Button MinimumWidthRequest="130" 
                         Background="{StaticResource Gray700}"
-                        Command="{Binding DefaultSettingsCommand}"/>
-                <Button x:Name="apply"
-                        Text="Применить"
-                        Command="{Binding ApplySettingsCommand}"/>
+                        Text="{x:Static resources:AppResources.Default}"
+                        Command="{Binding ApplyDefaultSettingsCommand}"/>
+                <Button MinimumWidthRequest="130" 
+                        Command="{Binding ApplySettingsCommand}"
+                        Text="{x:Static resources:AppResources.Apply}"/>
             </StackLayout>
         </Grid>
     </ScrollView>

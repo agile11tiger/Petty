@@ -1,4 +1,4 @@
-﻿namespace Petty.Models.User
+﻿namespace Petty.Models
 {
     internal class UserInfo
     {
