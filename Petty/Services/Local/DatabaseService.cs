@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Microsoft.EntityFrameworkCore;
+using Petty.Models.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,24 +11,47 @@ namespace Petty.Services.Local
 {
     public class DatabaseService
     {
-        public void Create()
+        public DatabaseService(ApplicationDbContext applicationDbContext)
         {
-
+            _applicationDbContext = applicationDbContext;
         }
 
-        public void Read()
-        {
+        private readonly ApplicationDbContext _applicationDbContext;
 
+        public async Task CreateOrUpdateAsync<T>(T item) where T: class, IDatabaseItem
+        {
+            if (Contains<T>(item.Id, out T result))
+            {
+                await UpdateAsync<T>(result);
+            }
+            else
+            {
+                await _applicationDbContext.AddAsync(item);
+                await _applicationDbContext.SaveChangesAsync();
+            }
         }
 
-        public void Update()
+        public async ValueTask<T> ReadAsync<T>(int id) where T : class
         {
-
+            return await _applicationDbContext.FindAsync<T>(id);
         }
 
-        public void Delete()
+        public async Task UpdateAsync<T>(T item) where T : class
         {
+            await Task.Run(() => _applicationDbContext.Update(item));
+            await _applicationDbContext.SaveChangesAsync();
+        }
 
+        public async Task DeleteAsync<T>(T item) where T : class
+        {
+            await Task.Run(() =>_applicationDbContext.Remove<T>(item));
+            await _applicationDbContext.SaveChangesAsync();
+        }
+
+        public bool Contains<T>(int id, out T result) where T : class
+        {
+            result = _applicationDbContext.Find<T>(id);
+            return result != default;
         }
     }
 }

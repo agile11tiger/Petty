@@ -1,11 +1,13 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using Microsoft.EntityFrameworkCore.Storage;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Globalization;
 
 namespace PettySQLite.Models
 {
-    public partial class Settings: ObservableObject
+    public partial class Settings : ObservableObject, IDatabaseItem
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Id { get; set; }
         public int Lol { get; set; }
 

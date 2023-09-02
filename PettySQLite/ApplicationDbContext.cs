@@ -36,7 +36,7 @@ namespace PettySQLite
                 var dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "petty.db");
                 optionsBuilder.UseSqlite($"Data Source={dbPath}");
                 //Todo: add smart logging
-                optionsBuilder.LogTo(message => System.Diagnostics.Debug.WriteLine(message));
+                //optionsBuilder.LogTo(message => System.Diagnostics.Debug.WriteLine(message));
             }
         }
 

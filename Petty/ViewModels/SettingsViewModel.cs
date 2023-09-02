@@ -10,17 +10,20 @@ namespace Petty.ViewModels
     {
         public SettingsViewModel(
             LoggerService loggerService,
+            DatabaseService databaseService,
             SettingsService settingsService,
             NavigationService navigationService,
             LocalizationService localizationService)
             : base(loggerService, navigationService, localizationService)
         {
+            _databaseService = databaseService;
             _settingsService = settingsService;
             _tempSettings = settingsService.Settings.CloneJson();
         }
 
         [ObservableProperty] private Settings _tempSettings;
         [ObservableProperty] private List<Language> _languagesDictionary = LocalizationService.SupportedCultures.Values.ToList();
+        private readonly DatabaseService _databaseService;
         private readonly SettingsService _settingsService;
 
         [RelayCommand]
@@ -37,7 +40,7 @@ namespace Petty.ViewModels
 
         private async Task GoToMainPageAsync(Settings tempSettings)
         {
-            //await AsyncDatabase.AddOrReplaceItemAsync(Settings);
+            await _databaseService.CreateOrUpdateAsync(tempSettings);
             var needSoftRestart = _settingsService.Settings.LanguageType != tempSettings.LanguageType;
             _settingsService.ApplySettings(tempSettings);
 

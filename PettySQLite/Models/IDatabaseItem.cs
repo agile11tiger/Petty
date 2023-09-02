@@ -1,4 +1,4 @@
-﻿namespace Petty.Models.Interfaces
+﻿namespace PettySQLite.Models
 {
     public interface IDatabaseItem
     {

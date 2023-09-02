@@ -74,10 +74,11 @@ namespace Petty
 
         private static MauiAppBuilder RegisterAppServices(this MauiAppBuilder builder)
         {
-            builder.Services.AddSingleton<LoggerService, LoggerService>();
-            builder.Services.AddSingleton<SettingsService, SettingsService>();
-            builder.Services.AddSingleton<NavigationService, NavigationService>();
-            builder.Services.AddSingleton<LocalizationService, LocalizationService>();
+            builder.Services.AddSingleton<LoggerService>();
+            builder.Services.AddSingleton<DatabaseService>();
+            builder.Services.AddSingleton<SettingsService>();
+            builder.Services.AddSingleton<NavigationService>();
+            builder.Services.AddSingleton<LocalizationService>();
             return builder;
         }
 
