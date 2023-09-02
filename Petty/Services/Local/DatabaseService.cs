@@ -38,13 +38,13 @@ namespace Petty.Services.Local
 
         public async Task UpdateAsync<T>(T item) where T : class
         {
-            await Task.Run(() => _applicationDbContext.Update(item));
+            _applicationDbContext.Update(item);
             await _applicationDbContext.SaveChangesAsync();
         }
 
         public async Task DeleteAsync<T>(T item) where T : class
         {
-            await Task.Run(() =>_applicationDbContext.Remove<T>(item));
+            _applicationDbContext.Remove<T>(item);
             await _applicationDbContext.SaveChangesAsync();
         }
 
