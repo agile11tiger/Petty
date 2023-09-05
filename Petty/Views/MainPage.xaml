@@ -29,7 +29,11 @@
                                             IconOptions="TopIcon"
                                             IconImageSource="podium.png"
                                             IsSelected="{Binding IsSelectedTabBarItem}"
-                                            Style="{StaticResource BottomTabStyle}"/>
+                                            Style="{StaticResource BottomTabStyle}">
+                <tabs:MaterialUnderlinedTabItem.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding GoToLeaderboardCommand}"/>
+                </tabs:MaterialUnderlinedTabItem.GestureRecognizers>
+            </tabs:MaterialUnderlinedTabItem>
             <tabs:TabButton x:Name="TabButton"
                             TranslationY="-20"
                             ButtonPadding="15"

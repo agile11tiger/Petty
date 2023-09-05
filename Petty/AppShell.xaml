@@ -163,7 +163,7 @@
                            TextDecorations="Underline"
                            VerticalTextAlignment="Center"
                            HorizontalTextAlignment="Start"
-                           Text="{x:Static resources:AppResources.BuyCoffee}">
+                           Text="{x:Static resources:AppResources.MessageForMe}">
                     </Label>
                 </Grid>
                 <Border.Shadow>

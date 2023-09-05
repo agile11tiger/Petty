@@ -144,6 +144,9 @@
   <data name="Logo" xml:space="preserve">
     <value>Petty</value>
   </data>
+  <data name="MessageForMe" xml:space="preserve">
+    <value>Все сообщения читаю лично :)</value>
+  </data>
   <data name="Petty" xml:space="preserve">
     <value>Питомец</value>
   </data>

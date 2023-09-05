@@ -142,6 +142,15 @@ namespace Petty.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to I read all messages personally :).
+        /// </summary>
+        internal static string MessageForMe {
+            get {
+                return ResourceManager.GetString("MessageForMe", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Petty.
         /// </summary>
         internal static string Petty {

@@ -23,5 +23,11 @@ namespace Petty.ViewModels
             await NavigationService.GoToAsync(RoutesHelper.SETINGS);
             IsSelectedTabBarItem = false;
         }
+
+        [RelayCommand]
+        private async Task GoToLeaderboardAsync()
+        {
+            App.StartPettyGuadrAndroidService();
+        }
     }
 }

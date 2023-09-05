@@ -16,7 +16,6 @@ namespace Petty
     {
         public static MauiApp CreateMauiApp()
         {
-            Initilize();
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
@@ -44,20 +43,6 @@ namespace Petty
             AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(HandleCurrentDomainUnhandledException);
 
             return builder.Build();
-        }
-
-        private static void Initilize()
-        {
-            var isFirstRun = Preferences.Default.Get<bool>(PreferencesHelper.IS_FIRST_RUN, true);
-            var language = Preferences.Default.Get<string>(PreferencesHelper.LANGUAGE, null);
-
-            if (isFirstRun is true)
-            {
-                Preferences.Default.Set<bool>(PreferencesHelper.IS_FIRST_RUN, false);
-            }
-
-            if (language is not null)
-                LocalizationService.SetCulture(new CultureInfo(language));
         }
 
         private static void HandleUnobservedException(object sender, UnobservedTaskExceptionEventArgs e)
