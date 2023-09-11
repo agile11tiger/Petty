@@ -4,7 +4,9 @@
 
     <!-- TODO: change to this: https://www.gradientmagic.com/collection/lightbg/gradient/1571400294220
     when maui background will supply collection of lineargradientbrush.
-    I checked in the css it`s not working too. -->
+    I checked in the css it`s not working too. 
+    
+    this can do it https://learn.microsoft.com/en-us/dotnet/maui/user-interface/graphics/paint-->
     <Style x:Key="PageBaseStyle" TargetType="Page">
         <Setter Property="Background">
             <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">

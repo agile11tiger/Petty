@@ -13,5 +13,14 @@ namespace Petty.Services.Local
         {
             return;
         }
+
+        public void Log(
+            Exception exception = default,
+            [CallerMemberName] string memberName = default,
+            [CallerFilePath] string sourceFilePath = default,
+            [CallerLineNumber] int sourceLineNumber = default)
+        {
+            return;
+        }
     }
 }

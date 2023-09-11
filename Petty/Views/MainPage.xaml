@@ -17,7 +17,15 @@
 
     <Grid RowDefinitions="0.9*, 0.1*">
         <ContentView>
-            <Label Text="LOL" />
+            <StackLayout Padding="20,80,20,0" Orientation="Vertical" Spacing="15">
+                <Label x:Name="lol" Text="LOL" />
+                <StackLayout Orientation="Horizontal">
+                    <Switch x:Name="TimeoutSwitch" IsToggled="True" />
+                    <Label Text="Timeout after silence?" />
+                </StackLayout>
+                <Button x:Name="RecordButton" Text="Record" FontSize="24" HorizontalOptions="FillAndExpand" Clicked="Record_Clicked" />
+                <Button x:Name="PlayButton" Text="Play" FontSize="24" HorizontalOptions="FillAndExpand" Clicked="Play_Clicked" IsEnabled="False" />
+            </StackLayout>
         </ContentView>
         <tabs:TabHostView x:Name="TabHostButton"
                           Margin="0"

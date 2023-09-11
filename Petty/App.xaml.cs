@@ -46,12 +46,7 @@ namespace Petty
         public static void StartPettyGuadrAndroidService()
         {
 #if ANDROID
-            var intent = new Android.Content.Intent(Android.App.Application.Context, typeof(PettyGuardService));
-            //TODO: если отзовут разрешение надо потребовать чтобы влючили
-            if (Android.OS.Build.VERSION.SdkInt >= Android.OS.BuildVersionCodes.O)
-                Android.App.Application.Context.StartForegroundService(intent);
-            else
-                Android.App.Application.Context.StartService(intent);
+            PettyGuardService.Start();
 #endif
         }
     }

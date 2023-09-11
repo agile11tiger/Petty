@@ -2,10 +2,12 @@ using Android.App;
 using Android.Content;
 using Android.Content.PM;
 using Android.Graphics;
+using Android.Media;
 using Android.OS;
 using Android.Runtime;
 using Android.Widget;
 using AndroidX.Core.App;
+using Petty;
 using Resource = Microsoft.Maui.Resource;
 
 /// <summary>
@@ -30,6 +32,24 @@ public class PettyGuardService : Service
     private const string NOTIFICATION_CHANNEL_ID = "999";
     private const int NOTIFICATION_ID = 1;
     private const string NOTIFICATION_CHANNEL_NAME = "notification";
+    private const string START_SERVICE = "StartService";
+    private const string STOP_SERVICE = "StopService";
+
+    public static void Start()
+    {
+        var intent = new Android.Content.Intent(START_SERVICE, default, Android.App.Application.Context, typeof(PettyGuardService));
+        //TODO: если отзовут разрешение надо потребовать чтобы влючили
+        if (Android.OS.Build.VERSION.SdkInt >= Android.OS.BuildVersionCodes.O)
+            Android.App.Application.Context.StartForegroundService(intent);
+        else
+            Android.App.Application.Context.StartService(intent);
+    }
+
+    public static void Stop()
+    {
+        var intent = new Android.Content.Intent(STOP_SERVICE, default, Android.App.Application.Context, typeof(PettyGuardService));
+        Android.App.Application.Context.StopService(intent);
+    }
 
     public override void OnCreate()
     {
@@ -45,15 +65,11 @@ public class PettyGuardService : Service
 
     public override StartCommandResult OnStartCommand(Intent intent, [GeneratedEnum] StartCommandFlags flags, int startId)
     {
-        if (!_isStart)
-        {
+        if (intent.Action == START_SERVICE)
             startForegroundService();
-            Toast.MakeText(this, "Служба started", ToastLength.Long).Show();
-            if (flags == StartCommandFlags.Retry)
-            {
-                //not need
-            }
-        }
+        else if (intent.Action == STOP_SERVICE)
+            stopForegroundService(startId);
+
         return StartCommandResult.NotSticky;
     }
     public override IBinder OnBind(Intent intent)
@@ -65,14 +81,24 @@ public class PettyGuardService : Service
 
     private void startForegroundService()
     {
-        if (Build.VERSION.SdkInt >= BuildVersionCodes.O && GetSystemService(Context.NotificationService) is NotificationManager notifcationManager)
-            CreateNotificationChannel(notifcationManager);
+        if (!_isStart)
+        {
+            if (Build.VERSION.SdkInt >= BuildVersionCodes.O && GetSystemService(Context.NotificationService) is NotificationManager notifcationManager)
+                CreateNotificationChannel(notifcationManager);
 
+            if (Build.VERSION.SdkInt >= BuildVersionCodes.Q)
+                StartForeground(NOTIFICATION_ID, CreateNotification(), ForegroundService.TypeManifest);
+            else
+                StartForeground(NOTIFICATION_ID, CreateNotification());
 
-        if (Build.VERSION.SdkInt >= BuildVersionCodes.Q)
-            StartForeground(NOTIFICATION_ID, CreateNotification(), ForegroundService.TypeManifest);
-        else
-            StartForeground(NOTIFICATION_ID, CreateNotification());
+            Toast.MakeText(this, "Служба started", ToastLength.Long).Show();
+        }
+    }
+
+    private void stopForegroundService(int startId)
+    {
+        StopForeground(true);
+        StopSelf(startId);
     }
 
     private void CreateNotificationChannel(NotificationManager notificationManager)
@@ -91,5 +117,4 @@ public class PettyGuardService : Service
         notification.SetContentText("Petty Guard Service is running");
         return notification.Build();
     }
-
 }

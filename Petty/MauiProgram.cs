@@ -2,7 +2,9 @@
 using Microsoft.Extensions.Logging;
 using Petty.Extensions;
 using Petty.Helpres;
+using Petty.Services.Local.Audio;
 using Petty.Services.Local.Localization;
+using Petty.Services.Local.PettyCommands;
 using Petty.ViewModels.Components;
 using Petty.Views;
 using Sharpnado.Tabs;
@@ -62,8 +64,10 @@ namespace Petty
             builder.Services.AddSingleton<LoggerService>();
             builder.Services.AddSingleton<DatabaseService>();
             builder.Services.AddSingleton<SettingsService>();
+            builder.Services.AddSingleton<PettyVoiceService>();
             builder.Services.AddSingleton<NavigationService>();
             builder.Services.AddSingleton<LocalizationService>();
+            builder.Services.AddSingleton<PettyCommandsService>();
             return builder;
         }
 

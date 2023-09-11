@@ -191,6 +191,10 @@ csharp_preserve_single_line_statements = true
 
 # Naming rules
 
+dotnet_naming_rule.const_field_should_be_all_upper_case.severity = suggestion
+dotnet_naming_rule.const_field_should_be_all_upper_case.symbols = const_field
+dotnet_naming_rule.const_field_should_be_all_upper_case.style = all_upper_case
+
 dotnet_naming_rule.interface_should_be_begins_with_i.severity = suggestion
 dotnet_naming_rule.interface_should_be_begins_with_i.symbols = interface
 dotnet_naming_rule.interface_should_be_begins_with_i.style = begins_with_i
@@ -225,6 +229,10 @@ dotnet_naming_symbols.private_field.applicable_kinds = field
 dotnet_naming_symbols.private_field.applicable_accessibilities = private, private_protected
 dotnet_naming_symbols.private_field.required_modifiers = 
 
+dotnet_naming_symbols.const_field.applicable_kinds = field
+dotnet_naming_symbols.const_field.applicable_accessibilities = *
+dotnet_naming_symbols.const_field.required_modifiers = const
+
 # Naming styles
 
 dotnet_naming_style.pascal_case.required_prefix = 
@@ -241,6 +249,11 @@ dotnet_naming_style.begings_with__.required_prefix = _
 dotnet_naming_style.begings_with__.required_suffix = 
 dotnet_naming_style.begings_with__.word_separator = 
 dotnet_naming_style.begings_with__.capitalization = camel_case
+
+dotnet_naming_style.all_upper_case.required_prefix = 
+dotnet_naming_style.all_upper_case.required_suffix = 
+dotnet_naming_style.all_upper_case.word_separator = _
+dotnet_naming_style.all_upper_case.capitalization = all_upper
 
 [*.{cs,vb}]
 dotnet_style_operator_placement_when_wrapping = beginning_of_line
