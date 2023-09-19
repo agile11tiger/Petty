@@ -13,11 +13,6 @@ namespace Petty.ViewModels.Components
     /// </summary>
     public partial class CircularProgressBarViewModel : ObservableObject, IDrawable
     {
-        //public CircularProgressBarViewModel(LoggerService loggerService, NavigationService navigationService, LocalizationService localizationService) 
-        //    : base(loggerService, navigationService, localizationService)
-        //{
-        //}
-
         public CircularProgressBarViewModel()
         {
         }
