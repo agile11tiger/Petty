@@ -14,7 +14,6 @@ namespace Petty
         }
 
         private readonly AppShellViewModel _appShellViewModel;
-        public readonly RunningTextViewModel RunningTextViewModel;
         private readonly NavigationService _navigationService;
 
         protected override async void OnHandlerChanged()

@@ -3,22 +3,41 @@
        x:Class="Petty.AppShell"
        xmlns:local="clr-namespace:Petty"
        xmlns:views="clr-namespace:Petty.Views"
+       xmlns:viewModels="clr-namespace:Petty.ViewModels"
        xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
        xmlns:resources="clr-namespace:Petty.Resources.Localization"
-       xmlns:viewModelsComponents="clr-namespace:Petty.ViewModels.Components"
+       xmlns:components="clr-namespace:Petty.ViewModels.Components"
        FlyoutBehavior="Flyout"
        FlyoutBackgroundColor="WhiteSmoke"
        FlyoutHeaderBehavior="CollapseOnScroll">
 
     <Shell.Resources>
-        <ResourceDictionary Source="/AppShellCss.xaml" />
+        <ResourceDictionary Source="/AppShellCss.xaml"/>
     </Shell.Resources>
 
+    <Shell.TitleView>
+        <Grid RowDefinitions="*" ColumnDefinitions="0.8*,0.2*" x:DataType="viewModels:AppShellViewModel">
+            <Label Grid.Column="0"
+                   FontSize="Large"
+                   HorizontalTextAlignment="Start"
+                   Text="{x:Static resources:AppResources.Petty}"/>
+            <GraphicsView x:Name="circularProgressBarGraphicsView" 
+                          Grid.Column="1"
+                          WidthRequest="39"
+                          HeightRequest="39"
+                          IsVisible="true">
+                <!--IsVisible="{Binding IsRunningSomeBackgroundWorking}">-->
+                <GraphicsView.Drawable>
+                    <components:CircularProgressBarViewModel x:Name="circularProgressBarViewModel"/>
+                </GraphicsView.Drawable>
+            </GraphicsView>
+        </Grid>
+    </Shell.TitleView>
+    
     <Shell.FlyoutHeaderTemplate>
         <DataTemplate>
-            <Grid x:Name="grid"
-                  HeightRequest="250"
+            <Grid HeightRequest="250"
                   ColumnDefinitions="*,*"
                   RowDefinitions="100,100,50"
                   Background="{StaticResource FlyoutHeaderBackground}">

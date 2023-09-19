@@ -7,11 +7,14 @@ using static Android.Provider.ContactsContract.CommonDataKinds;
 
 namespace Petty
 {
+    /*All errors are caught and logged, the application should work in any case, even if some of its components are unavailable.*/
+    //all variables, parameters, fields, properties, methods and etc sort BY GROUPS(all groups i will show below) then BY LENGTH
     internal class SomeRulesForClass: IDisposable
     {
         public SomeRulesForClass()
         {
             Initialize();
+            CatNotify += OnUpdate;
         }
 
         public SomeRulesForClass(string name)
@@ -23,7 +26,7 @@ namespace Petty
         }
 
         /// <summary>
-        /// Doesn't fit on the screen.
+        /// should be move down if doesn't fit on the screen, like this
         /// </summary>
         public SomeRulesForClass(
             string arg1, 
@@ -34,9 +37,9 @@ namespace Petty
         }
 
         /// <summary>
-        /// Only this method if its needed.
+        /// Only this method with this name if its needed. Modifiers doesn`t matter, allowed any.
         /// </summary>
-        public void Initialize()
+        private void Initialize() //or this InitializeAsync
         {
 
         }
@@ -53,12 +56,11 @@ namespace Petty
         private const string CONST_FIELD = "";
         //---------------------------------
 
-        //This applies to all code. Note the order, which depends on the group and length.
-        //-------------------------- sort only by length 
+        //-------------------------- private fields
         private string _field;
         private string _field888;
         private string _field99999;
-        private bool _disposedValue;
+        private bool _isDisposedValue; //all bool variables, parameters, fields, properties with prefix "is"
         private event TigerHandler _notify;
         private static string _staticField;
         private static string _staticField555;
@@ -67,23 +69,26 @@ namespace Petty
         private List<string> _list = new List<string>();
         //--------------------------
 
-        public event TigerHandler Notify;
+        //-------------------------- events, delegates
+        public event CatHandler CatNotify;
+        public event TigerHandler TigerNotify;
+        public delegate void CatHandler(string message);
         public delegate void TigerHandler(string message);
+        //-------------------------- 
 
-        protected string ProtectedProperty { get; set; }
-        public string PublicPrivateSetProperty { get; private set; }
-        public string PublicProtectedSetProperty { get; protected set; }
+        //-------------------------- properties
         public string PublicProperty { get; set; }
-        public static string PublicStaticProperty { get; set; }
-        public static string PublicStaticPrivateSetProperty { get; private set; }
+        public static bool PublicStaticProperty { get; set; }
+        public int PublicPrivateSetProperty { get; private set; }
         public static string PublicStaticProtectedSetProperty { get; protected set; }
+        //----------------------------------------------------------------------------
 
         //-----------------------------complex data structures
         public List<string> PublicList { get; set; }
         public Dictionary<string, string> PublicDictionary { get; set; }
         //------------------------------
 
-        //-----------------------------Property with summary
+        //-----------------------------Property with summary 
         /// <summary>
         /// There must be one blank line between properties with summary.
         /// </summary>
@@ -114,15 +119,11 @@ namespace Petty
 
         public void SomeMethodThatWasCalledByAnotherMethodMustBeBelowIt()
         {
-            var tiger = string.Empty;
+        }
 
-            if (true)
-            {
-                tiger = "Tiger";
-                tiger = "Tiger";
-            }
-
-            tiger = "Tiger";
+        //any PascalCase name with prefix "On"
+        public void OnUpdate(string message)
+        {
         }
 
         public void Dispose()
@@ -134,7 +135,7 @@ namespace Petty
 
         protected virtual void Dispose(bool disposing)
         {
-            if (!_disposedValue)
+            if (!_isDisposedValue)
             {
                 if (disposing)
                 {
@@ -143,7 +144,7 @@ namespace Petty
 
                 // TODO: free unmanaged resources (unmanaged objects) and override finalizer
                 // TODO: set large fields to null
-                _disposedValue = true;
+                _isDisposedValue = true;
             }
         }
 
