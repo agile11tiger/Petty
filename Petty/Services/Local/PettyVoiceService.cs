@@ -1,16 +1,10 @@
-﻿using Java.Lang;
-using Petty.Services.Local.PettyCommands.Commands;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Petty.Services.Local.PettyCommands.Commands;
 
 namespace Petty.Services.Local
 {
     public class PettyVoiceService
     {
-        public PettyVoiceService() 
+        public PettyVoiceService()
         {
         }
 

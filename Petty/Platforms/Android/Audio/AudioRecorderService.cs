@@ -1,48 +1,44 @@
-﻿using Android.Content;
-using Android.Media;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Petty.Services.Local.Audio
+﻿namespace Petty.Services.Platforms.Audio
 {
     public partial class AudioRecorderService
     {
+        private static volatile int _sampleRateCache;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <remarks>
+        /// it`s working, but no need now, see <see cref="PreferredSampleRate"/>
+        /// </remarks>
         public void Initialize()
         {
-            if (Android.OS.Build.VERSION.SdkInt > Android.OS.BuildVersionCodes.JellyBean)
-            {
-                try
-                {
-                    //if the below call to AudioManager is blocking and never returning/taking forever, ensure the emulator has proper access to the system mic input
-                    var audioManager = (AudioManager)global::Android.App.Application.Context.GetSystemService(Context.AudioService);
-                    var property = audioManager.GetProperty(AudioManager.PropertyOutputSampleRate);
+            //  
+            //if (Android.OS.Build.VERSION.SdkInt > Android.OS.BuildVersionCodes.JellyBean)
+            //{
+            //    lock (_locker)
+            //    {
+            //        if (_sampleRateCache != default)
+            //        {
+            //            PreferredSampleRate = _sampleRateCache;
+            //            return;
+            //        }
 
-                    if (!string.IsNullOrEmpty(property) && int.TryParse(property, out int sampleRate))
-                        PreferredSampleRate = sampleRate;
-                }
-                catch (Exception ex)
-                {
-                    _logger.Log("Error using AudioManager to get AudioManager.PropertyOutputSampleRate. " +
-                        "PreferredSampleRate will remain at the default", ex);
-                }
-            }
-        }
+            //        try
+            //        {
+            //            //if the below call to AudioManager is blocking and never returning/taking forever, ensure the emulator has proper access to the system mic input
+            //            var audioManager = (AudioManager)global::Android.App.Application.Context.GetSystemService(Context.AudioService);
+            //            var property = audioManager.GetProperty(AudioManager.PropertyOutputSampleRate);
 
-        private Task<string> GetDefaultFilePath()
-        {
-            return Task.FromResult(Path.Combine(Path.GetTempPath(), DEFAULT_FILE_NAME));
-        }
-
-        private void OnRecordingStarting()
-        {
-        }
-
-        private void OnRecordingStopped()
-        {
+            //            if (!string.IsNullOrEmpty(property) && int.TryParse(property, out int sampleRate))
+            //                PreferredSampleRate = sampleRate;
+            //        }
+            //        catch (Exception ex)
+            //        {
+            //            _loggerService.Log("Error using AudioManager to get AudioManager.PropertyOutputSampleRate. " +
+            //                "PreferredSampleRate will remain at the default", ex);
+            //        }
+            //    }
+            //}
         }
     }
 }

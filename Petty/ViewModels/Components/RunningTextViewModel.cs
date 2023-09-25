@@ -1,5 +1,4 @@
-﻿using Petty.Services.Local.Localization;
-using Petty.ViewModels.Base;
+﻿using Petty.ViewModels.Base;
 
 namespace Petty.ViewModels.Components
 {

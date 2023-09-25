@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static Android.Provider.ContactsContract.CommonDataKinds;
-
-namespace Petty
+﻿namespace Petty
 {
     /*All errors are caught and logged, the application should work in any case, even if some of its components are unavailable.*/
     //all variables, parameters, fields, properties, methods and etc sort BY GROUPS(all groups i will show below) then BY LENGTH
-    internal class SomeRulesForClass: IDisposable
+    internal class SomeRulesForClass : IDisposable
     {
         public SomeRulesForClass()
         {
@@ -29,9 +22,9 @@ namespace Petty
         /// should be move down if doesn't fit on the screen, like this
         /// </summary>
         public SomeRulesForClass(
-            string arg1, 
+            string arg1,
             string arg2,
-            string arg3, 
+            string arg3,
             string arg8888888888888888888888888888888888888888888888)
         {
         }

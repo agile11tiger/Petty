@@ -1,8 +1,5 @@
 ﻿using Petty.Extensions;
-using Petty.Resources.Localization;
-using Petty.Services.Local.Localization;
 using Petty.ViewModels.Base;
-using System.Globalization;
 
 namespace Petty.ViewModels
 {

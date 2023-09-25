@@ -1,15 +1,13 @@
 ﻿using CommunityToolkit.Mvvm.Messaging;
 using Petty.Helpres;
-using Petty.WeakReferenceMessengerCommands;
+using Petty.MessengerCommands.Application;
 using System.Globalization;
 
 namespace Petty
 {
     public partial class App : Application
     {
-        public App(
-            AppShellViewModel appShellViewModel,
-            NavigationService navigationService)
+        public App(AppShellViewModel appShellViewModel, NavigationService navigationService)
         {
             Initilize();
             //TODO: По желанию поддержать две темы и в настройках давать выбор.
@@ -17,7 +15,7 @@ namespace Petty
             //https://www.youtube.com/watch?v=0cY8iCz50fI&ab_channel=DanielHindrikes
             //https://www.youtube.com/watch?v=eu52qX-qww4&ab_channel=ProgrammingWithChris
             UserAppTheme = AppTheme.Light;
-            WeakReferenceMessenger.Default.Register<RestartCommand>(this, (sender, message) =>
+            WeakReferenceMessenger.Default.Register<RestartApplication>(this, (recipient, message) =>
             {
                 MainPage.Dispatcher.Dispatch(() =>
                 {
@@ -26,28 +24,33 @@ namespace Petty
                 });
             });
             InitializeComponent();
-            MainPage = new AppShell(appShellViewModel, navigationService);
-        }
 
+
+            MainPage = new AppShell(appShellViewModel, navigationService); //new SplashScreenPage();
+            //_ = EndSplash(appShellViewModel, navigationService);
+        }
+        async Task EndSplash(AppShellViewModel appShellViewModel,
+            NavigationService navigationService)
+        {
+            //delay 3 seconds
+            await Task.Delay(5000);
+            MainThread.BeginInvokeOnMainThread(() =>
+            {
+                MainPage = new AppShell(appShellViewModel, navigationService);
+            });
+        }
         private static void Initilize()
         {
-            var isFirstRun = Preferences.Default.Get<bool>(PreferencesHelper.IS_FIRST_RUN, true);
-            var language = Preferences.Default.Get<string>(PreferencesHelper.LANGUAGE, null);
+            var isFirstRun = Preferences.Default.Get<bool>(SharedPreferencesHelper.IS_FIRST_RUN, true);
+            var language = Preferences.Default.Get<string>(SharedPreferencesHelper.LANGUAGE, null);
 
             if (isFirstRun is true)
             {
-                Preferences.Default.Set<bool>(PreferencesHelper.IS_FIRST_RUN, false);
+                Preferences.Default.Set<bool>(SharedPreferencesHelper.IS_FIRST_RUN, false);
             }
 
             if (language is not null)
                 LocalizationService.SetCulture(new CultureInfo(language));
-        }
-
-        public static void StartPettyGuadrAndroidService()
-        {
-#if ANDROID
-            PettyGuardService.Start();
-#endif
         }
     }
 }

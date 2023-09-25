@@ -1,12 +1,8 @@
 ﻿using Android.Media;
-using Android.Util;
-using Petty.Services.Local.Audio;
 using Petty.Services.Local.PermissionsFolder;
-using System;
-using System.Diagnostics;
-using System.Threading.Tasks;
+using Petty.Services.Platforms.Audio;
 
-namespace Petty.Platforms.Android.Audio
+namespace Petty.Services.Platforms.Audio
 {
     internal class AudioStream : IAudioStream
     {
@@ -17,87 +13,96 @@ namespace Petty.Platforms.Android.Audio
         /// <param name="channels">The <see cref="ChannelIn"/> value representing the number of channels to record.</param>
         /// <param name="audioFormat">The format of the recorded audio.</param>
         public AudioStream(
-            LoggerService logger,
-            int sampleRate = 44100, 
-            ChannelIn channels = ChannelIn.Mono, 
-            Encoding audioFormat = Encoding.Pcm16bit)
+            LoggerService loggerService,
+            int sampleRate = 44100,
+            ChannelIn channels = ChannelIn.Mono,
+            Encoding audioFormat = Encoding.Pcm16bit,
+            AudioSource audioSource = AudioSource.Mic)
         {
             _bufferSize = AudioRecord.GetMinBufferSize(sampleRate, channels, audioFormat) * 8;
 
-            //TODO: try catch
             if (_bufferSize < 0)
                 throw new Exception("Invalid buffer size calculated; audio settings used may not be supported on this device");
 
-            _logger = logger;
-            SampleRate = sampleRate;
             _channels = channels;
+            _sampleRate = sampleRate;
             _audioFormat = audioFormat;
+            _audioSource = audioSource;
+            _loggerService = loggerService;
 
+            _audioStreamThread = new Thread(Record)
+            {
+                IsBackground = true,
+                Priority = ThreadPriority.AboveNormal,
+                Name = nameof(AudioStream) + "Thread"
+            };
+            //todo: Добавить в диагностику
             //var packageManager = global::Android.App.Application.Context.PackageManager;
             //var hasMicrophone = packageManager.HasSystemFeature(global::Android.Content.PM.PackageManager.FeatureMicrophone);
         }
 
-        private readonly int _bufferSize;
-        private readonly LoggerService _logger;
-        private readonly ChannelIn _channels = ChannelIn.Mono;
-        private readonly Encoding _audioFormat = Encoding.Pcm16bit;
-
-        /// <summary>
-        /// The audio record.
-        /// </summary>
         private AudioRecord _audioRecord;
+        private readonly int _bufferSize;
+        private readonly int _sampleRate;
+        private readonly ChannelIn _channels;
+        private readonly Encoding _audioFormat;
+        private readonly AudioSource _audioSource;
+        private readonly Thread _audioStreamThread;
+        private readonly LoggerService _loggerService;
+        private static readonly object _locker = new();
 
-        /// <summary>
-        /// Occurs when new audio has been streamed.
-        /// </summary>
-        public event EventHandler<byte[]> OnBroadcast;
+        public event Action<byte[]> BroadcastData;
+        public event Action<bool> ActiveStatusChanged;
+        public event Action<Exception> ExceptionCatched;
 
-        /// <summary>
-        /// Occurs when the audio stream active status changes.
-        /// </summary>
-        public event EventHandler<bool> OnActiveChanged;
-
-        /// <summary>
-        /// Occurs when there's an error while capturing audio.
-        /// </summary>
-        public event EventHandler<Exception> OnException;
-
-        /// <summary>
-        /// The default device.
-        /// </summary>
-        public const AudioSource AUDIO_SOURCE_DEFAULT = AudioSource.Mic;
-
-        /// <summary>
-        /// Gets the sample rate.
-        /// </summary>
-        public int SampleRate { get; private set; } = 44100;
-
-        /// <summary>
-        /// Gets bits per sample.
-        /// </summary>
+        public int ChannelCount => _audioRecord.ChannelCount;
+        public int SampleRate { get => _audioRecord.SampleRate; }
+        public bool IsActive => _audioRecord?.RecordingState == RecordState.Recording;
         public int BitsPerSample => (_audioRecord.AudioFormat == Encoding.Pcm16bit) ? 16 : 8;
 
-        /// <summary>
-        /// Gets the channel count.
-        /// </summary>      
-        public int ChannelCount => _audioRecord.ChannelCount;
+        public int AverageBytesPerSecond => _sampleRate * BitsPerSample / 8 * ChannelCount;
 
-        /// <summary>
-        /// Gets the average data transfer rate in bytes per second.
-        /// </summary>
-        public int AverageBytesPerSecond => SampleRate * BitsPerSample / 8 * ChannelCount;
+        public void Start()
+        {
+            lock (_locker)
+            {
+                try
+                {
+                    if (!IsActive)
+                    {
+                        // not sure this does anything or if should be here... inherited via copied code ¯\_(ツ)_/¯
+                        global::Android.OS.Process.SetThreadPriority(global::Android.OS.ThreadPriority.UrgentAudio);
+                        Init();
+                        _audioRecord.StartRecording();
+                        _audioStreamThread.Start();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    _loggerService.Log(ex);
+                    throw;
+                }
+            }
+        }
 
-        /// <summary>
-        /// Gets a value indicating if the audio stream is active.
-        /// </summary>
-        public bool Active => _audioRecord?.RecordingState == RecordState.Recording;
+        public void Stop()
+        {
+            lock (_locker)
+            {
+                if (_audioRecord != null && IsActive && BroadcastData.GetInvocationList().Length <= 1)
+                {
+                    _audioRecord.Stop();
+                    _audioRecord.Release();
+                }
+                else // just in case
+                    _audioRecord?.Release();
+            }
+        }
 
         private void Init()
         {
-            Stop(); // just in case
-
             if (MicrophonePermission.GetAsync().Result == PermissionStatus.Granted)
-                _audioRecord = new AudioRecord(AUDIO_SOURCE_DEFAULT, SampleRate ,_channels,_audioFormat, _bufferSize);
+                _audioRecord = new AudioRecord(_audioSource, _sampleRate, _channels, _audioFormat, _bufferSize);
 
             if (_audioRecord.State == State.Uninitialized)
                 throw new Exception("Unable to successfully initialize AudioStream; reporting State.Uninitialized. " +
@@ -105,69 +110,21 @@ namespace Petty.Platforms.Android.Audio
         }
 
         /// <summary>
-        /// Starts the audio stream.
-        /// </summary>
-        public Task Start()
-        {
-            try
-            {
-                if (!Active)
-                {
-                    // not sure this does anything or if should be here... inherited via copied code ¯\_(ツ)_/¯
-                    global::Android.OS.Process.SetThreadPriority(global::Android.OS.ThreadPriority.UrgentAudio);
-                    Init();
-                    _audioRecord.StartRecording();
-                    OnActiveChanged?.Invoke(this, true);
-                    Task.Run(() => Record());
-                }
-
-                return Task.FromResult(true);
-            }
-            catch (Exception ex)
-            {
-                _logger.Log(ex);
-                Stop();
-                throw;
-            }
-        }
-
-        /// <summary>
-        /// Stops the audio stream.
-        /// </summary>
-        public Task Stop()
-        {
-            if (Active)
-            {
-                _audioRecord.Stop();
-                _audioRecord.Release();
-                OnActiveChanged?.Invoke(this, false);
-            }
-            else // just in case
-                _audioRecord?.Release();
-
-            return Task.FromResult(true);
-        }
-
-        /// <summary>
         /// Record from the microphone and broadcast the buffer.
         /// </summary>
-        private async Task Record()
+        private void Record()
         {
-            var data = new byte[_bufferSize];
-            var readFailureCount = 0;
             var readResult = 0;
+            var readFailureCount = 0;
+            var data = new byte[_bufferSize];
 
-            while (Active)
+            while (IsActive)
             {
                 try
                 {
                     // not sure if this is even a good idea, but we'll try to allow a single bad read, and past that shut it down
                     if (readFailureCount > 1)
-                    {
-                        _logger.Log("AudioStream.Record(): Multiple read failures detected, stopping stream");
-                        await Stop();
-                        break;
-                    }
+                        throw new ThreadStateException();
 
                     readResult = _audioRecord.Read(data, 0, _bufferSize); // this can block if there are no bytes to read
 
@@ -175,19 +132,18 @@ namespace Petty.Platforms.Android.Audio
                     if (readResult > 0)
                     {
                         readFailureCount = 0;
-                        OnBroadcast?.Invoke(this, data);
+                        BroadcastData?.Invoke(data);
                     }
                     else
                     {
-                        _logger.Log($"AudioStream.Record(): readResult returned error code: {readResult}");
+                        _loggerService.Log($"AudioStream.Record(): readResult returned error code: {readResult}");
 
                         switch (readResult)
                         {
                             case (int)TrackStatus.ErrorInvalidOperation:
                             case (int)TrackStatus.ErrorBadValue:
                             case (int)TrackStatus.ErrorDeadObject:
-                                await Stop();
-                                break;
+                                throw new ThreadStateException($"readResult: {readResult}");
                             //case (int)TrackStatus.Error:
                             default:
                                 readFailureCount++;
@@ -197,9 +153,9 @@ namespace Petty.Platforms.Android.Audio
                 }
                 catch (Exception ex)
                 {
-                    _logger.Log(ex);
                     readFailureCount++;
-                    OnException?.Invoke(this, ex);
+                    _loggerService.Log($"ReadFailureCount: {readFailureCount}", ex);
+                    ExceptionCatched?.Invoke(ex);
                 }
             }
         }

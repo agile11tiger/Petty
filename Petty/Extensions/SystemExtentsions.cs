@@ -1,9 +1,4 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Petty.Extensions
 {
@@ -18,7 +13,7 @@ namespace Petty.Extensions
         public static T CloneJson<T>(this T source)
         {
             // Don't serialize a null object, simply return the default for that object
-            if (source is null) 
+            if (source is null)
                 return default;
 
             // initialize inner objects individually

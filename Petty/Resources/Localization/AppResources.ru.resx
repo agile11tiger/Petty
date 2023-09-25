@@ -126,17 +126,44 @@
   <data name="BuyCoffee" xml:space="preserve">
     <value>Купите мне кофе, я устал :(</value>
   </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Отмена</value>
+  </data>
+  <data name="CheckNetworkConnection" xml:space="preserve">
+    <value>Проверьте соединение к сети и попробуйте снова.</value>
+  </data>
   <data name="CurrentLanguage" xml:space="preserve">
     <value>Текущий язык:</value>
   </data>
   <data name="Default" xml:space="preserve">
     <value>По умолчанию</value>
   </data>
+  <data name="DisablePettyGuard" xml:space="preserve">
+    <value>Вы точно хотите отключить защиту Petty?</value>
+  </data>
+  <data name="Download" xml:space="preserve">
+    <value>Скачать</value>
+  </data>
+  <data name="Downloading" xml:space="preserve">
+    <value>Скачивание</value>
+  </data>
+  <data name="DownloadingInProgress" xml:space="preserve">
+    <value>Идёт скачивание, подождите его завершения...</value>
+  </data>
+  <data name="DownloadVoskModelMessage" xml:space="preserve">
+    <value>Для начала распознавания голоса вам необходимо скачать модель голоса (около 45 МБ)</value>
+  </data>
   <data name="English" xml:space="preserve">
     <value>Английский</value>
   </data>
+  <data name="f" xml:space="preserve">
+    <value />
+  </data>
   <data name="Help" xml:space="preserve">
     <value>Помощь</value>
+  </data>
+  <data name="Later" xml:space="preserve">
+    <value>Позже</value>
   </data>
   <data name="Leaderboard" xml:space="preserve">
     <value>Таблица лидеров</value>
@@ -147,8 +174,17 @@
   <data name="MessageForMe" xml:space="preserve">
     <value>Все сообщения читаю лично :)</value>
   </data>
+  <data name="No" xml:space="preserve">
+    <value>Нет</value>
+  </data>
+  <data name="Ok" xml:space="preserve">
+    <value>Ок</value>
+  </data>
   <data name="Petty" xml:space="preserve">
-    <value>Питомец</value>
+    <value>Пэти</value>
+  </data>
+  <data name="Point" xml:space="preserve">
+    <value>точка</value>
   </data>
   <data name="Russian" xml:space="preserve">
     <value>Русский</value>
@@ -156,7 +192,7 @@
   <data name="Settings" xml:space="preserve">
     <value>Настройки</value>
   </data>
-  <data name="Slider3Text" xml:space="preserve">
-    <value>Выбрано: {0:F1}</value>
+  <data name="Yes" xml:space="preserve">
+    <value>Да</value>
   </data>
 </root>

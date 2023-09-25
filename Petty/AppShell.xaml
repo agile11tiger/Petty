@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<Shell x:Name="shell"
-       x:Class="Petty.AppShell"
+<Shell x:Class="Petty.AppShell"
        xmlns:local="clr-namespace:Petty"
        xmlns:views="clr-namespace:Petty.Views"
        xmlns:viewModels="clr-namespace:Petty.ViewModels"
        xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
        xmlns:resources="clr-namespace:Petty.Resources.Localization"
-       xmlns:components="clr-namespace:Petty.ViewModels.Components"
+       xmlns:graphicsViews="clr-namespace:Petty.ViewModels.Components.GraphicsViews"
        FlyoutBehavior="Flyout"
        FlyoutBackgroundColor="WhiteSmoke"
        FlyoutHeaderBehavior="CollapseOnScroll">
@@ -22,16 +21,16 @@
                    FontSize="Large"
                    HorizontalTextAlignment="Start"
                    Text="{x:Static resources:AppResources.Petty}"/>
-            <GraphicsView x:Name="circularProgressBarGraphicsView" 
-                          Grid.Column="1"
-                          WidthRequest="39"
-                          HeightRequest="39"
-                          IsVisible="true">
-                <!--IsVisible="{Binding IsRunningSomeBackgroundWorking}">-->
-                <GraphicsView.Drawable>
-                    <components:CircularProgressBarViewModel x:Name="circularProgressBarViewModel"/>
-                </GraphicsView.Drawable>
-            </GraphicsView>
+            <graphicsViews:CircularProgressBarGraphicsView x:Name="_circularProgressBarGraphicsView" 
+                                                           Grid.Column="1"
+                                                           WidthRequest="39"
+                                                           HeightRequest="39"
+                                                           IsVisible="{Binding IsRunningProgressBar}"
+                                                           Percentages="{Binding ProgressBarPercentages}">
+                <graphicsViews:CircularProgressBarGraphicsView.Drawable>
+                    <graphicsViews:CircularProgressBarDrawble/>
+                </graphicsViews:CircularProgressBarGraphicsView.Drawable>
+            </graphicsViews:CircularProgressBarGraphicsView>
         </Grid>
     </Shell.TitleView>
     
@@ -92,8 +91,7 @@
                            VerticalTextAlignment="Center"
                            HorizontalTextAlignment="Center"/>
                 </VerticalStackLayout>
-                <Label x:Name="runningText"
-                       MaxLines ="1"
+                <Label MaxLines ="1"
                        Grid.Row="2" 
                        Grid.ColumnSpan="2"
                        HorizontalOptions="End"
@@ -141,8 +139,7 @@
                   Icon="dotnet_bot.svg"
                   Title="{x:Static resources:AppResources.Settings}"
                   ContentTemplate="{DataTemplate views:SettingsPage}" />
-    <MenuItem x:Name="MainPage"
-              Text="SomePage"
+    <MenuItem Text="SomePage"
               IconImageSource="dotnet_bot.svg"/>
     <MenuItem>
         <Shell.MenuItemTemplate>

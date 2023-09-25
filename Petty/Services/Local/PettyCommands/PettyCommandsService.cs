@@ -1,20 +1,21 @@
-﻿using Android.OS;
-using Newtonsoft.Json.Bson;
+﻿using CommunityToolkit.Mvvm.Messaging;
+using Petty.PlatformsShared.MessengerCommands.FromPettyGuard;
 using Petty.Services.Local.PettyCommands.Commands;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using Petty.Services.Local.Speech;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Petty.Services.Local.PettyCommands
 {
     public class PettyCommandsService
     {
-        public PettyCommandsService(PettyVoiceService pettyVoiceService)
+        public PettyCommandsService(
+            IMessenger messenger,
+            PettyVoiceService pettyVoiceService, 
+            SpeechRecognizerService speechRecognizerService)
         {
+            _messenger = messenger;
             _pettyVoiceService = pettyVoiceService;
+            _speechRecognizerService = speechRecognizerService;
             var iPettyCommandType = typeof(IPettyCommand);
             var currentAssemblyName = Assembly.GetExecutingAssembly().GetName().Name;
             var currentAssembly = AppDomain.CurrentDomain.GetAssemblies().First(a => a.FullName.StartsWith(currentAssemblyName));
@@ -27,41 +28,78 @@ namespace Petty.Services.Local.PettyCommands
             }
         }
 
+        private static bool _isStarting;
+        private readonly IMessenger _messenger;
         private readonly PettyVoiceService _pettyVoiceService;
+        private static readonly SemaphoreSlim _locker = new(1, 1);
+        private readonly SpeechRecognizerService _speechRecognizerService;
         private readonly Dictionary<string, IPettyCommand> _pettyCommands = new();
 
-        public void ProcessRawData(byte[] data)
+        public event Action<IPettyCommand> BroadcastPettyCommand;
+
+        public async Task<bool> TryStartAsync()
         {
-            var command = RecognizeCommand(data);
+            await _locker.WaitAsync();
 
-            if (command == null || !command.TryExecute())
-                _pettyVoiceService.PlayCommandExecutionFailed(command);
-
-            _pettyVoiceService.PlayCommandExecutionSuccessed(command);
+            try
+            {
+                if (!_isStarting)
+                {
+                    _speechRecognizerService.BroadcastSpeech += OnBroadcastSpeech;
+                    return _isStarting = await _speechRecognizerService.TryStartAsync();
+                }
+            }
+            finally { _locker.Release(); }
+            return true;
         }
-        
-        private IPettyCommand RecognizeCommand(byte[] data)
+
+        public async Task<bool> TryStopAsync()
         {
-            var text = GetText(data);
+            await _locker.WaitAsync();
 
-            if (_pettyCommands.TryGetValue(text, out IPettyCommand pettyCommand))
-                return pettyCommand;
+            try
+            {
+                if (BroadcastPettyCommand.GetInvocationList().Length <= 1)
+                {
+                    _speechRecognizerService.BroadcastSpeech -= OnBroadcastSpeech;
+                    var isStopped = await _speechRecognizerService.TryStopAsync();
+                    _isStarting = !isStopped;
+                    return isStopped;
+                }
+            }
+            finally { _locker.Release(); }
+            return false;
+        }
 
+        private void OnBroadcastSpeech(SpeechRecognizerResult speechResult)
+        {
+            System.Diagnostics.Debug.WriteLine(speechResult.Speech);
+            _messenger.Send(new SendSpeech() { Speech = speechResult.Speech });
+            return;
+
+            var command = RecognizeCommand(speechResult.Speech);
+
+            if (command != null)
+                speechResult.IsPettyCommand = true;
+            else
+                return;
+
+            if (command.TryExecute())
+            {
+                _pettyVoiceService.PlayCommandExecutionSuccessed(command);
+                BroadcastPettyCommand?.Invoke(command);
+            }
+            else
+                _pettyVoiceService.PlayCommandExecutionFailed(command);
+        }
+
+        private IPettyCommand RecognizeCommand(string speech)
+        {
             foreach (var command in _pettyCommands.Values)
-                if (command.CheckComplianceCommand(text))
+                if (command.CheckComplianceCommand(speech))
                     return command;
 
             return null;
-        }
-
-        private string GetText(byte[] data)
-        {
-            var text = Encoding.UTF8.GetString(data).TrimEnd(new char[] { (char)0 });
-            var text11 = Encoding.UTF32.GetString(data).TrimEnd(new char[] { (char)0 });
-            var text111 = Encoding.ASCII.GetString(data).TrimEnd(new char[] { (char)0 });
-            var text1 = Convert.ToBase64String(data).TrimEnd(new char[] { (char)0 });
-            var text2 = BitConverter.ToString(data).TrimEnd(new char[] { (char)0 });
-            return text;
         }
     }
 }

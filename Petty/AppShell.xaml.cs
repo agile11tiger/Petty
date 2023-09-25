@@ -1,6 +1,4 @@
-﻿using Petty.ViewModels.Components;
-
-namespace Petty
+﻿namespace Petty
 {
     public partial class AppShell : Shell
     {
@@ -8,6 +6,7 @@ namespace Petty
             AppShellViewModel appShellViewModel,
             NavigationService navigationService)
         {
+            appShellViewModel.InvalidateProgressBar = _circularProgressBarGraphicsView.Invalidate;
             BindingContext = _appShellViewModel = appShellViewModel;
             _navigationService = navigationService;
             InitializeComponent();

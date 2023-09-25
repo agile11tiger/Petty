@@ -1,12 +1,4 @@
-﻿using Android.OS;
-using AndroidX.Core.App;
-using Microsoft.Maui.Controls.Compatibility;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static Microsoft.Maui.ApplicationModel.Permissions;
+﻿using static Microsoft.Maui.ApplicationModel.Permissions;
 
 namespace Petty.Services.Local.PermissionsFolder
 {
@@ -18,16 +10,6 @@ namespace Petty.Services.Local.PermissionsFolder
     {
         public PermissionService()
         {
-            //_permissions = new Dictionary<string, IPermission>();
-            //var c = AppDomain.CurrentDomain.GetAssemblies();
-            //var types = AppDomain.CurrentDomain.GetAssemblies()
-            //    .SelectMany(s => s.GetTypes())
-            //    .Where(p => typeof(IPermission).IsAssignableFrom(p));
-
-            //foreach (var type in types)
-            //{
-            //    _permissions[nameof(type)] = (IPermission)Activator.CreateInstance(type);
-            //}
         }
 
         private Dictionary<string, Task<PermissionStatus>> _permissions;

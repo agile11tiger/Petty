@@ -17,18 +17,9 @@
 
     <Grid RowDefinitions="0.9*, 0.1*">
         <ContentView>
-            <StackLayout Padding="20,80,20,0" Orientation="Vertical" Spacing="15">
-                <Label x:Name="lol" Text="LOL" />
-                <StackLayout Orientation="Horizontal">
-                    <Switch x:Name="TimeoutSwitch" IsToggled="True" />
-                    <Label Text="Timeout after silence?" />
-                </StackLayout>
-                <Button x:Name="RecordButton" Text="Record" FontSize="24" HorizontalOptions="FillAndExpand" Clicked="Record_Clicked" />
-                <Button x:Name="PlayButton" Text="Play" FontSize="24" HorizontalOptions="FillAndExpand" Clicked="Play_Clicked" IsEnabled="False" />
-            </StackLayout>
+            <Label x:Name="_lol" Text="{Binding Speech}" />
         </ContentView>
-        <tabs:TabHostView x:Name="TabHostButton"
-                          Margin="0"
+        <tabs:TabHostView Margin="0"
                           Grid.Row="3"
                           Shadow="{StaticResource tabBarShadow}"
                           BackgroundColor="{StaticResource TabBarBackground}">
@@ -42,15 +33,15 @@
                     <TapGestureRecognizer Command="{Binding GoToLeaderboardCommand}"/>
                 </tabs:MaterialUnderlinedTabItem.GestureRecognizers>
             </tabs:MaterialUnderlinedTabItem>
-            <tabs:TabButton x:Name="TabButton"
-                            TranslationY="-20"
+            <tabs:TabButton TranslationY="-20"
                             ButtonPadding="15"
                             ButtonCircleSize="80"
                             ButtonWidthRequest="100"
                             ButtonHeightRequest="100"
-                            IconImageSource="play.png"
+                            IconImageSource="{Binding PettyGuardIconImageSource}"
                             Shadow="{StaticResource circleButtonShadow}"
-                            ButtonBackgroundColor="{StaticResource Primary}">
+                            ButtonBackgroundColor="{StaticResource Primary}"
+                            TapCommand="{Binding StartStopPettyGuardAndroidServiceCommand}">
             </tabs:TabButton>
             <tabs:MaterialUnderlinedTabItem Style="{StaticResource BottomTabStyle}"
                                             Label="{x:Static resources:AppResources.Settings}"

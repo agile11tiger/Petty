@@ -88,6 +88,24 @@ namespace Petty.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cancel.
+        /// </summary>
+        internal static string Cancel {
+            get {
+                return ResourceManager.GetString("Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Check your network connection and try again..
+        /// </summary>
+        internal static string CheckNetworkConnection {
+            get {
+                return ResourceManager.GetString("CheckNetworkConnection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Current language:.
         /// </summary>
         internal static string CurrentLanguage {
@@ -106,6 +124,51 @@ namespace Petty.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to disable Petty&apos;s protection?.
+        /// </summary>
+        internal static string DisablePettyGuard {
+            get {
+                return ResourceManager.GetString("DisablePettyGuard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Download.
+        /// </summary>
+        internal static string Download {
+            get {
+                return ResourceManager.GetString("Download", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Downloading.
+        /// </summary>
+        internal static string Downloading {
+            get {
+                return ResourceManager.GetString("Downloading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Downloading in progress, please wait for it to complete..
+        /// </summary>
+        internal static string DownloadingInProgress {
+            get {
+                return ResourceManager.GetString("DownloadingInProgress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to For start voice recognizing you need to download a voice model (about 128 MB).
+        /// </summary>
+        internal static string DownloadVoskModelMessage {
+            get {
+                return ResourceManager.GetString("DownloadVoskModelMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to English.
         /// </summary>
         internal static string English {
@@ -115,11 +178,29 @@ namespace Petty.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string f {
+            get {
+                return ResourceManager.GetString("f", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Help.
         /// </summary>
         internal static string Help {
             get {
                 return ResourceManager.GetString("Help", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Later.
+        /// </summary>
+        internal static string Later {
+            get {
+                return ResourceManager.GetString("Later", resourceCulture);
             }
         }
         
@@ -151,11 +232,38 @@ namespace Petty.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No.
+        /// </summary>
+        internal static string No {
+            get {
+                return ResourceManager.GetString("No", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ok.
+        /// </summary>
+        internal static string Ok {
+            get {
+                return ResourceManager.GetString("Ok", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Petty.
         /// </summary>
         internal static string Petty {
             get {
                 return ResourceManager.GetString("Petty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to point.
+        /// </summary>
+        internal static string Point {
+            get {
+                return ResourceManager.GetString("Point", resourceCulture);
             }
         }
         
@@ -183,6 +291,24 @@ namespace Petty.Resources.Localization {
         internal static string Slider3Text {
             get {
                 return ResourceManager.GetString("Slider3Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This operation is already in progress. Please try again later..
+        /// </summary>
+        internal static string TryLater {
+            get {
+                return ResourceManager.GetString("TryLater", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yes.
+        /// </summary>
+        internal static string Yes {
+            get {
+                return ResourceManager.GetString("Yes", resourceCulture);
             }
         }
     }

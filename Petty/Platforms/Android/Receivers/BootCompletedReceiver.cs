@@ -1,15 +1,9 @@
-﻿using Android.App;
-using Android.Content;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Android.Content;
 
 namespace Petty.Platforms.Android.Receivers
 {
     [BroadcastReceiver(Enabled = true)]
-    //TODO: bug not working, when its will be working check restart
+    //TODO: why he not added in the manifest automatic??? bug not working, when its will be working check restart
     //[IntentFilter(new[] { Intent.ActionBootCompleted })]
     public class BootCompletedReceiver : BroadcastReceiver
     {
@@ -17,7 +11,7 @@ namespace Petty.Platforms.Android.Receivers
         {
             if (intent != null && intent.Action != null && intent.Action == Intent.ActionBootCompleted)
             {
-                App.StartPettyGuadrAndroidService();
+                PettyGuardAndroidService.Start();
             }
         }
     }

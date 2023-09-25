@@ -1,7 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.Messaging;
 using Petty.Helpres;
 using Petty.Resources.Localization;
-using Petty.WeakReferenceMessengerCommands;
+using Petty.MessengerCommands.Application;
 using System.Globalization;
 
 namespace Petty.Services.Local.Localization
@@ -27,10 +27,10 @@ namespace Petty.Services.Local.Localization
             Thread.CurrentThread.CurrentUICulture = cultureInfo;
             CultureInfo.CurrentCulture = cultureInfo;
             CultureInfo.CurrentUICulture = cultureInfo;
-            Preferences.Default.Set(PreferencesHelper.LANGUAGE, cultureInfo.Name);
+            Preferences.Default.Set(SharedPreferencesHelper.LANGUAGE, cultureInfo.Name);
 
             if (needSoftRestart)
-                WeakReferenceMessenger.Default.Send<RestartCommand>(new RestartCommand() { CultureInfo = cultureInfo });
+                WeakReferenceMessenger.Default.Send<RestartApplication>(new RestartApplication() { CultureInfo = cultureInfo });
         }
 
         public static string Get(string key, params object[] parameters)

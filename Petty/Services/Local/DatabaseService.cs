@@ -1,13 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore.ChangeTracking;
-using Microsoft.EntityFrameworkCore;
-using Petty.Models.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Petty.Services.Local
+﻿namespace Petty.Services.Local
 {
     public class DatabaseService
     {
@@ -18,7 +9,7 @@ namespace Petty.Services.Local
 
         private readonly ApplicationDbContext _applicationDbContext;
 
-        public async Task CreateOrUpdateAsync<T>(T item) where T: class, IDatabaseItem
+        public async Task CreateOrUpdateAsync<T>(T item) where T : class, IDatabaseItem
         {
             if (Contains<T>(item.Id, out T result))
             {

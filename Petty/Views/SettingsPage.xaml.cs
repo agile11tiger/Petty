@@ -1,5 +1,3 @@
-using Petty.Resources.Localization;
-
 namespace Petty.Views;
 
 public partial class SettingsPage : ContentPage
@@ -8,7 +6,7 @@ public partial class SettingsPage : ContentPage
     {
         BindingContext = _settingsViewModel = settingsViewModel;
         InitializeComponent();
-        pickerLanguage.SelectedIndex = _settingsViewModel.LanguagesDictionary
+        _pickerLanguage.SelectedIndex = _settingsViewModel.LanguagesDictionary
             .FindIndex(item => item.CultureInfo.Name == _settingsViewModel.TempSettings.LanguageType);
     }
 
@@ -16,6 +14,6 @@ public partial class SettingsPage : ContentPage
 
     private void pickerLanguage_SelectedIndexChanged(object sender, EventArgs e)
     {
-        _settingsViewModel.TempSettings.LanguageType = (pickerLanguage.SelectedItem as Language).CultureInfo.Name;
+        _settingsViewModel.TempSettings.LanguageType = (_pickerLanguage.SelectedItem as Language).CultureInfo.Name;
     }
 }

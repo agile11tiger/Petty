@@ -1,8 +1,4 @@
-﻿using Android.Content;
-using Android.Media;
-using Android.Speech;
-using Java.IO;
-using System.Diagnostics;
+﻿using Android.Speech;
 using System.Globalization;
 
 namespace Petty.Platforms.Android.Audio.Google

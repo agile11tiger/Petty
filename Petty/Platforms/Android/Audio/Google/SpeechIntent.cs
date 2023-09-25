@@ -1,11 +1,6 @@
 ﻿using Android.Content;
 using Android.Speech;
-using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Petty.Platforms.Android.Audio.Google
 {

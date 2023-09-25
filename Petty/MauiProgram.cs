@@ -1,21 +1,24 @@
 ﻿using CommunityToolkit.Maui;
+using CommunityToolkit.Mvvm.Messaging;
 using Microsoft.Extensions.Logging;
 using Petty.Extensions;
 using Petty.Helpres;
-using Petty.Services.Local.Audio;
-using Petty.Services.Local.Localization;
+using Petty.Services.Platforms.Audio;
+using Petty.Services.Local.PermissionsFolder;
 using Petty.Services.Local.PettyCommands;
+using Petty.Services.Local.Speech;
 using Petty.ViewModels.Components;
+using Petty.ViewModels.Components.GraphicsViews;
 using Petty.Views;
 using Sharpnado.Tabs;
-using System.Globalization;
-using System.Threading;
-using System.Xml.Xsl;
+using SkiaSharp.Views.Maui.Handlers;
 
 namespace Petty
 {
     public static class MauiProgram
     {
+        public static IServiceProvider ServiceProvider { get; private set; }
+
         public static MauiApp CreateMauiApp()
         {
             var builder = MauiApp.CreateBuilder();
@@ -23,8 +26,10 @@ namespace Petty
                 .UseMauiApp<App>()
                 .UseMauiCommunityToolkit()
                 .UseSharpnadoTabs(loggerEnable: false)
+                .ConfigureMauiHandlers(handlers => { handlers.AddHandler<YinYangSpinnerWithTextSkiaSharpViewModel, SKCanvasViewHandler>(); })
                 .ConfigureFonts(fonts =>
                 {
+                    fonts.AddFont("MonotypeCorsiva.ttf", "MonotypeCorsiva");
                     fonts.AddFont("OpenSans-Bold.ttf", "OpenSansBold");
                     fonts.AddFont("OpenSans-ExtraBold.ttf", "OpenSansExtraBold");
                     fonts.AddFont("OpenSans-Light.ttf", "OpenSansLight");
@@ -44,7 +49,9 @@ namespace Petty
             TaskScheduler.UnobservedTaskException += HandleUnobservedException;
             AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(HandleCurrentDomainUnhandledException);
 
-            return builder.Build();
+            var app = builder.Build();
+            ServiceProvider = app.Services;
+            return app;
         }
 
         private static void HandleUnobservedException(object sender, UnobservedTaskExceptionEventArgs e)
@@ -66,8 +73,18 @@ namespace Petty
             builder.Services.AddSingleton<SettingsService>();
             builder.Services.AddSingleton<PettyVoiceService>();
             builder.Services.AddSingleton<NavigationService>();
+            builder.Services.AddSingleton<PermissionService>();
+            builder.Services.AddSingleton<AudioPlayerService>();
+            builder.Services.AddSingleton<WebRequestsService>();
             builder.Services.AddSingleton<LocalizationService>();
+            builder.Services.AddSingleton<UserMessagesService>();
             builder.Services.AddSingleton<PettyCommandsService>();
+            builder.Services.AddSingleton<AudioRecorderService>();
+            builder.Services.AddSingleton<SpeechRecognizerService>();
+            builder.Services.AddSingleton<IMessenger, WeakReferenceMessenger>();
+
+            builder.Services.AddTransient<WaveRecorderService>();
+
             return builder;
         }
 

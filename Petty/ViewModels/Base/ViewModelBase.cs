@@ -1,27 +1,13 @@
-﻿using Petty.Services.Local.Localization;
-
-namespace Petty.ViewModels.Base
+﻿namespace Petty.ViewModels.Base
 {
     public abstract partial class ViewModelBase : ObservableObject, IViewModelBase
     {
-        private long _isBusy;
-        [ObservableProperty]
-        private bool _isInitialized;
-
-        public bool IsBusy => Interlocked.Read(ref _isBusy) > 0;
-
-        public LoggerService LoggerService { get; }
-        public NavigationService NavigationService { get; }
-        public LocalizationService LocalizationService { get; }
-
-        public IAsyncRelayCommand InitializeAsyncCommand { get; }
-
         public ViewModelBase(
-            LoggerService logger,
+            LoggerService loggerService,
             NavigationService navigationService,
             LocalizationService localizationService)
         {
-            LoggerService = logger;
+            LoggerService = loggerService;
             NavigationService = navigationService;
             LocalizationService = localizationService;
             InitializeAsyncCommand =
@@ -33,6 +19,15 @@ namespace Petty.ViewModels.Base
                     },
                     AsyncRelayCommandOptions.FlowExceptionsToTaskScheduler);
         }
+
+        private long _isBusy;
+        [ObservableProperty] private bool _isInitialized;
+
+        public bool IsBusy => Interlocked.Read(ref _isBusy) > 0;
+        public LoggerService LoggerService { get; }
+        public NavigationService NavigationService { get; }
+        public LocalizationService LocalizationService { get; }
+        public IAsyncRelayCommand InitializeAsyncCommand { get; }
 
         public virtual Task InitializeAsync()
         {

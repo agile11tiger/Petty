@@ -2,7 +2,7 @@
 {
     public class SettingsService
     {
-        public SettingsService() 
+        public SettingsService()
         {
             Settings = new Settings();
         }

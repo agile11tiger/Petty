@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="Petty.Views.SplashScreenPage"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:components="clr-namespace:Petty.Views.Components"
+             Title="SplashScreenPage"
+             Background="#aaa">
+
+    <components:YinYangSpinner x:Name="_yinYangSpinner"/>
+</ContentPage>

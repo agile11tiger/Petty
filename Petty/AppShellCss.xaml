@@ -3,7 +3,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
 
     <Style TargetType="Shell" ApplyToDerivedTypes="True">
-        <Setter x:Name="headerBackground" Property="Shell.BackgroundColor" Value="#cdcdcd" />
+        <Setter Property="Shell.BackgroundColor" Value="#cdcdcd" />
         <!--TODO: not working https://github.com/dotnet/maui/issues/10445 -->
         <!--<Setter Property="Background">
             <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">

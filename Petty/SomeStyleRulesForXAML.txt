@@ -18,7 +18,7 @@
 то нужно делать перенос каждого свойства на новую строку. Grid.Column и Grid.Row считаются как одно свойство.
 
 Label x:Uid="1"
-	  x:Name="agile_tiger"
+	  x:Name="_agile_tiger" //Necessarily prefix _ as this local variable
 	  StyleId="agile_tiger"
 	  ClassId="agile_tiger"
 	  StyleClass="agile_tiger"
