@@ -6,10 +6,10 @@
             AppShellViewModel appShellViewModel,
             NavigationService navigationService)
         {
-            appShellViewModel.InvalidateProgressBar = _circularProgressBarGraphicsView.Invalidate;
             BindingContext = _appShellViewModel = appShellViewModel;
             _navigationService = navigationService;
             InitializeComponent();
+            appShellViewModel.InvalidateProgressBar = _circularProgressBarGraphicsView.Invalidate;
         }
 
         private readonly AppShellViewModel _appShellViewModel;
