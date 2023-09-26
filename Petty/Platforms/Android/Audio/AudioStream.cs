@@ -14,7 +14,7 @@ namespace Petty.Services.Platforms.Audio
         /// <param name="audioFormat">The format of the recorded audio.</param>
         public AudioStream(
             LoggerService loggerService,
-            int sampleRate = 44100,
+            int sampleRate = 16000,
             ChannelIn channels = ChannelIn.Mono,
             Encoding audioFormat = Encoding.Pcm16bit,
             AudioSource audioSource = AudioSource.Mic)
@@ -51,7 +51,7 @@ namespace Petty.Services.Platforms.Audio
         private readonly LoggerService _loggerService;
         private static readonly object _locker = new();
 
-        public event Action<byte[]> BroadcastData;
+        private event Action<byte[]> BroadcastData;
         public event Action<bool> ActiveStatusChanged;
         public event Action<Exception> ExceptionCatched;
 
@@ -59,10 +59,9 @@ namespace Petty.Services.Platforms.Audio
         public int SampleRate { get => _audioRecord.SampleRate; }
         public bool IsActive => _audioRecord?.RecordingState == RecordState.Recording;
         public int BitsPerSample => (_audioRecord.AudioFormat == Encoding.Pcm16bit) ? 16 : 8;
-
         public int AverageBytesPerSecond => _sampleRate * BitsPerSample / 8 * ChannelCount;
 
-        public void Start()
+        public void Start(Action<byte[]> subscriber)
         {
             lock (_locker)
             {
@@ -76,6 +75,8 @@ namespace Petty.Services.Platforms.Audio
                         _audioRecord.StartRecording();
                         _audioStreamThread.Start();
                     }
+
+                    BroadcastData += subscriber;
                 }
                 catch (Exception ex)
                 {
@@ -85,17 +86,15 @@ namespace Petty.Services.Platforms.Audio
             }
         }
 
-        public void Stop()
+        public void Stop(Action<byte[]> subscriber)
         {
             lock (_locker)
             {
-                if (_audioRecord != null && IsActive && BroadcastData.GetInvocationList().Length <= 1)
-                {
+                if (IsActive && BroadcastData.GetInvocationList().Length == 1)
                     _audioRecord.Stop();
-                    _audioRecord.Release();
-                }
-                else // just in case
-                    _audioRecord?.Release();
+
+                _audioRecord.Release();
+                BroadcastData -= subscriber;
             }
         }
 

@@ -3,6 +3,7 @@ using Petty.PlatformsShared.MessengerCommands.FromPettyGuard;
 using Petty.Services.Local.PettyCommands.Commands;
 using Petty.Services.Local.Speech;
 using System.Reflection;
+using static Java.Util.Concurrent.Flow;
 
 namespace Petty.Services.Local.PettyCommands
 {
@@ -28,47 +29,47 @@ namespace Petty.Services.Local.PettyCommands
             }
         }
 
-        private static bool _isStarting;
         private readonly IMessenger _messenger;
         private readonly PettyVoiceService _pettyVoiceService;
         private static readonly SemaphoreSlim _locker = new(1, 1);
         private readonly SpeechRecognizerService _speechRecognizerService;
         private readonly Dictionary<string, IPettyCommand> _pettyCommands = new();
 
-        public event Action<IPettyCommand> BroadcastPettyCommand;
+        private event Action<IPettyCommand> BroadcastPettyCommand;
 
-        public async Task<bool> TryStartAsync()
+        /// <summary>
+        /// Try start the petty commands recognizer.
+        /// </summary>
+        public async Task<bool> TryStartAsync(Action<IPettyCommand> subscriber)
         {
             await _locker.WaitAsync();
 
             try
             {
-                if (!_isStarting)
-                {
-                    _speechRecognizerService.BroadcastSpeech += OnBroadcastSpeech;
-                    return _isStarting = await _speechRecognizerService.TryStartAsync();
-                }
+                if (BroadcastPettyCommand == null)
+                    await _speechRecognizerService.TryStartAsync(OnBroadcastSpeech);
+
+                BroadcastPettyCommand += subscriber;
+                return true;
             }
             finally { _locker.Release(); }
-            return true;
         }
 
-        public async Task<bool> TryStopAsync()
+        /// <summary>
+        /// Stop the petty commands recognizer.
+        /// </summary>
+        public async Task StopAsync(Action<IPettyCommand> subscriber)
         {
             await _locker.WaitAsync();
 
             try
             {
-                if (BroadcastPettyCommand.GetInvocationList().Length <= 1)
-                {
-                    _speechRecognizerService.BroadcastSpeech -= OnBroadcastSpeech;
-                    var isStopped = await _speechRecognizerService.TryStopAsync();
-                    _isStarting = !isStopped;
-                    return isStopped;
-                }
+                if (BroadcastPettyCommand.GetInvocationList().Length == 1)
+                    await _speechRecognizerService.StopAsync(OnBroadcastSpeech);
+
+                BroadcastPettyCommand -= subscriber;
             }
             finally { _locker.Release(); }
-            return false;
         }
 
         private void OnBroadcastSpeech(SpeechRecognizerResult speechResult)

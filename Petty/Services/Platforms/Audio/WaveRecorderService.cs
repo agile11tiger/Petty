@@ -1,8 +1,9 @@
-﻿using System.Text;
+﻿using Android.Net.Rtp;
+using System.Text;
 
 namespace Petty.Services.Platforms.Audio
 {
-    public class WaveRecorderService : IDisposable
+    public class WaveRecorderService
     {
         public WaveRecorderService(LoggerService loggerService)
         {
@@ -42,10 +43,7 @@ namespace Petty.Services.Platforms.Audio
                 _fileStream = new FileStream(filePath, FileMode.Create, FileAccess.Write, FileShare.Read);
                 _streamWriter = new StreamWriter(_fileStream);
                 _writer = new BinaryWriter(_streamWriter.BaseStream, Encoding.UTF8);
-                _audioStream.BroadcastData += OnStreamBroadcast;
-
-                if (!_audioStream.IsActive)
-                    _audioStream.Start();
+                _audioStream.Start(OnStreamBroadcast);
             }
             catch (Exception ex)
             {
@@ -62,9 +60,6 @@ namespace Petty.Services.Platforms.Audio
         {
             try
             {
-                if (_audioStream != null)
-                    _audioStream.BroadcastData -= OnStreamBroadcast;
-
                 if (_writer != null)
                 {
                     if (_streamWriter.BaseStream.CanWrite)
@@ -85,24 +80,13 @@ namespace Petty.Services.Platforms.Audio
                     _streamWriter = null;
                 }
 
-                _audioStream = null;
+                _audioStream.Stop(OnStreamBroadcast);
             }
             catch (Exception ex)
             {
                 _loggerService.Log(ex);
                 throw;
             }
-        }
-
-        public void Dispose()
-        {
-            StopRecorder();
-        }
-
-        private void StreamActiveChanged(bool active)
-        {
-            if (!active)
-                StopRecorder();
         }
 
         private void OnStreamBroadcast(byte[] bytes)

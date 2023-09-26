@@ -1,4 +1,5 @@
 ﻿using Petty.Extensions;
+using Petty.Helpres;
 using Petty.ViewModels.Base;
 
 namespace Petty.ViewModels
@@ -22,6 +23,12 @@ namespace Petty.ViewModels
         [ObservableProperty] private List<Language> _languagesDictionary = LocalizationService.SupportedCultures.Values.ToList();
         private readonly DatabaseService _databaseService;
         private readonly SettingsService _settingsService;
+
+        [RelayCommand]
+        private async Task GoToDiagnosticsPettyPage()
+        {
+            await NavigationService.GoToAsync(RoutesHelper.DIAGNOSTICS_PETTY);
+        }
 
         [RelayCommand]
         private Task ApplyDefaultSettings()

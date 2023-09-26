@@ -5,6 +5,7 @@ using Petty.PlatformsShared.MessengerCommands.FromPettyGuard;
 using System.IO.Compression;
 using Vosk;
 using static Petty.Services.Local.Speech.VoskModelInfos;
+using static Java.Util.Concurrent.Flow;
 
 namespace Petty.Services.Local.Speech
 {
@@ -32,7 +33,6 @@ namespace Petty.Services.Local.Speech
         private const int PARTIAL_RESULT_EMPTY_MESSAGE_LENGTH = 20;// "{\n  \"partial\" : \"\"\n}
         private const string REALTIME_DATA_FILE_PATH = "speechRecognizerRealtimeData.wav";
 
-        private bool _isStarting;
         private Model _recognizerModel;
         private VoskRecognizer _recognizer;
         private bool _isRecognizingFromDisk;
@@ -44,47 +44,46 @@ namespace Petty.Services.Local.Speech
         private readonly UserMessagesService _userMessagesService;
         private readonly AudioRecorderService _audioRecorderService;
 
-        /// <summary>
-        /// Sends the speech recognition result, with two parameters: speech and isFinal
-        /// </summary>
-        public event Action<SpeechRecognizerResult> BroadcastSpeech;
+        private event Action<SpeechRecognizerResult> BroadcastSpeech;
 
-        public async Task<bool> TryStartAsync()
+        /// <summary>
+        /// Try start the speech recognizer.
+        /// </summary>
+        public async Task<bool> TryStartAsync(Action<SpeechRecognizerResult> subscriber)
         {
             await _locker.WaitAsync();
 
             try
             {
-                if (!_isStarting)
+                if (BroadcastSpeech == null)
                 {
                     if (!await TryInitializeRecognizer())
                         return false;
 
-                    _audioRecorderService.BroadcastRecorderData += OnBroadcastAudioRecorderData;
-                    _audioRecorderService.StartRecording();
-                    _isStarting = true;
+                    _audioRecorderService.StartRecording(OnBroadcastAudioRecorderData);
                 }
+
+                BroadcastSpeech += subscriber;
+                return true;
             }
             finally { _locker.Release(); }
-            return true;
         }
 
-        public async Task<bool> TryStopAsync()
+        /// <summary>
+        /// Stop the speech recognizer.
+        /// </summary>
+        public async Task StopAsync(Action<SpeechRecognizerResult> subscriber)
         {
             await _locker.WaitAsync();
 
             try
             {
-                if (BroadcastSpeech.GetInvocationList().Length <= 1)
-                {
-                    _audioRecorderService.BroadcastRecorderData -= OnBroadcastAudioRecorderData;
-                    _audioRecorderService.StopRecording();
-                    _isStarting = false;
-                    return true;
-                }
+                if (BroadcastSpeech.GetInvocationList().Length == 1)
+                    _audioRecorderService.StopRecording(OnBroadcastAudioRecorderData);
+
+                BroadcastSpeech -= subscriber;
             }
             finally { _locker.Release(); }
-            return false;
         }
 
         public async Task RecognizeFromDiskAsync(Action<string, bool> updateResult, string filePath)

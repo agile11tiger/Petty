@@ -14,41 +14,40 @@
     <ScrollView>
         <Grid Margin="10" 
               ColumnDefinitions="4*, 2*"
-              RowDefinitions="50,1,50,1,50,1,50,1,50,1,50,1,50,1,100">
+              RowDefinitions="50,1,50,1,50,1,50,1,50,1,50,1,50,1,50,1,100">
 
-            <Label Grid.Row="0" Grid.Column="0" Text="{x:Static resources:AppResources.CurrentLanguage}"/>
+            <Label Grid.Row="0" 
+                   Grid.ColumnSpan="2" 
+                   HorizontalOptions="Center"
+                   Text="{x:Static resources:AppResources.PettyDiagnostic}" >
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding GoToDiagnosticsPettyPageCommand}" />
+                </Label.GestureRecognizers>
+            </Label>
+            <BoxView Grid.Row="1" Grid.ColumnSpan="2"/>
+            
+            <Label Grid.Row="2" Grid.Column="0" Text="{x:Static resources:AppResources.CurrentLanguage}"/>
             <Picker x:Name="_pickerLanguage" 
-                    Grid.Row="0"
+                    Grid.Row="2"
                     Grid.Column="1"
                     ItemDisplayBinding="{Binding Name}"
                     ItemsSource="{Binding LanguagesDictionary}"
                     SelectedIndexChanged="pickerLanguage_SelectedIndexChanged"/>
-            <BoxView Grid.Row="1" Grid.ColumnSpan="2"/>
-            
-            <Label Grid.Row="2" Grid.Column="0" Text="Использовать фронтальную камеру"/>
-            <Switch Grid.Row="2" Grid.Column="1" IsToggled="{Binding TempSettings.UseFrontCamera}"/>
             <BoxView Grid.Row="3" Grid.ColumnSpan="2"/>
             
-            <Label Grid.Row="4" Grid.Column="0" Text="Более глубокий взгляд на растровое изображение"/>
-            <Switch Grid.Row="4" Grid.Column="1" IsToggled="{Binding TempSettings.TryHarder}"/>
+            <Label Grid.Row="4" Grid.Column="0" Text="Использовать фронтальную камеру"/>
+            <Switch Grid.Row="4" Grid.Column="1" IsToggled="{Binding TempSettings.UseFrontCamera}"/>
             <BoxView Grid.Row="5" Grid.ColumnSpan="2"/>
-
-            <Label Grid.Row="6" Grid.Column="0" Text="Инвертировать цвет QR-кода для его анализа"/>
-            <Switch Grid.Row="6" Grid.Column="1" IsToggled="{Binding TempSettings.TryInverted}"/>
+            
+            <Label Grid.Row="6" Grid.Column="0" Text="Более глубокий взгляд на растровое изображение"/>
+            <Switch Grid.Row="6" Grid.Column="1" IsToggled="{Binding TempSettings.TryHarder}"/>
             <BoxView Grid.Row="7" Grid.ColumnSpan="2"/>
 
-            <Label Grid.Row="8" Grid.Column="0" Text="Начальная задержка перед анализом кадров"/>
-            <StackLayout Spacing="0"
-                         Grid.Row="8"
-                         Grid.Column="1"
-                         VerticalOptions="Center">
-                <Label HorizontalOptions="Center"
-                       Text="{Binding TempSettings.Slider3Text}" />
-                <Slider Value="{Binding TempSettings.Slider3Value}"/>
-            </StackLayout>
+            <Label Grid.Row="8" Grid.Column="0" Text="Инвертировать цвет QR-кода для его анализа"/>
+            <Switch Grid.Row="8" Grid.Column="1" IsToggled="{Binding TempSettings.TryInverted}"/>
             <BoxView Grid.Row="9" Grid.ColumnSpan="2"/>
 
-            <Label Grid.Row="10" Grid.Column="0" Text="Задержка между анализом кадров"/>
+            <Label Grid.Row="10" Grid.Column="0" Text="Начальная задержка перед анализом кадров"/>
             <StackLayout Spacing="0"
                          Grid.Row="10"
                          Grid.Column="1"
@@ -59,10 +58,10 @@
             </StackLayout>
             <BoxView Grid.Row="11" Grid.ColumnSpan="2"/>
 
-            <Label Grid.Row="12" Grid.Column="0" Text="Задержка между непрерывным сканированием"/>
-            <StackLayout Spacing="0" 
-                         Grid.Row="12" 
-                         Grid.Column="1" 
+            <Label Grid.Row="12" Grid.Column="0" Text="Задержка между анализом кадров"/>
+            <StackLayout Spacing="0"
+                         Grid.Row="12"
+                         Grid.Column="1"
                          VerticalOptions="Center">
                 <Label HorizontalOptions="Center"
                        Text="{Binding TempSettings.Slider3Text}" />
@@ -70,8 +69,19 @@
             </StackLayout>
             <BoxView Grid.Row="13" Grid.ColumnSpan="2"/>
 
-            <StackLayout Spacing="20" 
+            <Label Grid.Row="14" Grid.Column="0" Text="Задержка между непрерывным сканированием"/>
+            <StackLayout Spacing="0" 
                          Grid.Row="14" 
+                         Grid.Column="1" 
+                         VerticalOptions="Center">
+                <Label HorizontalOptions="Center"
+                       Text="{Binding TempSettings.Slider3Text}" />
+                <Slider Value="{Binding TempSettings.Slider3Value}"/>
+            </StackLayout>
+            <BoxView Grid.Row="15" Grid.ColumnSpan="2"/>
+
+            <StackLayout Spacing="20" 
+                         Grid.Row="16" 
                          Grid.ColumnSpan="2" 
                          Orientation="Horizontal" 
                          VerticalOptions="Center"

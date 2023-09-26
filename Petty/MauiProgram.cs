@@ -81,6 +81,7 @@ namespace Petty
             builder.Services.AddSingleton<PettyCommandsService>();
             builder.Services.AddSingleton<AudioRecorderService>();
             builder.Services.AddSingleton<SpeechRecognizerService>();
+            builder.Services.AddSingleton<IAudioStream, AudioStream>();
             builder.Services.AddSingleton<IMessenger, WeakReferenceMessenger>();
 
             builder.Services.AddTransient<WaveRecorderService>();
@@ -90,8 +91,10 @@ namespace Petty
 
         private static MauiAppBuilder RegisterPagesWithViewModels(this MauiAppBuilder builder)
         {
-            builder.Services.AddTransientWithShellRoute<MainPage, MainViewModel>(RoutesHelper.MAIN);
-            builder.Services.AddTransientWithShellRoute<SettingsPage, SettingsViewModel>(RoutesHelper.SETINGS);
+            builder.Services.AddScopedWithShellRoute<MainPage, MainViewModel>(RoutesHelper.MAIN);
+            builder.Services.AddScopedWithShellRoute<SettingsPage, SettingsViewModel>(RoutesHelper.SETINGS);
+            builder.Services.AddScopedWithShellRoute<DiagnosticPettyPage, DiagnosticPettyViewModel>(
+                $"{RoutesHelper.SETINGS}/{RoutesHelper.DIAGNOSTICS_PETTY}");
             return builder;
         }
 

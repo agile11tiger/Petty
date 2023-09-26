@@ -12,21 +12,21 @@
         /// <summary>
         /// Creates a new instance of the <see cref="AudioRecorderService"/>.
         /// </summary>
-        public AudioRecorderService(LoggerService loggerService, WaveRecorderService waveRecorderService)
+        public AudioRecorderService(IAudioStream audioStream, LoggerService loggerService, WaveRecorderService waveRecorderService)
         {
             Initialize();
+            _audioStream = audioStream;
             _loggerService = loggerService;
             _waveRecorderService = waveRecorderService;
         }
 
-        private static bool _isStarting;
-        private IAudioStream _audioStream;
+        private readonly IAudioStream _audioStream;
         private readonly LoggerService _loggerService;
         private static readonly object _locker = new();
         private readonly List<float> _silenceThresholds = new();
         private readonly WaveRecorderService _waveRecorderService;
 
-        public event Action<byte[]> BroadcastRecorderData;
+        private event Action<byte[]> BroadcastRecorderData;
 
         /// <summary>
         /// Gets/sets the preferred sample rate to be used during recording.
@@ -54,33 +54,31 @@
         /// <summary>
         /// Starts recording audio.
         /// </summary>
-        public void StartRecording()
+        public void StartRecording(Action<byte[]> subscriber)
         {
             lock (_locker)
             {
-                if (!_isStarting)
-                {
-                    _isStarting = true;
-                    InitializeStream();
-                    _audioStream.Start();
-                }
+                if (BroadcastRecorderData == null)
+                    _audioStream.Start(OnBroadcastDataAudioStream);
+
+                BroadcastRecorderData += subscriber;
             }
         }
 
         /// <summary>
         /// Stops recording audio.
         /// </summary>
-        public void StopRecording()
+        public void StopRecording(Action<byte[]> subscriber)
         {
             lock (_locker)
             {
-                if (BroadcastRecorderData.GetInvocationList().Length <= 1)
+                if (BroadcastRecorderData.GetInvocationList().Length == 1)
                 {
                     _audioStream.Flush(); // allow the stream to send any remaining data
-                    _audioStream.BroadcastData -= OnBroadcastDataAudioStream;
-                    _audioStream.Stop();
-                    _isStarting = false;
+                    _audioStream.Stop(OnBroadcastDataAudioStream);
                 }
+
+                BroadcastRecorderData -= subscriber;
             }
         }
 
@@ -89,10 +87,23 @@
         /// </summary>
         public void StartRecording(string filePath)
         {
-            //Todo: can this not working parallel with on some device???
-            //recognizer always working
-            InitializeStream();
-            _waveRecorderService.StartRecorder(_audioStream, filePath);
+            lock (_locker)
+            {
+                //Todo: can this not working parallel with on some device???
+                //recognizer always working
+                _waveRecorderService.StartRecorder(_audioStream, filePath);
+            }
+        }
+
+        /// <summary>
+        /// Starts recording audio to the specified path.
+        /// </summary>
+        public void StopRecording(string filePath, Action<byte[]> subscriber)
+        {
+            lock (_locker)
+            {
+                _waveRecorderService.StopRecorder();
+            }
         }
 
         /// <summary>
@@ -102,21 +113,6 @@
         public Stream GetAudioFileStream()
         {
             return _waveRecorderService.GetAudioFileOnlyReadStream();
-        }
-
-        private void InitializeStream()
-        {
-            if (_audioStream == null)
-            {
-                lock (_locker)
-                {
-                    if (_audioStream != null)
-                        return;
-
-                    _audioStream = new AudioStream(_loggerService, PreferredSampleRate);
-                    _audioStream.BroadcastData += OnBroadcastDataAudioStream;
-                }
-            }
         }
 
         private void OnBroadcastDataAudioStream(byte[] bytes)

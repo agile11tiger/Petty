@@ -132,13 +132,12 @@
         </DataTemplate>
     </Shell.MenuItemTemplate>
 
-    <ShellContent Route="Main"
-                  FlyoutItemIsVisible="False"
+    <ShellContent FlyoutItemIsVisible="False"
                   ContentTemplate="{DataTemplate views:MainPage}" />
-    <ShellContent Route="Settings"
+    <!--<ShellContent Route="Settings"
                   Icon="dotnet_bot.svg"
                   Title="{x:Static resources:AppResources.Settings}"
-                  ContentTemplate="{DataTemplate views:SettingsPage}" />
+                  ContentTemplate="{DataTemplate views:SettingsPage}" />-->
     <MenuItem Text="SomePage"
               IconImageSource="dotnet_bot.svg"/>
     <MenuItem>

@@ -10,12 +10,12 @@ namespace Petty.Services.Local
 
         //TODO: change
         public Task InitializeAsync() => GoToAsync(
-            string.IsNullOrEmpty("_settingsService.AuthAccessToken") ? "//Login" : "//Main");
+            string.IsNullOrEmpty("_settingsService.AuthAccessToken") ? "Login" : "Main");
 
         public Task GoToAsync(string route, IDictionary<string, object> routeParameters = null)
         {
             var shellNavigation = new ShellNavigationState(route);
-
+            
             return routeParameters != null
                 ? Shell.Current.GoToAsync(shellNavigation, routeParameters)
                 : Shell.Current.GoToAsync(shellNavigation);

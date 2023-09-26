@@ -178,15 +178,6 @@ namespace Petty.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
-        /// </summary>
-        internal static string f {
-            get {
-                return ResourceManager.GetString("f", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Help.
         /// </summary>
         internal static string Help {
@@ -255,6 +246,15 @@ namespace Petty.Resources.Localization {
         internal static string Petty {
             get {
                 return ResourceManager.GetString("Petty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Diagnostics Petty.
+        /// </summary>
+        internal static string PettyDiagnostic {
+            get {
+                return ResourceManager.GetString("PettyDiagnostic", resourceCulture);
             }
         }
         

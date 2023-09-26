@@ -4,7 +4,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:components="clr-namespace:Petty.Views.Components"
              Title="SplashScreenPage"
-             Background="#aaa">
+             Style="{StaticResource PageBaseStyle}">
 
     <components:YinYangSpinner x:Name="_yinYangSpinner"/>
 </ContentPage>

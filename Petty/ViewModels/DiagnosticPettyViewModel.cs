@@ -1,15 +1,22 @@
-﻿using CommunityToolkit.Mvvm.Messaging;
-using Petty.Helpres;
-using Petty.Resources.Localization;
-using Petty.ViewModels.Base;
+﻿using Android.OS;
+using CommunityToolkit.Mvvm.Messaging;
 using Petty.PlatformsShared.MessengerCommands.FromPettyGuard;
+using Petty.Services.Local.Localization;
+using Petty.Services.Local;
+using Petty.ViewModels.Base;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using Petty.MessengerCommands.ToPettyGuard;
+using Petty.Resources.Localization;
 
 namespace Petty.ViewModels
 {
-    public partial class MainViewModel : ViewModelBase
+    public partial class DiagnosticPettyViewModel : ViewModelBase
     {
-        public MainViewModel(
+        public DiagnosticPettyViewModel(
             IMessenger messenger,
             LoggerService loggerService,
             NavigationService navigationService,
@@ -27,16 +34,7 @@ namespace Petty.ViewModels
         private readonly IMessenger _messenger;
         private readonly UserMessagesService _userMessagesService;
         [ObservableProperty] private string _speech = "lol";
-        [ObservableProperty] private bool _isSelectedTabBarItem;
         [ObservableProperty] private bool _isStartingPettyGuardAndroidService;
-        [ObservableProperty] private string _pettyGuardIconImageSource = "play.png";
-
-        [RelayCommand]
-        private async Task GoToSettingsAsync()
-        {
-            await NavigationService.GoToAsync(RoutesHelper.SETINGS);
-            IsSelectedTabBarItem = false;
-        }
 
         [RelayCommand]
         private async Task StartStopPettyGuardAndroidService()
@@ -45,11 +43,6 @@ namespace Petty.ViewModels
                 _messenger.Send<StartPettyGuardService>();
             else if (await _userMessagesService.SendRequestAsync(AppResources.DisablePettyGuard, AppResources.No, AppResources.Yes))
                 _messenger.Send<StopPettyGuardService>();
-        }
-
-        [RelayCommand]
-        private async Task GoToLeaderboardAsync()
-        {
         }
     }
 }

@@ -77,15 +77,29 @@ public class PettyGuardAndroidService : Service
         base.OnCreate();
     }
 
-    public override void OnDestroy()
+    public async override void OnDestroy()
     {
+        await Task.Run(async () =>
+        {
+            try
+            {
+                await StopForegroundServiceAsync();
+                _isStarting = false;
+                _messager.Send<StoppedPettyGuardService>(new StoppedPettyGuardService { IsStopped = _isStarting });
+            }
+            catch (Exception ex)
+            {
+                _isStarting = true;
+                _loggerService.Log(ex);
+            }
+        });
         base.OnDestroy();
         Toast.MakeText(this, "Служба stopped", ToastLength.Long).Show();
     }
 
     public override StartCommandResult OnStartCommand(Intent intent, [GeneratedEnum] StartCommandFlags flags, int startId)
     {
-        _ = Task.Run(async () =>
+        Task.Run(async () =>
         {
             try
             {
@@ -95,15 +109,11 @@ public class PettyGuardAndroidService : Service
                     var isStared = _isStarting = await TryStartForegroundServiceAsync();
                     _messager.Send<StartedPettyGuardService>(new StartedPettyGuardService { IsStarted = isStared });
                 }
-                else if (intent.Action == STOP_SERVICE)
-                {
-                    var isStopped = _isStarting = !(await TryStopForegroundServiceAsync(startId));
-                    _messager.Send<StoppedPettyGuardService>(new StoppedPettyGuardService { IsStopped = isStopped });
-                }
             }
             catch (Exception ex)
             {
                 _loggerService.Log(ex);
+                _isStarting = false;
             }
         });
         //restart service with last intent, if the service crashed due to memory deficiencies, etc.
@@ -119,6 +129,8 @@ public class PettyGuardAndroidService : Service
 
     private async Task<bool> TryStartForegroundServiceAsync()
     {
+        var isStarted = await _pettyCommandsService.TryStartAsync(OnBroadcastPettyCommand);
+
         if (Build.VERSION.SdkInt >= BuildVersionCodes.O && GetSystemService(Context.NotificationService) is NotificationManager notifcationManager)
             CreateNotificationChannel(notifcationManager);
 
@@ -127,8 +139,7 @@ public class PettyGuardAndroidService : Service
         else
             StartForeground(NOTIFICATION_ID, CreateNotification());
 
-        _pettyCommandsService.BroadcastPettyCommand += OnBroadcastPettyCommand;
-        return await _pettyCommandsService.TryStartAsync();
+        return isStarted;
     }
 
     private void OnBroadcastPettyCommand(Petty.Services.Local.PettyCommands.Commands.IPettyCommand pettyCommand)
@@ -136,11 +147,11 @@ public class PettyGuardAndroidService : Service
         _messager.Send(pettyCommand);
     }
 
-    private async Task<bool> TryStopForegroundServiceAsync(int startId)
+    private async Task StopForegroundServiceAsync()
     {
+        await _pettyCommandsService.StopAsync(OnBroadcastPettyCommand);
         StopForeground(true);
-        StopSelf(startId);
-        return await _pettyCommandsService.TryStopAsync();
+        StopSelf();
     }
 
     private void CreateNotificationChannel(NotificationManager notificationManager)

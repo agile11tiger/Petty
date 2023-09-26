@@ -25,14 +25,17 @@
                 if (!Thread.CurrentThread.IsBackground)
                     answer = await Application.Current.MainPage.DisplayAlert(title, message, accept, cancel);
                 else
+                {
                     App.Current.MainPage.Dispatcher.Dispatch(async () =>
                     {
                         answer = await Application.Current.MainPage.DisplayAlert(title, message, accept, cancel);
                         isAnswerRecevied = true;
                     });
 
-                while (!isAnswerRecevied)
-                    await Task.Delay(1000);
+                    while (!isAnswerRecevied)
+                        await Task.Delay(500);
+                }
+
             }
             catch (Exception ex)
             {
