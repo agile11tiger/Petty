@@ -2,6 +2,8 @@
 using Petty.ViewModels.Base;
 using Petty.ViewModels.Components;
 using Petty.PlatformsShared.MessengerCommands.FromPettyGuard;
+using System.Windows.Input;
+using Android.OS;
 
 namespace Petty.ViewModels
 {
@@ -21,10 +23,14 @@ namespace Petty.ViewModels
         }
 
         private readonly IMessenger _messenger;
+        [ObservableProperty] private string _title;
         [ObservableProperty] private bool _isRunningProgressBar;
+        [ObservableProperty] private bool _isVisibleQuestionIcon;
         [ObservableProperty] private double _progressBarPercentages;
         [ObservableProperty] private bool _isAnimationPlayingCoffeeGif;
         [ObservableProperty] private RunningTextViewModel _runningTextViewModel;
+
+        public IAsyncRelayCommand ShowQuestionIconInfo;
         public Action InvalidateProgressBar { get; set; }
 
         [RelayCommand]
@@ -43,7 +49,14 @@ namespace Petty.ViewModels
             IsAnimationPlayingCoffeeGif = false;
         }
 
-        public void UpdateProgressSomeBackgroundWorking(double percentages)
+        [RelayCommand]
+        private async Task TapQuestionIcon()
+        {
+            if (ShowQuestionIconInfo != null)
+                await ShowQuestionIconInfo.ExecuteAsync(null);
+        }
+
+        private void UpdateProgressSomeBackgroundWorking(double percentages)
         {
             App.Current.Dispatcher.Dispatch(() =>
             {

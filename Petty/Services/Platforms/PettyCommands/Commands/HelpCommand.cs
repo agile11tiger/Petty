@@ -1,4 +1,4 @@
-﻿namespace Petty.Services.Local.PettyCommands.Commands
+﻿namespace Petty.Services.Platforms.PettyCommands.Commands
 {
     public class HelpCommand : IPettyCommand
     {

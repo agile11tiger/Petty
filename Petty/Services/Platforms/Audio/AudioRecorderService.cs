@@ -22,7 +22,7 @@
 
         private readonly IAudioStream _audioStream;
         private readonly LoggerService _loggerService;
-        private static readonly object _locker = new();
+        private readonly static object _locker = new();
         private readonly List<float> _silenceThresholds = new();
         private readonly WaveRecorderService _waveRecorderService;
 

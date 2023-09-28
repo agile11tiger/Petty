@@ -30,12 +30,6 @@ namespace Petty.Services.Platforms.Audio
             _audioSource = audioSource;
             _loggerService = loggerService;
 
-            _audioStreamThread = new Thread(Record)
-            {
-                IsBackground = true,
-                Priority = ThreadPriority.AboveNormal,
-                Name = nameof(AudioStream) + "Thread"
-            };
             //todo: Добавить в диагностику
             //var packageManager = global::Android.App.Application.Context.PackageManager;
             //var hasMicrophone = packageManager.HasSystemFeature(global::Android.Content.PM.PackageManager.FeatureMicrophone);
@@ -44,10 +38,10 @@ namespace Petty.Services.Platforms.Audio
         private AudioRecord _audioRecord;
         private readonly int _bufferSize;
         private readonly int _sampleRate;
+        private Thread _audioStreamThread;
         private readonly ChannelIn _channels;
         private readonly Encoding _audioFormat;
         private readonly AudioSource _audioSource;
-        private readonly Thread _audioStreamThread;
         private readonly LoggerService _loggerService;
         private static readonly object _locker = new();
 
@@ -73,6 +67,12 @@ namespace Petty.Services.Platforms.Audio
                         global::Android.OS.Process.SetThreadPriority(global::Android.OS.ThreadPriority.UrgentAudio);
                         Init();
                         _audioRecord.StartRecording();
+                        _audioStreamThread = new Thread(Record)
+                        {
+                            IsBackground = true,
+                            Priority = ThreadPriority.AboveNormal,
+                            Name = nameof(AudioStream) + "Thread"
+                        };
                         _audioStreamThread.Start();
                     }
 
@@ -91,7 +91,10 @@ namespace Petty.Services.Platforms.Audio
             lock (_locker)
             {
                 if (IsActive && BroadcastData.GetInvocationList().Length == 1)
+                {
                     _audioRecord.Stop();
+                    _audioStreamThread = null;
+                }
 
                 _audioRecord.Release();
                 BroadcastData -= subscriber;

@@ -6,8 +6,9 @@ using Android.Runtime;
 using Android.Widget;
 using AndroidX.Core.App;
 using CommunityToolkit.Mvvm.Messaging;
-using Petty.Services.Local.PettyCommands;
 using Petty.PlatformsShared.MessengerCommands.FromPettyGuard;
+using Petty.Services.Platforms.PettyCommands;
+using Petty.Services.Platforms.PettyCommands.Commands;
 
 /// <summary>
 /// https://learn.microsoft.com/ru-ru/xamarin/android/app-fundamentals/services/creating-a-service/
@@ -85,7 +86,7 @@ public class PettyGuardAndroidService : Service
             {
                 await StopForegroundServiceAsync();
                 _isStarting = false;
-                _messager.Send<StoppedPettyGuardService>(new StoppedPettyGuardService { IsStopped = _isStarting });
+                _messager.Send<StoppedPettyGuardService>(new StoppedPettyGuardService { IsStopped = !_isStarting });
             }
             catch (Exception ex)
             {
@@ -134,6 +135,15 @@ public class PettyGuardAndroidService : Service
         if (Build.VERSION.SdkInt >= BuildVersionCodes.O && GetSystemService(Context.NotificationService) is NotificationManager notifcationManager)
             CreateNotificationChannel(notifcationManager);
 
+        //try
+        //{
+        //    //todo: i dont need Notification(), but which errors can be without it?
+        //    StartForeground(NOTIFICATION_ID, null);
+        //}
+        //catch (Exception ex)
+        //{
+        //    _loggerService.Log(ex);
+        //}
         if (Build.VERSION.SdkInt >= BuildVersionCodes.Q)
             StartForeground(NOTIFICATION_ID, CreateNotification(), ForegroundService.TypeManifest);
         else
@@ -142,7 +152,7 @@ public class PettyGuardAndroidService : Service
         return isStarted;
     }
 
-    private void OnBroadcastPettyCommand(Petty.Services.Local.PettyCommands.Commands.IPettyCommand pettyCommand)
+    private void OnBroadcastPettyCommand(IPettyCommand pettyCommand)
     {
         _messager.Send(pettyCommand);
     }

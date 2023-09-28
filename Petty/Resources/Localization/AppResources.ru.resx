@@ -123,6 +123,9 @@
   <data name="Apply" xml:space="preserve">
     <value>Применить</value>
   </data>
+  <data name="Bracket" xml:space="preserve">
+    <value>скобка</value>
+  </data>
   <data name="BuyCoffee" xml:space="preserve">
     <value>Купите мне кофе, я устал :(</value>
   </data>
@@ -132,11 +135,20 @@
   <data name="CheckNetworkConnection" xml:space="preserve">
     <value>Проверьте соединение к сети и попробуйте снова.</value>
   </data>
+  <data name="Colon" xml:space="preserve">
+    <value>двоеточие</value>
+  </data>
+  <data name="Comma" xml:space="preserve">
+    <value>запятая</value>
+  </data>
   <data name="CurrentLanguage" xml:space="preserve">
     <value>Текущий язык:</value>
   </data>
   <data name="Default" xml:space="preserve">
     <value>По умолчанию</value>
+  </data>
+  <data name="DiagnosticsPetty" xml:space="preserve">
+    <value>Диагностика</value>
   </data>
   <data name="DisablePettyGuard" xml:space="preserve">
     <value>Вы точно хотите отключить защиту Petty?</value>
@@ -156,6 +168,9 @@
   <data name="English" xml:space="preserve">
     <value>Английский</value>
   </data>
+  <data name="ExclamationMark" xml:space="preserve">
+    <value>восклицательный знак</value>
+  </data>
   <data name="Help" xml:space="preserve">
     <value>Помощь</value>
   </data>
@@ -171,6 +186,9 @@
   <data name="MessageForMe" xml:space="preserve">
     <value>Все сообщения читаю лично :)</value>
   </data>
+  <data name="NewLine" xml:space="preserve">
+    <value>новая строка</value>
+  </data>
   <data name="No" xml:space="preserve">
     <value>Нет</value>
   </data>
@@ -180,11 +198,17 @@
   <data name="Petty" xml:space="preserve">
     <value>Пэти</value>
   </data>
-  <data name="PettyDiagnostic" xml:space="preserve">
-    <value>Диагностика Пэтти</value>
-  </data>
   <data name="Point" xml:space="preserve">
     <value>точка</value>
+  </data>
+  <data name="PunctuationWords" xml:space="preserve">
+    <value>Слова для знаков пунктуации</value>
+  </data>
+  <data name="QuestionMark" xml:space="preserve">
+    <value>вопросительный знак</value>
+  </data>
+  <data name="Quote" xml:space="preserve">
+    <value>кавычка</value>
   </data>
   <data name="Russian" xml:space="preserve">
     <value>Русский</value>

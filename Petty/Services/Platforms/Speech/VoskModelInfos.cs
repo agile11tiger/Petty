@@ -1,6 +1,6 @@
 ﻿using System.Globalization;
 
-namespace Petty.Services.Local.Speech
+namespace Petty.Services.Platforms.Speech
 {
     /// <summary>
     /// https://alphacephei.com/vosk/models

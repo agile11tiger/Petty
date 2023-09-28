@@ -1,17 +1,17 @@
 ﻿using CommunityToolkit.Mvvm.Messaging;
+using Petty.MessengerCommands.FromPettyGuard;
 using Petty.PlatformsShared.MessengerCommands.FromPettyGuard;
-using Petty.Services.Local.PettyCommands.Commands;
-using Petty.Services.Local.Speech;
+using Petty.Services.Platforms.PettyCommands.Commands;
+using Petty.Services.Platforms.Speech;
 using System.Reflection;
-using static Java.Util.Concurrent.Flow;
 
-namespace Petty.Services.Local.PettyCommands
+namespace Petty.Services.Platforms.PettyCommands
 {
     public class PettyCommandsService
     {
         public PettyCommandsService(
             IMessenger messenger,
-            PettyVoiceService pettyVoiceService, 
+            PettyVoiceService pettyVoiceService,
             SpeechRecognizerService speechRecognizerService)
         {
             _messenger = messenger;
@@ -31,7 +31,7 @@ namespace Petty.Services.Local.PettyCommands
 
         private readonly IMessenger _messenger;
         private readonly PettyVoiceService _pettyVoiceService;
-        private static readonly SemaphoreSlim _locker = new(1, 1);
+        private readonly static SemaphoreSlim _locker = new(1, 1);
         private readonly SpeechRecognizerService _speechRecognizerService;
         private readonly Dictionary<string, IPettyCommand> _pettyCommands = new();
 
@@ -74,14 +74,15 @@ namespace Petty.Services.Local.PettyCommands
 
         private void OnBroadcastSpeech(SpeechRecognizerResult speechResult)
         {
-            System.Diagnostics.Debug.WriteLine(speechResult.Speech);
-            _messenger.Send(new SendSpeech() { Speech = speechResult.Speech });
+            _messenger.Send(new SpeechRecognizerResult() { Speech = speechResult.Speech.AddPunctuation() });
             return;
+            
+
 
             var command = RecognizeCommand(speechResult.Speech);
 
             if (command != null)
-                speechResult.IsPettyCommand = true;
+                speechResult.IsCommandRecognized = true;
             else
                 return;
 

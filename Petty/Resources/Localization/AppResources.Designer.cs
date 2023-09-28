@@ -79,6 +79,15 @@ namespace Petty.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to bracket.
+        /// </summary>
+        internal static string Bracket {
+            get {
+                return ResourceManager.GetString("Bracket", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Buy me a coffee, I&apos;m tired :(.
         /// </summary>
         internal static string BuyCoffee {
@@ -106,6 +115,24 @@ namespace Petty.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to сolon.
+        /// </summary>
+        internal static string Colon {
+            get {
+                return ResourceManager.GetString("Colon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to сomma.
+        /// </summary>
+        internal static string Comma {
+            get {
+                return ResourceManager.GetString("Comma", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Current language:.
         /// </summary>
         internal static string CurrentLanguage {
@@ -120,6 +147,15 @@ namespace Petty.Resources.Localization {
         internal static string Default {
             get {
                 return ResourceManager.GetString("Default", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Diagnostics.
+        /// </summary>
+        internal static string DiagnosticsPetty {
+            get {
+                return ResourceManager.GetString("DiagnosticsPetty", resourceCulture);
             }
         }
         
@@ -178,6 +214,15 @@ namespace Petty.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to exclamation mark.
+        /// </summary>
+        internal static string ExclamationMark {
+            get {
+                return ResourceManager.GetString("ExclamationMark", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Help.
         /// </summary>
         internal static string Help {
@@ -223,6 +268,15 @@ namespace Petty.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to new line.
+        /// </summary>
+        internal static string NewLine {
+            get {
+                return ResourceManager.GetString("NewLine", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No.
         /// </summary>
         internal static string No {
@@ -250,20 +304,38 @@ namespace Petty.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Diagnostics Petty.
-        /// </summary>
-        internal static string PettyDiagnostic {
-            get {
-                return ResourceManager.GetString("PettyDiagnostic", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to point.
         /// </summary>
         internal static string Point {
             get {
                 return ResourceManager.GetString("Point", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Words for punctuation marks.
+        /// </summary>
+        internal static string PunctuationWords {
+            get {
+                return ResourceManager.GetString("PunctuationWords", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to question mark.
+        /// </summary>
+        internal static string QuestionMark {
+            get {
+                return ResourceManager.GetString("QuestionMark", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to quote.
+        /// </summary>
+        internal static string Quote {
+            get {
+                return ResourceManager.GetString("Quote", resourceCulture);
             }
         }
         

@@ -4,6 +4,7 @@ using Petty.Resources.Localization;
 using Petty.ViewModels.Base;
 using Petty.PlatformsShared.MessengerCommands.FromPettyGuard;
 using Petty.MessengerCommands.ToPettyGuard;
+using Petty.MessengerCommands.FromPettyGuard;
 
 namespace Petty.ViewModels
 {
@@ -21,12 +22,10 @@ namespace Petty.ViewModels
             _userMessagesService = userMessagesService;
             _messenger.Register<StartedPettyGuardService>(this, (recipient, message) => IsStartingPettyGuardAndroidService = message.IsStarted);
             _messenger.Register<StoppedPettyGuardService>(this, (recipient, message) => IsStartingPettyGuardAndroidService = !message.IsStopped);
-            _messenger.Register<SendSpeech>(this, (recipient, message) => Speech = message.Speech);
         }
 
         private readonly IMessenger _messenger;
         private readonly UserMessagesService _userMessagesService;
-        [ObservableProperty] private string _speech = "lol";
         [ObservableProperty] private bool _isSelectedTabBarItem;
         [ObservableProperty] private bool _isStartingPettyGuardAndroidService;
         [ObservableProperty] private string _pettyGuardIconImageSource = "play.png";

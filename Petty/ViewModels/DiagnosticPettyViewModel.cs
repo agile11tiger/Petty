@@ -1,16 +1,9 @@
-﻿using Android.OS;
-using CommunityToolkit.Mvvm.Messaging;
-using Petty.PlatformsShared.MessengerCommands.FromPettyGuard;
-using Petty.Services.Local.Localization;
-using Petty.Services.Local;
+﻿using CommunityToolkit.Mvvm.Messaging;
 using Petty.ViewModels.Base;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Petty.MessengerCommands.ToPettyGuard;
 using Petty.Resources.Localization;
+using Petty.MessengerCommands.FromPettyGuard;
+using Petty.Services.Platforms.Speech;
+using System.Text;
 
 namespace Petty.ViewModels
 {
@@ -19,30 +12,65 @@ namespace Petty.ViewModels
         public DiagnosticPettyViewModel(
             IMessenger messenger,
             LoggerService loggerService,
+            MainViewModel mainViewModel,
             NavigationService navigationService,
             UserMessagesService userMessagesService,
             LocalizationService localizationService)
             : base(loggerService, navigationService, localizationService)
         {
             _messenger = messenger;
+            _mainViewModel = mainViewModel;
             _userMessagesService = userMessagesService;
-            _messenger.Register<StartedPettyGuardService>(this, (recipient, message) => IsStartingPettyGuardAndroidService = message.IsStarted);
-            _messenger.Register<StoppedPettyGuardService>(this, (recipient, message) => IsStartingPettyGuardAndroidService = !message.IsStopped);
-            _messenger.Register<SendSpeech>(this, (recipient, message) => Speech = message.Speech);
+            _messenger.Register<SpeechRecognizerResult>(this, OnSpeechReceived);
         }
 
         private readonly IMessenger _messenger;
+        private readonly MainViewModel _mainViewModel;
+        private readonly List<string> _sentences = new() { string.Empty };
         private readonly UserMessagesService _userMessagesService;
-        [ObservableProperty] private string _speech = "lol";
+        [ObservableProperty] private string _speech = "Здесь будет ваша речь";
         [ObservableProperty] private bool _isStartingPettyGuardAndroidService;
 
         [RelayCommand]
         private async Task StartStopPettyGuardAndroidService()
         {
-            if (!IsStartingPettyGuardAndroidService)
-                _messenger.Send<StartPettyGuardService>();
-            else if (await _userMessagesService.SendRequestAsync(AppResources.DisablePettyGuard, AppResources.No, AppResources.Yes))
-                _messenger.Send<StopPettyGuardService>();
+            await _mainViewModel.StartStopPettyGuardAndroidServiceCommand.ExecuteAsync(null);
+        }
+
+        [RelayCommand]
+        private async Task ShowQuestionIconInfo()
+        {
+            var commands = new StringBuilder();
+            var listNumber = 0;
+
+            foreach (var punctuation in PunctuationRecognizer.Punctuations)
+            {
+                if (punctuation.Key == AppResources.NewLine)
+                    commands.AppendLine($"{listNumber++}. {punctuation.Key} — ");
+                else
+                    commands.AppendLine($"{listNumber++}. {punctuation.Key} — {punctuation.Value}");
+            }
+
+            await _userMessagesService.SendMessageAsync(commands.ToString(), AppResources.Ok, title:AppResources.PunctuationWords);
+        }
+
+        private void OnSpeechReceived(object obj, SpeechRecognizerResult speechRecognizerResult)
+        {
+            if (speechRecognizerResult.Speech.Last() == '.')
+            {
+                _sentences[^1] = speechRecognizerResult.Speech;
+                _sentences.Add(string.Empty);
+            }
+            else
+                _sentences[_sentences.Count - 1] = speechRecognizerResult.Speech;
+
+            Speech = string.Join(' ', _sentences);
+        }
+
+        [RelayCommand]
+        public void ClearSpeech()
+        {
+            Speech = string.Empty;
         }
     }
 }

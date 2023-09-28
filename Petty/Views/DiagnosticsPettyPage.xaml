@@ -12,6 +12,7 @@
             Text="{Binding Speech}"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
+        <Button Text="Clear" Command="{Binding ClearSpeechCommand}"/>
         <Button Text="StartStop" Command="{Binding StartStopPettyGuardAndroidServiceCommand}"/>
     </VerticalStackLayout>
 </ContentPage>

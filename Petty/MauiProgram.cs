@@ -5,13 +5,13 @@ using Petty.Extensions;
 using Petty.Helpres;
 using Petty.Services.Platforms.Audio;
 using Petty.Services.Local.PermissionsFolder;
-using Petty.Services.Local.PettyCommands;
-using Petty.Services.Local.Speech;
 using Petty.ViewModels.Components;
 using Petty.ViewModels.Components.GraphicsViews;
 using Petty.Views;
 using Sharpnado.Tabs;
 using SkiaSharp.Views.Maui.Handlers;
+using Petty.Services.Platforms.Speech;
+using Petty.Services.Platforms.PettyCommands;
 
 namespace Petty
 {
@@ -100,8 +100,8 @@ namespace Petty
 
         private static MauiAppBuilder RegisterViewModels(this MauiAppBuilder builder)
         {
-            builder.Services.AddTransient<AppShellViewModel>();
-            builder.Services.AddTransient<RunningTextViewModel>();
+            builder.Services.AddSingleton<AppShellViewModel>();
+            builder.Services.AddSingleton<RunningTextViewModel>();
             return builder;
         }
 

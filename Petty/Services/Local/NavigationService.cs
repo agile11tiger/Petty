@@ -17,8 +17,8 @@ namespace Petty.Services.Local
             var shellNavigation = new ShellNavigationState(route);
             
             return routeParameters != null
-                ? Shell.Current.GoToAsync(shellNavigation, routeParameters)
-                : Shell.Current.GoToAsync(shellNavigation);
+                ? Shell.Current.GoToAsync(shellNavigation, true, routeParameters)
+                : Shell.Current.GoToAsync(shellNavigation, true);
         }
 
         public async Task PopToMainAsync()

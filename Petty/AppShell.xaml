@@ -16,21 +16,28 @@
     </Shell.Resources>
 
     <Shell.TitleView>
-        <Grid RowDefinitions="*" ColumnDefinitions="0.8*,0.2*" x:DataType="viewModels:AppShellViewModel">
+        <Grid RowDefinitions="*" ColumnDefinitions="0.6*,0.4*" x:DataType="viewModels:AppShellViewModel">
             <Label Grid.Column="0"
                    FontSize="Large"
                    HorizontalTextAlignment="Start"
-                   Text="{x:Static resources:AppResources.Petty}"/>
-            <graphicsViews:CircularProgressBarGraphicsView x:Name="_circularProgressBarGraphicsView" 
-                                                           Grid.Column="1"
-                                                           WidthRequest="39"
-                                                           HeightRequest="39"
+                   Text="{Binding Title}"/>
+            <!--Text="{x:Static resources:AppResources.Petty}"/>-->
+            <HorizontalStackLayout Grid.Column="1" HorizontalOptions="End" Spacing="9" Margin="9">
+                <graphicsViews:CircularProgressBarGraphicsView x:Name="_circularProgressBarGraphicsView" 
+                                                           WidthRequest="40"
+                                                           HeightRequest="40"
                                                            IsVisible="{Binding IsRunningProgressBar}"
                                                            Percentages="{Binding ProgressBarPercentages}">
-                <graphicsViews:CircularProgressBarGraphicsView.Drawable>
-                    <graphicsViews:CircularProgressBarDrawble/>
-                </graphicsViews:CircularProgressBarGraphicsView.Drawable>
-            </graphicsViews:CircularProgressBarGraphicsView>
+                    <graphicsViews:CircularProgressBarGraphicsView.Drawable>
+                        <graphicsViews:CircularProgressBarDrawble/>
+                    </graphicsViews:CircularProgressBarGraphicsView.Drawable>
+                </graphicsViews:CircularProgressBarGraphicsView>
+                <ImageButton WidthRequest="40"
+                             HeightRequest="40"
+                             Source="question.png"
+                             IsVisible="{Binding IsVisibleQuestionIcon, Mode=TwoWay}"
+                             Command="{Binding TapQuestionIconCommand}"/>
+            </HorizontalStackLayout>
         </Grid>
     </Shell.TitleView>
     

@@ -4,10 +4,12 @@ using Petty.Resources.Localization;
 using Petty.PlatformsShared.MessengerCommands.FromPettyGuard;
 using System.IO.Compression;
 using Vosk;
-using static Petty.Services.Local.Speech.VoskModelInfos;
+using static Petty.Services.Platforms.Speech.VoskModelInfos;
 using static Java.Util.Concurrent.Flow;
+using Petty.MessengerCommands.FromPettyGuard;
+using System.Diagnostics;
 
-namespace Petty.Services.Local.Speech
+namespace Petty.Services.Platforms.Speech
 {
     public class SpeechRecognizerService : IDisposable
     {
@@ -38,9 +40,10 @@ namespace Petty.Services.Local.Speech
         private bool _isRecognizingFromDisk;
         private readonly IMessenger _messenger;
         private readonly LoggerService _loggerService;
-        private static SemaphoreSlim _locker = new(1, 1);
+        private SpeechRecognizerResult _speechRecognizerResult;
         private readonly WebRequestsService _webRequestsService;
         private readonly AudioPlayerService _audioPlayerService;
+        private readonly static SemaphoreSlim _locker = new(1, 1);
         private readonly UserMessagesService _userMessagesService;
         private readonly AudioRecorderService _audioRecorderService;
 
@@ -110,7 +113,7 @@ namespace Petty.Services.Local.Speech
             if (_recognizer != null)
                 return true;
 
-            var voskModelInfo = VoskModelInfos.GetModelInfo();
+            var voskModelInfo = GetModelInfo();
 
             try
             {
@@ -176,38 +179,37 @@ namespace Petty.Services.Local.Speech
             }
         }
 
+        private string speechCache = string.Empty;
+
         private void OnBroadcastAudioRecorderData(byte[] recorderData)
         {
             _recognizer.AcceptWaveform(recorderData, recorderData.Length);
-            var result = new SpeechRecognizerResult() { Speech = _recognizer.PartialResult() };
+            _speechRecognizerResult ??= new SpeechRecognizerResult();
+            _speechRecognizerResult.Speech = _recognizer.PartialResult();
 
-            if (result.Speech.Length > PARTIAL_RESULT_EMPTY_MESSAGE_LENGTH)
+            if (_speechRecognizerResult.Speech.Length > PARTIAL_RESULT_EMPTY_MESSAGE_LENGTH)
             {
-                result.Speech = result.Speech[PARTIAL_RESULT_START_MESSAGE_INDEX..^3];
+                _speechRecognizerResult.Speech = _speechRecognizerResult.Speech[PARTIAL_RESULT_START_MESSAGE_INDEX..^3];
 
-                if (result.Speech.EndsWith(AppResources.Petty, true, null))
+                if (_speechRecognizerResult.Speech.EndsWith(AppResources.Point))
                 {
-                    _recognizer.Reset();
-                    _recognizer.AcceptWaveform(recorderData, recorderData.Length);
-                }
-
-                BroadcastSpeech.Invoke(result);
-
-                if (result.IsPettyCommand)
-                {
-                    _recognizer.FinalResult();
+                    _speechRecognizerResult.Speech = _recognizer.FinalResult();
+                    _speechRecognizerResult.Speech = _speechRecognizerResult.Speech[RESULT_START_MESSAGE_INDEX..^3];
+                    BroadcastSpeech?.Invoke(_speechRecognizerResult);
+                    _speechRecognizerResult = null;
                     return;
                 }
 
-                //Todo: do i need improve speed AppResources.Point???
-                //If I switch the language, the constant string needs to be updated.
-                //возможно, стоит добавить еще условия тишина в течение 2-3 сек,
-                //тогда мы распознаем это как точка в предложение, а не слово точка.
-                if (result.Speech.EndsWith(AppResources.Point))
+                if (_speechRecognizerResult.Speech.Length != speechCache.Length)
                 {
-                    result.Speech = _recognizer.FinalResult();
-                    result.Speech = result.Speech[RESULT_START_MESSAGE_INDEX..^3];
-                    BroadcastSpeech?.Invoke(result);
+                    speechCache = _speechRecognizerResult.Speech;
+                    BroadcastSpeech?.Invoke(_speechRecognizerResult);
+                }
+
+                if (_speechRecognizerResult.Speech.EndsWith(AppResources.Petty, true, null) || _speechRecognizerResult.IsCommandRecognized)
+                {
+                    _recognizer.Reset(); //ignore, i need just clear, maybe should i to select the reset() method?
+                    _speechRecognizerResult = null;
                 }
             }
         }

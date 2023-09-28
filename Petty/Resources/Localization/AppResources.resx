@@ -123,6 +123,9 @@
   <data name="Apply" xml:space="preserve">
     <value>Apply</value>
   </data>
+  <data name="Bracket" xml:space="preserve">
+    <value>bracket</value>
+  </data>
   <data name="BuyCoffee" xml:space="preserve">
     <value>Buy me a coffee, I'm tired :(</value>
   </data>
@@ -132,11 +135,20 @@
   <data name="CheckNetworkConnection" xml:space="preserve">
     <value>Check your network connection and try again.</value>
   </data>
+  <data name="Colon" xml:space="preserve">
+    <value>сolon</value>
+  </data>
+  <data name="Comma" xml:space="preserve">
+    <value>сomma</value>
+  </data>
   <data name="CurrentLanguage" xml:space="preserve">
     <value>Current language:</value>
   </data>
   <data name="Default" xml:space="preserve">
     <value>Default</value>
+  </data>
+  <data name="DiagnosticsPetty" xml:space="preserve">
+    <value>Diagnostics</value>
   </data>
   <data name="DisablePettyGuard" xml:space="preserve">
     <value>Are you sure you want to disable Petty's protection?</value>
@@ -156,6 +168,9 @@
   <data name="English" xml:space="preserve">
     <value>English</value>
   </data>
+  <data name="ExclamationMark" xml:space="preserve">
+    <value>exclamation mark</value>
+  </data>
   <data name="Help" xml:space="preserve">
     <value>Help</value>
   </data>
@@ -171,6 +186,9 @@
   <data name="MessageForMe" xml:space="preserve">
     <value>I read all messages personally :)</value>
   </data>
+  <data name="NewLine" xml:space="preserve">
+    <value>new line</value>
+  </data>
   <data name="No" xml:space="preserve">
     <value>No</value>
   </data>
@@ -180,11 +198,17 @@
   <data name="Petty" xml:space="preserve">
     <value>Petty</value>
   </data>
-  <data name="PettyDiagnostic" xml:space="preserve">
-    <value>Diagnostics Petty</value>
-  </data>
   <data name="Point" xml:space="preserve">
     <value>point</value>
+  </data>
+  <data name="PunctuationWords" xml:space="preserve">
+    <value>Words for punctuation marks</value>
+  </data>
+  <data name="QuestionMark" xml:space="preserve">
+    <value>question mark</value>
+  </data>
+  <data name="Quote" xml:space="preserve">
+    <value>quote</value>
   </data>
   <data name="Russian" xml:space="preserve">
     <value>Russian</value>

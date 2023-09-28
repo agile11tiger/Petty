@@ -1,16 +1,27 @@
+using Petty.Resources.Localization;
+using Petty.ViewModels;
+
 namespace Petty.Views;
 
 public partial class SettingsPage : ContentPage
 {
-    public SettingsPage(SettingsViewModel settingsViewModel)
+    public SettingsPage(SettingsViewModel settingsViewModel, AppShellViewModel appShellViewModel)
     {
         BindingContext = _settingsViewModel = settingsViewModel;
+        _appShellViewModel = appShellViewModel;
         InitializeComponent();
         _pickerLanguage.SelectedIndex = _settingsViewModel.LanguagesDictionary
             .FindIndex(item => item.CultureInfo.Name == _settingsViewModel.TempSettings.LanguageType);
     }
 
     private readonly SettingsViewModel _settingsViewModel;
+    private readonly AppShellViewModel _appShellViewModel;
+
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+        _appShellViewModel.Title = AppResources.Settings;
+    }
 
     private void pickerLanguage_SelectedIndexChanged(object sender, EventArgs e)
     {
