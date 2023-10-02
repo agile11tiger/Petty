@@ -22,7 +22,7 @@
                           Grid.Row="3"
                           Shadow="{StaticResource tabBarShadow}"
                           Background="{StaticResource TabBarBackground}">
-            <tabs:MaterialUnderlinedTabItem Label="{x:Static resources:AppResources.Leaderboard}" 
+            <tabs:MaterialUnderlinedTabItem Label="{x:Static resources:AppResources.PageLeaderboard}" 
                                             IconTextSpacing="0"
                                             IconOptions="TopIcon"
                                             IconImageSource="podium.png"
@@ -42,7 +42,7 @@
                             IconImageSource="{Binding PettyGuardIconImageSource}"
                             TapCommand="{Binding GoToSpeechSimulatorCommand}">
             </tabs:TabButton>
-            <tabs:MaterialUnderlinedTabItem Label="{x:Static resources:AppResources.Settings}"
+            <tabs:MaterialUnderlinedTabItem Label="{x:Static resources:AppResources.PageSettings}"
                                             IconTextSpacing="0"
                                             IconOptions="TopIcon"
                                             IconImageSource="settings.png"

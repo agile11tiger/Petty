@@ -6,7 +6,7 @@
 
         public bool CheckComplianceCommand(string text)
         {
-            return text.Contains(Name);
+            return text.EndsWith(Name);
         }
 
         public bool TryExecute()

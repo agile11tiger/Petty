@@ -37,14 +37,14 @@ namespace Petty.ViewModels
         private readonly UserMessagesService _userMessagesService;
         [ObservableProperty] private bool _isStartingPettyGuardAndroidService;
         [ObservableProperty] private SolidColorBrush _startStopButtonBackground;
-        [ObservableProperty] private string _speech = AppResources.PettySpeechSimulatorPlaceholder;
+        [ObservableProperty] private string _speech = AppResources.UserMessagePettySpeechSimulatorPlaceholder;
 
         [RelayCommand]
         private async Task StartStopPettyGuardAndroidService()
         {
             if (!IsStartingPettyGuardAndroidService)
                 _messenger.Send<StartPettyGuardService>();
-            else if (await _userMessagesService.SendRequestAsync(AppResources.DisablePettyGuard, AppResources.No, AppResources.Yes))
+            else if (await _userMessagesService.SendRequestAsync(AppResources.UserMessageDisablePettyGuard, AppResources.ButtonNo, AppResources.ButtonYes))
                 _messenger.Send<StopPettyGuardService>();
         }
 
@@ -56,13 +56,13 @@ namespace Petty.ViewModels
 
             foreach (var punctuation in PunctuationRecognizer.Punctuations)
             {
-                if (punctuation.Key == AppResources.NewLine)
+                if (punctuation.Key == AppResources.SpeechCommandNewLine)
                     commands.AppendLine($"{listNumber++}. {punctuation.Key} — ");
                 else
                     commands.AppendLine($"{listNumber++}. {punctuation.Key} — {punctuation.Value}");
             }
 
-            await _userMessagesService.SendMessageAsync(commands.ToString(), AppResources.Ok, title: AppResources.PunctuationWords);
+            await _userMessagesService.SendMessageAsync(commands.ToString(), AppResources.ButtonOk, title: AppResources.TitlePunctuationWords);
         }
 
         [RelayCommand]

@@ -80,13 +80,10 @@ namespace Petty.Services.Platforms.PettyCommands
 
         private void OnBroadcastSpeech(SpeechRecognizerResult speechResult)
         {
-            speechResult.Speech = speechResult.Speech.AddPunctuation();
             _loggerService.Log(speechResult.Speech);
-            _messenger.Send(speechResult);
-            return;
+            speechResult.Speech = speechResult.Speech.AddPunctuation();
+            _loggerService.Log($"after {nameof(PunctuationRecognizer.AddPunctuation)}: {speechResult.Speech}");
             
-
-
             var command = RecognizeCommand(speechResult.Speech);
 
             if (command != null)
@@ -101,6 +98,9 @@ namespace Petty.Services.Platforms.PettyCommands
             }
             else
                 _pettyVoiceService.PlayCommandExecutionFailed(command);
+
+            _messenger.Send(speechResult);
+            return;
         }
 
         private IPettyCommand RecognizeCommand(string speech)

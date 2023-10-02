@@ -18,14 +18,14 @@
             <Label Grid.Row="0" 
                    Grid.ColumnSpan="2" 
                    HorizontalOptions="Center"
-                   Text="{x:Static resources:AppResources.Diagnostics}" >
+                   Text="{x:Static resources:AppResources.PageDiagnostics}" >
                 <Label.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding GoToDiagnosticsPettyPageCommand}" />
                 </Label.GestureRecognizers>
             </Label>
             <BoxView Grid.Row="1" Grid.ColumnSpan="2"/>
             
-            <Label Grid.Row="2" Grid.Column="0" Text="{x:Static resources:AppResources.CurrentLanguage}"/>
+            <Label Grid.Row="2" Grid.Column="0" Text="{x:Static resources:AppResources.TextCurrentLanguage}"/>
             <Picker x:Name="_pickerLanguage" 
                     Grid.Row="2"
                     Grid.Column="1"
@@ -87,11 +87,11 @@
                          HorizontalOptions="CenterAndExpand" >
                 <Button MinimumWidthRequest="130" 
                         Background="{StaticResource Gray700}"
-                        Text="{x:Static resources:AppResources.Default}"
+                        Text="{x:Static resources:AppResources.ButtonDefault}"
                         Command="{Binding ApplyDefaultSettingsCommand}"/>
                 <Button MinimumWidthRequest="130" 
                         Command="{Binding ApplySettingsCommand}"
-                        Text="{x:Static resources:AppResources.Apply}"/>
+                        Text="{x:Static resources:AppResources.ButtonApply}"/>
             </StackLayout>
         </Grid>
     </ScrollView>

@@ -103,7 +103,7 @@ namespace Petty.Services.Platforms.Speech
         public async Task RecognizeFromDiskAsync(Action<string, bool> updateResult, string filePath)
         {
             if (_isRecognizingFromDisk)
-                await _userMessagesService.SendMessageAsync(AppResources.TryLater, AppResources.Ok);
+                await _userMessagesService.SendMessageAsync(AppResources.UserMessageTryLater, AppResources.ButtonOk);
 
             if (await TryInitializeRecognizer())
             {
@@ -150,9 +150,13 @@ namespace Petty.Services.Platforms.Speech
             if (!Directory.Exists(voskModelInfo.Path))
             {
                 if (Connectivity.Current.NetworkAccess == NetworkAccess.None)
-                    return await _userMessagesService.SendRequestAsync(AppResources.CheckNetworkConnection, AppResources.Ok);
+                    return await _userMessagesService.SendRequestAsync(AppResources.UserMessageCheckNetworkConnection, AppResources.ButtonOk);
 
-                if (!await _userMessagesService.SendRequestAsync(AppResources.DownloadVoskModelMessage, AppResources.Later, AppResources.Download, AppResources.Downloading))
+                if (!await _userMessagesService.SendRequestAsync(
+                    AppResources.UserMessageDownloadVoskModelMessage,
+                    AppResources.ButtonLater, 
+                    AppResources.ButtonDownload, 
+                    AppResources.TitleDownloading))
                     return false;
 
                 await _webRequestsService.DownloadAsync(
@@ -222,7 +226,7 @@ namespace Petty.Services.Platforms.Speech
                 _speechRecognizerResult.IsPartialSpeech = true;
             }
 
-            if (_speechRecognizerResult.Speech.EndsWith(AppResources.Point))
+            if (_speechRecognizerResult.Speech.EndsWith(AppResources.SpeechCommandPoint))
             {
                 _speechRecognizerResult.Speech = _recognizer.FinalResult();
                 _speechRecognizerResult.Speech = _speechRecognizerResult.Speech[RESULT_START_MESSAGE_INDEX..^3];
@@ -240,7 +244,7 @@ namespace Petty.Services.Platforms.Speech
                 BroadcastSpeech?.Invoke(_speechRecognizerResult);
             }
 
-            if (_speechRecognizerResult.Speech.EndsWith(AppResources.Petty, true, null) || _speechRecognizerResult.IsCommandRecognized)
+            if (_speechRecognizerResult.Speech.EndsWith(AppResources.PetName, true, null) || _speechRecognizerResult.IsCommandRecognized)
             {
                 _recognizer.Reset();
             }

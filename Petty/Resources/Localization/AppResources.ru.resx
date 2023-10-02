@@ -117,125 +117,134 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="About" xml:space="preserve">
-    <value>Информация</value>
-  </data>
-  <data name="Apply" xml:space="preserve">
+  <data name="ButtonApply" xml:space="preserve">
     <value>Применить</value>
   </data>
-  <data name="Bracket" xml:space="preserve">
-    <value>скобка</value>
-  </data>
-  <data name="BuyCoffee" xml:space="preserve">
+  <data name="ButtonBuyCoffee" xml:space="preserve">
     <value>Купите мне кофе, я устал :(</value>
   </data>
-  <data name="Cancel" xml:space="preserve">
+  <data name="ButtonCancel" xml:space="preserve">
     <value>Отмена</value>
   </data>
-  <data name="CheckNetworkConnection" xml:space="preserve">
-    <value>Проверьте соединение к сети и попробуйте снова.</value>
-  </data>
-  <data name="Clear" xml:space="preserve">
+  <data name="ButtonClear" xml:space="preserve">
     <value>Очистить</value>
   </data>
-  <data name="Colon" xml:space="preserve">
-    <value>двоеточие</value>
-  </data>
-  <data name="Comma" xml:space="preserve">
-    <value>запятая</value>
-  </data>
-  <data name="CurrentLanguage" xml:space="preserve">
-    <value>Текущий язык:</value>
-  </data>
-  <data name="Default" xml:space="preserve">
+  <data name="ButtonDefault" xml:space="preserve">
     <value>По умолчанию</value>
   </data>
-  <data name="Diagnostics" xml:space="preserve">
-    <value>Диагностика</value>
-  </data>
-  <data name="DisablePettyGuard" xml:space="preserve">
-    <value>Вы точно хотите отключить защиту Пэтти?</value>
-  </data>
-  <data name="Download" xml:space="preserve">
-    <value>Скачать</value>
-  </data>
-  <data name="Downloading" xml:space="preserve">
-    <value>Скачивание</value>
-  </data>
-  <data name="DownloadingInProgress" xml:space="preserve">
-    <value>Идёт скачивание, подождите его завершения...</value>
-  </data>
-  <data name="DownloadVoskModelMessage" xml:space="preserve">
-    <value>Для начала распознавания голоса вам необходимо скачать модель голоса (около 45 МБ)</value>
-  </data>
-  <data name="English" xml:space="preserve">
-    <value>Английский</value>
-  </data>
-  <data name="ExclamationMark" xml:space="preserve">
-    <value>восклицательный знак</value>
-  </data>
-  <data name="Help" xml:space="preserve">
-    <value>Помощь</value>
-  </data>
-  <data name="Later" xml:space="preserve">
-    <value>Позже</value>
-  </data>
-  <data name="Leaderboard" xml:space="preserve">
-    <value>Таблица лидеров</value>
-  </data>
-  <data name="Logo" xml:space="preserve">
-    <value>Petty</value>
-  </data>
-  <data name="MessageForMe" xml:space="preserve">
+  <data name="ButtonDonate" xml:space="preserve">
     <value>Все сообщения читаю лично :)</value>
   </data>
-  <data name="NewLine" xml:space="preserve">
-    <value>новая строка</value>
+  <data name="ButtonDownload" xml:space="preserve">
+    <value>Скачать</value>
   </data>
-  <data name="No" xml:space="preserve">
+  <data name="ButtonLater" xml:space="preserve">
+    <value>Позже</value>
+  </data>
+  <data name="ButtonNo" xml:space="preserve">
     <value>Нет</value>
   </data>
-  <data name="Ok" xml:space="preserve">
+  <data name="ButtonOk" xml:space="preserve">
     <value>Ок</value>
   </data>
-  <data name="Petty" xml:space="preserve">
+  <data name="ButtonStartStop" xml:space="preserve">
+    <value>Старт/Стоп</value>
+  </data>
+  <data name="ButtonYes" xml:space="preserve">
+    <value>Да</value>
+  </data>
+  <data name="CommandFlashlight" xml:space="preserve">
+    <value>фонарик</value>
+  </data>
+  <data name="CommandHelp" xml:space="preserve">
+    <value>помогите</value>
+  </data>
+  <data name="LanguageEnglish" xml:space="preserve">
+    <value>Английский</value>
+  </data>
+  <data name="LanguageRussian" xml:space="preserve">
+    <value>Русский</value>
+  </data>
+  <data name="PageAbout" xml:space="preserve">
+    <value>Информация</value>
+  </data>
+  <data name="PageDiagnostics" xml:space="preserve">
+    <value>Диагностика</value>
+  </data>
+  <data name="PageHelp" xml:space="preserve">
+    <value>Помощь</value>
+  </data>
+  <data name="PageLeaderboard" xml:space="preserve">
+    <value>Таблица лидеров</value>
+  </data>
+  <data name="PagePetty" xml:space="preserve">
     <value>Пэтти</value>
   </data>
-  <data name="PettySpeechSimulatorPlaceholder" xml:space="preserve">
+  <data name="PageSettings" xml:space="preserve">
+    <value>Настройки</value>
+  </data>
+  <data name="PageSpeechSimulator" xml:space="preserve">
+    <value>Тренажёр речи</value>
+  </data>
+  <data name="PetName" xml:space="preserve">
+    <value>Пэти</value>
+  </data>
+  <data name="SpeechCommandBracket" xml:space="preserve">
+    <value>скобка</value>
+  </data>
+  <data name="SpeechCommandColon" xml:space="preserve">
+    <value>двоеточие</value>
+  </data>
+  <data name="SpeechCommandComma" xml:space="preserve">
+    <value>запятая</value>
+  </data>
+  <data name="SpeechCommandExclamationMark" xml:space="preserve">
+    <value>восклицательный знак</value>
+  </data>
+  <data name="SpeechCommandNewLine" xml:space="preserve">
+    <value>новая строка</value>
+  </data>
+  <data name="SpeechCommandPoint" xml:space="preserve">
+    <value>точка</value>
+  </data>
+  <data name="SpeechCommandQuestionMark" xml:space="preserve">
+    <value>вопросительный знак</value>
+  </data>
+  <data name="SpeechCommandQuote" xml:space="preserve">
+    <value>кавычки</value>
+  </data>
+  <data name="TextCurrentLanguage" xml:space="preserve">
+    <value>Текущий язык:</value>
+  </data>
+  <data name="TitleDownloading" xml:space="preserve">
+    <value>Скачивание</value>
+  </data>
+  <data name="TitlePunctuationWords" xml:space="preserve">
+    <value>Слова для знаков пунктуации</value>
+  </data>
+  <data name="UserMessageCheckNetworkConnection" xml:space="preserve">
+    <value>Проверьте соединение к сети и попробуйте снова.</value>
+  </data>
+  <data name="UserMessageDisablePettyGuard" xml:space="preserve">
+    <value>Вы точно хотите отключить защиту Пэтти?</value>
+  </data>
+  <data name="UserMessageDownloadingInProgress" xml:space="preserve">
+    <value>Идёт скачивание, подождите его завершения...</value>
+  </data>
+  <data name="UserMessageDownloadVoskModelMessage" xml:space="preserve">
+    <value>Для начала распознавания голоса вам необходимо скачать модель голоса (около 45 МБ)</value>
+  </data>
+  <data name="UserMessagePettySpeechSimulatorPlaceholder" xml:space="preserve">
     <value>Люди не понимают, что вы говорите, но вам кажется ваша речь нормальной? 
 Решение есть!!! 
 Петти тренажер для речи поможет вам в этом непростом деле. 
 Просто начни говорить, а он покажет, что слышат люди. 
 Здесь будет ваша речь, удачи!)</value>
   </data>
-  <data name="PettyStartStopRemark" xml:space="preserve">
+  <data name="UserMessagePettyStartStopRemark" xml:space="preserve">
     <value>П.С. Это кнопка запускает и останавливает голосового помощника Петти во всем приложении.</value>
   </data>
-  <data name="Point" xml:space="preserve">
-    <value>точка</value>
-  </data>
-  <data name="PunctuationWords" xml:space="preserve">
-    <value>Слова для знаков пунктуации</value>
-  </data>
-  <data name="QuestionMark" xml:space="preserve">
-    <value>вопросительный знак</value>
-  </data>
-  <data name="Quote" xml:space="preserve">
-    <value>кавычки</value>
-  </data>
-  <data name="Russian" xml:space="preserve">
-    <value>Русский</value>
-  </data>
-  <data name="Settings" xml:space="preserve">
-    <value>Настройки</value>
-  </data>
-  <data name="SpeechSimulator" xml:space="preserve">
-    <value>Тренажёр речи</value>
-  </data>
-  <data name="StartStop" xml:space="preserve">
-    <value>Старт/Стоп</value>
-  </data>
-  <data name="Yes" xml:space="preserve">
-    <value>Да</value>
+  <data name="UserMessageTryLater" xml:space="preserve">
+    <value>Эта операция уже выполняется. Пожалуйста, повторите попытку позже.</value>
   </data>
 </root>

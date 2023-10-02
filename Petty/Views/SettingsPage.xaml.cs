@@ -20,7 +20,7 @@ public partial class SettingsPage : ContentPage
     protected override void OnAppearing()
     {
         base.OnAppearing();
-        _appShellViewModel.Title = AppResources.Settings;
+        _appShellViewModel.Title = AppResources.PageSettings;
     }
 
     private void PickerLanguage_SelectedIndexChanged(object sender, EventArgs e)

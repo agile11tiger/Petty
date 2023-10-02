@@ -61,254 +61,353 @@ namespace Petty.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to About.
-        /// </summary>
-        internal static string About {
-            get {
-                return ResourceManager.GetString("About", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Apply.
         /// </summary>
-        internal static string Apply {
+        internal static string ButtonApply {
             get {
-                return ResourceManager.GetString("Apply", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to bracket.
-        /// </summary>
-        internal static string Bracket {
-            get {
-                return ResourceManager.GetString("Bracket", resourceCulture);
+                return ResourceManager.GetString("ButtonApply", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Buy me a coffee, I&apos;m tired :(.
         /// </summary>
-        internal static string BuyCoffee {
+        internal static string ButtonBuyCoffee {
             get {
-                return ResourceManager.GetString("BuyCoffee", resourceCulture);
+                return ResourceManager.GetString("ButtonBuyCoffee", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Cancel.
         /// </summary>
-        internal static string Cancel {
+        internal static string ButtonCancel {
             get {
-                return ResourceManager.GetString("Cancel", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Check your network connection and try again..
-        /// </summary>
-        internal static string CheckNetworkConnection {
-            get {
-                return ResourceManager.GetString("CheckNetworkConnection", resourceCulture);
+                return ResourceManager.GetString("ButtonCancel", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Clear.
         /// </summary>
-        internal static string Clear {
+        internal static string ButtonClear {
             get {
-                return ResourceManager.GetString("Clear", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to сolon.
-        /// </summary>
-        internal static string Colon {
-            get {
-                return ResourceManager.GetString("Colon", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to сomma.
-        /// </summary>
-        internal static string Comma {
-            get {
-                return ResourceManager.GetString("Comma", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Current language:.
-        /// </summary>
-        internal static string CurrentLanguage {
-            get {
-                return ResourceManager.GetString("CurrentLanguage", resourceCulture);
+                return ResourceManager.GetString("ButtonClear", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Default.
         /// </summary>
-        internal static string Default {
+        internal static string ButtonDefault {
             get {
-                return ResourceManager.GetString("Default", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Diagnostics.
-        /// </summary>
-        internal static string Diagnostics {
-            get {
-                return ResourceManager.GetString("Diagnostics", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Are you sure you want to disable Petty&apos;s protection?.
-        /// </summary>
-        internal static string DisablePettyGuard {
-            get {
-                return ResourceManager.GetString("DisablePettyGuard", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Download.
-        /// </summary>
-        internal static string Download {
-            get {
-                return ResourceManager.GetString("Download", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Downloading.
-        /// </summary>
-        internal static string Downloading {
-            get {
-                return ResourceManager.GetString("Downloading", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Downloading in progress, please wait for it to complete..
-        /// </summary>
-        internal static string DownloadingInProgress {
-            get {
-                return ResourceManager.GetString("DownloadingInProgress", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to For start voice recognizing you need to download a voice model (about 128 MB).
-        /// </summary>
-        internal static string DownloadVoskModelMessage {
-            get {
-                return ResourceManager.GetString("DownloadVoskModelMessage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to English.
-        /// </summary>
-        internal static string English {
-            get {
-                return ResourceManager.GetString("English", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to exclamation mark.
-        /// </summary>
-        internal static string ExclamationMark {
-            get {
-                return ResourceManager.GetString("ExclamationMark", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Help.
-        /// </summary>
-        internal static string Help {
-            get {
-                return ResourceManager.GetString("Help", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Later.
-        /// </summary>
-        internal static string Later {
-            get {
-                return ResourceManager.GetString("Later", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Leaderboard.
-        /// </summary>
-        internal static string Leaderboard {
-            get {
-                return ResourceManager.GetString("Leaderboard", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Petty.
-        /// </summary>
-        internal static string Logo {
-            get {
-                return ResourceManager.GetString("Logo", resourceCulture);
+                return ResourceManager.GetString("ButtonDefault", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to I read all messages personally :).
         /// </summary>
-        internal static string MessageForMe {
+        internal static string ButtonDonate {
             get {
-                return ResourceManager.GetString("MessageForMe", resourceCulture);
+                return ResourceManager.GetString("ButtonDonate", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to new line.
+        ///   Looks up a localized string similar to Download.
         /// </summary>
-        internal static string NewLine {
+        internal static string ButtonDownload {
             get {
-                return ResourceManager.GetString("NewLine", resourceCulture);
+                return ResourceManager.GetString("ButtonDownload", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Later.
+        /// </summary>
+        internal static string ButtonLater {
+            get {
+                return ResourceManager.GetString("ButtonLater", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to No.
         /// </summary>
-        internal static string No {
+        internal static string ButtonNo {
             get {
-                return ResourceManager.GetString("No", resourceCulture);
+                return ResourceManager.GetString("ButtonNo", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Ok.
         /// </summary>
-        internal static string Ok {
+        internal static string ButtonOk {
             get {
-                return ResourceManager.GetString("Ok", resourceCulture);
+                return ResourceManager.GetString("ButtonOk", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start/Stop.
+        /// </summary>
+        internal static string ButtonStartStop {
+            get {
+                return ResourceManager.GetString("ButtonStartStop", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yes.
+        /// </summary>
+        internal static string ButtonYes {
+            get {
+                return ResourceManager.GetString("ButtonYes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to flashlight.
+        /// </summary>
+        internal static string CommandFlashlight {
+            get {
+                return ResourceManager.GetString("CommandFlashlight", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to help.
+        /// </summary>
+        internal static string CommandHelp {
+            get {
+                return ResourceManager.GetString("CommandHelp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to English.
+        /// </summary>
+        internal static string LanguageEnglish {
+            get {
+                return ResourceManager.GetString("LanguageEnglish", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Russian.
+        /// </summary>
+        internal static string LanguageRussian {
+            get {
+                return ResourceManager.GetString("LanguageRussian", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to About.
+        /// </summary>
+        internal static string PageAbout {
+            get {
+                return ResourceManager.GetString("PageAbout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Diagnostics.
+        /// </summary>
+        internal static string PageDiagnostics {
+            get {
+                return ResourceManager.GetString("PageDiagnostics", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Help.
+        /// </summary>
+        internal static string PageHelp {
+            get {
+                return ResourceManager.GetString("PageHelp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Leaderboard.
+        /// </summary>
+        internal static string PageLeaderboard {
+            get {
+                return ResourceManager.GetString("PageLeaderboard", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Petty.
         /// </summary>
-        internal static string Petty {
+        internal static string PagePetty {
             get {
-                return ResourceManager.GetString("Petty", resourceCulture);
+                return ResourceManager.GetString("PagePetty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Settings.
+        /// </summary>
+        internal static string PageSettings {
+            get {
+                return ResourceManager.GetString("PageSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Simulator speech.
+        /// </summary>
+        internal static string PageSpeechSimulator {
+            get {
+                return ResourceManager.GetString("PageSpeechSimulator", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Petty.
+        /// </summary>
+        internal static string PetName {
+            get {
+                return ResourceManager.GetString("PetName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to bracket.
+        /// </summary>
+        internal static string SpeechCommandBracket {
+            get {
+                return ResourceManager.GetString("SpeechCommandBracket", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to сolon.
+        /// </summary>
+        internal static string SpeechCommandColon {
+            get {
+                return ResourceManager.GetString("SpeechCommandColon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to сomma.
+        /// </summary>
+        internal static string SpeechCommandComma {
+            get {
+                return ResourceManager.GetString("SpeechCommandComma", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to exclamation mark.
+        /// </summary>
+        internal static string SpeechCommandExclamationMark {
+            get {
+                return ResourceManager.GetString("SpeechCommandExclamationMark", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to new line.
+        /// </summary>
+        internal static string SpeechCommandNewLine {
+            get {
+                return ResourceManager.GetString("SpeechCommandNewLine", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to point.
+        /// </summary>
+        internal static string SpeechCommandPoint {
+            get {
+                return ResourceManager.GetString("SpeechCommandPoint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to question mark.
+        /// </summary>
+        internal static string SpeechCommandQuestionMark {
+            get {
+                return ResourceManager.GetString("SpeechCommandQuestionMark", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to quote.
+        /// </summary>
+        internal static string SpeechCommandQuote {
+            get {
+                return ResourceManager.GetString("SpeechCommandQuote", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Current language:.
+        /// </summary>
+        internal static string TextCurrentLanguage {
+            get {
+                return ResourceManager.GetString("TextCurrentLanguage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Downloading.
+        /// </summary>
+        internal static string TitleDownloading {
+            get {
+                return ResourceManager.GetString("TitleDownloading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Words for punctuation marks.
+        /// </summary>
+        internal static string TitlePunctuationWords {
+            get {
+                return ResourceManager.GetString("TitlePunctuationWords", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Check your network connection and try again..
+        /// </summary>
+        internal static string UserMessageCheckNetworkConnection {
+            get {
+                return ResourceManager.GetString("UserMessageCheckNetworkConnection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to disable Petty&apos;s protection?.
+        /// </summary>
+        internal static string UserMessageDisablePettyGuard {
+            get {
+                return ResourceManager.GetString("UserMessageDisablePettyGuard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Downloading in progress, please wait for it to complete..
+        /// </summary>
+        internal static string UserMessageDownloadingInProgress {
+            get {
+                return ResourceManager.GetString("UserMessageDownloadingInProgress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to For start voice recognizing you need to download a voice model (about 128 MB).
+        /// </summary>
+        internal static string UserMessageDownloadVoskModelMessage {
+            get {
+                return ResourceManager.GetString("UserMessageDownloadVoskModelMessage", resourceCulture);
             }
         }
         
@@ -319,117 +418,27 @@ namespace Petty.Resources.Localization {
         ///Just start talking and it will show you what people hear.
         ///Your speech will be here, good luck!).
         /// </summary>
-        internal static string PettySpeechSimulatorPlaceholder {
+        internal static string UserMessagePettySpeechSimulatorPlaceholder {
             get {
-                return ResourceManager.GetString("PettySpeechSimulatorPlaceholder", resourceCulture);
+                return ResourceManager.GetString("UserMessagePettySpeechSimulatorPlaceholder", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to P.S. This button starts and stops Petty&apos;s voice assistant throughout the application..
         /// </summary>
-        internal static string PettyStartStopRemark {
+        internal static string UserMessagePettyStartStopRemark {
             get {
-                return ResourceManager.GetString("PettyStartStopRemark", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to point.
-        /// </summary>
-        internal static string Point {
-            get {
-                return ResourceManager.GetString("Point", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Words for punctuation marks.
-        /// </summary>
-        internal static string PunctuationWords {
-            get {
-                return ResourceManager.GetString("PunctuationWords", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to question mark.
-        /// </summary>
-        internal static string QuestionMark {
-            get {
-                return ResourceManager.GetString("QuestionMark", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to quote.
-        /// </summary>
-        internal static string Quote {
-            get {
-                return ResourceManager.GetString("Quote", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Russian.
-        /// </summary>
-        internal static string Russian {
-            get {
-                return ResourceManager.GetString("Russian", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Settings.
-        /// </summary>
-        internal static string Settings {
-            get {
-                return ResourceManager.GetString("Settings", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Selected: {0:F1}.
-        /// </summary>
-        internal static string Slider3Text {
-            get {
-                return ResourceManager.GetString("Slider3Text", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Simulator speech.
-        /// </summary>
-        internal static string SpeechSimulator {
-            get {
-                return ResourceManager.GetString("SpeechSimulator", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Start/Stop.
-        /// </summary>
-        internal static string StartStop {
-            get {
-                return ResourceManager.GetString("StartStop", resourceCulture);
+                return ResourceManager.GetString("UserMessagePettyStartStopRemark", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to This operation is already in progress. Please try again later..
         /// </summary>
-        internal static string TryLater {
+        internal static string UserMessageTryLater {
             get {
-                return ResourceManager.GetString("TryLater", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Yes.
-        /// </summary>
-        internal static string Yes {
-            get {
-                return ResourceManager.GetString("Yes", resourceCulture);
+                return ResourceManager.GetString("UserMessageTryLater", resourceCulture);
             }
         }
     }

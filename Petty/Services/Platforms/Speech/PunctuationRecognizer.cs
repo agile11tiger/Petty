@@ -10,13 +10,13 @@ namespace Petty.Services.Platforms.Speech
     {
         public readonly static Dictionary<string, string> Punctuations = new()
         {
-            { AppResources.Point, "." },
-            { AppResources.Comma, "," },
-            { AppResources.Colon, ":" },
-            { AppResources.Quote, "\"" },
-            { AppResources.NewLine, "\r\n" },
-            { AppResources.QuestionMark, "?" },
-            { AppResources.ExclamationMark, "!" },
+            { AppResources.SpeechCommandPoint, "." },
+            { AppResources.SpeechCommandComma, "," },
+            { AppResources.SpeechCommandColon, ":" },
+            { AppResources.SpeechCommandQuote, "\"" },
+            { AppResources.SpeechCommandNewLine, "\r\n" },
+            { AppResources.SpeechCommandQuestionMark, "?" },
+            { AppResources.SpeechCommandExclamationMark, "!" },
         };
 
         public static string AddPunctuation(this string text)

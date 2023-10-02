@@ -20,14 +20,14 @@
                      HorizontalOptions="CenterAndExpand" >
             <Button MinimumWidthRequest="130" 
                     Background="{StaticResource GrayButton}"
-                    Text="{x:Static resources:AppResources.Clear}"
+                    Text="{x:Static resources:AppResources.ButtonClear}"
                     Command="{Binding ClearSpeechCommand}"/>
             <Button MinimumWidthRequest="130" 
                     Background="{Binding StartStopButtonBackground}"
                     Command="{Binding StartStopPettyGuardAndroidServiceCommand}"
-                    Text="{x:Static resources:AppResources.StartStop}"/>
+                    Text="{x:Static resources:AppResources.ButtonStartStop}"/>
         </StackLayout>
 
-        <Label Margin="20" FontSize="13" Text="{x:Static resources:AppResources.PettyStartStopRemark}" TextColor="{StaticResource PSText}"/>
+        <Label Margin="20" FontSize="13" Text="{x:Static resources:AppResources.UserMessagePettyStartStopRemark}" TextColor="{StaticResource PSText}"/>
     </VerticalStackLayout>
 </ContentPage>

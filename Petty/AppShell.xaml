@@ -92,7 +92,7 @@
                            Aspect="AspectFill"
                            VerticalOptions="Center"
                            HorizontalOptions="Center"/>
-                    <Label Text="{x:Static resources:AppResources.Logo}"
+                    <Label Text="{x:Static resources:AppResources.PetName}"
                            FontAttributes="Bold"
                            VerticalTextAlignment="Center"
                            HorizontalTextAlignment="Center"/>
@@ -161,7 +161,7 @@
     <MenuItem IconImageSource="settings.png"
               Text="{x:Static resources:AppResources.Help}"/>
     <MenuItem IconImageSource="play.png"
-              Text="{x:Static resources:AppResources.About}"/>
+              Text="{x:Static resources:AppResources.PageAbout}"/>
 
     <Shell.FlyoutFooterTemplate>
         <DataTemplate>
@@ -184,7 +184,7 @@
                            TextDecorations="Underline"
                            VerticalTextAlignment="Center"
                            HorizontalTextAlignment="Start"
-                           Text="{x:Static resources:AppResources.MessageForMe}">
+                           Text="{x:Static resources:AppResources.ButtonDonate}">
                     </Label>
                 </Grid>
                 <Border.Shadow>

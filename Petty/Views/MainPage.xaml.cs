@@ -23,7 +23,7 @@ public partial class MainPage : ContentPage
     protected override async void OnAppearing()
     {
         base.OnAppearing();
-        _appShellViewModel.Title = AppResources.Petty;
+        _appShellViewModel.Title = AppResources.PagePetty;
         await _permissionService.GetAllPermissionsAsync();
     }
 }

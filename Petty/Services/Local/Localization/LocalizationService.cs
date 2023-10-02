@@ -15,8 +15,8 @@ namespace Petty.Services.Local.Localization
 
         public static Dictionary<string, Language> SupportedCultures = new()
         {
-            { "en-US", new Language { Name = AppResources.English, CultureInfo = new CultureInfo("en-US")} },
-            { "ru-RU", new Language { Name = AppResources.Russian, CultureInfo = new CultureInfo("ru-RU")} }
+            { "en-US", new Language { Name = AppResources.LanguageEnglish, CultureInfo = new CultureInfo("en-US")} },
+            { "ru-RU", new Language { Name = AppResources.LanguageRussian, CultureInfo = new CultureInfo("ru-RU")} }
         };
 
         private Dictionary<string, string> _cacheStringWithParameters = new Dictionary<string, string>();
