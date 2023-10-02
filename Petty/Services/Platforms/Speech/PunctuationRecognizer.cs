@@ -1,4 +1,7 @@
-﻿using Petty.Resources.Localization;
+﻿using Petty.MessengerCommands.FromPettyGuard;
+using Petty.Resources.Localization;
+using Petty.Services.Local;
+using System.Diagnostics;
 using System.Linq;
 
 namespace Petty.Services.Platforms.Speech
@@ -28,7 +31,12 @@ namespace Petty.Services.Platforms.Speech
                         textArray[i] = punctuationMark;
                     else
                     {
-                        textArray[i - 1] += punctuationMark;
+                        //example: point back
+                        if (i == 0)
+                            textArray[i] = punctuationMark;
+                        else
+                            textArray[i - 1] += punctuationMark;
+
                         textArray[i] = string.Empty;
                     }
                 }
@@ -39,7 +47,11 @@ namespace Petty.Services.Platforms.Speech
                         textArray[i] = punctuationMark;
                     else
                     {
-                        textArray[i - 2] += punctuationMark;
+                        if (i == 1)
+                            textArray[i] = punctuationMark;
+                        else 
+                            textArray[i - 2] += punctuationMark;
+
                         textArray[i - 1] = string.Empty;
                         textArray[i] = string.Empty;
                     }

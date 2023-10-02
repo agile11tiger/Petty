@@ -23,7 +23,6 @@
         private readonly IAudioStream _audioStream;
         private readonly LoggerService _loggerService;
         private readonly static object _locker = new();
-        private readonly List<float> _silenceThresholds = new();
         private readonly WaveRecorderService _waveRecorderService;
 
         private event Action<byte[]> BroadcastRecorderData;
@@ -42,14 +41,6 @@
         /// Returns a value indicating if the <see cref="AudioRecorderService"/> is currently recording audio
         /// </summary>
         public bool IsRecording => _audioStream?.IsActive ?? false;
-
-        /// <summary>
-        /// Gets/sets a value indicating the signal threshold that determines silence.
-        /// If the recorder is being over or under aggressive when detecting silence, 
-        /// you can alter this value to achieve different results.
-        /// </summary>
-        /// <remarks>Defaults to .15.  Value should be between 0 and 1.</remarks>
-        public float SilenceThreshold { get; private set; } = .03f;
 
         /// <summary>
         /// Starts recording audio.
@@ -117,17 +108,7 @@
 
         private void OnBroadcastDataAudioStream(byte[] bytes)
         {
-            var level = AudioFunctions.CalculateLevel(bytes);
-            _silenceThresholds.Add(level);
-
-            if (_silenceThresholds.Count > 180) //~1min
-            {
-                SilenceThreshold = _silenceThresholds.Average();
-                _silenceThresholds.Clear();
-            }
-
-            if (level > SilenceThreshold) // skip silence bytes
-                BroadcastRecorderData?.Invoke(bytes);
+            BroadcastRecorderData?.Invoke(bytes);
         }
     }
 }

@@ -9,7 +9,7 @@
 
     <ContentPage.Resources>
     </ContentPage.Resources>
-
+    
     <ScrollView>
         <Grid Margin="10" 
               ColumnDefinitions="4*, 2*"
@@ -18,7 +18,7 @@
             <Label Grid.Row="0" 
                    Grid.ColumnSpan="2" 
                    HorizontalOptions="Center"
-                   Text="{x:Static resources:AppResources.DiagnosticsPetty}" >
+                   Text="{x:Static resources:AppResources.Diagnostics}" >
                 <Label.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding GoToDiagnosticsPettyPageCommand}" />
                 </Label.GestureRecognizers>
@@ -31,7 +31,7 @@
                     Grid.Column="1"
                     ItemDisplayBinding="{Binding Name}"
                     ItemsSource="{Binding LanguagesDictionary}"
-                    SelectedIndexChanged="pickerLanguage_SelectedIndexChanged"/>
+                    SelectedIndexChanged="PickerLanguage_SelectedIndexChanged"/>
             <BoxView Grid.Row="3" Grid.ColumnSpan="2"/>
             
             <Label Grid.Row="4" Grid.Column="0" Text="Использовать фронтальную камеру"/>

@@ -21,7 +21,8 @@
 
             if (Handler is not null)
             {
-                await _navigationService.InitializeAsync();
+                //todo:change
+                //await _navigationService.InitializeAsync();
             }
         }
 

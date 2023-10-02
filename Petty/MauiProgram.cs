@@ -91,10 +91,11 @@ namespace Petty
 
         private static MauiAppBuilder RegisterPagesWithViewModels(this MauiAppBuilder builder)
         {
-            builder.Services.AddScopedWithShellRoute<MainPage, MainViewModel>(RoutesHelper.MAIN);
-            builder.Services.AddScopedWithShellRoute<SettingsPage, SettingsViewModel>(RoutesHelper.SETINGS);
-            builder.Services.AddScopedWithShellRoute<DiagnosticPettyPage, DiagnosticPettyViewModel>(
-                $"{RoutesHelper.SETINGS}/{RoutesHelper.DIAGNOSTICS_PETTY}");
+            builder.Services.AddSingletonWithShellRoute<MainPage, MainViewModel>(RoutesHelper.MAIN);
+            builder.Services.AddSingletonWithShellRoute<SettingsPage, SettingsViewModel>(RoutesHelper.SETINGS);
+            builder.Services.AddSingletonWithShellRoute<SpeechSimulatorPage, SpeechSimulatorViewModel>(RoutesHelper.SPEECH_SIMULATOR);
+            builder.Services.AddSingletonWithShellRoute<DiagnosticPettyPage, DiagnosticPettyViewModel>(
+                $"{RoutesHelper.SETINGS}/{RoutesHelper.DIAGNOSTICS}");
             return builder;
         }
 

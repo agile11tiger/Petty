@@ -304,9 +304,9 @@
     <Style TargetType="Slider">
         <Setter Property="Minimum" Value="0" />
         <Setter Property="Maximum" Value="100" />
-        <Setter Property="ThumbColor" Value="{StaticResource CircleButton}" />
-        <Setter Property="MinimumTrackColor" Value="{StaticResource CircleButtonOnSurface}" />
-        <Setter Property="MaximumTrackColor" Value="{StaticResource CircleButtonOffSurface}" />
+        <Setter Property="ThumbColor" Value="{StaticResource Switcher}" />
+        <Setter Property="MinimumTrackColor" Value="{StaticResource SwitcherOnSurface}" />
+        <Setter Property="MaximumTrackColor" Value="{StaticResource SwitcherOffSurface}" />
         <Setter Property="VisualStateManager.VisualStateGroups">
             <VisualStateGroupList>
                 <VisualStateGroup x:Name="CommonStates">
@@ -328,7 +328,7 @@
     </Style>
 
     <Style TargetType="Switch">
-        <Setter Property="OnColor" Value="{StaticResource CircleButtonOffSurface}" />
+        <Setter Property="OnColor" Value="{StaticResource SwitcherOffSurface}" />
         <Setter Property="ThumbColor" Value="{StaticResource Gray500}" />
         <Setter Property="VisualStateManager.VisualStateGroups">
             <VisualStateGroupList>
@@ -336,19 +336,19 @@
                     <VisualState x:Name="Normal" />
                     <VisualState x:Name="Disabled">
                         <VisualState.Setters>
-                            <Setter Property="OnColor" Value="{StaticResource CircleButtonOffSurface}" />
+                            <Setter Property="OnColor" Value="{StaticResource SwitcherOffSurface}" />
                             <Setter Property="ThumbColor" Value="{StaticResource Gray300}" />
                         </VisualState.Setters>
                     </VisualState>
                     <VisualState x:Name="On">
                         <VisualState.Setters>
-                            <Setter Property="OnColor" Value="{StaticResource CircleButtonOnSurface}" />
-                            <Setter Property="ThumbColor" Value="{StaticResource CircleButton}" />
+                            <Setter Property="OnColor" Value="{StaticResource SwitcherOnSurface}" />
+                            <Setter Property="ThumbColor" Value="{StaticResource Switcher}" />
                         </VisualState.Setters>
                     </VisualState>
                     <VisualState x:Name="Off">
                         <VisualState.Setters>
-                            <Setter Property="OnColor" Value="{StaticResource CircleButtonOffSurface}" />
+                            <Setter Property="OnColor" Value="{StaticResource SwitcherOffSurface}" />
                             <Setter Property="ThumbColor" Value="{StaticResource Gray500}" />
                         </VisualState.Setters>
                     </VisualState>

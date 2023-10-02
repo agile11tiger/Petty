@@ -1,9 +1,19 @@
-﻿using System.Runtime.CompilerServices;
+﻿using System.Diagnostics;
+using System.Runtime.CompilerServices;
 
 namespace Petty.Services.Local
 {
     public class LoggerService
     {
+        public void Log(
+            Exception exception = default,
+            [CallerMemberName] string memberName = default,
+            [CallerFilePath] string sourceFilePath = default,
+            [CallerLineNumber] int sourceLineNumber = default)
+        {
+            Log(null, exception, memberName, sourceFilePath, sourceLineNumber);
+        }
+
         public void Log(
             string message = default,
             Exception exception = default,
@@ -11,16 +21,8 @@ namespace Petty.Services.Local
             [CallerFilePath] string sourceFilePath = default,
             [CallerLineNumber] int sourceLineNumber = default)
         {
-            return;
+            Debug.WriteLine($"{DateTime.UtcNow}. {sourceFilePath}. {memberName}. {sourceLineNumber}.\r\n{message}\r\n{exception}");
         }
 
-        public void Log(
-            Exception exception = default,
-            [CallerMemberName] string memberName = default,
-            [CallerFilePath] string sourceFilePath = default,
-            [CallerLineNumber] int sourceLineNumber = default)
-        {
-            return;
-        }
     }
 }

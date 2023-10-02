@@ -17,22 +17,30 @@
     <Color x:Key="Gray700">#777</Color>
     <Color x:Key="Gray800">#555</Color>
     <Color x:Key="Gray900">#333</Color>
+    <Color x:Key="Gray950">#222</Color>
     <Color x:Key="Gray999">#111</Color>
-    <Color x:Key="FlyoutHeaderPart1">blue</Color>
-    <Color x:Key="FlyoutHeaderPart2">yellow</Color>
-    <Color x:Key="FlyoutHeaderPart3">blueviolet</Color>
-    <Color x:Key="FlyoutHeaderPart4">green</Color>
-    <Color x:Key="FlyoutHeaderBackground">#222</Color>
+    <Color x:Key="Blue">blue</Color>
+    <Color x:Key="Yellow">yellow</Color>
+    <Color x:Key="BlueViolet">blueviolet</Color>
+    <Color x:Key="Green">green</Color>
     <Color x:Key="FlyoutHeaderRunningText">#f5a</Color>
-    <Color x:Key="FlyoutMenuItemSeparator">#ddd</Color>
-    <Color x:Key="FlyoutFooter">green</Color>
-    <Color x:Key="TabBarBackground">#111</Color>
-    <Color x:Key="TabBarMainButtonShadow">blue</Color>
-    <Color x:Key="CircleButton">green</Color>
-    <Color x:Key="CircleButtonOnSurface">yellow</Color>
-    <Color x:Key="CircleButtonOffSurface">#eee</Color>
-    <Color x:Key="PickerTitle">blue</Color>
+    <Color x:Key="PSText">#999</Color>
     <SolidColorBrush x:Key="PrimaryBrush" Color="{StaticResource Primary}"/>
+    <SolidColorBrush x:Key="FlyoutHeaderPart1" Color="{StaticResource Blue}"/>
+    <SolidColorBrush x:Key="FlyoutHeaderPart2" Color="{StaticResource Yellow}"/>
+    <SolidColorBrush x:Key="FlyoutHeaderPart3" Color="{StaticResource BlueViolet}"/>
+    <SolidColorBrush x:Key="FlyoutHeaderPart4" Color="{StaticResource Green}"/>
+    <SolidColorBrush x:Key="FlyoutHeaderBackground" Color="{StaticResource Gray950}"/>
+    <SolidColorBrush x:Key="FlyoutMenuItemSeparator" Color="{StaticResource Gray200}"/>
+    <SolidColorBrush x:Key="FlyoutFooter" Color="{StaticResource Green}"/>
+    <SolidColorBrush x:Key="TabBarBackground" Color="{StaticResource Gray999}"/>
+    <SolidColorBrush x:Key="TabBarMainButtonShadow" Color="{StaticResource Blue}"/>
+    <SolidColorBrush x:Key="Switcher" Color="{StaticResource Green}"/>
+    <SolidColorBrush x:Key="SwitcherOnSurface" Color="{StaticResource Yellow}"/>
+    <SolidColorBrush x:Key="SwitcherOffSurface" Color="{StaticResource Gray100}"/>
+    <SolidColorBrush x:Key="PickerTitle" Color="{StaticResource Blue}"/>
+    <SolidColorBrush x:Key="GrayButton" Color="{StaticResource Gray700}"/>
+    <!--
     <SolidColorBrush x:Key="SecondaryBrush" Color="{StaticResource Secondary}"/>
     <SolidColorBrush x:Key="TertiaryBrush" Color="{StaticResource Tertiary}"/>
     <SolidColorBrush x:Key="Gray100Brush" Color="{StaticResource Gray100}"/>
@@ -54,6 +62,6 @@
     <Color x:Key="Cyan300Accent">#C3F2F4</Color>
     <Color x:Key="Blue100Accent">#3E8EED</Color>
     <Color x:Key="Blue200Accent">#72ACF1</Color>
-    <Color x:Key="Blue300Accent">#A7CBF6</Color>
+    <Color x:Key="Blue300Accent">#A7CBF6</Color>-->
 
 </ResourceDictionary>

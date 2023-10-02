@@ -135,6 +135,9 @@
   <data name="CheckNetworkConnection" xml:space="preserve">
     <value>Check your network connection and try again.</value>
   </data>
+  <data name="Clear" xml:space="preserve">
+    <value>Clear</value>
+  </data>
   <data name="Colon" xml:space="preserve">
     <value>сolon</value>
   </data>
@@ -147,7 +150,7 @@
   <data name="Default" xml:space="preserve">
     <value>Default</value>
   </data>
-  <data name="DiagnosticsPetty" xml:space="preserve">
+  <data name="Diagnostics" xml:space="preserve">
     <value>Diagnostics</value>
   </data>
   <data name="DisablePettyGuard" xml:space="preserve">
@@ -198,6 +201,16 @@
   <data name="Petty" xml:space="preserve">
     <value>Petty</value>
   </data>
+  <data name="PettySpeechSimulatorPlaceholder" xml:space="preserve">
+    <value>People don't understand what you say, but do you think your speech is normal? 
+There is a solution!!! 
+Petty speech simulator will help you in this difficult task. 
+Just start talking and it will show you what people hear.
+Your speech will be here, good luck!)</value>
+  </data>
+  <data name="PettyStartStopRemark" xml:space="preserve">
+    <value>P.S. This button starts and stops Petty's voice assistant throughout the application.</value>
+  </data>
   <data name="Point" xml:space="preserve">
     <value>point</value>
   </data>
@@ -218,6 +231,12 @@
   </data>
   <data name="Slider3Text" xml:space="preserve">
     <value>Selected: {0:F1}</value>
+  </data>
+  <data name="SpeechSimulator" xml:space="preserve">
+    <value>Simulator speech</value>
+  </data>
+  <data name="StartStop" xml:space="preserve">
+    <value>Start/Stop</value>
   </data>
   <data name="TryLater" xml:space="preserve">
     <value>This operation is already in progress. Please try again later.</value>

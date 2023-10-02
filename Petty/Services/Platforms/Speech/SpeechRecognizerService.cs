@@ -35,19 +35,30 @@ namespace Petty.Services.Platforms.Speech
         private const int PARTIAL_RESULT_EMPTY_MESSAGE_LENGTH = 20;// "{\n  \"partial\" : \"\"\n}
         private const string REALTIME_DATA_FILE_PATH = "speechRecognizerRealtimeData.wav";
 
+        private bool isAcceptWaveform;
         private Model _recognizerModel;
         private VoskRecognizer _recognizer;
         private bool _isRecognizingFromDisk;
         private readonly IMessenger _messenger;
+        private string speechCache = string.Empty;
         private readonly LoggerService _loggerService;
         private SpeechRecognizerResult _speechRecognizerResult;
         private readonly WebRequestsService _webRequestsService;
         private readonly AudioPlayerService _audioPlayerService;
+        private readonly List<float> _silenceThresholds = new();
         private readonly static SemaphoreSlim _locker = new(1, 1);
         private readonly UserMessagesService _userMessagesService;
         private readonly AudioRecorderService _audioRecorderService;
 
         private event Action<SpeechRecognizerResult> BroadcastSpeech;
+
+        /// <summary>
+        /// Gets/sets a value indicating the signal threshold that determines silence.
+        /// If the recorder is being over or under aggressive when detecting silence, 
+        /// you can alter this value to achieve different results.
+        /// </summary>
+        /// <remarks>Defaults to .15.  Value should be between 0 and 1.</remarks>
+        public float SilenceThreshold { get; private set; } = .03f;
 
         /// <summary>
         /// Try start the speech recognizer.
@@ -179,39 +190,77 @@ namespace Petty.Services.Platforms.Speech
             }
         }
 
-        private string speechCache = string.Empty;
 
         private void OnBroadcastAudioRecorderData(byte[] recorderData)
         {
-            _recognizer.AcceptWaveform(recorderData, recorderData.Length);
-            _speechRecognizerResult ??= new SpeechRecognizerResult();
-            _speechRecognizerResult.Speech = _recognizer.PartialResult();
+            if (isAcceptWaveform && CanSkipRecognize(recorderData))
+                return;
 
-            if (_speechRecognizerResult.Speech.Length > PARTIAL_RESULT_EMPTY_MESSAGE_LENGTH)
+            //Returns a value indicating whether the speech has ended or not.
+            //Presumably, when receiving a bunch of zeros, that is, silence.
+            isAcceptWaveform = _recognizer.AcceptWaveform(recorderData, recorderData.Length);
+            _speechRecognizerResult = new SpeechRecognizerResult();
+
+            if (isAcceptWaveform)
             {
-                _speechRecognizerResult.Speech = _speechRecognizerResult.Speech[PARTIAL_RESULT_START_MESSAGE_INDEX..^3];
+                _speechRecognizerResult.Speech = _recognizer.Result();
 
-                if (_speechRecognizerResult.Speech.EndsWith(AppResources.Point))
-                {
-                    _speechRecognizerResult.Speech = _recognizer.FinalResult();
-                    _speechRecognizerResult.Speech = _speechRecognizerResult.Speech[RESULT_START_MESSAGE_INDEX..^3];
-                    BroadcastSpeech?.Invoke(_speechRecognizerResult);
-                    _speechRecognizerResult = null;
+                if (_speechRecognizerResult.Speech.Length == RESULT_EMPTY_MESSAGE_LENGTH)
                     return;
-                }
 
-                if (_speechRecognizerResult.Speech.Length != speechCache.Length)
-                {
-                    speechCache = _speechRecognizerResult.Speech;
-                    BroadcastSpeech?.Invoke(_speechRecognizerResult);
-                }
-
-                if (_speechRecognizerResult.Speech.EndsWith(AppResources.Petty, true, null) || _speechRecognizerResult.IsCommandRecognized)
-                {
-                    _recognizer.Reset(); //ignore, i need just clear, maybe should i to select the reset() method?
-                    _speechRecognizerResult = null;
-                }
+                _speechRecognizerResult.Speech = _speechRecognizerResult.Speech[RESULT_START_MESSAGE_INDEX..^3];
+                _speechRecognizerResult.IsResultSpeech = true;
             }
+            else
+            {
+                _speechRecognizerResult.Speech = _recognizer.PartialResult();
+
+                if (_speechRecognizerResult.Speech.Length == PARTIAL_RESULT_EMPTY_MESSAGE_LENGTH)
+                    return;
+
+                _speechRecognizerResult.Speech = _speechRecognizerResult.Speech[PARTIAL_RESULT_START_MESSAGE_INDEX..^3];
+                _speechRecognizerResult.IsPartialSpeech = true;
+            }
+
+            if (_speechRecognizerResult.Speech.EndsWith(AppResources.Point))
+            {
+                _speechRecognizerResult.Speech = _recognizer.FinalResult();
+                _speechRecognizerResult.Speech = _speechRecognizerResult.Speech[RESULT_START_MESSAGE_INDEX..^3];
+                _speechRecognizerResult.IsFinalSpeech = true;
+                _speechRecognizerResult.IsPartialSpeech = false;
+                BroadcastSpeech?.Invoke(_speechRecognizerResult);
+                return;
+            }
+
+            //isAcceptWaveform mean that result() called and we should send result
+            //We dont ignore result even if it's the same. Since we need to separate completed pieces
+            if (isAcceptWaveform || !_speechRecognizerResult.Speech.Reverse().SequenceEqual(speechCache.Reverse()))
+            {
+                speechCache = _speechRecognizerResult.Speech;
+                BroadcastSpeech?.Invoke(_speechRecognizerResult);
+            }
+
+            if (_speechRecognizerResult.Speech.EndsWith(AppResources.Petty, true, null) || _speechRecognizerResult.IsCommandRecognized)
+            {
+                _recognizer.Reset();
+            }
+        }
+
+        private bool CanSkipRecognize(byte[] recorderData)
+        {
+            var level = AudioFunctions.CalculateLevel(recorderData);
+            _silenceThresholds.Add(level);
+
+            if (_silenceThresholds.Count > 180) //~1min
+            {
+                SilenceThreshold = _silenceThresholds.Average();
+                _silenceThresholds.Clear();
+            }
+
+            if (level > SilenceThreshold) // skip silence bytes
+                return false;
+
+            return true;
         }
 
         private async Task Recognize(Stream reader, Action<string, bool> updateResult)

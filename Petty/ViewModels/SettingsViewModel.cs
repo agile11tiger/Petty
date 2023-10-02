@@ -27,7 +27,7 @@ namespace Petty.ViewModels
         [RelayCommand]
         private async Task GoToDiagnosticsPettyPage()
         {
-            await NavigationService.GoToAsync(RoutesHelper.DIAGNOSTICS_PETTY);
+            await NavigationService.GoToAsync(RoutesHelper.DIAGNOSTICS);
         }
 
         [RelayCommand]

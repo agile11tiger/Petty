@@ -21,7 +21,6 @@
                    FontSize="Large"
                    HorizontalTextAlignment="Start"
                    Text="{Binding Title}"/>
-            <!--Text="{x:Static resources:AppResources.Petty}"/>-->
             <HorizontalStackLayout Grid.Column="1" HorizontalOptions="End" Spacing="9" Margin="9">
                 <graphicsViews:CircularProgressBarGraphicsView x:Name="_circularProgressBarGraphicsView" 
                                                            WidthRequest="40"
@@ -35,7 +34,7 @@
                 <ImageButton WidthRequest="40"
                              HeightRequest="40"
                              Source="question.png"
-                             IsVisible="{Binding IsVisibleQuestionIcon, Mode=TwoWay}"
+                             IsVisible="{Binding IsVisibleQuestionIcon}"
                              Command="{Binding TapQuestionIconCommand}"/>
             </HorizontalStackLayout>
         </Grid>
@@ -153,7 +152,7 @@
                 <VerticalStackLayout Padding="5">
                     <Label IsEnabled="False" 
                            HeightRequest="1" 
-                           BackgroundColor="{StaticResource FlyoutMenuItemSeparator}">
+                           Background="{StaticResource FlyoutMenuItemSeparator}">
                     </Label>
                 </VerticalStackLayout>
             </DataTemplate>
@@ -171,7 +170,7 @@
                       VerticalOptions="Fill"
                       HorizontalOptions="Fill"
                       ColumnDefinitions="80,*"
-                      BackgroundColor="{StaticResource FlyoutFooter}">
+                      Background="{StaticResource FlyoutFooter}">
                     <Image Margin="5"
                            Grid.Column="0"
                            Source="coffee.gif"

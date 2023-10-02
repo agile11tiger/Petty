@@ -23,7 +23,7 @@ public partial class SettingsPage : ContentPage
         _appShellViewModel.Title = AppResources.Settings;
     }
 
-    private void pickerLanguage_SelectedIndexChanged(object sender, EventArgs e)
+    private void PickerLanguage_SelectedIndexChanged(object sender, EventArgs e)
     {
         _settingsViewModel.TempSettings.LanguageType = (_pickerLanguage.SelectedItem as Language).CultureInfo.Name;
     }

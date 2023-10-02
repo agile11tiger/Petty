@@ -115,6 +115,15 @@ namespace Petty.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Clear.
+        /// </summary>
+        internal static string Clear {
+            get {
+                return ResourceManager.GetString("Clear", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to сolon.
         /// </summary>
         internal static string Colon {
@@ -153,9 +162,9 @@ namespace Petty.Resources.Localization {
         /// <summary>
         ///   Looks up a localized string similar to Diagnostics.
         /// </summary>
-        internal static string DiagnosticsPetty {
+        internal static string Diagnostics {
             get {
-                return ResourceManager.GetString("DiagnosticsPetty", resourceCulture);
+                return ResourceManager.GetString("Diagnostics", resourceCulture);
             }
         }
         
@@ -304,6 +313,28 @@ namespace Petty.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to People don&apos;t understand what you say, but do you think your speech is normal? 
+        ///There is a solution!!! 
+        ///Petty speech simulator will help you in this difficult task. 
+        ///Just start talking and it will show you what people hear.
+        ///Your speech will be here, good luck!).
+        /// </summary>
+        internal static string PettySpeechSimulatorPlaceholder {
+            get {
+                return ResourceManager.GetString("PettySpeechSimulatorPlaceholder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to P.S. This button starts and stops Petty&apos;s voice assistant throughout the application..
+        /// </summary>
+        internal static string PettyStartStopRemark {
+            get {
+                return ResourceManager.GetString("PettyStartStopRemark", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to point.
         /// </summary>
         internal static string Point {
@@ -363,6 +394,24 @@ namespace Petty.Resources.Localization {
         internal static string Slider3Text {
             get {
                 return ResourceManager.GetString("Slider3Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Simulator speech.
+        /// </summary>
+        internal static string SpeechSimulator {
+            get {
+                return ResourceManager.GetString("SpeechSimulator", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start/Stop.
+        /// </summary>
+        internal static string StartStop {
+            get {
+                return ResourceManager.GetString("StartStop", resourceCulture);
             }
         }
         

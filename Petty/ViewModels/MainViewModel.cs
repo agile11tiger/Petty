@@ -20,14 +20,11 @@ namespace Petty.ViewModels
         {
             _messenger = messenger;
             _userMessagesService = userMessagesService;
-            _messenger.Register<StartedPettyGuardService>(this, (recipient, message) => IsStartingPettyGuardAndroidService = message.IsStarted);
-            _messenger.Register<StoppedPettyGuardService>(this, (recipient, message) => IsStartingPettyGuardAndroidService = !message.IsStopped);
         }
 
         private readonly IMessenger _messenger;
         private readonly UserMessagesService _userMessagesService;
         [ObservableProperty] private bool _isSelectedTabBarItem;
-        [ObservableProperty] private bool _isStartingPettyGuardAndroidService;
         [ObservableProperty] private string _pettyGuardIconImageSource = "play.png";
 
         [RelayCommand]
@@ -38,12 +35,9 @@ namespace Petty.ViewModels
         }
 
         [RelayCommand]
-        private async Task StartStopPettyGuardAndroidService()
+        private async Task GoToSpeechSimulator()
         {
-            if (!IsStartingPettyGuardAndroidService)
-                _messenger.Send<StartPettyGuardService>();
-            else if (await _userMessagesService.SendRequestAsync(AppResources.DisablePettyGuard, AppResources.No, AppResources.Yes))
-                _messenger.Send<StopPettyGuardService>();
+            await NavigationService.GoToAsync(RoutesHelper.SPEECH_SIMULATOR);
         }
 
         [RelayCommand]

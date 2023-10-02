@@ -1,10 +1,13 @@
-﻿namespace Petty.MessengerCommands.FromPettyGuard
+﻿using Petty.Services.Platforms.Speech;
+
+namespace Petty.MessengerCommands.FromPettyGuard
 {
     public class SpeechRecognizerResult
     {
-        private volatile string _speech;
-        private volatile bool _isCommandRecognized;
-        public  string Speech { get => _speech; set => _speech = value; }
-        public bool IsCommandRecognized { get => _isCommandRecognized; set => _isCommandRecognized = value; }
+        public  string Speech { get; set; }
+        public bool IsFinalSpeech { get; set; }
+        public bool IsResultSpeech { get; set; }
+        public bool IsPartialSpeech { get; set; }
+        public bool IsCommandRecognized { get; set; }
     }
 }

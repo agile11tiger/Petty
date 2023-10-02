@@ -21,13 +21,13 @@
         <tabs:TabHostView Margin="0"
                           Grid.Row="3"
                           Shadow="{StaticResource tabBarShadow}"
-                          BackgroundColor="{StaticResource TabBarBackground}">
+                          Background="{StaticResource TabBarBackground}">
             <tabs:MaterialUnderlinedTabItem Label="{x:Static resources:AppResources.Leaderboard}" 
                                             IconTextSpacing="0"
                                             IconOptions="TopIcon"
                                             IconImageSource="podium.png"
-                                            IsSelected="{Binding IsSelectedTabBarItem}"
-                                            Style="{StaticResource BottomTabStyle}">
+                                            Style="{StaticResource MaterialTabStyle}"
+                                            IsSelected="{Binding IsSelectedTabBarItem}">
                 <tabs:MaterialUnderlinedTabItem.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding GoToLeaderboardCommand}"/>
                 </tabs:MaterialUnderlinedTabItem.GestureRecognizers>
@@ -37,16 +37,16 @@
                             ButtonCircleSize="80"
                             ButtonWidthRequest="100"
                             ButtonHeightRequest="100"
-                            IconImageSource="{Binding PettyGuardIconImageSource}"
-                            Shadow="{StaticResource circleButtonShadow}"
+                            Shadow="{StaticResource tabBarMainButtonShadow}"
                             ButtonBackgroundColor="{StaticResource Primary}"
-                            TapCommand="{Binding StartStopPettyGuardAndroidServiceCommand}">
+                            IconImageSource="{Binding PettyGuardIconImageSource}"
+                            TapCommand="{Binding GoToSpeechSimulatorCommand}">
             </tabs:TabButton>
-            <tabs:MaterialUnderlinedTabItem Style="{StaticResource BottomTabStyle}"
-                                            Label="{x:Static resources:AppResources.Settings}"
+            <tabs:MaterialUnderlinedTabItem Label="{x:Static resources:AppResources.Settings}"
                                             IconTextSpacing="0"
                                             IconOptions="TopIcon"
                                             IconImageSource="settings.png"
+                                            Style="{StaticResource MaterialTabStyle}"
                                             IsSelected="{Binding IsSelectedTabBarItem, Mode=TwoWay}">
                 <tabs:MaterialUnderlinedTabItem.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding GoToSettingsCommand}"/>

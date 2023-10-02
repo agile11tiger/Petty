@@ -3,7 +3,9 @@ using Petty.MessengerCommands.FromPettyGuard;
 using Petty.PlatformsShared.MessengerCommands.FromPettyGuard;
 using Petty.Services.Platforms.PettyCommands.Commands;
 using Petty.Services.Platforms.Speech;
+using System.Diagnostics;
 using System.Reflection;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Petty.Services.Platforms.PettyCommands
 {
@@ -11,10 +13,12 @@ namespace Petty.Services.Platforms.PettyCommands
     {
         public PettyCommandsService(
             IMessenger messenger,
+            LoggerService loggerService,
             PettyVoiceService pettyVoiceService,
             SpeechRecognizerService speechRecognizerService)
         {
             _messenger = messenger;
+            _loggerService = loggerService;
             _pettyVoiceService = pettyVoiceService;
             _speechRecognizerService = speechRecognizerService;
             var iPettyCommandType = typeof(IPettyCommand);
@@ -30,6 +34,8 @@ namespace Petty.Services.Platforms.PettyCommands
         }
 
         private readonly IMessenger _messenger;
+        private readonly LoggerService _loggerService;
+        private readonly LoggerService _logger;
         private readonly PettyVoiceService _pettyVoiceService;
         private readonly static SemaphoreSlim _locker = new(1, 1);
         private readonly SpeechRecognizerService _speechRecognizerService;
@@ -74,7 +80,9 @@ namespace Petty.Services.Platforms.PettyCommands
 
         private void OnBroadcastSpeech(SpeechRecognizerResult speechResult)
         {
-            _messenger.Send(new SpeechRecognizerResult() { Speech = speechResult.Speech.AddPunctuation() });
+            speechResult.Speech = speechResult.Speech.AddPunctuation();
+            _loggerService.Log(speechResult.Speech);
+            _messenger.Send(speechResult);
             return;
             
 
@@ -103,5 +111,6 @@ namespace Petty.Services.Platforms.PettyCommands
 
             return null;
         }
+
     }
 }

@@ -4,7 +4,8 @@
     {
         public const string MAIN = "Main";
         public const string SETINGS = "Settings";
-        public const string DIAGNOSTICS_PETTY = "DiagnosticsPetty";
+        public const string DIAGNOSTICS = "Diagnostics";
+        public const string SPEECH_SIMULATOR = "SpeechSimulator";
         public const string BACK = "..";
     }
 }

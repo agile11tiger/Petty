@@ -135,6 +135,9 @@
   <data name="CheckNetworkConnection" xml:space="preserve">
     <value>Проверьте соединение к сети и попробуйте снова.</value>
   </data>
+  <data name="Clear" xml:space="preserve">
+    <value>Очистить</value>
+  </data>
   <data name="Colon" xml:space="preserve">
     <value>двоеточие</value>
   </data>
@@ -147,11 +150,11 @@
   <data name="Default" xml:space="preserve">
     <value>По умолчанию</value>
   </data>
-  <data name="DiagnosticsPetty" xml:space="preserve">
+  <data name="Diagnostics" xml:space="preserve">
     <value>Диагностика</value>
   </data>
   <data name="DisablePettyGuard" xml:space="preserve">
-    <value>Вы точно хотите отключить защиту Petty?</value>
+    <value>Вы точно хотите отключить защиту Пэтти?</value>
   </data>
   <data name="Download" xml:space="preserve">
     <value>Скачать</value>
@@ -196,7 +199,17 @@
     <value>Ок</value>
   </data>
   <data name="Petty" xml:space="preserve">
-    <value>Пэти</value>
+    <value>Пэтти</value>
+  </data>
+  <data name="PettySpeechSimulatorPlaceholder" xml:space="preserve">
+    <value>Люди не понимают, что вы говорите, но вам кажется ваша речь нормальной? 
+Решение есть!!! 
+Петти тренажер для речи поможет вам в этом непростом деле. 
+Просто начни говорить, а он покажет, что слышат люди. 
+Здесь будет ваша речь, удачи!)</value>
+  </data>
+  <data name="PettyStartStopRemark" xml:space="preserve">
+    <value>П.С. Это кнопка запускает и останавливает голосового помощника Петти во всем приложении.</value>
   </data>
   <data name="Point" xml:space="preserve">
     <value>точка</value>
@@ -208,13 +221,19 @@
     <value>вопросительный знак</value>
   </data>
   <data name="Quote" xml:space="preserve">
-    <value>кавычка</value>
+    <value>кавычки</value>
   </data>
   <data name="Russian" xml:space="preserve">
     <value>Русский</value>
   </data>
   <data name="Settings" xml:space="preserve">
     <value>Настройки</value>
+  </data>
+  <data name="SpeechSimulator" xml:space="preserve">
+    <value>Тренажёр речи</value>
+  </data>
+  <data name="StartStop" xml:space="preserve">
+    <value>Старт/Стоп</value>
   </data>
   <data name="Yes" xml:space="preserve">
     <value>Да</value>
