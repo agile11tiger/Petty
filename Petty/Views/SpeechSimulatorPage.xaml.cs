@@ -18,7 +18,7 @@ public partial class SpeechSimulatorPage : ContentPage
     {
         base.OnAppearing();
         await Task.Delay(10); //Otherwise, the question mark is shown before moving to a new page.
-        _appShellViewModel.Title = AppResources.SpeechSimulator;
+        _appShellViewModel.Title = AppResources.PageSpeechSimulator;
         _appShellViewModel.IsVisibleQuestionIcon = true;
         _appShellViewModel.ShowQuestionIconInfo = _speechSimulatorViewModel.ShowQuestionIconInfoCommand;
     }
