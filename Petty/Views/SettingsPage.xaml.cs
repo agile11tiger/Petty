@@ -1,5 +1,4 @@
 using Petty.Resources.Localization;
-using Petty.ViewModels;
 
 namespace Petty.Views;
 

@@ -22,7 +22,7 @@ using Petty.Services.Platforms.PettyCommands.Commands;
 /// https://stackoverflow.com/questions/73829758/how-to-create-an-android-foreground-service-in-maui
 /// </remarks>
 [Service]
-public class PettyGuardAndroidService : Service
+public class PettyGuardAndroidService : Android.App.Service
 {
     public PettyGuardAndroidService()
     {

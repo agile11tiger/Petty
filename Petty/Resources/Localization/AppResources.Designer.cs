@@ -187,6 +187,24 @@ namespace Petty.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to petty.
+        /// </summary>
+        internal static string CommandPetName {
+            get {
+                return ResourceManager.GetString("CommandPetName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to screenshot.
+        /// </summary>
+        internal static string CommandScreenshot {
+            get {
+                return ResourceManager.GetString("CommandScreenshot", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to English.
         /// </summary>
         internal static string LanguageEnglish {
@@ -264,15 +282,6 @@ namespace Petty.Resources.Localization {
         internal static string PageSpeechSimulator {
             get {
                 return ResourceManager.GetString("PageSpeechSimulator", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Petty.
-        /// </summary>
-        internal static string PetName {
-            get {
-                return ResourceManager.GetString("PetName", resourceCulture);
             }
         }
         
@@ -358,6 +367,15 @@ namespace Petty.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Commands.
+        /// </summary>
+        internal static string TitleCommands {
+            get {
+                return ResourceManager.GetString("TitleCommands", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Downloading.
         /// </summary>
         internal static string TitleDownloading {
@@ -367,11 +385,20 @@ namespace Petty.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Words for punctuation marks.
+        ///   Looks up a localized string similar to Words for punctuation marks:.
         /// </summary>
         internal static string TitlePunctuationWords {
             get {
                 return ResourceManager.GetString("TitlePunctuationWords", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Useful features:.
+        /// </summary>
+        internal static string UsefulFeatures {
+            get {
+                return ResourceManager.GetString("UsefulFeatures", resourceCulture);
             }
         }
         
@@ -381,6 +408,15 @@ namespace Petty.Resources.Localization {
         internal static string UserMessageCheckNetworkConnection {
             get {
                 return ResourceManager.GetString("UserMessageCheckNetworkConnection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This command is not supported on this device..
+        /// </summary>
+        internal static string UserMessageCommandNotSupported {
+            get {
+                return ResourceManager.GetString("UserMessageCommandNotSupported", resourceCulture);
             }
         }
         

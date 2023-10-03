@@ -3,19 +3,14 @@ using Petty.MessengerCommands.FromPettyGuard;
 using Petty.MessengerCommands.ToPettyGuard;
 using Petty.PlatformsShared.MessengerCommands.FromPettyGuard;
 using Petty.Resources.Localization;
-using Petty.Services.Local;
+using Petty.Services.Platforms.PettyCommands;
 using Petty.Services.Platforms.Speech;
 using Petty.ViewModels.Base;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Petty.ViewModels
 {
-    public partial class SpeechSimulatorViewModel: ViewModelBase
+    public partial class SpeechSimulatorViewModel : ViewModelBase
     {
         public SpeechSimulatorViewModel(
             IMessenger messenger,
@@ -53,7 +48,7 @@ namespace Petty.ViewModels
         {
             var listNumber = 0;
             var commands = new StringBuilder();
-
+            commands.AppendLine(AppResources.TitlePunctuationWords);
             foreach (var punctuation in PunctuationRecognizer.Punctuations)
             {
                 if (punctuation.Key == AppResources.SpeechCommandNewLine)
@@ -62,7 +57,14 @@ namespace Petty.ViewModels
                     commands.AppendLine($"{listNumber++}. {punctuation.Key} — {punctuation.Value}");
             }
 
-            await _userMessagesService.SendMessageAsync(commands.ToString(), AppResources.ButtonOk, title: AppResources.TitlePunctuationWords);
+            listNumber = 0;
+            commands.AppendLine();
+            commands.AppendLine(AppResources.UsefulFeatures);
+
+            foreach (var commandName in PettyCommandsService.PettyCommands.Keys)
+                commands.AppendLine($"{listNumber++}. {commandName}.");
+
+            await _userMessagesService.SendMessageAsync(commands.ToString(), AppResources.ButtonOk, title: AppResources.TitleCommands);
         }
 
         [RelayCommand]

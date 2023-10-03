@@ -4,6 +4,6 @@
     {
         string Name { get; }
         bool CheckComplianceCommand(string text);
-        bool TryExecute();
+        Task<bool> TryExecuteAsync();
     }
 }

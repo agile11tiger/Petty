@@ -6,9 +6,9 @@ namespace Petty.Services.Local.PermissionsFolder
     /// 
     /// </summary>
     /// <remarks>https://learn.microsoft.com/en-us/dotnet/maui/platform-integration/appmodel/permissions?tabs=android</remarks>
-    public class PermissionService
+    public class PermissionService : Service
     {
-        public PermissionService()
+        public PermissionService(LoggerService loggerService) : base(loggerService)
         {
         }
 
@@ -17,9 +17,6 @@ namespace Petty.Services.Local.PermissionsFolder
 
         public async Task<Dictionary<string, Task<PermissionStatus>>> GetAllPermissionsAsync()
         {
-            if (_allPermissions != null)
-                return _allPermissions;
-
             _allPermissions = (await GetBasePermissionsAsync()).ToDictionary(entry => entry.Key, entry => entry.Value);
             _allPermissions[nameof(Permissions.Microphone)] = RequestPermissionAsync<Permissions.Microphone>();
             return _allPermissions;
@@ -33,7 +30,9 @@ namespace Petty.Services.Local.PermissionsFolder
             _permissions = new Dictionary<string, Task<PermissionStatus>>
             {
                 [nameof(Permissions.StorageRead)] = RequestPermissionAsync<Permissions.StorageRead>(),
-                [nameof(Permissions.StorageWrite)] = RequestPermissionAsync<Permissions.StorageWrite>()
+                [nameof(Permissions.StorageWrite)] = RequestPermissionAsync<Permissions.StorageWrite>(),
+                [nameof(Permissions.Camera)] = RequestPermissionAsync<Permissions.Camera>(),
+                [nameof(Permissions.Flashlight)] = RequestPermissionAsync<Permissions.Flashlight>(),
             };
             await Task.WhenAll(_permissions.Values.ToArray<Task<PermissionStatus>>());
             return _permissions;

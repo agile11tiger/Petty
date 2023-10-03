@@ -1,18 +1,23 @@
-﻿using CommunityToolkit.Maui;
+﻿using Android.App;
+using CommunityToolkit.Maui;
 using CommunityToolkit.Mvvm.Messaging;
 using Microsoft.Extensions.Logging;
 using Petty.Extensions;
 using Petty.Helpres;
-using Petty.Services.Platforms.Audio;
 using Petty.Services.Local.PermissionsFolder;
+using Petty.Services.Platforms.Audio;
+using Petty.Services.Platforms.PettyCommands;
+using Petty.Services.Platforms.Speech;
 using Petty.ViewModels.Components;
 using Petty.ViewModels.Components.GraphicsViews;
 using Petty.Views;
+using Plugin.Maui.Audio;
 using Sharpnado.Tabs;
 using SkiaSharp.Views.Maui.Handlers;
-using Petty.Services.Platforms.Speech;
-using Petty.Services.Platforms.PettyCommands;
 
+//https://learn.microsoft.com/en-us/dotnet/maui/platform-integration/device/flashlight?tabs=android#:~:text=%5B-,assembly,-%3A%20UsesFeature(%22android.hardware.camera%22
+[assembly: UsesFeature("android.hardware.camera", Required = false)]
+[assembly: UsesFeature("android.hardware.camera.autofocus", Required = false)]
 namespace Petty
 {
     public static class MauiProgram
@@ -25,6 +30,7 @@ namespace Petty
             builder
                 .UseMauiApp<App>()
                 .UseMauiCommunityToolkit()
+                //.UseMauiCommunityToolkitMediaElement()
                 .UseSharpnadoTabs(loggerEnable: false)
                 .ConfigureMauiHandlers(handlers => { handlers.AddHandler<YinYangSpinnerWithTextSkiaSharpViewModel, SKCanvasViewHandler>(); })
                 .ConfigureFonts(fonts =>
@@ -68,41 +74,43 @@ namespace Petty
 
         private static MauiAppBuilder RegisterAppServices(this MauiAppBuilder builder)
         {
-            builder.Services.AddSingleton<LoggerService>();
-            builder.Services.AddSingleton<DatabaseService>();
-            builder.Services.AddSingleton<SettingsService>();
-            builder.Services.AddSingleton<PettyVoiceService>();
-            builder.Services.AddSingleton<NavigationService>();
-            builder.Services.AddSingleton<PermissionService>();
-            builder.Services.AddSingleton<AudioPlayerService>();
-            builder.Services.AddSingleton<WebRequestsService>();
-            builder.Services.AddSingleton<LocalizationService>();
-            builder.Services.AddSingleton<UserMessagesService>();
-            builder.Services.AddSingleton<PettyCommandsService>();
-            builder.Services.AddSingleton<AudioRecorderService>();
-            builder.Services.AddSingleton<SpeechRecognizerService>();
-            builder.Services.AddSingleton<IAudioStream, AudioStream>();
-            builder.Services.AddSingleton<IMessenger, WeakReferenceMessenger>();
+            builder.Services
+                .AddSingleton<LoggerService>()
+                .AddSingleton<DatabaseService>()
+                .AddSingleton<SettingsService>()
+                .AddSingleton<PettyVoiceService>()
+                .AddSingleton<NavigationService>()
+                .AddSingleton<PermissionService>()
+                .AddSingleton<WebRequestsService>()
+                .AddSingleton<AudioPlayerService>()
+                .AddSingleton<LocalizationService>()
+                .AddSingleton<UserMessagesService>()
+                .AddSingleton<PettyCommandsService>()
+                .AddSingleton<AudioRecorderService>()
+                .AddSingleton<SpeechRecognizerService>()
+                .AddSingleton<IAudioStream, AudioStream>()
+                .AddSingleton<IMessenger, WeakReferenceMessenger>()
+                .AddSingleton<IAudioManager>((services) => AudioManager.Current)
 
-            builder.Services.AddTransient<WaveRecorderService>();
+                .AddTransient<WaveRecorderService>();
 
             return builder;
         }
 
         private static MauiAppBuilder RegisterPagesWithViewModels(this MauiAppBuilder builder)
         {
-            builder.Services.AddSingletonWithShellRoute<MainPage, MainViewModel>(RoutesHelper.MAIN);
-            builder.Services.AddSingletonWithShellRoute<SettingsPage, SettingsViewModel>(RoutesHelper.SETINGS);
-            builder.Services.AddSingletonWithShellRoute<SpeechSimulatorPage, SpeechSimulatorViewModel>(RoutesHelper.SPEECH_SIMULATOR);
-            builder.Services.AddSingletonWithShellRoute<DiagnosticPettyPage, DiagnosticPettyViewModel>(
-                $"{RoutesHelper.SETINGS}/{RoutesHelper.DIAGNOSTICS}");
+            builder.Services.AddSingletonWithShellRoute<MainPage, MainViewModel>(RoutesHelper.MAIN)
+                .AddSingletonWithShellRoute<SettingsPage, SettingsViewModel>(RoutesHelper.SETINGS)
+                .AddSingletonWithShellRoute<SpeechSimulatorPage, SpeechSimulatorViewModel>(RoutesHelper.SPEECH_SIMULATOR)
+                .AddSingletonWithShellRoute<DiagnosticPettyPage, DiagnosticPettyViewModel>(
+                    $"{RoutesHelper.SETINGS}/{RoutesHelper.DIAGNOSTICS}");
             return builder;
         }
 
         private static MauiAppBuilder RegisterViewModels(this MauiAppBuilder builder)
         {
-            builder.Services.AddSingleton<AppShellViewModel>();
-            builder.Services.AddSingleton<RunningTextViewModel>();
+            builder.Services.AddSingleton<AppShellViewModel>()
+                .AddSingleton<RunningTextViewModel>();
             return builder;
         }
 

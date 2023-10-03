@@ -1,50 +1,41 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Petty.Resources.Localization;
 
 namespace Petty.Services.Platforms.PettyCommands.Commands
 {
-    internal class FlashlightCommand : IPettyCommand
+    public class FlashlightCommand : PettyCommand, IPettyCommand
     {
         private bool _isTurnOn;
-        public string Name => "flashlight";
+        public string Name => $"{AppResources.CommandPetName} {AppResources.CommandFlashlight}";
 
         public bool CheckComplianceCommand(string text)
         {
             return text.EndsWith(Name);
         }
 
-        public bool TryExecute()
+        public async Task<bool> TryExecuteAsync()
         {
-            Task.Run(async () =>
+            try
             {
-                try
-                {
-                    _isTurnOn = !_isTurnOn;
+                _isTurnOn = !_isTurnOn;
 
-                    if (_isTurnOn)
-                        await Flashlight.Default.TurnOnAsync();
-                    else
-                        await Flashlight.Default.TurnOffAsync();
+                if (_isTurnOn)
+                    await Flashlight.Default.TurnOnAsync();
+                else
+                    await Flashlight.Default.TurnOffAsync();
 
-                }
-                catch (FeatureNotSupportedException ex)
-                {
-                    // Handle not supported on device exception
-                }
-                catch (PermissionException ex)
-                {
-                    // Handle permission exception
-                }
-                catch (Exception ex)
-                {
-                    // Unable to turn on/off flashlight
-                }
-            });
+                return true;
+            }
+            catch (FeatureNotSupportedException ex)
+            {
+                _loggerService.Log(ex);
+                await _userMessagesService.SendMessageAsync(AppResources.UserMessageCommandNotSupported, AppResources.ButtonOk);
+            }
+            catch (Exception ex)
+            {
+                _loggerService.Log(ex);
+            }
 
-            return true;
+            return false;
         }
     }
 }

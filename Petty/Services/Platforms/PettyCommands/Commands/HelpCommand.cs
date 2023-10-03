@@ -1,15 +1,17 @@
-﻿namespace Petty.Services.Platforms.PettyCommands.Commands
+﻿using Petty.Resources.Localization;
+
+namespace Petty.Services.Platforms.PettyCommands.Commands
 {
-    public class HelpCommand : IPettyCommand
+    public class HelpCommand : PettyCommand, IPettyCommand
     {
-        public string Name => "help";
+        public string Name => $"{AppResources.CommandPetName} {AppResources.CommandHelp}";
 
         public bool CheckComplianceCommand(string text)
         {
             return text.EndsWith(Name);
         }
 
-        public bool TryExecute()
+        public Task<bool> TryExecuteAsync()
         {
             throw new NotImplementedException();
         }

@@ -1,13 +1,10 @@
 ﻿namespace Petty.Services.Local
 {
-    public class UserMessagesService
+    public class UserMessagesService : Service
     {
-        public UserMessagesService(LoggerService loggerService)
+        public UserMessagesService(LoggerService loggerService) : base(loggerService)
         {
-            _loggerService = loggerService;
         }
-
-        private readonly LoggerService _loggerService;
 
         public async Task SendMessageAsync(string message, string cancel, string accept = "", string title = "")
         {

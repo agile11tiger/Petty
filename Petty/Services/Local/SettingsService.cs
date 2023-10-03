@@ -1,8 +1,8 @@
 ﻿namespace Petty.Services.Local
 {
-    public class SettingsService
+    public class SettingsService : Service
     {
-        public SettingsService()
+        public SettingsService(LoggerService loggerService) : base(loggerService)
         {
             Settings = new Settings();
         }

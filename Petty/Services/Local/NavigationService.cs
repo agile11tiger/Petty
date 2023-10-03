@@ -2,9 +2,10 @@
 
 namespace Petty.Services.Local
 {
-    public class NavigationService
+    public class NavigationService : Service
     {
-        public NavigationService()
+        public NavigationService(LoggerService loggerService)
+            : base(loggerService)
         {
         }
 
@@ -15,7 +16,7 @@ namespace Petty.Services.Local
         public Task GoToAsync(string route, IDictionary<string, object> routeParameters = null)
         {
             var shellNavigation = new ShellNavigationState(route);
-            
+
             return routeParameters != null
                 ? Shell.Current.GoToAsync(shellNavigation, true, routeParameters)
                 : Shell.Current.GoToAsync(shellNavigation, true);

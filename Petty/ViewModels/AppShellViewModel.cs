@@ -1,9 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.Messaging;
+using Petty.PlatformsShared.MessengerCommands.FromPettyGuard;
 using Petty.ViewModels.Base;
 using Petty.ViewModels.Components;
-using Petty.PlatformsShared.MessengerCommands.FromPettyGuard;
-using System.Windows.Input;
-using Android.OS;
 
 namespace Petty.ViewModels
 {

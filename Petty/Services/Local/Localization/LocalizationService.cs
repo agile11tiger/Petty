@@ -1,19 +1,18 @@
 ﻿using CommunityToolkit.Mvvm.Messaging;
 using Petty.Helpres;
-using Petty.Resources.Localization;
 using Petty.MessengerCommands.Application;
+using Petty.Resources.Localization;
 using System.Globalization;
 
 namespace Petty.Services.Local.Localization
 {
-    public class LocalizationService
+    public class LocalizationService : Service
     {
-        public LocalizationService()
+        public LocalizationService(LoggerService loggerService) : base(loggerService)
         {
-
         }
 
-        public static Dictionary<string, Language> SupportedCultures = new()
+        public readonly static Dictionary<string, Language> SupportedCultures = new()
         {
             { "en-US", new Language { Name = AppResources.LanguageEnglish, CultureInfo = new CultureInfo("en-US")} },
             { "ru-RU", new Language { Name = AppResources.LanguageRussian, CultureInfo = new CultureInfo("ru-RU")} }

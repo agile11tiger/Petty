@@ -1,6 +1,5 @@
 ﻿using Android.Media;
 using Petty.Services.Local.PermissionsFolder;
-using Petty.Services.Platforms.Audio;
 
 namespace Petty.Services.Platforms.Audio
 {

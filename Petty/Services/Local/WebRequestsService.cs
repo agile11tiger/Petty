@@ -5,14 +5,12 @@ namespace Petty.Services.Local
     /// <summary>
     /// https://learn.microsoft.com/en-us/dotnet/api/system.net.http.httpclient?view=net-5.0
     /// </summary>
-    public class WebRequestsService
+    public class WebRequestsService : Service
     {
-        public WebRequestsService(LoggerService loggerService)
+        public WebRequestsService(LoggerService loggerService) : base(loggerService)
         {
-            _loggerService = loggerService;
         }
 
-        private readonly LoggerService _loggerService;
         private readonly HttpClient _client = new();
 
         public async Task DownloadAsync(

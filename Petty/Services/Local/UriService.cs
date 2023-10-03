@@ -1,6 +1,9 @@
 ﻿namespace Petty.Services.Local
 {
-    internal class UriService
+    public class UriService : Service
     {
+        public UriService(LoggerService loggerService) : base(loggerService)
+        {
+        }
     }
 }

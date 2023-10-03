@@ -1,13 +1,11 @@
-﻿using Android.Net.Rtp;
-using System.Text;
+﻿using System.Text;
 
 namespace Petty.Services.Platforms.Audio
 {
-    public class WaveRecorderService
+    public class WaveRecorderService : Service
     {
-        public WaveRecorderService(LoggerService loggerService)
+        public WaveRecorderService(LoggerService loggerService) : base(loggerService)
         {
-            _loggerService = loggerService;
         }
 
         private int _byteCount;
@@ -16,7 +14,6 @@ namespace Petty.Services.Platforms.Audio
         private FileStream _fileStream;
         private IAudioStream _audioStream;
         private StreamWriter _streamWriter;
-        private readonly LoggerService _loggerService;
 
         /// <summary>
         /// Gets a new <see cref="Stream"/> to the audio file in readonly mode.

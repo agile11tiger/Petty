@@ -2,9 +2,9 @@
 
 namespace Petty.Services.Local
 {
-    public class PettyVoiceService
+    public class PettyVoiceService : Service
     {
-        public PettyVoiceService()
+        public PettyVoiceService(LoggerService loggerService) : base(loggerService)
         {
         }
 

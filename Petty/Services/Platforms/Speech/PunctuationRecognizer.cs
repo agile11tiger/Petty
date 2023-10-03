@@ -1,8 +1,4 @@
-﻿using Petty.MessengerCommands.FromPettyGuard;
-using Petty.Resources.Localization;
-using Petty.Services.Local;
-using System.Diagnostics;
-using System.Linq;
+﻿using Petty.Resources.Localization;
 
 namespace Petty.Services.Platforms.Speech
 {
@@ -49,7 +45,7 @@ namespace Petty.Services.Platforms.Speech
                     {
                         if (i == 1)
                             textArray[i] = punctuationMark;
-                        else 
+                        else
                             textArray[i - 2] += punctuationMark;
 
                         textArray[i - 1] = string.Empty;

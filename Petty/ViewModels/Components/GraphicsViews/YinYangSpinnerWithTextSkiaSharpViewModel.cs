@@ -1,4 +1,4 @@
-﻿using Petty.Helpres;
+﻿using Petty.Services.Platforms.Paths;
 using SkiaSharp;
 using SkiaSharp.Views.Maui;
 using SkiaSharp.Views.Maui.Controls;
@@ -13,11 +13,11 @@ namespace Petty.ViewModels.Components.GraphicsViews
     {
         public YinYangSpinnerWithTextSkiaSharpViewModel()
         {
-            var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(FilesPathsHelper.MONOTYPE_CORSIVA_PATH);
+            var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(PathsService.MONOTYPE_CORSIVA_PATH);
             _font = SKTypeface.FromStream(stream);
 
             if (_font == null)
-                throw new FileLoadException($"Failed to load font: {FilesPathsHelper.MONOTYPE_CORSIVA_PATH}");
+                throw new FileLoadException($"Failed to load font: {PathsService.MONOTYPE_CORSIVA_PATH}");
         }
 
         private int _drawCounter;

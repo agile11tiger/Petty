@@ -7,21 +7,20 @@
     /// https://github.com/NateRickard/Plugin.AudioRecorder/blob/master/Plugin.AudioRecorder.Shared/AudioRecorderService.cs
     /// https://github.com/Dan0398/XamarinVoskSample
     /// </remarks>
-    public partial class AudioRecorderService
+    public partial class AudioRecorderService : Service
     {
         /// <summary>
         /// Creates a new instance of the <see cref="AudioRecorderService"/>.
         /// </summary>
         public AudioRecorderService(IAudioStream audioStream, LoggerService loggerService, WaveRecorderService waveRecorderService)
+            : base(loggerService)
         {
             Initialize();
             _audioStream = audioStream;
-            _loggerService = loggerService;
             _waveRecorderService = waveRecorderService;
         }
 
         private readonly IAudioStream _audioStream;
-        private readonly LoggerService _loggerService;
         private readonly static object _locker = new();
         private readonly WaveRecorderService _waveRecorderService;
 

@@ -1,8 +1,9 @@
 ﻿namespace Petty.Services.Local
 {
-    public class DatabaseService
+    public class DatabaseService : Service
     {
-        public DatabaseService(ApplicationDbContext applicationDbContext)
+        public DatabaseService(ApplicationDbContext applicationDbContext, LoggerService loggerService)
+            : base(loggerService)
         {
             _applicationDbContext = applicationDbContext;
         }

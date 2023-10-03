@@ -1,30 +1,26 @@
 ﻿using CommunityToolkit.Mvvm.Messaging;
-using Petty.Services.Platforms.Audio;
-using Petty.Resources.Localization;
+using Petty.MessengerCommands.FromPettyGuard;
 using Petty.PlatformsShared.MessengerCommands.FromPettyGuard;
+using Petty.Resources.Localization;
+using Petty.Services.Platforms.Audio;
 using System.IO.Compression;
 using Vosk;
 using static Petty.Services.Platforms.Speech.VoskModelInfos;
-using static Java.Util.Concurrent.Flow;
-using Petty.MessengerCommands.FromPettyGuard;
-using System.Diagnostics;
 
 namespace Petty.Services.Platforms.Speech
 {
-    public class SpeechRecognizerService : IDisposable
+    public class SpeechRecognizerService : Service, IDisposable
     {
         public SpeechRecognizerService(
             IMessenger messenger,
             LoggerService loggerService,
             WebRequestsService webRequestsService,
-            AudioPlayerService audioPlayerService,
             UserMessagesService userMessagesService,
             AudioRecorderService audioRecorderService)
+            : base(loggerService)
         {
             _messenger = messenger;
-            _loggerService = loggerService;
             _webRequestsService = webRequestsService;
-            _audioPlayerService = audioPlayerService;
             _userMessagesService = userMessagesService;
             _audioRecorderService = audioRecorderService;
         }
@@ -35,16 +31,14 @@ namespace Petty.Services.Platforms.Speech
         private const int PARTIAL_RESULT_EMPTY_MESSAGE_LENGTH = 20;// "{\n  \"partial\" : \"\"\n}
         private const string REALTIME_DATA_FILE_PATH = "speechRecognizerRealtimeData.wav";
 
-        private bool isAcceptWaveform;
+        private bool _isAcceptWaveform;
         private Model _recognizerModel;
         private VoskRecognizer _recognizer;
         private bool _isRecognizingFromDisk;
         private readonly IMessenger _messenger;
-        private string speechCache = string.Empty;
-        private readonly LoggerService _loggerService;
+        private string _speechCache = string.Empty;
         private SpeechRecognizerResult _speechRecognizerResult;
         private readonly WebRequestsService _webRequestsService;
-        private readonly AudioPlayerService _audioPlayerService;
         private readonly List<float> _silenceThresholds = new();
         private readonly static SemaphoreSlim _locker = new(1, 1);
         private readonly UserMessagesService _userMessagesService;
@@ -154,8 +148,8 @@ namespace Petty.Services.Platforms.Speech
 
                 if (!await _userMessagesService.SendRequestAsync(
                     AppResources.UserMessageDownloadVoskModelMessage,
-                    AppResources.ButtonLater, 
-                    AppResources.ButtonDownload, 
+                    AppResources.ButtonLater,
+                    AppResources.ButtonDownload,
                     AppResources.TitleDownloading))
                     return false;
 
@@ -194,18 +188,24 @@ namespace Petty.Services.Platforms.Speech
             }
         }
 
-
+        private bool skip;
         private void OnBroadcastAudioRecorderData(byte[] recorderData)
         {
-            if (isAcceptWaveform && CanSkipRecognize(recorderData))
+            if (skip)
+                return;
+
+            skip = true;
+            BroadcastSpeech?.Invoke(new SpeechRecognizerResult() { Speech = "пэтти скриншот", NotifyCommandRecognized = OnCommandRecognized });
+            return;
+            if (_isAcceptWaveform && CanSkipRecognize(recorderData))
                 return;
 
             //Returns a value indicating whether the speech has ended or not.
             //Presumably, when receiving a bunch of zeros, that is, silence.
-            isAcceptWaveform = _recognizer.AcceptWaveform(recorderData, recorderData.Length);
-            _speechRecognizerResult = new SpeechRecognizerResult();
+            _isAcceptWaveform = _recognizer.AcceptWaveform(recorderData, recorderData.Length);
+            _speechRecognizerResult = new SpeechRecognizerResult() { NotifyCommandRecognized = OnCommandRecognized };
 
-            if (isAcceptWaveform)
+            if (_isAcceptWaveform)
             {
                 _speechRecognizerResult.Speech = _recognizer.Result();
 
@@ -238,16 +238,16 @@ namespace Petty.Services.Platforms.Speech
 
             //isAcceptWaveform mean that result() called and we should send result
             //We dont ignore result even if it's the same. Since we need to separate completed pieces
-            if (isAcceptWaveform || !_speechRecognizerResult.Speech.Reverse().SequenceEqual(speechCache.Reverse()))
+            if (_isAcceptWaveform || !_speechRecognizerResult.Speech.Reverse().SequenceEqual(_speechCache.Reverse()))
             {
-                speechCache = _speechRecognizerResult.Speech;
+                _speechCache = _speechRecognizerResult.Speech;
                 BroadcastSpeech?.Invoke(_speechRecognizerResult);
             }
+        }
 
-            if (_speechRecognizerResult.Speech.EndsWith(AppResources.PetName, true, null) || _speechRecognizerResult.IsCommandRecognized)
-            {
-                _recognizer.Reset();
-            }
+        private void OnCommandRecognized()
+        {
+            _recognizer.Reset();
         }
 
         private bool CanSkipRecognize(byte[] recorderData)

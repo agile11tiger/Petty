@@ -4,8 +4,8 @@ namespace Petty.Views;
 
 public partial class SpeechSimulatorPage : ContentPage
 {
-	public SpeechSimulatorPage(SpeechSimulatorViewModel speechSimulatorViewModel, AppShellViewModel appShellViewModel)
-	{
+    public SpeechSimulatorPage(SpeechSimulatorViewModel speechSimulatorViewModel, AppShellViewModel appShellViewModel)
+    {
         BindingContext = _speechSimulatorViewModel = speechSimulatorViewModel;
         _appShellViewModel = appShellViewModel;
         InitializeComponent();

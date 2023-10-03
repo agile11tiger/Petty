@@ -1,10 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.Messaging;
 using Petty.Helpres;
-using Petty.Resources.Localization;
 using Petty.ViewModels.Base;
-using Petty.PlatformsShared.MessengerCommands.FromPettyGuard;
-using Petty.MessengerCommands.ToPettyGuard;
-using Petty.MessengerCommands.FromPettyGuard;
 
 namespace Petty.ViewModels
 {

@@ -43,6 +43,8 @@
 
 		<!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
 		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
+		<MauiAsset Remove="Resources\Raw\musicReferences.txt" />
+		<MauiImage Remove="Resources\Images\imagesReferences.txt" />
     
 	  <MauiImage Remove="Resources\Images\settings.svg" />
 	</ItemGroup>
@@ -61,6 +63,7 @@
     <None Remove="Resources\Images\moon.png" />
     <None Remove="Resources\Images\podium.png" />
     <None Remove="Resources\Images\settings.svg" />
+    <None Remove="Resources\Raw\screenshot.mp3" />
   </ItemGroup>
 
   <ItemGroup>
@@ -75,11 +78,12 @@
   </ItemGroup>
   
   <ItemGroup>
-    <PackageReference Include="CommunityToolkit.Maui" Version="5.3.0" />
+    <PackageReference Include="CommunityToolkit.Maui" Version="6.0.0" />
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="7.0.10" />
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="Plugin.Maui.Audio" Version="2.0.0" />
     <PackageReference Include="Sharpnado.Tabs.Maui" Version="3.0.1" />
     <PackageReference Include="SkiaSharp.Views.Maui.Controls" Version="2.88.5" />
     <PackageReference Include="SkiaSharp.Views.Maui.Core" Version="2.88.5" />
@@ -131,7 +135,7 @@
 
   <ItemGroup>
     <MauiAsset Update="Resources\Raw\AboutAssets.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </MauiAsset>
   </ItemGroup>
 

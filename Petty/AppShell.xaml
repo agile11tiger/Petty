@@ -92,7 +92,7 @@
                            Aspect="AspectFill"
                            VerticalOptions="Center"
                            HorizontalOptions="Center"/>
-                    <Label Text="{x:Static resources:AppResources.PetName}"
+                    <Label Text="{x:Static resources:AppResources.PagePetty}"
                            FontAttributes="Bold"
                            VerticalTextAlignment="Center"
                            HorizontalTextAlignment="Center"/>
@@ -159,7 +159,7 @@
         </Shell.MenuItemTemplate>
     </MenuItem>
     <MenuItem IconImageSource="settings.png"
-              Text="{x:Static resources:AppResources.Help}"/>
+              Text="{x:Static resources:AppResources.PageHelp}"/>
     <MenuItem IconImageSource="play.png"
               Text="{x:Static resources:AppResources.PageAbout}"/>
 

@@ -159,6 +159,12 @@
   <data name="CommandHelp" xml:space="preserve">
     <value>помогите</value>
   </data>
+  <data name="CommandPetName" xml:space="preserve">
+    <value>пэтти</value>
+  </data>
+  <data name="CommandScreenshot" xml:space="preserve">
+    <value>скриншот</value>
+  </data>
   <data name="LanguageEnglish" xml:space="preserve">
     <value>Английский</value>
   </data>
@@ -185,9 +191,6 @@
   </data>
   <data name="PageSpeechSimulator" xml:space="preserve">
     <value>Тренажёр речи</value>
-  </data>
-  <data name="PetName" xml:space="preserve">
-    <value>Пэти</value>
   </data>
   <data name="SpeechCommandBracket" xml:space="preserve">
     <value>скобка</value>
@@ -216,14 +219,23 @@
   <data name="TextCurrentLanguage" xml:space="preserve">
     <value>Текущий язык:</value>
   </data>
+  <data name="TitleCommands" xml:space="preserve">
+    <value>Команды</value>
+  </data>
   <data name="TitleDownloading" xml:space="preserve">
     <value>Скачивание</value>
   </data>
   <data name="TitlePunctuationWords" xml:space="preserve">
-    <value>Слова для знаков пунктуации</value>
+    <value>Слова для знаков пунктуации:</value>
+  </data>
+  <data name="UsefulFeatures" xml:space="preserve">
+    <value>Полезные фичи:</value>
   </data>
   <data name="UserMessageCheckNetworkConnection" xml:space="preserve">
     <value>Проверьте соединение к сети и попробуйте снова.</value>
+  </data>
+  <data name="UserMessageCommandNotSupported" xml:space="preserve">
+    <value>Эта команда не поддерживается на этом устройстве.</value>
   </data>
   <data name="UserMessageDisablePettyGuard" xml:space="preserve">
     <value>Вы точно хотите отключить защиту Пэтти?</value>

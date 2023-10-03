@@ -159,6 +159,12 @@
   <data name="CommandHelp" xml:space="preserve">
     <value>help</value>
   </data>
+  <data name="CommandPetName" xml:space="preserve">
+    <value>petty</value>
+  </data>
+  <data name="CommandScreenshot" xml:space="preserve">
+    <value>screenshot</value>
+  </data>
   <data name="LanguageEnglish" xml:space="preserve">
     <value>English</value>
   </data>
@@ -185,9 +191,6 @@
   </data>
   <data name="PageSpeechSimulator" xml:space="preserve">
     <value>Simulator speech</value>
-  </data>
-  <data name="PetName" xml:space="preserve">
-    <value>Petty</value>
   </data>
   <data name="SpeechCommandBracket" xml:space="preserve">
     <value>bracket</value>
@@ -216,14 +219,23 @@
   <data name="TextCurrentLanguage" xml:space="preserve">
     <value>Current language:</value>
   </data>
+  <data name="TitleCommands" xml:space="preserve">
+    <value>Commands</value>
+  </data>
   <data name="TitleDownloading" xml:space="preserve">
     <value>Downloading</value>
   </data>
   <data name="TitlePunctuationWords" xml:space="preserve">
-    <value>Words for punctuation marks</value>
+    <value>Words for punctuation marks:</value>
+  </data>
+  <data name="UsefulFeatures" xml:space="preserve">
+    <value>Useful features:</value>
   </data>
   <data name="UserMessageCheckNetworkConnection" xml:space="preserve">
     <value>Check your network connection and try again.</value>
+  </data>
+  <data name="UserMessageCommandNotSupported" xml:space="preserve">
+    <value>This command is not supported on this device.</value>
   </data>
   <data name="UserMessageDisablePettyGuard" xml:space="preserve">
     <value>Are you sure you want to disable Petty's protection?</value>
