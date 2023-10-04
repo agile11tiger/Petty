@@ -20,7 +20,7 @@ namespace Petty.Services.Local.Localization
 
         private Dictionary<string, string> _cacheStringWithParameters = new Dictionary<string, string>();
 
-        public static void SetCulture(CultureInfo cultureInfo, bool needSoftRestart = false)
+        public void SetCulture(CultureInfo cultureInfo, bool needSoftRestart = false)
         {
             Thread.CurrentThread.CurrentCulture = cultureInfo;
             Thread.CurrentThread.CurrentUICulture = cultureInfo;
@@ -32,7 +32,7 @@ namespace Petty.Services.Local.Localization
                 WeakReferenceMessenger.Default.Send<RestartApplication>(new RestartApplication() { CultureInfo = cultureInfo });
         }
 
-        public static string Get(string key, params object[] parameters)
+        public string Get(string key, params object[] parameters)
         {
             var str = AppResources.ResourceManager.GetString(key);
             return string.Format(CultureInfo.InvariantCulture, str, parameters);

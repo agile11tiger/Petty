@@ -5,12 +5,7 @@ namespace Petty.Services.Platforms.PettyCommands.Commands
 {
     public class ScreenshotCommand : PettyCommand, IPettyCommand
     {
-        public string Name => $"{AppResources.CommandPetName} {AppResources.CommandScreenshot}";
-
-        public bool CheckComplianceCommand(string text)
-        {
-            return text.EndsWith(Name);
-        }
+        public string Name => AppResources.CommandScreenshot;
 
         public async Task<bool> TryExecuteAsync()
         {

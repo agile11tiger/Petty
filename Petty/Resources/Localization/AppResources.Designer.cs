@@ -169,6 +169,15 @@ namespace Petty.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to call.
+        /// </summary>
+        internal static string CommandCall {
+            get {
+                return ResourceManager.GetString("CommandCall", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to flashlight.
         /// </summary>
         internal static string CommandFlashlight {
@@ -417,6 +426,15 @@ namespace Petty.Resources.Localization {
         internal static string UserMessageCommandNotSupported {
             get {
                 return ResourceManager.GetString("UserMessageCommandNotSupported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Contact not found..
+        /// </summary>
+        internal static string UserMessageContactNotFound {
+            get {
+                return ResourceManager.GetString("UserMessageContactNotFound", resourceCulture);
             }
         }
         

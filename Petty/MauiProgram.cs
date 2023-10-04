@@ -4,7 +4,10 @@ using CommunityToolkit.Mvvm.Messaging;
 using Microsoft.Extensions.Logging;
 using Petty.Extensions;
 using Petty.Helpres;
+using Petty.Platforms.Android.Services;
+using Petty.Platforms.Android.Services.Audio;
 using Petty.Services.Local.PermissionsFolder;
+using Petty.Services.Platforms;
 using Petty.Services.Platforms.Audio;
 using Petty.Services.Platforms.PettyCommands;
 using Petty.Services.Platforms.Speech;
@@ -30,7 +33,8 @@ namespace Petty
             builder
                 .UseMauiApp<App>()
                 .UseMauiCommunityToolkit()
-                //.UseMauiCommunityToolkitMediaElement()
+                //https://stackoverflow.com/questions/72463558/how-to-play-an-audio-file-net-maui
+                //.UseMauiCommunityToolkitMediaElement()  https://stackoverflow.com/questions/75525722/correct-way-to-set-net-maui-mediaelement-source-from-code
                 .UseSharpnadoTabs(loggerEnable: false)
                 .ConfigureMauiHandlers(handlers => { handlers.AddHandler<YinYangSpinnerWithTextSkiaSharpViewModel, SKCanvasViewHandler>(); })
                 .ConfigureFonts(fonts =>
@@ -75,6 +79,7 @@ namespace Petty
         private static MauiAppBuilder RegisterAppServices(this MauiAppBuilder builder)
         {
             builder.Services
+                .AddSingleton<PhoneService>()
                 .AddSingleton<LoggerService>()
                 .AddSingleton<DatabaseService>()
                 .AddSingleton<SettingsService>()

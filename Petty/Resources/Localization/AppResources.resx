@@ -153,6 +153,9 @@
   <data name="ButtonYes" xml:space="preserve">
     <value>Yes</value>
   </data>
+  <data name="CommandCall" xml:space="preserve">
+    <value>call</value>
+  </data>
   <data name="CommandFlashlight" xml:space="preserve">
     <value>flashlight</value>
   </data>
@@ -236,6 +239,9 @@
   </data>
   <data name="UserMessageCommandNotSupported" xml:space="preserve">
     <value>This command is not supported on this device.</value>
+  </data>
+  <data name="UserMessageContactNotFound" xml:space="preserve">
+    <value>Contact not found.</value>
   </data>
   <data name="UserMessageDisablePettyGuard" xml:space="preserve">
     <value>Are you sure you want to disable Petty's protection?</value>

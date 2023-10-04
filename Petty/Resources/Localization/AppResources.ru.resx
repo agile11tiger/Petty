@@ -153,6 +153,9 @@
   <data name="ButtonYes" xml:space="preserve">
     <value>Да</value>
   </data>
+  <data name="CommandCall" xml:space="preserve">
+    <value>позвони</value>
+  </data>
   <data name="CommandFlashlight" xml:space="preserve">
     <value>фонарик</value>
   </data>
@@ -236,6 +239,9 @@
   </data>
   <data name="UserMessageCommandNotSupported" xml:space="preserve">
     <value>Эта команда не поддерживается на этом устройстве.</value>
+  </data>
+  <data name="UserMessageContactNotFound" xml:space="preserve">
+    <value>Контакт не найдет.</value>
   </data>
   <data name="UserMessageDisablePettyGuard" xml:space="preserve">
     <value>Вы точно хотите отключить защиту Пэтти?</value>

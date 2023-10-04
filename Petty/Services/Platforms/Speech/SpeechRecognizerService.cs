@@ -195,7 +195,7 @@ namespace Petty.Services.Platforms.Speech
                 return;
 
             skip = true;
-            BroadcastSpeech?.Invoke(new SpeechRecognizerResult() { Speech = "пэтти скриншот", NotifyCommandRecognized = OnCommandRecognized });
+            BroadcastSpeech?.Invoke(new SpeechRecognizerResult() {IsResultSpeech = true, Speech = "пэтти позвони", NotifyCommandRecognized = OnCommandRecognized });
             return;
             if (_isAcceptWaveform && CanSkipRecognize(recorderData))
                 return;

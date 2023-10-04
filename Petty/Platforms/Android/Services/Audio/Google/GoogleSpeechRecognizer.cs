@@ -1,7 +1,7 @@
 ﻿using Android.Speech;
 using System.Globalization;
 
-namespace Petty.Platforms.Android.Audio.Google
+namespace Petty.Platforms.Android.Services.Audio.Google
 {
     /// <summary>
     /// 

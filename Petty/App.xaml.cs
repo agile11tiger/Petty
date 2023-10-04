@@ -7,9 +7,9 @@ namespace Petty
 {
     public partial class App : Application
     {
-        public App(AppShellViewModel appShellViewModel, NavigationService navigationService)
+        public App(AppShellViewModel appShellViewModel, NavigationService navigationService, LocalizationService localizationService)
         {
-            Initilize();
+            Initilize(localizationService);
             //TODO: По желанию поддержать две темы и в настройках давать выбор.
             //https://learn.microsoft.com/en-us/dotnet/maui/user-interface/theming
             //https://www.youtube.com/watch?v=0cY8iCz50fI&ab_channel=DanielHindrikes
@@ -19,7 +19,7 @@ namespace Petty
             {
                 MainPage.Dispatcher.Dispatch(() =>
                 {
-                    LocalizationService.SetCulture(message.CultureInfo);
+                    localizationService.SetCulture(message.CultureInfo);
                     MainPage = new AppShell(appShellViewModel, navigationService);//REQUIRE RUN MAIN THREAD
                 });
             });
@@ -39,7 +39,8 @@ namespace Petty
                 MainPage = new AppShell(appShellViewModel, navigationService);
             });
         }
-        private static void Initilize()
+
+        private void Initilize(LocalizationService localizationService)
         {
             var isFirstRun = Preferences.Default.Get<bool>(SharedPreferencesHelper.IS_FIRST_RUN, true);
             var language = Preferences.Default.Get<string>(SharedPreferencesHelper.LANGUAGE, null);
@@ -50,7 +51,7 @@ namespace Petty
             }
 
             if (language is not null)
-                LocalizationService.SetCulture(new CultureInfo(language));
+                localizationService.SetCulture(new CultureInfo(language));
         }
     }
 }

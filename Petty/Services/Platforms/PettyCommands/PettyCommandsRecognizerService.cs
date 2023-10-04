@@ -3,6 +3,7 @@ using Petty.MessengerCommands.FromPettyGuard;
 using Petty.Services.Platforms.PettyCommands.Commands;
 using Petty.Services.Platforms.Speech;
 using System.Reflection;
+using static Microsoft.Maui.ApplicationModel.Permissions;
 
 namespace Petty.Services.Platforms.PettyCommands
 {
@@ -31,7 +32,7 @@ namespace Petty.Services.Platforms.PettyCommands
             foreach (var type in types)
             {
                 var command = (IPettyCommand)Activator.CreateInstance(type);
-                PettyCommands[command.Name] = command;
+                PettyCommands[command.CommandText] = command;
             }
         }
 
@@ -87,7 +88,7 @@ namespace Petty.Services.Platforms.PettyCommands
                 speechResult.Speech = speechResult.Speech.AddPunctuation();
                 _loggerService.Log($"after {nameof(PunctuationRecognizer.AddPunctuation)}: {speechResult.Speech}");
 
-                var command = RecognizeCommand(speechResult.Speech);
+                var command = RecognizeCommand(speechResult);
 
                 if (command != null)
                     speechResult.NotifyCommandRecognized();
@@ -110,11 +111,16 @@ namespace Petty.Services.Platforms.PettyCommands
             }
         }
 
-        private IPettyCommand RecognizeCommand(string speech)
+        private IPettyCommand RecognizeCommand(SpeechRecognizerResult speechResult)
         {
             foreach (var command in PettyCommands.Values)
-                if (command.CheckComplianceCommand(speech))
+            {
+                if (command.NeedFullText && !(speechResult.IsResultSpeech || speechResult.IsFinalSpeech))
+                    continue;
+                
+                if (command.CheckCommandCompliance(speechResult.Speech))
                     return command;
+            }
 
             return null;
         }

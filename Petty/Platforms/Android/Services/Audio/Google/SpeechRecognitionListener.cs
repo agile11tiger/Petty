@@ -2,7 +2,7 @@
 using Android.Runtime;
 using Android.Speech;
 
-namespace Petty.Platforms.Android.Audio.Google
+namespace Petty.Platforms.Android.Services.Audio.Google
 {
     public class SpeechRecognitionListener : Java.Lang.Object, IRecognitionListener
     {

@@ -4,12 +4,7 @@ namespace Petty.Services.Platforms.PettyCommands.Commands
 {
     public class HelpCommand : PettyCommand, IPettyCommand
     {
-        public string Name => $"{AppResources.CommandPetName} {AppResources.CommandHelp}";
-
-        public bool CheckComplianceCommand(string text)
-        {
-            return text.EndsWith(Name);
-        }
+        public string Name => AppResources.CommandHelp;
 
         public Task<bool> TryExecuteAsync()
         {

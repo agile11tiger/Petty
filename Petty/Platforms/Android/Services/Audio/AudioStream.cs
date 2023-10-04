@@ -1,7 +1,8 @@
 ﻿using Android.Media;
 using Petty.Services.Local.PermissionsFolder;
+using Petty.Services.Platforms.Audio;
 
-namespace Petty.Services.Platforms.Audio
+namespace Petty.Platforms.Android.Services.Audio
 {
     internal class AudioStream : IAudioStream
     {
@@ -51,7 +52,7 @@ namespace Petty.Services.Platforms.Audio
         public int ChannelCount => _audioRecord.ChannelCount;
         public int SampleRate { get => _audioRecord.SampleRate; }
         public bool IsActive => _audioRecord?.RecordingState == RecordState.Recording;
-        public int BitsPerSample => (_audioRecord.AudioFormat == Encoding.Pcm16bit) ? 16 : 8;
+        public int BitsPerSample => _audioRecord.AudioFormat == Encoding.Pcm16bit ? 16 : 8;
         public int AverageBytesPerSecond => _sampleRate * BitsPerSample / 8 * ChannelCount;
 
         public void Start(Action<byte[]> subscriber)

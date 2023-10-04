@@ -33,6 +33,7 @@ namespace Petty.Services.Local.PermissionsFolder
                 [nameof(Permissions.StorageWrite)] = RequestPermissionAsync<Permissions.StorageWrite>(),
                 [nameof(Permissions.Camera)] = RequestPermissionAsync<Permissions.Camera>(),
                 [nameof(Permissions.Flashlight)] = RequestPermissionAsync<Permissions.Flashlight>(),
+                [nameof(Permissions.Flashlight)] = RequestPermissionAsync<Permissions.ContactsRead>(),
             };
             await Task.WhenAll(_permissions.Values.ToArray<Task<PermissionStatus>>());
             return _permissions;

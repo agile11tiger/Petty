@@ -5,12 +5,7 @@ namespace Petty.Services.Platforms.PettyCommands.Commands
     public class FlashlightCommand : PettyCommand, IPettyCommand
     {
         private bool _isTurnOn;
-        public string Name => $"{AppResources.CommandPetName} {AppResources.CommandFlashlight}";
-
-        public bool CheckComplianceCommand(string text)
-        {
-            return text.EndsWith(Name);
-        }
+        public string Name => AppResources.CommandFlashlight;
 
         public async Task<bool> TryExecuteAsync()
         {
