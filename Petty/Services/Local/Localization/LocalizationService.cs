@@ -12,13 +12,11 @@ namespace Petty.Services.Local.Localization
         {
         }
 
-        public readonly static Dictionary<string, Language> SupportedCultures = new()
+        public readonly Dictionary<string, Language> SupportedCultures = new()
         {
             { "en-US", new Language { Name = AppResources.LanguageEnglish, CultureInfo = new CultureInfo("en-US")} },
             { "ru-RU", new Language { Name = AppResources.LanguageRussian, CultureInfo = new CultureInfo("ru-RU")} }
         };
-
-        private Dictionary<string, string> _cacheStringWithParameters = new Dictionary<string, string>();
 
         public void SetCulture(CultureInfo cultureInfo, bool needSoftRestart = false)
         {

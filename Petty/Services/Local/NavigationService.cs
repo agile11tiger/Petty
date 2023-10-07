@@ -26,5 +26,10 @@ namespace Petty.Services.Local
         {
             await GoToAsync($"//{RoutesHelper.MAIN}");
         }
+
+        public async Task GoBackAsync()
+        {
+            await GoToAsync($"..");
+        }
     }
 }

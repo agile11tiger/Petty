@@ -147,6 +147,9 @@
   <data name="ButtonOk" xml:space="preserve">
     <value>Ок</value>
   </data>
+  <data name="ButtonSpeak" xml:space="preserve">
+    <value>Сказать</value>
+  </data>
   <data name="ButtonStartStop" xml:space="preserve">
     <value>Старт/Стоп</value>
   </data>
@@ -168,6 +171,21 @@
   <data name="CommandScreenshot" xml:space="preserve">
     <value>скриншот</value>
   </data>
+  <data name="EditorVoiceTestSpeech" xml:space="preserve">
+    <value>Привет, кожаный мешок, как дела?</value>
+  </data>
+  <data name="LabelSettingsCurrentLanguage" xml:space="preserve">
+    <value>Текущий язык:</value>
+  </data>
+  <data name="LabelSettingsPitch" xml:space="preserve">
+    <value>Подача</value>
+  </data>
+  <data name="LabelSettingsValue" xml:space="preserve">
+    <value>Значение: {0}</value>
+  </data>
+  <data name="LabelSettingsVolume" xml:space="preserve">
+    <value>Громкость</value>
+  </data>
   <data name="LanguageEnglish" xml:space="preserve">
     <value>Английский</value>
   </data>
@@ -176,6 +194,9 @@
   </data>
   <data name="PageAbout" xml:space="preserve">
     <value>Информация</value>
+  </data>
+  <data name="PageBaseSettings" xml:space="preserve">
+    <value>Базовые настройки</value>
   </data>
   <data name="PageDiagnostics" xml:space="preserve">
     <value>Диагностика</value>
@@ -194,6 +215,9 @@
   </data>
   <data name="PageSpeechSimulator" xml:space="preserve">
     <value>Тренажёр речи</value>
+  </data>
+  <data name="PageVoiceSettings" xml:space="preserve">
+    <value>Голос</value>
   </data>
   <data name="SpeechCommandBracket" xml:space="preserve">
     <value>скобка</value>
@@ -218,9 +242,6 @@
   </data>
   <data name="SpeechCommandQuote" xml:space="preserve">
     <value>кавычки</value>
-  </data>
-  <data name="TextCurrentLanguage" xml:space="preserve">
-    <value>Текущий язык:</value>
   </data>
   <data name="TitleCommands" xml:space="preserve">
     <value>Команды</value>

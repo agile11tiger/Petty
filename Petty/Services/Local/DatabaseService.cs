@@ -5,10 +5,10 @@
         public DatabaseService(ApplicationDbContext applicationDbContext, LoggerService loggerService)
             : base(loggerService)
         {
-            _applicationDbContext = applicationDbContext;
+            ApplicationDbContext = applicationDbContext;
         }
 
-        private readonly ApplicationDbContext _applicationDbContext;
+        public ApplicationDbContext ApplicationDbContext { get; set; }
 
         public async Task CreateOrUpdateAsync<T>(T item) where T : class, IDatabaseItem
         {
@@ -18,31 +18,34 @@
             }
             else
             {
-                await _applicationDbContext.AddAsync(item);
-                await _applicationDbContext.SaveChangesAsync();
+                await ApplicationDbContext.AddAsync(item);
+                await ApplicationDbContext.SaveChangesAsync();
+                ApplicationDbContext.ChangeTracker.Clear();
             }
         }
 
         public async ValueTask<T> ReadAsync<T>(int id) where T : class
         {
-            return await _applicationDbContext.FindAsync<T>(id);
+            return await ApplicationDbContext.FindAsync<T>(id);
         }
 
         public async Task UpdateAsync<T>(T item) where T : class
         {
-            _applicationDbContext.Update(item);
-            await _applicationDbContext.SaveChangesAsync();
+            ApplicationDbContext.Update(item);
+            await ApplicationDbContext.SaveChangesAsync();
+            ApplicationDbContext.ChangeTracker.Clear();
         }
 
         public async Task DeleteAsync<T>(T item) where T : class
         {
-            _applicationDbContext.Remove<T>(item);
-            await _applicationDbContext.SaveChangesAsync();
+            ApplicationDbContext.Remove<T>(item);
+            await ApplicationDbContext.SaveChangesAsync();
+            ApplicationDbContext.ChangeTracker.Clear();
         }
 
         public bool Contains<T>(int id, out T result) where T : class
         {
-            result = _applicationDbContext.Find<T>(id);
+            result = ApplicationDbContext.Find<T>(id);
             return result != default;
         }
     }

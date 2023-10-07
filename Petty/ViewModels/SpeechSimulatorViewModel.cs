@@ -76,7 +76,7 @@ namespace Petty.ViewModels
 
         private void OnSpeechReceived(object obj, SpeechRecognizerResult speechRecognizerResult)
         {
-            LoggerService.Log(speechRecognizerResult.Speech);
+            _loggerService.Log(speechRecognizerResult.Speech);
             //resultSpeech == finalSpeech 
             //Depends on how to call either because of silence or manually because of the point.
             if (_sentences.Count == 0)

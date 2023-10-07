@@ -151,6 +151,15 @@ namespace Petty.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Speak.
+        /// </summary>
+        internal static string ButtonSpeak {
+            get {
+                return ResourceManager.GetString("ButtonSpeak", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Start/Stop.
         /// </summary>
         internal static string ButtonStartStop {
@@ -214,6 +223,51 @@ namespace Petty.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Hello leather bag, how are you?.
+        /// </summary>
+        internal static string EditorVoiceTestSpeech {
+            get {
+                return ResourceManager.GetString("EditorVoiceTestSpeech", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Current language:.
+        /// </summary>
+        internal static string LabelSettingsCurrentLanguage {
+            get {
+                return ResourceManager.GetString("LabelSettingsCurrentLanguage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pitch.
+        /// </summary>
+        internal static string LabelSettingsPitch {
+            get {
+                return ResourceManager.GetString("LabelSettingsPitch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Value: {0}.
+        /// </summary>
+        internal static string LabelSettingsValue {
+            get {
+                return ResourceManager.GetString("LabelSettingsValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Volume.
+        /// </summary>
+        internal static string LabelSettingsVolume {
+            get {
+                return ResourceManager.GetString("LabelSettingsVolume", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to English.
         /// </summary>
         internal static string LanguageEnglish {
@@ -237,6 +291,15 @@ namespace Petty.Resources.Localization {
         internal static string PageAbout {
             get {
                 return ResourceManager.GetString("PageAbout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Base settings.
+        /// </summary>
+        internal static string PageBaseSettings {
+            get {
+                return ResourceManager.GetString("PageBaseSettings", resourceCulture);
             }
         }
         
@@ -291,6 +354,15 @@ namespace Petty.Resources.Localization {
         internal static string PageSpeechSimulator {
             get {
                 return ResourceManager.GetString("PageSpeechSimulator", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Voice.
+        /// </summary>
+        internal static string PageVoiceSettings {
+            get {
+                return ResourceManager.GetString("PageVoiceSettings", resourceCulture);
             }
         }
         
@@ -363,15 +435,6 @@ namespace Petty.Resources.Localization {
         internal static string SpeechCommandQuote {
             get {
                 return ResourceManager.GetString("SpeechCommandQuote", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Current language:.
-        /// </summary>
-        internal static string TextCurrentLanguage {
-            get {
-                return ResourceManager.GetString("TextCurrentLanguage", resourceCulture);
             }
         }
         

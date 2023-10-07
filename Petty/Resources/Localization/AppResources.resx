@@ -147,6 +147,9 @@
   <data name="ButtonOk" xml:space="preserve">
     <value>Ok</value>
   </data>
+  <data name="ButtonSpeak" xml:space="preserve">
+    <value>Speak</value>
+  </data>
   <data name="ButtonStartStop" xml:space="preserve">
     <value>Start/Stop</value>
   </data>
@@ -168,6 +171,21 @@
   <data name="CommandScreenshot" xml:space="preserve">
     <value>screenshot</value>
   </data>
+  <data name="EditorVoiceTestSpeech" xml:space="preserve">
+    <value>Hello leather bag, how are you?</value>
+  </data>
+  <data name="LabelSettingsCurrentLanguage" xml:space="preserve">
+    <value>Current language:</value>
+  </data>
+  <data name="LabelSettingsPitch" xml:space="preserve">
+    <value>Pitch</value>
+  </data>
+  <data name="LabelSettingsValue" xml:space="preserve">
+    <value>Value: {0}</value>
+  </data>
+  <data name="LabelSettingsVolume" xml:space="preserve">
+    <value>Volume</value>
+  </data>
   <data name="LanguageEnglish" xml:space="preserve">
     <value>English</value>
   </data>
@@ -176,6 +194,9 @@
   </data>
   <data name="PageAbout" xml:space="preserve">
     <value>About</value>
+  </data>
+  <data name="PageBaseSettings" xml:space="preserve">
+    <value>Base settings</value>
   </data>
   <data name="PageDiagnostics" xml:space="preserve">
     <value>Diagnostics</value>
@@ -194,6 +215,9 @@
   </data>
   <data name="PageSpeechSimulator" xml:space="preserve">
     <value>Simulator speech</value>
+  </data>
+  <data name="PageVoiceSettings" xml:space="preserve">
+    <value>Voice</value>
   </data>
   <data name="SpeechCommandBracket" xml:space="preserve">
     <value>bracket</value>
@@ -218,9 +242,6 @@
   </data>
   <data name="SpeechCommandQuote" xml:space="preserve">
     <value>quote</value>
-  </data>
-  <data name="TextCurrentLanguage" xml:space="preserve">
-    <value>Current language:</value>
   </data>
   <data name="TitleCommands" xml:space="preserve">
     <value>Commands</value>

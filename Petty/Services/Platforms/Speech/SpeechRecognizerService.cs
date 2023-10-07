@@ -189,13 +189,13 @@ namespace Petty.Services.Platforms.Speech
         }
 
         private bool skip;
-        private void OnBroadcastAudioRecorderData(byte[] recorderData)
+        private async void OnBroadcastAudioRecorderData(byte[] recorderData)
         {
             if (skip)
                 return;
 
             skip = true;
-            BroadcastSpeech?.Invoke(new SpeechRecognizerResult() {IsResultSpeech = true, Speech = "пэтти позвони", NotifyCommandRecognized = OnCommandRecognized });
+            BroadcastSpeech?.Invoke(new SpeechRecognizerResult() {IsResultSpeech = true, Speech = "пэтти kjk", NotifyCommandRecognized = OnCommandRecognized });
             return;
             if (_isAcceptWaveform && CanSkipRecognize(recorderData))
                 return;

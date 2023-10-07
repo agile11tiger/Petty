@@ -18,7 +18,7 @@ namespace Petty.Services.Platforms.PettyCommands.Commands
             _phoneService = MauiProgram.ServiceProvider.GetService<PhoneService>();
         }
 
-        private string textContainingTheCommand;
+        private string _textContainingTheCommand;
         private readonly PhoneService _phoneService;
         private Dictionary<string, Contact> _contacts;
         public bool NeedFullText => true;
@@ -29,7 +29,7 @@ namespace Petty.Services.Platforms.PettyCommands.Commands
             //Todo: improve, contains is too long
             if (text.Contains((this as IPettyCommand).CommandText))
             {
-                textContainingTheCommand = text;
+                _textContainingTheCommand = text;
                 return true;
             }
 
@@ -53,7 +53,7 @@ namespace Petty.Services.Platforms.PettyCommands.Commands
                          _contacts[name] = contact;
                     }
 
-                    var contactName = textContainingTheCommand[textContainingTheCommand.LastIndexOf(Name)..];
+                    var contactName = _textContainingTheCommand[_textContainingTheCommand.LastIndexOf(Name)..];
 
                     if (_contacts.TryGetValue(contactName, out Contact value))
                         _phoneService.Call(value.Phones.First().ToString());

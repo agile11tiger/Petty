@@ -49,7 +49,7 @@ namespace Petty.ViewModels.Components
                 }
                 catch (Exception ex)
                 {
-                    LoggerService.Log(default, ex);
+                    _loggerService.Log(default, ex);
                 }
                 finally
                 {

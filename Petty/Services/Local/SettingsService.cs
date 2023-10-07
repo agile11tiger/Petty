@@ -1,10 +1,26 @@
-﻿namespace Petty.Services.Local
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace Petty.Services.Local
 {
     public class SettingsService : Service
     {
-        public SettingsService(LoggerService loggerService) : base(loggerService)
+        public SettingsService(LoggerService loggerService, DatabaseService databaseService) : base(loggerService)
         {
-            Settings = new Settings();
+            Settings = databaseService.ApplicationDbContext.Settings.FirstOrDefault();
+
+            if (Settings == default)
+            {
+                try
+                {
+                    var settings = new Settings() { BaseSettings = new(), VoiceSettings = new() };
+                    databaseService.CreateOrUpdateAsync(settings).Wait();
+                    Settings = settings;
+                }
+                catch (Exception ex)
+                {
+                    loggerService.Log(ex);
+                }
+            }
         }
 
         public Settings Settings { get; private set; }

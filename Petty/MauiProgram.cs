@@ -13,7 +13,9 @@ using Petty.Services.Platforms.PettyCommands;
 using Petty.Services.Platforms.Speech;
 using Petty.ViewModels.Components;
 using Petty.ViewModels.Components.GraphicsViews;
+using Petty.ViewModels.Settings;
 using Petty.Views;
+using Petty.Views.Settings;
 using Plugin.Maui.Audio;
 using Sharpnado.Tabs;
 using SkiaSharp.Views.Maui.Handlers;
@@ -58,7 +60,9 @@ namespace Petty
 
             TaskScheduler.UnobservedTaskException += HandleUnobservedException;
             AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(HandleCurrentDomainUnhandledException);
-
+            
+            //https://learn.microsoft.com/en-us/dotnet/maui/user-interface/handlers/customize
+            AddEditorCustomization();
             var app = builder.Build();
             ServiceProvider = app.Services;
             return app;
@@ -79,11 +83,11 @@ namespace Petty
         private static MauiAppBuilder RegisterAppServices(this MauiAppBuilder builder)
         {
             builder.Services
+                .AddSingleton<VoiceService>()
                 .AddSingleton<PhoneService>()
                 .AddSingleton<LoggerService>()
                 .AddSingleton<DatabaseService>()
                 .AddSingleton<SettingsService>()
-                .AddSingleton<PettyVoiceService>()
                 .AddSingleton<NavigationService>()
                 .AddSingleton<PermissionService>()
                 .AddSingleton<WebRequestsService>()
@@ -105,10 +109,11 @@ namespace Petty
         private static MauiAppBuilder RegisterPagesWithViewModels(this MauiAppBuilder builder)
         {
             builder.Services.AddSingletonWithShellRoute<MainPage, MainViewModel>(RoutesHelper.MAIN)
-                .AddSingletonWithShellRoute<SettingsPage, SettingsViewModel>(RoutesHelper.SETINGS)
+                .AddSingletonWithShellRoute<SettingsPage, SettingsViewModel>(RoutesHelper.SETTINGS)
                 .AddSingletonWithShellRoute<SpeechSimulatorPage, SpeechSimulatorViewModel>(RoutesHelper.SPEECH_SIMULATOR)
-                .AddSingletonWithShellRoute<DiagnosticPettyPage, DiagnosticPettyViewModel>(
-                    $"{RoutesHelper.SETINGS}/{RoutesHelper.DIAGNOSTICS}");
+                .AddSingletonWithShellRoute<BaseSettingsPage, BaseSettingsViewModel>($"{RoutesHelper.SETTINGS}/{RoutesHelper.BASE_SETTINGS}")
+                .AddSingletonWithShellRoute<DiagnosticPettyPage, DiagnosticPettyViewModel>($"{RoutesHelper.SETTINGS}/{RoutesHelper.DIAGNOSTICS}")
+                .AddSingletonWithShellRoute<VoiceSettingsPage, VoiceSettingsViewModel>($"{RoutesHelper.SETTINGS}/{RoutesHelper.VOICE_SETTINGS}");
             return builder;
         }
 
@@ -123,6 +128,16 @@ namespace Petty
         {
             builder.Services.AddTransient<Settings>(services => services.GetService<SettingsService>().Settings.CloneJson());
             return builder;
+        }
+
+        private static void AddEditorCustomization()
+        {
+            Microsoft.Maui.Handlers.EditorHandler.Mapper.AppendToMapping(nameof(Editor), (handler, view) =>
+            {
+#if ANDROID
+                handler.PlatformView.SetBackgroundColor(Android.Graphics.Color.Transparent);
+#endif
+            });
         }
     }
 }

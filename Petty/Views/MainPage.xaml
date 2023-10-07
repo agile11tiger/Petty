@@ -14,7 +14,7 @@
         <ResourceDictionary Source="/Views/MainPageCss.xaml" />
     </ContentPage.Resources>
 
-    <Grid RowDefinitions="0.9*, 0.1*">
+    <Grid RowDefinitions="9*, *">
         <ContentView>
             <Label x:Name="_lol" Text="lol" />
         </ContentView>

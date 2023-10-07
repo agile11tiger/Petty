@@ -1,16 +1,16 @@
 ﻿namespace Petty.ViewModels.Base
 {
-    public abstract partial class ViewModelBase : ObservableObject, IViewModelBase
+    public abstract partial class ViewModelBase : ObservableObject
     {
         public ViewModelBase(
             LoggerService loggerService,
             NavigationService navigationService,
             LocalizationService localizationService)
         {
-            LoggerService = loggerService;
-            NavigationService = navigationService;
-            LocalizationService = localizationService;
-            InitializeAsyncCommand =
+            _loggerService = loggerService;
+            _navigationService = navigationService;
+            _localizationService = localizationService;
+            _initializeAsyncCommand =
                 new AsyncRelayCommand(
                     async () =>
                     {
@@ -21,13 +21,12 @@
         }
 
         private long _isBusy;
+        protected LoggerService _loggerService;
+        protected NavigationService _navigationService;
+        protected LocalizationService _localizationService;
+        protected IAsyncRelayCommand _initializeAsyncCommand;
         [ObservableProperty] private bool _isInitialized;
-
         public bool IsBusy => Interlocked.Read(ref _isBusy) > 0;
-        public LoggerService LoggerService { get; }
-        public NavigationService NavigationService { get; }
-        public LocalizationService LocalizationService { get; }
-        public IAsyncRelayCommand InitializeAsyncCommand { get; }
 
         public virtual Task InitializeAsync()
         {

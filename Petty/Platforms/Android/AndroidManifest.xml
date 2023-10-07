@@ -2,7 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 	<application android:requestLegacyExternalStorage="true" android:allowBackup="true" android:icon="@mipmap/butterfly" android:supportsRtl="true">
 		<service android:name=".PettyGuardAndroidService" android:exported="false" android:foregroundServiceType="microphone|connectedDevice" android:process=":camera_process" />
-	</application>
+  </application>
+  <queries>
+    <intent>
+      <action android:name="android.intent.action.TTS_SERVICE" />
+    </intent>
+  </queries>
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 	<uses-permission android:name="android.permission.INTERNET" />
 	<uses-permission android:name="android.permission.FOREGROUND_SERVICE" />

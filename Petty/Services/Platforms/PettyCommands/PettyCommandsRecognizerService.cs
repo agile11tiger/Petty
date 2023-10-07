@@ -11,13 +11,13 @@ namespace Petty.Services.Platforms.PettyCommands
     {
         public PettyCommandsService(
             IMessenger messenger,
+            VoiceService voiceService,
             LoggerService loggerService,
-            PettyVoiceService pettyVoiceService,
             SpeechRecognizerService speechRecognizerService)
             : base(loggerService)
         {
             _messenger = messenger;
-            _pettyVoiceService = pettyVoiceService;
+            _voiceService = voiceService;
             _speechRecognizerService = speechRecognizerService;
         }
 
@@ -37,7 +37,7 @@ namespace Petty.Services.Platforms.PettyCommands
         }
 
         private readonly IMessenger _messenger;
-        private readonly PettyVoiceService _pettyVoiceService;
+        private readonly VoiceService _voiceService;
         private readonly static SemaphoreSlim _locker = new(1, 1);
         private readonly SpeechRecognizerService _speechRecognizerService;
 
@@ -97,11 +97,11 @@ namespace Petty.Services.Platforms.PettyCommands
 
                 if (await command.TryExecuteAsync())
                 {
-                    _pettyVoiceService.PlayCommandExecutionSuccessed(command);
+                    _voiceService.PlayCommandExecutionSuccessed(command);
                     BroadcastPettyCommand?.Invoke(command);
                 }
                 else
-                    _pettyVoiceService.PlayCommandExecutionFailed(command);
+                    _voiceService.PlayCommandExecutionFailed(command);
 
                 _messenger.Send(speechResult);
             }

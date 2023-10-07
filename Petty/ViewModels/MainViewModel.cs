@@ -26,14 +26,14 @@ namespace Petty.ViewModels
         [RelayCommand]
         private async Task GoToSettingsAsync()
         {
-            await NavigationService.GoToAsync(RoutesHelper.SETINGS);
+            await _navigationService.GoToAsync(RoutesHelper.SETTINGS);
             IsSelectedTabBarItem = false;
         }
 
         [RelayCommand]
         private async Task GoToSpeechSimulator()
         {
-            await NavigationService.GoToAsync(RoutesHelper.SPEECH_SIMULATOR);
+            await _navigationService.GoToAsync(RoutesHelper.SPEECH_SIMULATOR);
         }
 
         [RelayCommand]
