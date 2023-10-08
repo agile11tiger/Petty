@@ -4,7 +4,7 @@ namespace Petty.Services.Local
 {
     public class SettingsService : Service
     {
-        public SettingsService(LoggerService loggerService, DatabaseService databaseService) : base(loggerService)
+        public SettingsService(LoggerService loggerService, ApplicationDbContext applicationDbContext, DatabaseService databaseService) : base(loggerService)
         {
             Settings = databaseService.ApplicationDbContext.Settings.FirstOrDefault();
 

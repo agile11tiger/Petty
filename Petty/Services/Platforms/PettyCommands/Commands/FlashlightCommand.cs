@@ -6,6 +6,7 @@ namespace Petty.Services.Platforms.PettyCommands.Commands
     {
         private bool _isTurnOn;
         public string Name => AppResources.CommandFlashlight;
+        public string Description => AppResources.CommandFlashlightDescription;
 
         public async Task<bool> TryExecuteAsync()
         {

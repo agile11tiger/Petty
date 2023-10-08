@@ -159,17 +159,29 @@
   <data name="CommandCall" xml:space="preserve">
     <value>позвони</value>
   </data>
+  <data name="CommandCallDescription" xml:space="preserve">
+    <value>делает вызов, если данный пользователь был найден в вашем списке контактов.</value>
+  </data>
   <data name="CommandFlashlight" xml:space="preserve">
     <value>фонарик</value>
   </data>
+  <data name="CommandFlashlightDescription" xml:space="preserve">
+    <value>включает/выключает фонарик. (Если фонарик был уже включен вне приложения, то первый вызов включит включенный фонарик, а второй отключит.)</value>
+  </data>
   <data name="CommandHelp" xml:space="preserve">
     <value>помогите</value>
+  </data>
+  <data name="CommandHelpDescription" xml:space="preserve">
+    <value>рассылает, если были заранее выбраны люди и включает сирену(по желанию) о помощи.</value>
   </data>
   <data name="CommandPetName" xml:space="preserve">
     <value>пэтти</value>
   </data>
   <data name="CommandScreenshot" xml:space="preserve">
     <value>скриншот</value>
+  </data>
+  <data name="CommandScreenshotDescription" xml:space="preserve">
+    <value>делает снимок экрана.</value>
   </data>
   <data name="EditorVoiceTestSpeech" xml:space="preserve">
     <value>Привет, кожаный мешок, как дела?</value>
@@ -262,7 +274,7 @@
     <value>Эта команда не поддерживается на этом устройстве.</value>
   </data>
   <data name="UserMessageContactNotFound" xml:space="preserve">
-    <value>Контакт не найдет.</value>
+    <value>{0} не найдет.</value>
   </data>
   <data name="UserMessageDisablePettyGuard" xml:space="preserve">
     <value>Вы точно хотите отключить защиту Пэтти?</value>

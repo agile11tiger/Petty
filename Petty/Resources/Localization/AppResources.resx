@@ -159,17 +159,29 @@
   <data name="CommandCall" xml:space="preserve">
     <value>call</value>
   </data>
+  <data name="CommandCallDescription" xml:space="preserve">
+    <value>makes a call if the given user was found in your contacts list.</value>
+  </data>
   <data name="CommandFlashlight" xml:space="preserve">
     <value>flashlight</value>
   </data>
+  <data name="CommandFlashlightDescription" xml:space="preserve">
+    <value>turns the flashlight on/off. (If the flashlight was already turned on outside the application, then the first call will turn on the turned on flashlight, and the second will turn it off.)</value>
+  </data>
   <data name="CommandHelp" xml:space="preserve">
     <value>help</value>
+  </data>
+  <data name="CommandHelpDescription" xml:space="preserve">
+    <value>sends out if people have been pre-selected and turns on a siren (optional) for help.</value>
   </data>
   <data name="CommandPetName" xml:space="preserve">
     <value>petty</value>
   </data>
   <data name="CommandScreenshot" xml:space="preserve">
     <value>screenshot</value>
+  </data>
+  <data name="CommandScreenshotDescription" xml:space="preserve">
+    <value>takes a screenshot.</value>
   </data>
   <data name="EditorVoiceTestSpeech" xml:space="preserve">
     <value>Hello leather bag, how are you?</value>
@@ -262,7 +274,7 @@
     <value>This command is not supported on this device.</value>
   </data>
   <data name="UserMessageContactNotFound" xml:space="preserve">
-    <value>Contact not found.</value>
+    <value>{0} not found.</value>
   </data>
   <data name="UserMessageDisablePettyGuard" xml:space="preserve">
     <value>Are you sure you want to disable Petty's protection?</value>

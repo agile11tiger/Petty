@@ -61,8 +61,8 @@ namespace Petty.ViewModels
             commands.AppendLine();
             commands.AppendLine(AppResources.UsefulFeatures);
 
-            foreach (var commandName in PettyCommandsService.PettyCommands.Keys)
-                commands.AppendLine($"{listNumber++}. {commandName}.");
+            foreach (var command in PettyCommandsService.PettyCommands.Values)
+                commands.AppendLine($"{listNumber++}. {command.Name} — {command.Description}");
 
             await _userMessagesService.SendMessageAsync(commands.ToString(), AppResources.ButtonOk, title: AppResources.TitleCommands);
         }

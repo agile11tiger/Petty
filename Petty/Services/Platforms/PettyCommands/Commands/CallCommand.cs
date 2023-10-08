@@ -23,6 +23,7 @@ namespace Petty.Services.Platforms.PettyCommands.Commands
         private Dictionary<string, Contact> _contacts;
         public bool NeedFullText => true;
         public string Name => AppResources.CommandCall;
+        public string Description => AppResources.CommandCallDescription;
 
         public bool CheckCommandCompliance(string text)
         {
@@ -46,21 +47,21 @@ namespace Petty.Services.Platforms.PettyCommands.Commands
 
                     foreach (var contact in await Contacts.Default.GetAllAsync())
                     {
-                        var name = CultureInfo.CurrentCulture.Name == "ru-RU" 
+                        var name = _localizationService.IsRussianLanguage 
                             ? Regex.Replace(contact.DisplayName.ToLower(), @"[^а-яё\s]", "", RegexOptions.Compiled)
                             : Regex.Replace(contact.DisplayName.ToLower(), @"[^a-z\s]", "", RegexOptions.Compiled);
 
                          _contacts[name] = contact;
                     }
-
-                    var contactName = _textContainingTheCommand[_textContainingTheCommand.LastIndexOf(Name)..];
-
-                    if (_contacts.TryGetValue(contactName, out Contact value))
-                        _phoneService.Call(value.Phones.First().ToString());
-                    else
-                        await _userMessagesService.SendMessageAsync(AppResources.UserMessageContactNotFound, AppResources.ButtonOk);
-
                 }
+
+                if (_contacts != default) { }
+                var contactName = _textContainingTheCommand[_textContainingTheCommand.LastIndexOf(Name)..];
+
+                if (_contacts.TryGetValue(contactName, out Contact value))
+                    _phoneService.Call(value.Phones.First().ToString());
+                else
+                    await _voiceService.SpeakAsync(_localizationService.Get(nameof(AppResources.UserMessageContactNotFound), contactName));
 
                 return true;
             }

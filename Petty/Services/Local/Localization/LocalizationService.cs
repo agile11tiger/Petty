@@ -18,6 +18,8 @@ namespace Petty.Services.Local.Localization
             { "ru-RU", new Language { Name = AppResources.LanguageRussian, CultureInfo = new CultureInfo("ru-RU")} }
         };
 
+        public bool IsRussianLanguage => CultureInfo.CurrentCulture.Name == "ru-RU";
+
         public void SetCulture(CultureInfo cultureInfo, bool needSoftRestart = false)
         {
             Thread.CurrentThread.CurrentCulture = cultureInfo;

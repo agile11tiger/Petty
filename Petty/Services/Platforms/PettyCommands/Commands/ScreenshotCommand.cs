@@ -6,6 +6,7 @@ namespace Petty.Services.Platforms.PettyCommands.Commands
     public class ScreenshotCommand : PettyCommand, IPettyCommand
     {
         public string Name => AppResources.CommandScreenshot;
+        public string Description => AppResources.CommandScreenshotDescription;
 
         public async Task<bool> TryExecuteAsync()
         {

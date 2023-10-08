@@ -187,6 +187,15 @@ namespace Petty.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to makes a call if the given user was found in your contacts list..
+        /// </summary>
+        internal static string CommandCallDescription {
+            get {
+                return ResourceManager.GetString("CommandCallDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to flashlight.
         /// </summary>
         internal static string CommandFlashlight {
@@ -196,11 +205,29 @@ namespace Petty.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to turns the flashlight on/off. (If the flashlight was already turned on outside the application, then the first call will turn on the turned on flashlight, and the second will turn it off.).
+        /// </summary>
+        internal static string CommandFlashlightDescription {
+            get {
+                return ResourceManager.GetString("CommandFlashlightDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to help.
         /// </summary>
         internal static string CommandHelp {
             get {
                 return ResourceManager.GetString("CommandHelp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to sends out if people have been pre-selected and turns on a siren (optional) for help..
+        /// </summary>
+        internal static string CommandHelpDescription {
+            get {
+                return ResourceManager.GetString("CommandHelpDescription", resourceCulture);
             }
         }
         
@@ -219,6 +246,15 @@ namespace Petty.Resources.Localization {
         internal static string CommandScreenshot {
             get {
                 return ResourceManager.GetString("CommandScreenshot", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to takes a screenshot..
+        /// </summary>
+        internal static string CommandScreenshotDescription {
+            get {
+                return ResourceManager.GetString("CommandScreenshotDescription", resourceCulture);
             }
         }
         
@@ -493,7 +529,7 @@ namespace Petty.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Contact not found..
+        ///   Looks up a localized string similar to {0} not found..
         /// </summary>
         internal static string UserMessageContactNotFound {
             get {
