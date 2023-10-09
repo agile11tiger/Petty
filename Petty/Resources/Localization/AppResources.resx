@@ -166,7 +166,7 @@
     <value>flashlight</value>
   </data>
   <data name="CommandFlashlightDescription" xml:space="preserve">
-    <value>turns the flashlight on/off. (If the flashlight was already turned on outside the application, then the first call will turn on the turned on flashlight, and the second will turn it off.)</value>
+    <value>turns the flashlight on/off (if the flashlight was already turned on outside the application, then the first call will turn on the turned on flashlight, and the second will turn it off)</value>
   </data>
   <data name="CommandHelp" xml:space="preserve">
     <value>help</value>
@@ -185,6 +185,18 @@
   </data>
   <data name="EditorVoiceTestSpeech" xml:space="preserve">
     <value>Hello leather bag, how are you?</value>
+  </data>
+  <data name="InformationPerceptionMode" xml:space="preserve">
+    <value>Information perception method:</value>
+  </data>
+  <data name="InformationPerceptionModeRead" xml:space="preserve">
+    <value>Read — all information is displayed on the screen.</value>
+  </data>
+  <data name="InformationPerceptionModeReadOrVoice" xml:space="preserve">
+    <value>ReadOrVoice — all information is displayed or spoken.</value>
+  </data>
+  <data name="InformationPerceptionModeVoice" xml:space="preserve">
+    <value>Voice — all information is spoken.</value>
   </data>
   <data name="LabelSettingsCurrentLanguage" xml:space="preserve">
     <value>Current language:</value>

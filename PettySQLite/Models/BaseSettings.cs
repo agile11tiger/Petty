@@ -15,10 +15,6 @@ namespace PettySQLite.Models
         public int Id { get; set; }
 
         public string LanguageType = CultureInfo.CurrentCulture.Name;
-        public bool? UseFrontCamera
-        {
-            get => false;
-            set => value = false;
-        }
+        public InformationPerceptionModes InformationPerceptionMode { get; set; }
     }
 }

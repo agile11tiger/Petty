@@ -2,6 +2,7 @@
 using Petty.MessengerCommands.FromPettyGuard;
 using Petty.PlatformsShared.MessengerCommands.FromPettyGuard;
 using Petty.Resources.Localization;
+using Petty.Services.Local.UserMessages;
 using Petty.Services.Platforms.Audio;
 using System.IO.Compression;
 using Vosk;
@@ -195,7 +196,7 @@ namespace Petty.Services.Platforms.Speech
                 return;
 
             skip = true;
-            BroadcastSpeech?.Invoke(new SpeechRecognizerResult() {IsResultSpeech = true, Speech = "пэтти kjk", NotifyCommandRecognized = OnCommandRecognized });
+            BroadcastSpeech?.Invoke(new SpeechRecognizerResult() { IsResultSpeech = true, Speech = "пэтти kjk", NotifyCommandRecognized = OnCommandRecognized });
             return;
             if (_isAcceptWaveform && CanSkipRecognize(recorderData))
                 return;

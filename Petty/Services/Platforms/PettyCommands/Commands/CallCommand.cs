@@ -1,16 +1,7 @@
-﻿using Cyriller.Model;
-using Cyriller;
+﻿using Cyriller;
+using Cyriller.Model;
 using Petty.Resources.Localization;
-using Petty.Services.Platforms.Paths;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Globalization;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace Petty.Services.Platforms.PettyCommands.Commands
 {
@@ -47,14 +38,14 @@ namespace Petty.Services.Platforms.PettyCommands.Commands
             try
             {
                 if (_contacts == default)
-                   await InitialiseContactsAsync();
+                    await InitialiseContactsAsync();
 
                 var contactName = _textContainingTheCommand[_textContainingTheCommand.LastIndexOf(Name)..];
 
                 if (_contacts.TryGetValue(contactName, out Contact value))
                     _phoneService.Call(value.Phones.First().ToString());
                 else
-                    await _voiceService.SpeakAsync(_localizationService.Get(nameof(AppResources.UserMessageContactNotFound), contactName));
+                    await _userMessagesService.SendMessageAsync(_localizationService.Get(nameof(AppResources.UserMessageContactNotFound), contactName), AppResources.ButtonOk);
 
                 return true;
             }

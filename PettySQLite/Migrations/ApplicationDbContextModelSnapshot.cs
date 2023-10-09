@@ -15,14 +15,18 @@ namespace PettySQLite.Migrations
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "7.0.11");
+            modelBuilder
+                .HasAnnotation("ProductVersion", "7.0.11")
+                .HasAnnotation("Proxies:ChangeTracking", false)
+                .HasAnnotation("Proxies:CheckEquality", false)
+                .HasAnnotation("Proxies:LazyLoading", true);
 
             modelBuilder.Entity("PettySQLite.Models.BaseSettings", b =>
                 {
                     b.Property<int>("Id")
                         .HasColumnType("INTEGER");
 
-                    b.Property<bool?>("UseFrontCamera")
+                    b.Property<int>("InformationPerceptionMode")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");

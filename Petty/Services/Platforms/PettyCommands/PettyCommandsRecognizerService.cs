@@ -3,7 +3,6 @@ using Petty.MessengerCommands.FromPettyGuard;
 using Petty.Services.Platforms.PettyCommands.Commands;
 using Petty.Services.Platforms.Speech;
 using System.Reflection;
-using static Microsoft.Maui.ApplicationModel.Permissions;
 
 namespace Petty.Services.Platforms.PettyCommands
 {
@@ -117,7 +116,7 @@ namespace Petty.Services.Platforms.PettyCommands
             {
                 if (command.NeedFullText && !(speechResult.IsResultSpeech || speechResult.IsFinalSpeech))
                     continue;
-                
+
                 if (command.CheckCommandCompliance(speechResult.Speech))
                     return command;
             }

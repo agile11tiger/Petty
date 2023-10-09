@@ -205,7 +205,7 @@ namespace Petty.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to turns the flashlight on/off. (If the flashlight was already turned on outside the application, then the first call will turn on the turned on flashlight, and the second will turn it off.).
+        ///   Looks up a localized string similar to turns the flashlight on/off (if the flashlight was already turned on outside the application, then the first call will turn on the turned on flashlight, and the second will turn it off).
         /// </summary>
         internal static string CommandFlashlightDescription {
             get {
@@ -264,6 +264,42 @@ namespace Petty.Resources.Localization {
         internal static string EditorVoiceTestSpeech {
             get {
                 return ResourceManager.GetString("EditorVoiceTestSpeech", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Information perception method:.
+        /// </summary>
+        internal static string InformationPerceptionMode {
+            get {
+                return ResourceManager.GetString("InformationPerceptionMode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Read — all information is displayed on the screen..
+        /// </summary>
+        internal static string InformationPerceptionModeRead {
+            get {
+                return ResourceManager.GetString("InformationPerceptionModeRead", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ReadOrVoice — all information is displayed or spoken..
+        /// </summary>
+        internal static string InformationPerceptionModeReadOrVoice {
+            get {
+                return ResourceManager.GetString("InformationPerceptionModeReadOrVoice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Voice — all information is spoken..
+        /// </summary>
+        internal static string InformationPerceptionModeVoice {
+            get {
+                return ResourceManager.GetString("InformationPerceptionModeVoice", resourceCulture);
             }
         }
         

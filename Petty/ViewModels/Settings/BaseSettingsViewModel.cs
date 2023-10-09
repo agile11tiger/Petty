@@ -1,15 +1,10 @@
 ﻿using Petty.Extensions;
-using Petty.Services.Local;
+using Petty.Resources.Localization;
 using Petty.ViewModels.Base;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Petty.ViewModels.Settings
 {
-    public partial class BaseSettingsViewModel: ViewModelBase
+    public partial class BaseSettingsViewModel : ViewModelBase
     {
         public BaseSettingsViewModel(
             LoggerService loggerService,
@@ -22,36 +17,61 @@ namespace Petty.ViewModels.Settings
             _databaseService = databaseService;
             _settingsService = settingsService;
             _tempBaseSettings = settingsService.Settings.BaseSettings.CloneJson();
-            _languagesDictionary = _localizationService.SupportedCultures.Values.ToList();
+            _languages = _localizationService.SupportedCultures.Values.ToList();
+            _informationPerceptionModes = new()
+            {
+                //carefully, sequence from PettySQLite.Models.InformationPerceptionModes
+                new InformationPerceptionMode() { Id = 0, ModeName = $"0. {AppResources.InformationPerceptionModeReadOrVoice}" },
+                new InformationPerceptionMode() { Id = 1, ModeName = $"1. {AppResources.InformationPerceptionModeRead}" },
+                new InformationPerceptionMode() { Id = 2, ModeName = $"2. {AppResources.InformationPerceptionModeVoice}" },
+            };
         }
 
+        private string _informationPerceptionMode;
         private readonly DatabaseService _databaseService;
         private readonly SettingsService _settingsService;
-        [ObservableProperty] private List<Language> _languagesDictionary;
+        [ObservableProperty] private List<Language> _languages;
         [ObservableProperty] private PettySQLite.Models.BaseSettings _tempBaseSettings;
-        
-        [RelayCommand]
-        private Task ApplyDefaultSettings()
+        [ObservableProperty] private List<InformationPerceptionMode> _informationPerceptionModes;
+
+        /// <summary>
+        /// todo: formating not working https://github.com/dotnet/maui/issues/14854
+        /// </summary>
+        public string SelectedInformationPerceptionMode
         {
-            return GoToMainPageAsync(new PettySQLite.Models.BaseSettings());
+            get => _informationPerceptionMode;
+            set => SetProperty(ref _informationPerceptionMode, value.Substring(3, value.IndexOf('(')));
+        }
+
+        [RelayCommand]
+        private async Task ApplyDefaultSettings()
+        {
+            TempBaseSettings = new PettySQLite.Models.BaseSettings();
+            await GoBackPageAsync();
         }
 
         [RelayCommand]
         private async Task ApplySettings()
         {
-            await GoToMainPageAsync(TempBaseSettings.CloneJson());
+            await GoBackPageAsync();
         }
 
-        private async Task GoToMainPageAsync(PettySQLite.Models.BaseSettings tempBaseSettings)
+        private async Task GoBackPageAsync()
         {
-            await _databaseService.CreateOrUpdateAsync(tempBaseSettings);
-            var needSoftRestart = _settingsService.Settings.BaseSettings.LanguageType != tempBaseSettings.LanguageType;
-            _settingsService.Settings.BaseSettings = tempBaseSettings;
+            await _databaseService.CreateOrUpdateAsync(TempBaseSettings);
+            var needSoftRestart = _settingsService.Settings.BaseSettings.LanguageType != TempBaseSettings.LanguageType;
+            _settingsService.Settings.BaseSettings = TempBaseSettings;
 
             if (needSoftRestart)
                 _localizationService.SetCulture(_localizationService.SupportedCultures[_settingsService.Settings.BaseSettings.LanguageType].CultureInfo, true);
             else
-                await _navigationService.PopToMainAsync();
+                await _navigationService.GoBackAsync();
+        }
+
+        public class InformationPerceptionMode
+        {
+            public int Id { get; set; }
+            public string ModeName { get; set; }
         }
     }
 }

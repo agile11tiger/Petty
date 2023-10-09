@@ -3,6 +3,7 @@ using Petty.MessengerCommands.FromPettyGuard;
 using Petty.MessengerCommands.ToPettyGuard;
 using Petty.PlatformsShared.MessengerCommands.FromPettyGuard;
 using Petty.Resources.Localization;
+using Petty.Services.Local.UserMessages;
 using Petty.Services.Platforms.PettyCommands;
 using Petty.Services.Platforms.Speech;
 using Petty.ViewModels.Base;
@@ -23,8 +24,8 @@ namespace Petty.ViewModels
             _messenger = messenger;
             _userMessagesService = userMessagesService;
             _messenger.Register<SpeechRecognizerResult>(this, OnSpeechReceived);
-            _messenger.Register<StartedPettyGuardService>(this, (recipient, message) => SetStartStopButtonTextColor(message.IsStarted));
-            _messenger.Register<StoppedPettyGuardService>(this, (recipient, message) => SetStartStopButtonTextColor(!message.IsStopped));
+            _messenger.Register<StartedPettyGuardService>(this, (recipient, message) => SetStartStop(message.IsStarted));
+            _messenger.Register<StoppedPettyGuardService>(this, (recipient, message) => SetStartStop(!message.IsStopped));
         }
 
         private readonly IMessenger _messenger;
@@ -98,8 +99,10 @@ namespace Petty.ViewModels
             Speech = string.Join(' ', _sentences);
         }
 
-        private void SetStartStopButtonTextColor(bool isStarted)
+        private void SetStartStop(bool isStarted)
         {
+            IsStartingPettyGuardAndroidService = isStarted;
+
             if (App.Current.Resources.TryGetValue(isStarted ? "GrayButton" : "PrimaryBrush", out object brush))
                 StartStopButtonBackground = (SolidColorBrush)brush;
         }

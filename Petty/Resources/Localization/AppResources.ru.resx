@@ -169,13 +169,13 @@
     <value>фонарик</value>
   </data>
   <data name="CommandFlashlightDescription" xml:space="preserve">
-    <value>включает/выключает фонарик. (Если фонарик был уже включен вне приложения, то первый вызов включит включенный фонарик, а второй отключит.)</value>
+    <value>включает/выключает фонарик (если фонарик был уже включен вне приложения, то первый вызов включит включенный фонарик, а второй отключит)</value>
   </data>
   <data name="CommandHelp" xml:space="preserve">
     <value>помогите</value>
   </data>
   <data name="CommandHelpDescription" xml:space="preserve">
-    <value>рассылает, если были заранее выбраны люди и включает сирену(по желанию) о помощи.</value>
+    <value>рассылает, если были заранее выбраны люди и включает сирену (по желанию) о помощи.</value>
   </data>
   <data name="CommandPetName" xml:space="preserve">
     <value>пэтти</value>
@@ -188,6 +188,18 @@
   </data>
   <data name="EditorVoiceTestSpeech" xml:space="preserve">
     <value>Привет, кожаный мешок, как дела?</value>
+  </data>
+  <data name="InformationPerceptionMode" xml:space="preserve">
+    <value>Способ восприятия информации:</value>
+  </data>
+  <data name="InformationPerceptionModeRead" xml:space="preserve">
+    <value>Чтение — вся информация отображается на экране.</value>
+  </data>
+  <data name="InformationPerceptionModeReadOrVoice" xml:space="preserve">
+    <value>ЧтениеИлиГолос  — вся информация отображается или произносится.</value>
+  </data>
+  <data name="InformationPerceptionModeVoice" xml:space="preserve">
+    <value>Голос — вся информация произносится.</value>
   </data>
   <data name="LabelSettingsCurrentLanguage" xml:space="preserve">
     <value>Текущий язык:</value>

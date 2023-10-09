@@ -15,7 +15,7 @@ namespace PettySQLite
     {
         public ApplicationDbContext()
         {
-            //Database.EnsureDeleted();
+            Database.EnsureDeleted();
             //Database.EnsureCreated();
 
             if (!Initialized)

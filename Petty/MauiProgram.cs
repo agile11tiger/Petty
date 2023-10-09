@@ -4,9 +4,9 @@ using CommunityToolkit.Mvvm.Messaging;
 using Microsoft.Extensions.Logging;
 using Petty.Extensions;
 using Petty.Helpres;
-using Petty.Platforms.Android.Services;
 using Petty.Platforms.Android.Services.Audio;
 using Petty.Services.Local.PermissionsFolder;
+using Petty.Services.Local.UserMessages;
 using Petty.Services.Platforms;
 using Petty.Services.Platforms.Audio;
 using Petty.Services.Platforms.PettyCommands;
@@ -60,7 +60,7 @@ namespace Petty
 
             TaskScheduler.UnobservedTaskException += HandleUnobservedException;
             AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(HandleCurrentDomainUnhandledException);
-            
+
             //https://learn.microsoft.com/en-us/dotnet/maui/user-interface/handlers/customize
             AddEditorCustomization();
             var app = builder.Build();
@@ -111,9 +111,9 @@ namespace Petty
             builder.Services.AddSingletonWithShellRoute<MainPage, MainViewModel>(RoutesHelper.MAIN)
                 .AddSingletonWithShellRoute<SettingsPage, SettingsViewModel>(RoutesHelper.SETTINGS)
                 .AddSingletonWithShellRoute<SpeechSimulatorPage, SpeechSimulatorViewModel>(RoutesHelper.SPEECH_SIMULATOR)
-                .AddSingletonWithShellRoute<BaseSettingsPage, BaseSettingsViewModel>($"{RoutesHelper.SETTINGS}/{RoutesHelper.BASE_SETTINGS}")
-                .AddSingletonWithShellRoute<DiagnosticPettyPage, DiagnosticPettyViewModel>($"{RoutesHelper.SETTINGS}/{RoutesHelper.DIAGNOSTICS}")
-                .AddSingletonWithShellRoute<VoiceSettingsPage, VoiceSettingsViewModel>($"{RoutesHelper.SETTINGS}/{RoutesHelper.VOICE_SETTINGS}");
+                .AddTransientWithShellRoute<BaseSettingsPage, BaseSettingsViewModel>($"{RoutesHelper.SETTINGS}/{RoutesHelper.BASE_SETTINGS}")
+                .AddTransientWithShellRoute<DiagnosticPettyPage, DiagnosticPettyViewModel>($"{RoutesHelper.SETTINGS}/{RoutesHelper.DIAGNOSTICS}")
+                .AddTransientWithShellRoute<VoiceSettingsPage, VoiceSettingsViewModel>($"{RoutesHelper.SETTINGS}/{RoutesHelper.VOICE_SETTINGS}");
             return builder;
         }
 

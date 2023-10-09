@@ -1,14 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using Petty.Extensions;
+﻿using Petty.Extensions;
 using Petty.Resources.Localization;
-using Petty.Services.Local;
-using Petty.Services.Local.Localization;
 using Petty.ViewModels.Base;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Petty.ViewModels.Settings
 {
@@ -20,7 +12,7 @@ namespace Petty.ViewModels.Settings
             DatabaseService databaseService,
             SettingsService settingsService,
             NavigationService navigationService,
-            LocalizationService localizationService) 
+            LocalizationService localizationService)
             : base(loggerService, navigationService, localizationService)
         {
             _voiceService = voiceService;
@@ -86,9 +78,7 @@ namespace Petty.ViewModels.Settings
         [RelayCommand]
         private Task ApplyDefaultSettings()
         {
-            var _voiceSttingsDefault = new PettySQLite.Models.VoiceSettings();
-            VolumeValue = _voiceSttingsDefault.Volume;
-            PitchValue = _voiceSttingsDefault.Pitch;
+            _tempVoiceSettings = new PettySQLite.Models.VoiceSettings();
             return GoBackAsync();
         }
 

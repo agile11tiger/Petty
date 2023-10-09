@@ -1,4 +1,5 @@
-﻿using Petty.Services.Platforms.Paths;
+﻿using Petty.Services.Local.UserMessages;
+using Petty.Services.Platforms.Paths;
 
 namespace Petty.Services.Platforms.PettyCommands.Commands
 {
@@ -7,7 +8,6 @@ namespace Petty.Services.Platforms.PettyCommands.Commands
         static PettyCommand()
         {
             _pathsService = MauiProgram.ServiceProvider.GetService<PathsService>();
-            _voiceService = MauiProgram.ServiceProvider.GetService<VoiceService>();
             _loggerService = MauiProgram.ServiceProvider.GetService<LoggerService>();
             _audioPlayerService = MauiProgram.ServiceProvider.GetService<AudioPlayerService>();
             _localizationService = MauiProgram.ServiceProvider.GetService<LocalizationService>();
@@ -15,7 +15,6 @@ namespace Petty.Services.Platforms.PettyCommands.Commands
         }
 
         protected static readonly PathsService _pathsService;
-        protected static readonly VoiceService _voiceService;
         protected static readonly LoggerService _loggerService;
         protected static readonly AudioPlayerService _audioPlayerService;
         protected static readonly LocalizationService _localizationService;

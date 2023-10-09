@@ -17,12 +17,19 @@
                     Grid.Row="0"
                     Grid.Column="1"
                     ItemDisplayBinding="{Binding Name}"
-                    ItemsSource="{Binding LanguagesDictionary}"
+                    ItemsSource="{Binding Languages}"
                     SelectedIndexChanged="PickerLanguage_SelectedIndexChanged"/>
             <BoxView Grid.Row="1" Grid.ColumnSpan="2"/>
 
-            <Label Grid.Row="2" Grid.Column="0" Text="Использовать фронтальную камеру"/>
-            <Switch Grid.Row="2" Grid.Column="1" IsToggled="{Binding TempBaseSettings.UseFrontCamera}"/>
+            <Label Grid.Row="2" Grid.Column="0" Text="{x:Static resources:AppResources.InformationPerceptionMode}"/>
+            <Picker x:Name="_informationPerceptionMode" 
+                    Grid.Row="2"
+                    Grid.Column="1"
+                    WidthRequest="140"
+                    ItemDisplayBinding="{Binding ModeName}"
+                    ItemsSource="{Binding InformationPerceptionModes}"
+                    SelectedItem="{Binding SelectedInformationPerceptionMode}"
+                    SelectedIndexChanged="InformationPerceptionMode_SelectedIndexChanged"/>
             <BoxView Grid.Row="3" Grid.ColumnSpan="2"/>
 
             <StackLayout Spacing="20" 
@@ -30,7 +37,7 @@
                          Grid.ColumnSpan="2" 
                          Orientation="Horizontal" 
                          VerticalOptions="Center"
-                         HorizontalOptions="CenterAndExpand" >
+                         HorizontalOptions="Center">
                 <Button MinimumWidthRequest="130" 
                         BackgroundColor="{StaticResource Gray700}"
                         Command="{Binding ApplyDefaultSettingsCommand}"

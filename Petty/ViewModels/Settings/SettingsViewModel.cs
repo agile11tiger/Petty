@@ -1,5 +1,4 @@
-﻿using Petty.Extensions;
-using Petty.Helpres;
+﻿using Petty.Helpres;
 using Petty.ViewModels.Base;
 
 namespace Petty.ViewModels.Settings

@@ -15,7 +15,7 @@ namespace PettySQLite.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false),
-                    UseFrontCamera = table.Column<bool>(type: "INTEGER", nullable: true)
+                    InformationPerceptionMode = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {

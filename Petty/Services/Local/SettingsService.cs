@@ -1,6 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-
-namespace Petty.Services.Local
+﻿namespace Petty.Services.Local
 {
     public class SettingsService : Service
     {
