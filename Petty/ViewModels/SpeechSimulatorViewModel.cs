@@ -49,6 +49,7 @@ namespace Petty.ViewModels
             var listNumber = 0;
             var commands = new StringBuilder();
             commands.AppendLine(AppResources.TitlePunctuationWords);
+
             foreach (var punctuation in PunctuationRecognizer.Punctuations)
             {
                 if (punctuation.Key == AppResources.SpeechCommandNewLine)

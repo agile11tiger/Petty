@@ -1,4 +1,6 @@
-﻿using Petty.Resources.Localization;
+﻿using Cyriller.Model;
+using Cyriller;
+using Petty.Resources.Localization;
 using Petty.Services.Platforms.Paths;
 using System;
 using System.Collections.Generic;
@@ -8,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Petty.Services.Platforms.PettyCommands.Commands
 {
@@ -19,8 +22,10 @@ namespace Petty.Services.Platforms.PettyCommands.Commands
         }
 
         private string _textContainingTheCommand;
+        private readonly CyrName _cyrName = new();
         private readonly PhoneService _phoneService;
         private Dictionary<string, Contact> _contacts;
+        private readonly Regex _allLetters = new(@"[^a-zа-яё\s]", RegexOptions.Compiled);
         public bool NeedFullText => true;
         public string Name => AppResources.CommandCall;
         public string Description => AppResources.CommandCallDescription;
@@ -42,20 +47,8 @@ namespace Petty.Services.Platforms.PettyCommands.Commands
             try
             {
                 if (_contacts == default)
-                {
-                    _contacts = new();
+                   await InitialiseContactsAsync();
 
-                    foreach (var contact in await Contacts.Default.GetAllAsync())
-                    {
-                        var name = _localizationService.IsRussianLanguage 
-                            ? Regex.Replace(contact.DisplayName.ToLower(), @"[^а-яё\s]", "", RegexOptions.Compiled)
-                            : Regex.Replace(contact.DisplayName.ToLower(), @"[^a-z\s]", "", RegexOptions.Compiled);
-
-                         _contacts[name] = contact;
-                    }
-                }
-
-                if (_contacts != default) { }
                 var contactName = _textContainingTheCommand[_textContainingTheCommand.LastIndexOf(Name)..];
 
                 if (_contacts.TryGetValue(contactName, out Contact value))
@@ -65,12 +58,45 @@ namespace Petty.Services.Platforms.PettyCommands.Commands
 
                 return true;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 _loggerService.Log(ex);
             }
 
             return false;
+        }
+
+        private async Task InitialiseContactsAsync()
+        {
+            _contacts = new();
+
+            foreach (var contact in await Contacts.Default.GetAllAsync())
+            {
+                try
+                {
+                    var displayName = _allLetters.Replace(contact.DisplayName.ToLower(), " ");
+                    _contacts[displayName] = contact;
+
+                    if (_localizationService.IsRussianLanguage)
+                    {
+                        var displayNameParts = displayName.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+                        var name = displayNameParts[0];
+                        var surname = displayNameParts.Length > 1 ? displayNameParts[1] : null;
+                        var result = _cyrName.Decline(name, surname, null, CasesEnum.Dative);
+                        displayNameParts[0] = result.Name;
+
+                        if (displayNameParts.Length > 1)
+                            displayNameParts[1] = result.Surname;
+
+                        displayName = string.Join(' ', displayNameParts).ToLower();
+                        _contacts[displayName] = contact;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    _loggerService.Log(contact.DisplayName, ex);
+                }
+            }
         }
     }
 }
