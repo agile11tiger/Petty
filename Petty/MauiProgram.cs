@@ -39,6 +39,10 @@ namespace Petty
                 //.UseMauiCommunityToolkitMediaElement()  https://stackoverflow.com/questions/75525722/correct-way-to-set-net-maui-mediaelement-source-from-code
                 .UseSharpnadoTabs(loggerEnable: false)
                 .ConfigureMauiHandlers(handlers => { handlers.AddHandler<YinYangSpinnerWithTextSkiaSharpViewModel, SKCanvasViewHandler>(); })
+                .ConfigureEssentials(essentials =>
+                {
+                    essentials.UseVersionTracking();
+                })
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("MonotypeCorsiva.ttf", "MonotypeCorsiva");
@@ -100,6 +104,7 @@ namespace Petty
                 .AddSingleton<IAudioStream, AudioStream>()
                 .AddSingleton<IMessenger, WeakReferenceMessenger>()
                 .AddSingleton<IAudioManager>((services) => AudioManager.Current)
+                .AddSingleton<IVersionTracking>((services) => VersionTracking.Default)
 
                 .AddTransient<WaveRecorderService>();
 

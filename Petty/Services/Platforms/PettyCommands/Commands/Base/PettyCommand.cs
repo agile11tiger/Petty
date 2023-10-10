@@ -2,7 +2,7 @@
 using Petty.Services.Local.UserMessages;
 using Petty.Services.Platforms.Paths;
 
-namespace Petty.Services.Platforms.PettyCommands.Commands
+namespace Petty.Services.Platforms.PettyCommands.Commands.Base
 {
     public abstract class PettyCommand
     {

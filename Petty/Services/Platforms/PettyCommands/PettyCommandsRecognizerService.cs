@@ -1,6 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.Messaging;
 using Petty.MessengerCommands.FromPettyGuard;
-using Petty.Services.Platforms.PettyCommands.Commands;
+using Petty.Services.Platforms.PettyCommands.Commands.Base;
 using Petty.Services.Platforms.Speech;
 using System.Reflection;
 

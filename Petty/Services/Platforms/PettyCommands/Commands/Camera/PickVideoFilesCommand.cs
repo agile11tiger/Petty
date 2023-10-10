@@ -1,8 +1,8 @@
 ﻿using CommunityToolkit.Mvvm.Messaging;
 using Petty.Resources.Localization;
-using Petty.Services.Platforms.Paths;
+using Petty.Services.Platforms.PettyCommands.Commands.Base;
 
-namespace Petty.Services.Platforms.PettyCommands.Commands
+namespace Petty.Services.Platforms.PettyCommands.Commands.Camera
 {
     public class PickVideoFilesCommand : PettyCommand, IPettyCommand
     {

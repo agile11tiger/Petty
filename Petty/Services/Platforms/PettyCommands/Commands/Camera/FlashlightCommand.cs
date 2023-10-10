@@ -1,6 +1,7 @@
 ﻿using Petty.Resources.Localization;
+using Petty.Services.Platforms.PettyCommands.Commands.Base;
 
-namespace Petty.Services.Platforms.PettyCommands.Commands
+namespace Petty.Services.Platforms.PettyCommands.Commands.Camera
 {
     public class FlashlightCommand : PettyCommand, IPettyCommand
     {

@@ -8,7 +8,7 @@ using AndroidX.Core.App;
 using CommunityToolkit.Mvvm.Messaging;
 using Petty.PlatformsShared.MessengerCommands.FromPettyGuard;
 using Petty.Services.Platforms.PettyCommands;
-using Petty.Services.Platforms.PettyCommands.Commands;
+using Petty.Services.Platforms.PettyCommands.Commands.Base;
 
 /// <summary>
 /// https://learn.microsoft.com/ru-ru/xamarin/android/app-fundamentals/services/creating-a-service/

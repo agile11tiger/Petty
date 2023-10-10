@@ -1,8 +1,9 @@
 ﻿using CommunityToolkit.Mvvm.Messaging;
 using Petty.Resources.Localization;
 using Petty.Services.Platforms.Paths;
+using Petty.Services.Platforms.PettyCommands.Commands.Base;
 
-namespace Petty.Services.Platforms.PettyCommands.Commands
+namespace Petty.Services.Platforms.PettyCommands.Commands.Camera
 {
     public class TakePhotoCommand : PettyCommand, IPettyCommand
     {
@@ -20,7 +21,7 @@ namespace Petty.Services.Platforms.PettyCommands.Commands
 
                 if (photo != null)
                 {
-                    var picturePath = System.IO.Path.Combine(PathsService.PicturesPath, $"Picture_{DateTime.Now:yy.MM.dd_hh-mm-ss}.jpg");
+                    var picturePath = Path.Combine(PathsService.PicturesPath, $"Picture_{DateTime.Now:yy.MM.dd_hh-mm-ss}.jpg");
                     using Stream sourceStream = await photo.OpenReadAsync();
                     using FileStream localFileStream = File.OpenWrite(picturePath);
                     await sourceStream.CopyToAsync(localFileStream);

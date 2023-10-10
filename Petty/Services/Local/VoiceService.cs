@@ -1,4 +1,4 @@
-﻿using Petty.Services.Platforms.PettyCommands.Commands;
+﻿using Petty.Services.Platforms.PettyCommands.Commands.Base;
 
 namespace Petty.Services.Local
 {
