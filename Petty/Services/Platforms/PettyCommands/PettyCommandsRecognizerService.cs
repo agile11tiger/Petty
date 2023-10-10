@@ -83,16 +83,10 @@ namespace Petty.Services.Platforms.PettyCommands
         {
             try
             {
-                _loggerService.Log(speechResult.Speech);
-                speechResult.Speech = speechResult.Speech.AddPunctuation();
-                _loggerService.Log($"after {nameof(PunctuationRecognizer.AddPunctuation)}: {speechResult.Speech}");
-
                 var command = RecognizeCommand(speechResult);
 
                 if (command != null)
                     speechResult.NotifyCommandRecognized();
-                else
-                    return;
 
                 if (await command.TryExecuteAsync())
                 {
@@ -102,6 +96,9 @@ namespace Petty.Services.Platforms.PettyCommands
                 else
                     _voiceService.PlayCommandExecutionFailed(command);
 
+                _loggerService.Log(speechResult.Speech);
+                speechResult.Speech = speechResult.Speech.AddPunctuation();
+                _loggerService.Log($"after {nameof(PunctuationRecognizer.AddPunctuation)}: {speechResult.Speech}");
                 _messenger.Send(speechResult);
             }
             catch (Exception ex)

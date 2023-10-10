@@ -180,11 +180,41 @@
   <data name="CommandPetName" xml:space="preserve">
     <value>пэтти</value>
   </data>
+  <data name="CommandPickFiles" xml:space="preserve">
+    <value>выбрать файлы</value>
+  </data>
+  <data name="CommandPickFilesDescription" xml:space="preserve">
+    <value>отрывает список для выбора файлов</value>
+  </data>
+  <data name="CommandPickImages" xml:space="preserve">
+    <value>выбрать фото</value>
+  </data>
+  <data name="CommandPickImagesDescription" xml:space="preserve">
+    <value>открывает список для выбора изображений</value>
+  </data>
+  <data name="CommandPickVideoFiles" xml:space="preserve">
+    <value>выбрать видео</value>
+  </data>
+  <data name="CommandPickVideoFilesDescription" xml:space="preserve">
+    <value>открывает список для выбора видео файлов</value>
+  </data>
   <data name="CommandScreenshot" xml:space="preserve">
     <value>скриншот</value>
   </data>
   <data name="CommandScreenshotDescription" xml:space="preserve">
     <value>делает снимок экрана.</value>
+  </data>
+  <data name="CommandTakePhoto" xml:space="preserve">
+    <value>сделать фото</value>
+  </data>
+  <data name="CommandTakePhotoDescription" xml:space="preserve">
+    <value>открывает окно для фотографирования</value>
+  </data>
+  <data name="CommandTakeVideo" xml:space="preserve">
+    <value>сделать видео</value>
+  </data>
+  <data name="CommandTakeVideoDescription" xml:space="preserve">
+    <value>открывает окно для создания видео файла</value>
   </data>
   <data name="EditorVoiceTestSpeech" xml:space="preserve">
     <value>Привет, кожаный мешок, как дела?</value>

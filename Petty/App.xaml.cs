@@ -7,7 +7,11 @@ namespace Petty
 {
     public partial class App : Application
     {
-        public App(AppShellViewModel appShellViewModel, NavigationService navigationService, LocalizationService localizationService)
+        public App(
+            IMessenger messenger,
+            AppShellViewModel appShellViewModel,
+            NavigationService navigationService,
+            LocalizationService localizationService)
         {
             Initilize(localizationService);
             //TODO: По желанию поддержать две темы и в настройках давать выбор.
@@ -15,7 +19,7 @@ namespace Petty
             //https://www.youtube.com/watch?v=0cY8iCz50fI&ab_channel=DanielHindrikes
             //https://www.youtube.com/watch?v=eu52qX-qww4&ab_channel=ProgrammingWithChris
             UserAppTheme = AppTheme.Light;
-            WeakReferenceMessenger.Default.Register<RestartApplication>(this, (recipient, message) =>
+            messenger.Register<RestartApplication>(this, (recipient, message) =>
             {
                 MainPage.Dispatcher.Dispatch(() =>
                 {

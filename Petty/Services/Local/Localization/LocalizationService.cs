@@ -8,10 +8,12 @@ namespace Petty.Services.Local.Localization
 {
     public class LocalizationService : Service
     {
-        public LocalizationService(LoggerService loggerService) : base(loggerService)
+        public LocalizationService(LoggerService loggerService, IMessenger messenger) : base(loggerService)
         {
+            _messenger = messenger;
         }
 
+        private readonly IMessenger _messenger;
         public readonly Dictionary<string, Language> SupportedCultures = new()
         {
             { "en-US", new Language { Name = AppResources.LanguageEnglish, CultureInfo = new CultureInfo("en-US")} },
@@ -29,7 +31,7 @@ namespace Petty.Services.Local.Localization
             Preferences.Default.Set(SharedPreferencesHelper.LANGUAGE, cultureInfo.Name);
 
             if (needSoftRestart)
-                WeakReferenceMessenger.Default.Send<RestartApplication>(new RestartApplication() { CultureInfo = cultureInfo });
+                _messenger.Send<RestartApplication>(new RestartApplication() { CultureInfo = cultureInfo });
         }
 
         public string Get(string key, params object[] parameters)

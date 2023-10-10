@@ -241,6 +241,60 @@ namespace Petty.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to pick files.
+        /// </summary>
+        internal static string CommandPickFiles {
+            get {
+                return ResourceManager.GetString("CommandPickFiles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to opens a list to select files.
+        /// </summary>
+        internal static string CommandPickFilesDescription {
+            get {
+                return ResourceManager.GetString("CommandPickFilesDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to pick images.
+        /// </summary>
+        internal static string CommandPickImages {
+            get {
+                return ResourceManager.GetString("CommandPickImages", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to opens a list for selecting images.
+        /// </summary>
+        internal static string CommandPickImagesDescription {
+            get {
+                return ResourceManager.GetString("CommandPickImagesDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to pick video.
+        /// </summary>
+        internal static string CommandPickVideoFiles {
+            get {
+                return ResourceManager.GetString("CommandPickVideoFiles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to opens a list for selecting video files.
+        /// </summary>
+        internal static string CommandPickVideoFilesDescription {
+            get {
+                return ResourceManager.GetString("CommandPickVideoFilesDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to screenshot.
         /// </summary>
         internal static string CommandScreenshot {
@@ -255,6 +309,42 @@ namespace Petty.Resources.Localization {
         internal static string CommandScreenshotDescription {
             get {
                 return ResourceManager.GetString("CommandScreenshotDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to take photo.
+        /// </summary>
+        internal static string CommandTakePhoto {
+            get {
+                return ResourceManager.GetString("CommandTakePhoto", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to opens a window for taking photographs.
+        /// </summary>
+        internal static string CommandTakePhotoDescription {
+            get {
+                return ResourceManager.GetString("CommandTakePhotoDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to take video.
+        /// </summary>
+        internal static string CommandTakeVideo {
+            get {
+                return ResourceManager.GetString("CommandTakeVideo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to opens a window for creating a video file.
+        /// </summary>
+        internal static string CommandTakeVideoDescription {
+            get {
+                return ResourceManager.GetString("CommandTakeVideoDescription", resourceCulture);
             }
         }
         

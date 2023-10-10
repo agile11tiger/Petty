@@ -86,7 +86,7 @@ public class PettyGuardAndroidService : Android.App.Service
             {
                 await StopForegroundServiceAsync();
                 _isStarting = false;
-                _messager.Send<StoppedPettyGuardService>(new StoppedPettyGuardService { IsStopped = !_isStarting });
+                _messager.Send(new StoppedPettyGuardService { IsStopped = !_isStarting });
             }
             catch (Exception ex)
             {
@@ -108,7 +108,7 @@ public class PettyGuardAndroidService : Android.App.Service
                 if (intent.Action == START_SERVICE)
                 {
                     var isStared = _isStarting = await TryStartForegroundServiceAsync();
-                    _messager.Send<StartedPettyGuardService>(new StartedPettyGuardService { IsStarted = isStared });
+                    _messager.Send(new StartedPettyGuardService { IsStarted = isStared });
                 }
             }
             catch (Exception ex)

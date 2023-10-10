@@ -177,11 +177,41 @@
   <data name="CommandPetName" xml:space="preserve">
     <value>petty</value>
   </data>
+  <data name="CommandPickFiles" xml:space="preserve">
+    <value>pick files</value>
+  </data>
+  <data name="CommandPickFilesDescription" xml:space="preserve">
+    <value>opens a list to select files</value>
+  </data>
+  <data name="CommandPickImages" xml:space="preserve">
+    <value>pick images</value>
+  </data>
+  <data name="CommandPickImagesDescription" xml:space="preserve">
+    <value>opens a list for selecting images</value>
+  </data>
+  <data name="CommandPickVideoFiles" xml:space="preserve">
+    <value>pick video</value>
+  </data>
+  <data name="CommandPickVideoFilesDescription" xml:space="preserve">
+    <value>opens a list for selecting video files</value>
+  </data>
   <data name="CommandScreenshot" xml:space="preserve">
     <value>screenshot</value>
   </data>
   <data name="CommandScreenshotDescription" xml:space="preserve">
     <value>takes a screenshot.</value>
+  </data>
+  <data name="CommandTakePhoto" xml:space="preserve">
+    <value>take photo</value>
+  </data>
+  <data name="CommandTakePhotoDescription" xml:space="preserve">
+    <value>opens a window for taking photographs</value>
+  </data>
+  <data name="CommandTakeVideo" xml:space="preserve">
+    <value>take video</value>
+  </data>
+  <data name="CommandTakeVideoDescription" xml:space="preserve">
+    <value>opens a window for creating a video file</value>
   </data>
   <data name="EditorVoiceTestSpeech" xml:space="preserve">
     <value>Hello leather bag, how are you?</value>
