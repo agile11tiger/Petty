@@ -46,6 +46,7 @@
                 {
                     Application.Current.MainPage.Dispatcher.Dispatch(async () =>
                     {
+                        //todo: need custom display alert with the addition of a "more details" button.
                         answer = await Application.Current.MainPage.DisplayAlert(title, message, accept, cancel);
                         isAnswerRecevied = true;
                     });

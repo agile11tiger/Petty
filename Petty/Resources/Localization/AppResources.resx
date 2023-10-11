@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="BatteryCharging" xml:space="preserve">
+    <value>Yay! Food</value>
+  </data>
+  <data name="BatteryFull" xml:space="preserve">
+    <value>I'm full</value>
+  </data>
   <data name="ButtonApply" xml:space="preserve">
     <value>Apply</value>
   </data>
@@ -156,11 +162,23 @@
   <data name="ButtonYes" xml:space="preserve">
     <value>Yes</value>
   </data>
+  <data name="CommandBattery" xml:space="preserve">
+    <value>battery charge</value>
+  </data>
+  <data name="CommandBatteryDescription" xml:space="preserve">
+    <value>notifies you of the current battery charge</value>
+  </data>
   <data name="CommandCall" xml:space="preserve">
     <value>call</value>
   </data>
   <data name="CommandCallDescription" xml:space="preserve">
     <value>makes a call if the given user was found in your contacts list.</value>
+  </data>
+  <data name="CommandDeviceInfo" xml:space="preserve">
+    <value>device info</value>
+  </data>
+  <data name="CommandDeviceInfoDescription" xml:space="preserve">
+    <value>notifies you about the phone's characteristics</value>
   </data>
   <data name="CommandFlashlight" xml:space="preserve">
     <value>flashlight</value>
@@ -212,6 +230,36 @@
   </data>
   <data name="CommandTakeVideoDescription" xml:space="preserve">
     <value>opens a window for creating a video file</value>
+  </data>
+  <data name="DeviceInfoDensity" xml:space="preserve">
+    <value>Density</value>
+  </data>
+  <data name="DeviceInfoHeight" xml:space="preserve">
+    <value>Height</value>
+  </data>
+  <data name="DeviceInfoHertz" xml:space="preserve">
+    <value>Hz</value>
+  </data>
+  <data name="DeviceInfoManufacturer" xml:space="preserve">
+    <value>Manufacturer</value>
+  </data>
+  <data name="DeviceInfoModel" xml:space="preserve">
+    <value>Model</value>
+  </data>
+  <data name="DeviceInfoOSVersion" xml:space="preserve">
+    <value>Version OS</value>
+  </data>
+  <data name="DeviceInfoPixel" xml:space="preserve">
+    <value>px</value>
+  </data>
+  <data name="DeviceInfoPlatform" xml:space="preserve">
+    <value>Platform</value>
+  </data>
+  <data name="DeviceInfoRefreshRate" xml:space="preserve">
+    <value>RefreshRate</value>
+  </data>
+  <data name="DeviceInfoWidth" xml:space="preserve">
+    <value>Width</value>
   </data>
   <data name="EditorVoiceTestSpeech" xml:space="preserve">
     <value>Hello leather bag, how are you?</value>

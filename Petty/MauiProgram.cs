@@ -6,6 +6,7 @@ using Petty.Extensions;
 using Petty.Helpres;
 using Petty.Platforms.Android.Services.Audio;
 using Petty.Services.Local.PermissionsFolder;
+using Petty.Services.Local.Phone;
 using Petty.Services.Local.UserMessages;
 using Petty.Services.Platforms;
 using Petty.Services.Platforms.Audio;
@@ -90,6 +91,7 @@ namespace Petty
                 .AddSingleton<VoiceService>()
                 .AddSingleton<PhoneService>()
                 .AddSingleton<LoggerService>()
+                .AddSingleton<BatteryService>()
                 .AddSingleton<DatabaseService>()
                 .AddSingleton<SettingsService>()
                 .AddSingleton<NavigationService>()
@@ -103,6 +105,9 @@ namespace Petty
                 .AddSingleton<SpeechRecognizerService>()
                 .AddSingleton<IAudioStream, AudioStream>()
                 .AddSingleton<IMessenger, WeakReferenceMessenger>()
+                .AddSingleton<IBattery>((services) => Battery.Default)
+                .AddSingleton<IDeviceInfo>((services) => DeviceInfo.Current)
+                .AddSingleton<IDeviceDisplay>((services) => DeviceDisplay.Current)
                 .AddSingleton<IAudioManager>((services) => AudioManager.Current)
                 .AddSingleton<IVersionTracking>((services) => VersionTracking.Default)
 

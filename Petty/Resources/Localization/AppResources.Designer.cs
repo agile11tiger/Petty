@@ -61,6 +61,24 @@ namespace Petty.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Yay! Food.
+        /// </summary>
+        internal static string BatteryCharging {
+            get {
+                return ResourceManager.GetString("BatteryCharging", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to I&apos;m full.
+        /// </summary>
+        internal static string BatteryFull {
+            get {
+                return ResourceManager.GetString("BatteryFull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Apply.
         /// </summary>
         internal static string ButtonApply {
@@ -178,6 +196,24 @@ namespace Petty.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to battery charge.
+        /// </summary>
+        internal static string CommandBattery {
+            get {
+                return ResourceManager.GetString("CommandBattery", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to notifies you of the current battery charge.
+        /// </summary>
+        internal static string CommandBatteryDescription {
+            get {
+                return ResourceManager.GetString("CommandBatteryDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to call.
         /// </summary>
         internal static string CommandCall {
@@ -192,6 +228,24 @@ namespace Petty.Resources.Localization {
         internal static string CommandCallDescription {
             get {
                 return ResourceManager.GetString("CommandCallDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to device info.
+        /// </summary>
+        internal static string CommandDeviceInfo {
+            get {
+                return ResourceManager.GetString("CommandDeviceInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to notifies you about the phone&apos;s characteristics.
+        /// </summary>
+        internal static string CommandDeviceInfoDescription {
+            get {
+                return ResourceManager.GetString("CommandDeviceInfoDescription", resourceCulture);
             }
         }
         
@@ -345,6 +399,96 @@ namespace Petty.Resources.Localization {
         internal static string CommandTakeVideoDescription {
             get {
                 return ResourceManager.GetString("CommandTakeVideoDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Density.
+        /// </summary>
+        internal static string DeviceInfoDensity {
+            get {
+                return ResourceManager.GetString("DeviceInfoDensity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Height.
+        /// </summary>
+        internal static string DeviceInfoHeight {
+            get {
+                return ResourceManager.GetString("DeviceInfoHeight", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hz.
+        /// </summary>
+        internal static string DeviceInfoHertz {
+            get {
+                return ResourceManager.GetString("DeviceInfoHertz", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Manufacturer.
+        /// </summary>
+        internal static string DeviceInfoManufacturer {
+            get {
+                return ResourceManager.GetString("DeviceInfoManufacturer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Model.
+        /// </summary>
+        internal static string DeviceInfoModel {
+            get {
+                return ResourceManager.GetString("DeviceInfoModel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Version OS.
+        /// </summary>
+        internal static string DeviceInfoOSVersion {
+            get {
+                return ResourceManager.GetString("DeviceInfoOSVersion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to px.
+        /// </summary>
+        internal static string DeviceInfoPixel {
+            get {
+                return ResourceManager.GetString("DeviceInfoPixel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Platform.
+        /// </summary>
+        internal static string DeviceInfoPlatform {
+            get {
+                return ResourceManager.GetString("DeviceInfoPlatform", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to RefreshRate.
+        /// </summary>
+        internal static string DeviceInfoRefreshRate {
+            get {
+                return ResourceManager.GetString("DeviceInfoRefreshRate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Width.
+        /// </summary>
+        internal static string DeviceInfoWidth {
+            get {
+                return ResourceManager.GetString("DeviceInfoWidth", resourceCulture);
             }
         }
         

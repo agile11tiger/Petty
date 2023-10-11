@@ -53,8 +53,8 @@ namespace Petty.Services.Platforms.PettyCommands
 
             try
             {
-                if (BroadcastPettyCommand == null)
-                    await _speechRecognizerService.TryStartAsync(OnBroadcastSpeech);
+                if (BroadcastPettyCommand == null && !await _speechRecognizerService.TryStartAsync(OnBroadcastSpeech))
+                    return false;
 
                 BroadcastPettyCommand += subscriber;
                 return true;

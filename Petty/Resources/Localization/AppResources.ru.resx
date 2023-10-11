@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="BatteryCharging" xml:space="preserve">
+    <value>Ура! Еда</value>
+  </data>
+  <data name="BatteryFull" xml:space="preserve">
+    <value>Я наелся</value>
+  </data>
   <data name="ButtonApply" xml:space="preserve">
     <value>Применить</value>
   </data>
@@ -156,6 +162,12 @@
   <data name="ButtonYes" xml:space="preserve">
     <value>Да</value>
   </data>
+  <data name="CommandBattery" xml:space="preserve">
+    <value>заряд батареи</value>
+  </data>
+  <data name="CommandBatteryDescription" xml:space="preserve">
+    <value>уведомляет о текущем заряде батареи</value>
+  </data>
   <data name="CommandCall" xml:space="preserve">
     <value>позвони</value>
   </data>
@@ -164,6 +176,12 @@
 Все символы кроме букв удаляются, поэтому у контакта "Тигр Тигровов9 (друг)" останется "Тигр Тигровов друг" и будут доступны следующие команды:
 1. Петти позвони Тигр Тигров друг
 2. Петти позвони Тигру Тигрову друг</value>
+  </data>
+  <data name="CommandDeviceInfo" xml:space="preserve">
+    <value>характеристики телефона</value>
+  </data>
+  <data name="CommandDeviceInfoDescription" xml:space="preserve">
+    <value>уведомляет о характеристиках телефона</value>
   </data>
   <data name="CommandFlashlight" xml:space="preserve">
     <value>фонарик</value>
@@ -215,6 +233,36 @@
   </data>
   <data name="CommandTakeVideoDescription" xml:space="preserve">
     <value>открывает окно для создания видео файла</value>
+  </data>
+  <data name="DeviceInfoDensity" xml:space="preserve">
+    <value>Плотность</value>
+  </data>
+  <data name="DeviceInfoHeight" xml:space="preserve">
+    <value>Высота</value>
+  </data>
+  <data name="DeviceInfoHertz" xml:space="preserve">
+    <value>Гц</value>
+  </data>
+  <data name="DeviceInfoManufacturer" xml:space="preserve">
+    <value>Производитель</value>
+  </data>
+  <data name="DeviceInfoModel" xml:space="preserve">
+    <value>Модель</value>
+  </data>
+  <data name="DeviceInfoOSVersion" xml:space="preserve">
+    <value>Версия ОС</value>
+  </data>
+  <data name="DeviceInfoPixel" xml:space="preserve">
+    <value>пикселей</value>
+  </data>
+  <data name="DeviceInfoPlatform" xml:space="preserve">
+    <value>Платформа</value>
+  </data>
+  <data name="DeviceInfoRefreshRate" xml:space="preserve">
+    <value>Частота обновления</value>
+  </data>
+  <data name="DeviceInfoWidth" xml:space="preserve">
+    <value>Ширина</value>
   </data>
   <data name="EditorVoiceTestSpeech" xml:space="preserve">
     <value>Привет, кожаный мешок, как дела?</value>
