@@ -1,4 +1,4 @@
-﻿namespace Petty.ViewModels.Components.GraphicsViews
+﻿namespace Petty.ViewModels.Components.YinYangSpinner
 {
     /// <summary>
     /// It's fun, there are a lot of pictures and text, but I didn't read it :).

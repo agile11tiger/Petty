@@ -231,6 +231,9 @@
   <data name="CommandTakeVideoDescription" xml:space="preserve">
     <value>opens a window for creating a video file</value>
   </data>
+  <data name="DeviceInfo" xml:space="preserve">
+    <value>Device information</value>
+  </data>
   <data name="DeviceInfoDensity" xml:space="preserve">
     <value>Density</value>
   </data>

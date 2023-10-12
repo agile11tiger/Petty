@@ -5,7 +5,7 @@
        xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
        xmlns:resources="clr-namespace:Petty.Resources.Localization"
-       xmlns:graphicsViews="clr-namespace:Petty.ViewModels.Components.GraphicsViews"
+       xmlns:components="clr-namespace:Petty.ViewModels.Components.CircularProgressBar"
        FlyoutBehavior="Flyout"
        FlyoutBackgroundColor="WhiteSmoke"
        FlyoutHeaderBehavior="CollapseOnScroll">
@@ -21,15 +21,15 @@
                    Text="{Binding Title}" 
                    LineBreakMode="TailTruncation"/>
             <HorizontalStackLayout Grid.Column="1" HorizontalOptions="End" Spacing="9" Margin="9">
-                <graphicsViews:CircularProgressBarGraphicsView x:Name="_circularProgressBarGraphicsView" 
-                                                           WidthRequest="40"
-                                                           HeightRequest="40"
-                                                           IsVisible="{Binding IsRunningProgressBar}"
-                                                           Percentages="{Binding ProgressBarPercentages}">
-                    <graphicsViews:CircularProgressBarGraphicsView.Drawable>
-                        <graphicsViews:CircularProgressBarDrawble/>
-                    </graphicsViews:CircularProgressBarGraphicsView.Drawable>
-                </graphicsViews:CircularProgressBarGraphicsView>
+                <components:CircularProgressBarGraphicsView x:Name="_circularProgressBarGraphicsView" 
+                                                            WidthRequest="40"
+                                                            HeightRequest="40"
+                                                            IsVisible="{Binding IsRunningProgressBar}"
+                                                            Percentages="{Binding ProgressBarPercentages}">
+                    <components:CircularProgressBarGraphicsView.Drawable>
+                        <components:CircularProgressBarDrawble/>
+                    </components:CircularProgressBarGraphicsView.Drawable>
+                </components:CircularProgressBarGraphicsView>
                 <ImageButton WidthRequest="40"
                              HeightRequest="40"
                              Source="question.png"

@@ -1,4 +1,4 @@
-﻿namespace Petty.ViewModels.Components.GraphicsViews
+﻿namespace Petty.ViewModels.Components.CircularProgressBar
 {
     /// <summary>
     /// https://medium.com/@jasper76/creating-a-circular-progress-bar-in-net-maui-22f2f30565fc

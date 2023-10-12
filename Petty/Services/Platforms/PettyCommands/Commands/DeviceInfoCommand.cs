@@ -35,7 +35,7 @@ namespace Petty.Services.Platforms.PettyCommands.Commands
                 };
 
                 var deviceInfoMessage = string.Join("\r\n", deviceInfo.OrderBy(d => d.Length));
-                await _userMessagesService.SendMessageAsync(deviceInfoMessage, AppResources.ButtonOk);
+                await _userMessagesService.SendMessageAsync(deviceInfoMessage, AppResources.ButtonOk, title: AppResources.DeviceInfo);
                 return true;
             }
             catch (Exception ex)

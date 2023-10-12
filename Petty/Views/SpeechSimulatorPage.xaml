@@ -4,10 +4,13 @@
              xmlns:viewModels="clr-namespace:Petty.ViewModels"
              xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:components="clr-namespace:Petty.Views.Components"
              xmlns:resources="clr-namespace:Petty.Resources.Localization"
              Style="{StaticResource PageBaseStyle}">
 
     <VerticalStackLayout>
+        <components:DisplayAlert x:Name="_diplayAlert"/>
+        
         <ScrollView Margin="10" HeightRequest="300" WidthRequest="358">
             <Label FontSize="16"  Text="{Binding Speech}" VerticalOptions="Start" />
         </ScrollView>

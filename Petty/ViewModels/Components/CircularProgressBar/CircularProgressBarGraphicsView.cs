@@ -1,4 +1,4 @@
-﻿namespace Petty.ViewModels.Components.GraphicsViews
+﻿namespace Petty.ViewModels.Components.CircularProgressBar
 {
     /// <summary>
     /// https://stackoverflow.com/questions/76020765/net-maui-binding-to-graphicsview

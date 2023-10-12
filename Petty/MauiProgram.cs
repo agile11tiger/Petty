@@ -13,7 +13,7 @@ using Petty.Services.Platforms.Audio;
 using Petty.Services.Platforms.PettyCommands;
 using Petty.Services.Platforms.Speech;
 using Petty.ViewModels.Components;
-using Petty.ViewModels.Components.GraphicsViews;
+using Petty.ViewModels.Components.YinYangSpinner;
 using Petty.ViewModels.Settings;
 using Petty.Views;
 using Petty.Views.Settings;
@@ -39,7 +39,7 @@ namespace Petty
                 //https://stackoverflow.com/questions/72463558/how-to-play-an-audio-file-net-maui
                 //.UseMauiCommunityToolkitMediaElement()  https://stackoverflow.com/questions/75525722/correct-way-to-set-net-maui-mediaelement-source-from-code
                 .UseSharpnadoTabs(loggerEnable: false)
-                .ConfigureMauiHandlers(handlers => { handlers.AddHandler<YinYangSpinnerWithTextSkiaSharpViewModel, SKCanvasViewHandler>(); })
+                .ConfigureMauiHandlers(handlers => { handlers.AddHandler<YinYangSpinnerSKCanvasView, SKCanvasViewHandler>(); })
                 .ConfigureEssentials(essentials =>
                 {
                     essentials.UseVersionTracking();

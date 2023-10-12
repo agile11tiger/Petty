@@ -4,14 +4,14 @@ using SkiaSharp.Views.Maui;
 using SkiaSharp.Views.Maui.Controls;
 using System.Reflection;
 
-namespace Petty.ViewModels.Components.GraphicsViews
+namespace Petty.ViewModels.Components.YinYangSpinner
 {
     /// <summary>
     /// Delete this class, look summary <see cref="SkCanvasExtension"/>
     /// </summary>
-    public class YinYangSpinnerWithTextSkiaSharpViewModel : SKCanvasView
+    public class YinYangSpinnerSKCanvasView : SKCanvasView
     {
-        public YinYangSpinnerWithTextSkiaSharpViewModel()
+        public YinYangSpinnerSKCanvasView()
         {
             var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(PathsService.MONOTYPE_CORSIVA_PATH);
             _font = SKTypeface.FromStream(stream);
