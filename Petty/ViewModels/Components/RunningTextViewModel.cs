@@ -4,11 +4,7 @@ namespace Petty.ViewModels.Components
 {
     public partial class RunningTextViewModel : ViewModelBase
     {
-        public RunningTextViewModel(
-            LoggerService loggerService,
-            NavigationService navigationService,
-            LocalizationService localizationService)
-            : base(loggerService, navigationService, localizationService)
+        public RunningTextViewModel()
         {
             _runningText = string.Join(";", Enumerable.Range(1, 100));
             _runningTextStart = _runningText.Length * _runningTextStartCoefficient;

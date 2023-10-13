@@ -5,11 +5,7 @@ namespace Petty.ViewModels.Settings
 {
     public partial class SettingsViewModel : ViewModelBase
     {
-        public SettingsViewModel(
-            LoggerService loggerService,
-            NavigationService navigationService,
-            LocalizationService localizationService)
-            : base(loggerService, navigationService, localizationService)
+        public SettingsViewModel()
         {
         }
 

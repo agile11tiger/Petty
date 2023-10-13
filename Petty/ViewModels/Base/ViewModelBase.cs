@@ -1,15 +1,14 @@
-﻿namespace Petty.ViewModels.Base
+﻿using Android.Content.Res;
+
+namespace Petty.ViewModels.Base
 {
     public abstract partial class ViewModelBase : ObservableObject
     {
-        public ViewModelBase(
-            LoggerService loggerService,
-            NavigationService navigationService,
-            LocalizationService localizationService)
+        public ViewModelBase()
         {
-            _loggerService = loggerService;
-            _navigationService = navigationService;
-            _localizationService = localizationService;
+            _loggerService = MauiProgram.ServiceProvider.GetService<LoggerService>();
+            _navigationService = MauiProgram.ServiceProvider.GetService<NavigationService>();
+            _localizationService = MauiProgram.ServiceProvider.GetService<LocalizationService>();
             _initializeAsyncCommand =
                 new AsyncRelayCommand(
                     async () =>

@@ -7,13 +7,7 @@ namespace Petty.ViewModels
 {
     public partial class MainViewModel : ViewModelBase
     {
-        public MainViewModel(
-            IMessenger messenger,
-            LoggerService loggerService,
-            NavigationService navigationService,
-            UserMessagesService userMessagesService,
-            LocalizationService localizationService)
-            : base(loggerService, navigationService, localizationService)
+        public MainViewModel(IMessenger messenger, UserMessagesService userMessagesService)
         {
             _messenger = messenger;
             _userMessagesService = userMessagesService;

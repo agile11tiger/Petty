@@ -13,13 +13,7 @@ namespace Petty.ViewModels
 {
     public partial class SpeechSimulatorViewModel : ViewModelBase
     {
-        public SpeechSimulatorViewModel(
-            IMessenger messenger,
-            LoggerService loggerService,
-            NavigationService navigationService,
-            UserMessagesService userMessagesService,
-            LocalizationService localizationService)
-            : base(loggerService, navigationService, localizationService)
+        public SpeechSimulatorViewModel(IMessenger messenger, UserMessagesService userMessagesService)
         {
             _messenger = messenger;
             _userMessagesService = userMessagesService;

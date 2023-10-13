@@ -6,13 +6,7 @@ namespace Petty.ViewModels.Settings
 {
     public partial class BaseSettingsViewModel : ViewModelBase
     {
-        public BaseSettingsViewModel(
-            LoggerService loggerService,
-            DatabaseService databaseService,
-            SettingsService settingsService,
-            NavigationService navigationService,
-            LocalizationService localizationService)
-            : base(loggerService, navigationService, localizationService)
+        public BaseSettingsViewModel(DatabaseService databaseService, SettingsService settingsService)
         {
             _databaseService = databaseService;
             _settingsService = settingsService;

@@ -7,13 +7,7 @@ namespace Petty.ViewModels
 {
     public partial class AppShellViewModel : ViewModelBase
     {
-        public AppShellViewModel(
-            IMessenger messenger,
-            LoggerService loggerService,
-            NavigationService navigationService,
-            LocalizationService localizationService,
-            RunningTextViewModel runningTextViewModel)
-            : base(loggerService, navigationService, localizationService)
+        public AppShellViewModel(IMessenger messenger, RunningTextViewModel runningTextViewModel)
         {
             _messenger = messenger;
             _runningTextViewModel = runningTextViewModel;
