@@ -9,8 +9,6 @@
              Style="{StaticResource PageBaseStyle}">
 
     <VerticalStackLayout>
-        <components:DisplayAlert x:Name="_diplayAlert"/>
-        
         <ScrollView Margin="10" HeightRequest="300" WidthRequest="358">
             <Label FontSize="16"  Text="{Binding Speech}" VerticalOptions="Start" />
         </ScrollView>
