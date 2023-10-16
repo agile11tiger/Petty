@@ -5,9 +5,9 @@
        xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
        xmlns:resources="clr-namespace:Petty.Resources.Localization"
-       xmlns:components="clr-namespace:Petty.ViewModels.Components.CircularProgressBar"
+       xmlns:circularProgressBar="clr-namespace:Petty.ViewModels.Components.CircularProgressBar"
        FlyoutBehavior="Flyout"
-       FlyoutBackgroundColor="WhiteSmoke"
+       FlyoutBackgroundColor="{StaticResource FlyoutBackground}"
        FlyoutHeaderBehavior="CollapseOnScroll">
 
     <Shell.Resources>
@@ -21,15 +21,15 @@
                    Text="{Binding Title}" 
                    LineBreakMode="TailTruncation"/>
             <HorizontalStackLayout Grid.Column="1" HorizontalOptions="End" Spacing="9" Margin="9">
-                <components:CircularProgressBarGraphicsView x:Name="_circularProgressBarGraphicsView" 
-                                                            WidthRequest="40"
-                                                            HeightRequest="40"
-                                                            IsVisible="{Binding IsRunningProgressBar}"
-                                                            Percentages="{Binding ProgressBarPercentages}">
-                    <components:CircularProgressBarGraphicsView.Drawable>
-                        <components:CircularProgressBarDrawble/>
-                    </components:CircularProgressBarGraphicsView.Drawable>
-                </components:CircularProgressBarGraphicsView>
+                <circularProgressBar:CircularProgressBarGraphicsView x:Name="_circularProgressBarGraphicsView" 
+                                                                     WidthRequest="40"
+                                                                     HeightRequest="40"
+                                                                     IsVisible="{Binding IsRunningProgressBar}"
+                                                                     Percentages="{Binding ProgressBarPercentages}">
+                    <circularProgressBar:CircularProgressBarGraphicsView.Drawable>
+                        <circularProgressBar:CircularProgressBarDrawble/>
+                    </circularProgressBar:CircularProgressBarGraphicsView.Drawable>
+                </circularProgressBar:CircularProgressBarGraphicsView>
                 <ImageButton WidthRequest="40"
                              HeightRequest="40"
                              Source="question.png"
@@ -44,9 +44,9 @@
             <Grid HeightRequest="250"
                   ColumnDefinitions="*,*"
                   RowDefinitions="100,100,50"
-                  Background="{StaticResource FlyoutHeaderBackground}">
+                  BackgroundColor="{StaticResource FlyoutHeaderBackground}">
                 <!--TODO: VerticalTextAlignment doesn`t work here. I don`t know, why?-->
-                <VerticalStackLayout Grid.Row="0" Grid.Column="0" Background="{StaticResource FlyoutHeaderPart1}">
+                <VerticalStackLayout Grid.Row="0" Grid.Column="0" BackgroundColor="{StaticResource FlyoutHeaderPart1}">
                     <Image Source="play.png" 
                            Aspect="AspectFit" 
                            VerticalOptions="Fill"
@@ -55,7 +55,7 @@
                            VerticalTextAlignment="Center"
                            HorizontalTextAlignment="Center"/>
                 </VerticalStackLayout>
-                <VerticalStackLayout Grid.Row="0" Grid.Column="1" Background="{StaticResource FlyoutHeaderPart2}">
+                <VerticalStackLayout Grid.Row="0" Grid.Column="1" BackgroundColor="{StaticResource FlyoutHeaderPart2}">
                     <Image Source="play.png"
                            Aspect="AspectFit"
                            VerticalOptions="Fill"
@@ -64,7 +64,7 @@
                            VerticalTextAlignment="Center"
                            HorizontalTextAlignment="Center"/>
                 </VerticalStackLayout>
-                <VerticalStackLayout Grid.Row="1" Grid.Column="0" Background="{StaticResource FlyoutHeaderPart3}">
+                <VerticalStackLayout Grid.Row="1" Grid.Column="0" BackgroundColor="{StaticResource FlyoutHeaderPart3}">
                     <Image Source="play.png"
                            Aspect="AspectFit"
                            VerticalOptions="Fill"
@@ -73,7 +73,7 @@
                            VerticalTextAlignment="Center"
                            HorizontalTextAlignment="Center"/>
                 </VerticalStackLayout>
-                <VerticalStackLayout Grid.Row="1" Grid.Column="1" Background="{StaticResource FlyoutHeaderPart4}">
+                <VerticalStackLayout Grid.Row="1" Grid.Column="1" BackgroundColor="{StaticResource FlyoutHeaderPart4}">
                     <Image Source="play.png"
                            Aspect="AspectFit"
                            VerticalOptions="Fill"
@@ -151,7 +151,7 @@
                 <VerticalStackLayout Padding="5">
                     <Label IsEnabled="False" 
                            HeightRequest="1" 
-                           Background="{StaticResource FlyoutMenuItemSeparator}">
+                           BackgroundColor="{StaticResource FlyoutMenuItemSeparator}">
                     </Label>
                 </VerticalStackLayout>
             </DataTemplate>
@@ -169,7 +169,7 @@
                       VerticalOptions="Fill"
                       HorizontalOptions="Fill"
                       ColumnDefinitions="80,*"
-                      Background="{StaticResource FlyoutFooter}">
+                      BackgroundColor="{StaticResource FlyoutFooter}">
                     <Image Margin="5"
                            Grid.Column="0"
                            Source="coffee.gif"

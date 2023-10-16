@@ -2,17 +2,17 @@
 <ContentView x:Class="Petty.Views.Components.YinYangSpinner"
              xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:components="clr-namespace:Petty.ViewModels.Components.YinYangSpinner">
+             xmlns:yinYangSpinner="clr-namespace:Petty.ViewModels.Components.YinYangSpinner">
 
     <Grid RowDefinitions="8*,2*">
-        <components:YinYangSpinnerSKCanvasView 
+        <yinYangSpinner:YinYangSpinnerSKCanvasView 
             x:Name="_spinner" 
             HorizontalOptions="Center" 
             VerticalOptions="Center" 
             Grid.Row="0" WidthRequest="380" HeightRequest="380"/>
         <!--<GraphicsView x:Name="_lol" Grid.Row="0" WidthRequest="200" Background="pink" HeightRequest="200">
             <GraphicsView.Drawable>
-                <components:YinYangSpinnerViewModel/>
+                <yinYangSpinner:YinYangSpinnerViewModel/>
             </GraphicsView.Drawable>
         </GraphicsView>-->
         <!--<Label Grid.Row="0"

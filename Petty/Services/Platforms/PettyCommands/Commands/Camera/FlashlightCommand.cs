@@ -8,6 +8,7 @@ namespace Petty.Services.Platforms.PettyCommands.Commands.Camera
         private bool _isTurnOn;
         public string Name => AppResources.CommandFlashlight;
         public string Description => AppResources.CommandFlashlightDescription;
+        public string ExtendedDescription => _localizationService.IsRussianLanguage ? AppResources.CommandFlashlightExtendedDescription : null;
 
         public async Task<bool> TryExecuteAsync()
         {

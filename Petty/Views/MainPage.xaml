@@ -21,7 +21,7 @@
         <tabs:TabHostView Margin="0"
                           Grid.Row="3"
                           Shadow="{StaticResource tabBarShadow}"
-                          Background="{StaticResource TabBarBackground}">
+                          BackgroundColor="{StaticResource TabBarBackground}">
             <tabs:MaterialUnderlinedTabItem Label="{x:Static resources:AppResources.PageLeaderboard}" 
                                             IconTextSpacing="0"
                                             IconOptions="TopIcon"

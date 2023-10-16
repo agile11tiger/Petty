@@ -7,7 +7,8 @@ using Petty.Services.Local.UserMessages;
 using Petty.Services.Platforms.PettyCommands;
 using Petty.Services.Platforms.Speech;
 using Petty.ViewModels.Base;
-using System.Text;
+using Petty.ViewModels.Components.DisplayAlert;
+using Petty.Views.Components;
 
 namespace Petty.ViewModels
 {
@@ -20,13 +21,17 @@ namespace Petty.ViewModels
             _messenger.Register<SpeechRecognizerResult>(this, OnSpeechReceived);
             _messenger.Register<StartedPettyGuardService>(this, (recipient, message) => SetStartStop(message.IsStarted));
             _messenger.Register<StoppedPettyGuardService>(this, (recipient, message) => SetStartStop(!message.IsStopped));
+            SetColorStartStopButton();
+
+            _displayAlertPageTask = Task.Run(() => CreateDisplayAlertPage());
         }
 
         private readonly IMessenger _messenger;
-        private readonly List<string> _sentences = new();
+        private readonly List<string> _sentences = [];
         private readonly UserMessagesService _userMessagesService;
+        private readonly Task<DisplayAlertPage> _displayAlertPageTask;
+        [ObservableProperty] private Color _startStopButtonBackground;
         [ObservableProperty] private bool _isStartingPettyGuardAndroidService;
-        [ObservableProperty] private SolidColorBrush _startStopButtonBackground;
         [ObservableProperty] private string _speech = AppResources.UserMessagePettySpeechSimulatorPlaceholder;
 
         [RelayCommand]
@@ -41,26 +46,7 @@ namespace Petty.ViewModels
         [RelayCommand]
         private async Task ShowQuestionIconInfo()
         {
-            var listNumber = 0;
-            var commands = new StringBuilder();
-            commands.AppendLine(AppResources.TitlePunctuationWords);
-
-            foreach (var punctuation in PunctuationRecognizer.Punctuations)
-            {
-                if (punctuation.Key == AppResources.SpeechCommandNewLine)
-                    commands.AppendLine($"{listNumber++}. {punctuation.Key} — ");
-                else
-                    commands.AppendLine($"{listNumber++}. {punctuation.Key} — {punctuation.Value}");
-            }
-
-            listNumber = 0;
-            commands.AppendLine();
-            commands.AppendLine(AppResources.UsefulFeatures);
-
-            foreach (var command in PettyCommandsService.PettyCommands.Values)
-                commands.AppendLine($"{listNumber++}. {command.Name} — {command.Description}");
-
-            await _userMessagesService.SendMessageAsync(commands.ToString(), AppResources.ButtonOk, title: AppResources.TitleCommands);
+            await _userMessagesService.SendMessageAsync(await _displayAlertPageTask);
         }
 
         [RelayCommand]
@@ -68,6 +54,40 @@ namespace Petty.ViewModels
         {
             Speech = string.Empty;
             _sentences.Clear();
+        }
+
+        private async Task<DisplayAlertPage> CreateDisplayAlertPage()
+        {
+            var listNumber = 0;
+            var commands = new List<ILink> { new RawLink(AppResources.TitlePunctuationWords, true) };
+
+            foreach (var punctuation in PunctuationRecognizer.Punctuations)
+            {
+                if (punctuation.Key == AppResources.SpeechCommandNewLine)
+                    commands.Add(new Link([$"{listNumber++}", punctuation.Key, string.Empty]));
+                else
+                    commands.Add(new Link([$"{listNumber++}", punctuation.Key, punctuation.Value]));
+            }
+
+            listNumber = 0;
+            commands.Add(new RawLink(string.Empty));
+            commands.Add(new RawLink(AppResources.UsefulFeatures, true));
+
+            foreach (var command in PettyCommandsService.PettyCommands.Values)
+            {
+                if (command.ExtendedDescription != null)
+                    commands.Add(new Link([$"{listNumber++}", command.Name, command.Description],
+                        async () => await _userMessagesService.SendMessageAsync(
+                            await _userMessagesService.CreateDisplayAlertPage(
+                                [new RawLink(command.ExtendedDescription)],
+                                AppResources.ButtonOk,
+                                $"{AppResources.Command} " +
+                                $"{command.Name}"))));
+                else
+                    commands.Add(new Link([$"{listNumber++}", command.Name, command.Description]));
+            }
+
+            return await _userMessagesService.CreateDisplayAlertPage(commands, AppResources.ButtonOk, AppResources.TitleCommands, true);
         }
 
         private void OnSpeechReceived(object obj, SpeechRecognizerResult speechRecognizerResult)
@@ -96,9 +116,13 @@ namespace Petty.ViewModels
         private void SetStartStop(bool isStarted)
         {
             IsStartingPettyGuardAndroidService = isStarted;
+            SetColorStartStopButton();
+        }
 
-            if (App.Current.Resources.TryGetValue(isStarted ? "GrayButton" : "PrimaryBrush", out object brush))
-                StartStopButtonBackground = (SolidColorBrush)brush;
+        private void SetColorStartStopButton()
+        {
+            if (App.Current.Resources.TryGetValue(IsStartingPettyGuardAndroidService ? "Button" : "Primary", out object color))
+                StartStopButtonBackground = (Color)color;
         }
     }
 }

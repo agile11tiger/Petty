@@ -4,7 +4,6 @@
              xmlns:viewModels="clr-namespace:Petty.ViewModels"
              xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:components="clr-namespace:Petty.Views.Components"
              xmlns:resources="clr-namespace:Petty.Resources.Localization"
              Style="{StaticResource PageBaseStyle}">
 
@@ -20,13 +19,13 @@
                      VerticalOptions="Center"
                      HorizontalOptions="CenterAndExpand" >
             <Button MinimumWidthRequest="130" 
-                    Background="{StaticResource GrayButton}"
-                    Text="{x:Static resources:AppResources.ButtonClear}"
-                    Command="{Binding ClearSpeechCommand}"/>
+                    Command="{Binding ClearSpeechCommand}"
+                    BackgroundColor="{StaticResource Button}"
+                    Text="{x:Static resources:AppResources.ButtonClear}"/>
             <Button MinimumWidthRequest="130" 
-                    Background="{Binding StartStopButtonBackground}"
-                    Command="{Binding StartStopPettyGuardAndroidServiceCommand}"
-                    Text="{x:Static resources:AppResources.ButtonStartStop}"/>
+                    BackgroundColor="{Binding StartStopButtonBackground}"
+                    Text="{x:Static resources:AppResources.ButtonStartStop}"
+                    Command="{Binding StartStopPettyGuardAndroidServiceCommand}"/>
         </StackLayout>
 
         <Label Margin="20" FontSize="13" Text="{x:Static resources:AppResources.UserMessagePettyStartStopRemark}" TextColor="{StaticResource PSText}"/>

@@ -24,7 +24,7 @@ namespace Petty
             {
                 MainPage.Dispatcher.Dispatch(() =>
                 {
-                    localizationService.SetCulture(message.CultureInfo);
+                    MauiProgram.UpdateServicesAfterRestart();
                     MainPage = new AppShell(appShellViewModel, navigationService);//REQUIRE RUN MAIN THREAD
                 });
             });

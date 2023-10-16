@@ -151,6 +151,15 @@ namespace Petty.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to more.
+        /// </summary>
+        internal static string ButtonMoreDetails {
+            get {
+                return ResourceManager.GetString("ButtonMoreDetails", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No.
         /// </summary>
         internal static string ButtonNo {
@@ -196,6 +205,15 @@ namespace Petty.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Command.
+        /// </summary>
+        internal static string Command {
+            get {
+                return ResourceManager.GetString("Command", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to battery charge.
         /// </summary>
         internal static string CommandBattery {
@@ -232,6 +250,15 @@ namespace Petty.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string CommandCallExtendedDescription {
+            get {
+                return ResourceManager.GetString("CommandCallExtendedDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to device info.
         /// </summary>
         internal static string CommandDeviceInfo {
@@ -259,11 +286,20 @@ namespace Petty.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to turns the flashlight on/off (if the flashlight was already turned on outside the application, then the first call will turn on the turned on flashlight, and the second will turn it off).
+        ///   Looks up a localized string similar to turns the flashlight on/off.
         /// </summary>
         internal static string CommandFlashlightDescription {
             get {
                 return ResourceManager.GetString("CommandFlashlightDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Turns the flashlight on/off. If the flashlight was already turned on outside the application, then the first call will turn on the turned on flashlight, and the second will turn it off..
+        /// </summary>
+        internal static string CommandFlashlightExtendedDescription {
+            get {
+                return ResourceManager.GetString("CommandFlashlightExtendedDescription", resourceCulture);
             }
         }
         

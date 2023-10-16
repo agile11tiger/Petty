@@ -1,5 +1,4 @@
 ﻿using Petty.Resources.Localization;
-using System.Timers;
 
 namespace Petty.Services.Local.Phone
 {
@@ -18,7 +17,6 @@ namespace Petty.Services.Local.Phone
         private long _isSleeping;
         private readonly IBattery _battery;
         private readonly VoiceService _voiceService;
-        private System.Timers.Timer _batteryInfoSkipTimer;
         public bool IsStarting { get; private set; }
         public int BatteryChargeLevel => (int)_battery.ChargeLevel * 100;
 

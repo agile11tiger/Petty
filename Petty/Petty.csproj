@@ -83,6 +83,7 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.0-rc.2.23480.1" />
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0-rc.2.23479.6" />
     <PackageReference Include="Miyconst.Cyriller" Version="0.1.1" />
+    <PackageReference Include="Mopups" Version="1.2.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="Plugin.Maui.Audio" Version="2.0.0" />
     <PackageReference Include="Sharpnado.Tabs.Maui" Version="3.0.1" />
@@ -115,6 +116,9 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>AppResources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Components\DisplayAlertPage.xaml.cs">
+      <DependentUpon>DisplayAlertPage.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\DiagnosticsPettyPage.xaml.cs">
       <DependentUpon>DiagnosticsPettyPage.xaml</DependentUpon>
@@ -149,6 +153,9 @@
     </MauiXaml>
     <MauiXaml Update="AppShellCss.xaml">
       <Generator></Generator>
+    </MauiXaml>
+    <MauiXaml Update="Views\Components\DisplayAlertPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
     <MauiXaml Update="Views\Components\YinYangSpinner.xaml">
       <Generator>MSBuild:Compile</Generator>

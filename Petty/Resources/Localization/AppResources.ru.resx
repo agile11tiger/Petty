@@ -147,6 +147,9 @@
   <data name="ButtonLater" xml:space="preserve">
     <value>Позже</value>
   </data>
+  <data name="ButtonMoreDetails" xml:space="preserve">
+    <value>подробнее</value>
+  </data>
   <data name="ButtonNo" xml:space="preserve">
     <value>Нет</value>
   </data>
@@ -162,6 +165,9 @@
   <data name="ButtonYes" xml:space="preserve">
     <value>Да</value>
   </data>
+  <data name="Command" xml:space="preserve">
+    <value>Команда</value>
+  </data>
   <data name="CommandBattery" xml:space="preserve">
     <value>заряд батареи</value>
   </data>
@@ -172,8 +178,11 @@
     <value>позвони</value>
   </data>
   <data name="CommandCallDescription" xml:space="preserve">
-    <value>делает вызов, если данный пользователь был найден в вашем списке контактов. Для вашего удобства добавлено склонение имен и фамилий, при условии, сначало имя, потом фамилия, дальше все остальное.
-Все символы кроме букв удаляются, поэтому у контакта "Тигр Тигровов9 (друг)" останется "Тигр Тигровов друг" и будут доступны следующие команды:
+    <value>делает вызов, если данный пользователь был найден в вашем списке контактов.</value>
+  </data>
+  <data name="CommandCallExtendedDescription" xml:space="preserve">
+    <value>Делает вызов, если данный пользователь был найден в вашем списке контактов. Для вашего удобства добавлено склонение имен и фамилий, при условии, сначало имя, потом фамилия, дальше все остальное.
+Все символы кроме букв удаляются, поэтому у контакта "Тигр Тигров9 (друг)" останется "Тигр Тигров друг" и будут доступны следующие команды:
 1. Петти позвони Тигр Тигров друг
 2. Петти позвони Тигру Тигрову друг</value>
   </data>
@@ -187,7 +196,10 @@
     <value>фонарик</value>
   </data>
   <data name="CommandFlashlightDescription" xml:space="preserve">
-    <value>включает/выключает фонарик (если фонарик был уже включен вне приложения, то первый вызов включит включенный фонарик, а второй отключит)</value>
+    <value>включает/выключает фонарик</value>
+  </data>
+  <data name="CommandFlashlightExtendedDescription" xml:space="preserve">
+    <value>Включает/выключает фонарик. Если фонарик был уже включен вне приложения, то первый вызов включит включенный фонарик, а второй отключит.</value>
   </data>
   <data name="CommandHelp" xml:space="preserve">
     <value>помогите</value>

@@ -2,6 +2,9 @@
 using CommunityToolkit.Maui;
 using CommunityToolkit.Mvvm.Messaging;
 using Microsoft.Extensions.Logging;
+using Mopups.Hosting;
+using Mopups.Interfaces;
+using Mopups.Services;
 using Petty.Extensions;
 using Petty.Helpres;
 using Petty.Platforms.Android.Services.Audio;
@@ -39,6 +42,7 @@ namespace Petty
                 //https://stackoverflow.com/questions/72463558/how-to-play-an-audio-file-net-maui
                 //.UseMauiCommunityToolkitMediaElement()  https://stackoverflow.com/questions/75525722/correct-way-to-set-net-maui-mediaelement-source-from-code
                 .UseSharpnadoTabs(loggerEnable: false)
+                .ConfigureMopups()
                 .ConfigureMauiHandlers(handlers => { handlers.AddHandler<YinYangSpinnerSKCanvasView, SKCanvasViewHandler>(); })
                 .ConfigureEssentials(essentials =>
                 {
@@ -73,6 +77,12 @@ namespace Petty
             return app;
         }
 
+        public static void UpdateServicesAfterRestart()
+        {
+            //todo
+            throw new NotImplementedException();
+        }
+
         private static void HandleUnobservedException(object sender, UnobservedTaskExceptionEventArgs e)
         {
             //TODO: need logging
@@ -105,11 +115,12 @@ namespace Petty
                 .AddSingleton<SpeechRecognizerService>()
                 .AddSingleton<IAudioStream, AudioStream>()
                 .AddSingleton<IMessenger, WeakReferenceMessenger>()
-                .AddSingleton<IBattery>((services) => Battery.Default)
-                .AddSingleton<IDeviceInfo>((services) => DeviceInfo.Current)
-                .AddSingleton<IDeviceDisplay>((services) => DeviceDisplay.Current)
-                .AddSingleton<IAudioManager>((services) => AudioManager.Current)
-                .AddSingleton<IVersionTracking>((services) => VersionTracking.Default)
+                .AddSingleton<IBattery>(Battery.Default)
+                .AddSingleton<IDeviceInfo>(DeviceInfo.Current)
+                .AddSingleton<IAudioManager>(AudioManager.Current)
+                .AddSingleton<IDeviceDisplay>(DeviceDisplay.Current)
+                .AddSingleton<IPopupNavigation>(MopupService.Instance)
+                .AddSingleton<IVersionTracking>(VersionTracking.Default)
 
                 .AddTransient<WaveRecorderService>();
 
@@ -118,7 +129,8 @@ namespace Petty
 
         private static MauiAppBuilder RegisterPagesWithViewModels(this MauiAppBuilder builder)
         {
-            builder.Services.AddSingletonWithShellRoute<MainPage, MainViewModel>(RoutesHelper.MAIN)
+            builder.Services
+                .AddSingletonWithShellRoute<MainPage, MainViewModel>(RoutesHelper.MAIN)
                 .AddSingletonWithShellRoute<SettingsPage, SettingsViewModel>(RoutesHelper.SETTINGS)
                 .AddSingletonWithShellRoute<SpeechSimulatorPage, SpeechSimulatorViewModel>(RoutesHelper.SPEECH_SIMULATOR)
                 .AddTransientWithShellRoute<BaseSettingsPage, BaseSettingsViewModel>($"{RoutesHelper.SETTINGS}/{RoutesHelper.BASE_SETTINGS}")
@@ -129,7 +141,8 @@ namespace Petty
 
         private static MauiAppBuilder RegisterViewModels(this MauiAppBuilder builder)
         {
-            builder.Services.AddSingleton<AppShellViewModel>()
+            builder.Services
+                .AddSingleton<AppShellViewModel>()
                 .AddSingleton<RunningTextViewModel>();
             return builder;
         }

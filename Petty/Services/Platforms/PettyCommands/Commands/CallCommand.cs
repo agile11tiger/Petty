@@ -21,6 +21,7 @@ namespace Petty.Services.Platforms.PettyCommands.Commands
         public bool NeedFullText => true;
         public string Name => AppResources.CommandCall;
         public string Description => AppResources.CommandCallDescription;
+        public string ExtendedDescription => AppResources.CommandCallExtendedDescription;
 
         public bool CheckCommandCompliance(string text)
         {
@@ -60,7 +61,7 @@ namespace Petty.Services.Platforms.PettyCommands.Commands
 
         private async Task InitialiseContactsAsync()
         {
-            _contacts = new();
+            _contacts = [];
 
             foreach (var contact in await Contacts.Default.GetAllAsync())
             {

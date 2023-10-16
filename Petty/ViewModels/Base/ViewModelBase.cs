@@ -1,6 +1,4 @@
-﻿using Android.Content.Res;
-
-namespace Petty.ViewModels.Base
+﻿namespace Petty.ViewModels.Base
 {
     public abstract partial class ViewModelBase : ObservableObject
     {
