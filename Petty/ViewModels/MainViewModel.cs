@@ -1,20 +1,10 @@
-﻿using CommunityToolkit.Mvvm.Messaging;
-using Petty.Helpres;
-using Petty.Services.Local.UserMessages;
+﻿using Petty.Helpres;
 using Petty.ViewModels.Base;
 
 namespace Petty.ViewModels
 {
     public partial class MainViewModel : ViewModelBase
     {
-        public MainViewModel(IMessenger messenger, UserMessagesService userMessagesService)
-        {
-            _messenger = messenger;
-            _userMessagesService = userMessagesService;
-        }
-
-        private readonly IMessenger _messenger;
-        private readonly UserMessagesService _userMessagesService;
         [ObservableProperty] private bool _isSelectedTabBarItem;
         [ObservableProperty] private string _pettyGuardIconImageSource = "play.png";
 
@@ -26,7 +16,7 @@ namespace Petty.ViewModels
         }
 
         [RelayCommand]
-        private async Task GoToSpeechSimulator()
+        private async Task GoToSpeechSimulatorAsync()
         {
             await _navigationService.GoToAsync(RoutesHelper.SPEECH_SIMULATOR);
         }

@@ -23,7 +23,7 @@ namespace Petty.ViewModels
             _messenger.Register<StoppedPettyGuardService>(this, (recipient, message) => SetStartStop(!message.IsStopped));
             SetColorStartStopButton();
 
-            _displayAlertPageTask = Task.Run(() => CreateDisplayAlertPage());
+            _displayAlertPageTask = Task.Run(() => CreateDisplayAlertPageAsync());
         }
 
         private readonly IMessenger _messenger;
@@ -35,7 +35,7 @@ namespace Petty.ViewModels
         [ObservableProperty] private string _speech = AppResources.UserMessagePettySpeechSimulatorPlaceholder;
 
         [RelayCommand]
-        private async Task StartStopPettyGuardAndroidService()
+        private async Task StartStopPettyGuardAndroidServiceAsync()
         {
             if (!IsStartingPettyGuardAndroidService)
                 _messenger.Send<StartPettyGuardService>();
@@ -44,7 +44,7 @@ namespace Petty.ViewModels
         }
 
         [RelayCommand]
-        private async Task ShowQuestionIconInfo()
+        private async Task ShowQuestionIconInfoAsync()
         {
             await _userMessagesService.SendMessageAsync(await _displayAlertPageTask);
         }
@@ -56,7 +56,7 @@ namespace Petty.ViewModels
             _sentences.Clear();
         }
 
-        private async Task<DisplayAlertPage> CreateDisplayAlertPage()
+        private async Task<DisplayAlertPage> CreateDisplayAlertPageAsync()
         {
             var listNumber = 0;
             var commands = new List<ILink> { new RawLink(AppResources.TitlePunctuationWords, true) };

@@ -78,7 +78,7 @@
                                             </FormattedString>
                                         </Label.FormattedText>
                                         <Label.GestureRecognizers>
-                                            <TapGestureRecognizer Tapped="Link_Tapped" CommandParameter="{Binding Action}"/>
+                                            <TapGestureRecognizer Tapped="Link_TappedAsync" CommandParameter="{Binding Action}"/>
                                         </Label.GestureRecognizers>
                                     </Label>
                                 </DataTemplate>

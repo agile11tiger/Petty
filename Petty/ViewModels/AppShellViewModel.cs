@@ -26,7 +26,7 @@ namespace Petty.ViewModels
         public Action InvalidateProgressBar { get; set; }
 
         [RelayCommand]
-        private async Task StartCoffeGifAsync()
+        private async Task StartCoffeeGifAsync()
         {
             await Task.Run(async () =>
             {
@@ -36,13 +36,13 @@ namespace Petty.ViewModels
         }
 
         [RelayCommand]
-        private void StopCoffeGif()
+        private void StopCoffeeGif()
         {
             IsAnimationPlayingCoffeeGif = false;
         }
 
         [RelayCommand]
-        private async Task TapQuestionIcon()
+        private async Task TapQuestionIconAsync()
         {
             if (ShowQuestionIconInfo != null)
                 await ShowQuestionIconInfo.ExecuteAsync(null);

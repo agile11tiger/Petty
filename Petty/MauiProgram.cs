@@ -31,8 +31,6 @@ namespace Petty
 {
     public static class MauiProgram
     {
-        public static IServiceProvider ServiceProvider { get; private set; }
-
         public static MauiApp CreateMauiApp()
         {
             var builder = MauiApp.CreateBuilder();
@@ -74,25 +72,27 @@ namespace Petty
             AddEditorCustomization();
             var app = builder.Build();
             ServiceProvider = app.Services;
+            _loggerService = ServiceProvider.GetService<LoggerService>();
             return app;
         }
 
+        private static LoggerService _loggerService;
+        public static IServiceProvider ServiceProvider { get; private set; }
+
         public static void UpdateServicesAfterRestart()
         {
-            //todo
-            throw new NotImplementedException();
+            //todo implement
         }
 
         private static void HandleUnobservedException(object sender, UnobservedTaskExceptionEventArgs e)
         {
-            //TODO: need logging
-            throw new NotImplementedException();
+            _loggerService.Log(e.Exception, LogLevel.Critical);
+            e.SetObserved();
         }
 
         private static void HandleCurrentDomainUnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
-            //TODO: need logging
-            throw new NotImplementedException();
+            _loggerService.Log((Exception)e.ExceptionObject, LogLevel.Critical);
         }
 
         private static MauiAppBuilder RegisterAppServices(this MauiAppBuilder builder)

@@ -26,9 +26,9 @@ public class PettyGuardAndroidService : Android.App.Service
 {
     public PettyGuardAndroidService()
     {
-        _pettyCommandsService = MauiApplication.Current.Services.GetService<PettyCommandsService>();
-        _messager = MauiApplication.Current.Services.GetService<IMessenger>();
-        _loggerService = MauiApplication.Current.Services.GetService<LoggerService>();
+        _pettyCommandsService = IPlatformApplication.Current.Services.GetService<PettyCommandsService>();
+        _messager = IPlatformApplication.Current.Services.GetService<IMessenger>();
+        _loggerService = IPlatformApplication.Current.Services.GetService<LoggerService>();
     }
 
     private const int NOTIFICATION_ID = 1;

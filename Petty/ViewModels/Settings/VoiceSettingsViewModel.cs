@@ -69,14 +69,14 @@ namespace Petty.ViewModels.Settings
         }
 
         [RelayCommand]
-        private Task ApplyDefaultSettings()
+        private async Task ApplyDefaultSettingsAsync()
         {
             _tempVoiceSettings = new PettySQLite.Models.VoiceSettings();
-            return GoBackAsync();
+            await GoBackAsync();
         }
 
         [RelayCommand]
-        private async Task ApplySettings()
+        private async Task ApplySettingsAsync()
         {
             await GoBackAsync();
         }

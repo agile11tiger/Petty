@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using Microsoft.Extensions.Logging;
+using System.Diagnostics;
 using System.Runtime.CompilerServices;
 
 namespace Petty.Services.Local
@@ -6,17 +7,19 @@ namespace Petty.Services.Local
     public class LoggerService
     {
         public void Log(
-            Exception exception = default,
+            Exception exception,
+            LogLevel logLevel = LogLevel.Error,
             [CallerMemberName] string memberName = default,
             [CallerFilePath] string sourceFilePath = default,
             [CallerLineNumber] int sourceLineNumber = default)
         {
-            Log(null, exception, memberName, sourceFilePath, sourceLineNumber);
+            Log(null, exception, logLevel, memberName, sourceFilePath, sourceLineNumber);
         }
 
         public void Log(
-            string message = default,
+            string message,
             Exception exception = default,
+            LogLevel logLevel = LogLevel.Error,
             [CallerMemberName] string memberName = default,
             [CallerFilePath] string sourceFilePath = default,
             [CallerLineNumber] int sourceLineNumber = default)

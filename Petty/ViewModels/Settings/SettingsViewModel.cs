@@ -10,19 +10,19 @@ namespace Petty.ViewModels.Settings
         }
 
         [RelayCommand]
-        private async Task GoToBaseSettingsPage()
+        private async Task GoToBaseSettingsPageAsync()
         {
             await _navigationService.GoToAsync(RoutesHelper.BASE_SETTINGS);
         }
 
         [RelayCommand]
-        private async Task GoToDiagnosticsPettyPage()
+        private async Task GoToDiagnosticsPettyPageAsync()
         {
             await _navigationService.GoToAsync(RoutesHelper.DIAGNOSTICS);
         }
 
         [RelayCommand]
-        private async Task GoToVoiceSettingsPage()
+        private async Task GoToVoiceSettingsPageAsync()
         {
             await _navigationService.GoToAsync(RoutesHelper.VOICE_SETTINGS);
         }

@@ -14,9 +14,8 @@ public partial class DisplayAlertPage : PopupPage
 
     public readonly DisplayAlertViewModel _displayAlertViewModel;
 
-    private async void Link_Tapped(object sender, TappedEventArgs e)
+    private async void Link_TappedAsync(object sender, TappedEventArgs e)
     {
-        //todo add logging 
         await (e.Parameter as Func<Task>)();
     }
 

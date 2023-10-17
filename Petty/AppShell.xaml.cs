@@ -30,14 +30,14 @@
         {
             base.OnAppearing();
             _appShellViewModel.RunningTextViewModel.StartRunningTextCommand.Execute(null);
-            await _appShellViewModel.StartCoffeGifCommand.ExecuteAsync(null);
+            await _appShellViewModel.StartCoffeeGifCommand.ExecuteAsync(null);
         }
 
         protected override void OnDisappearing()
         {
             base.OnDisappearing();
             _appShellViewModel.RunningTextViewModel.StopRunningTextCommand.Execute(null);
-            _appShellViewModel.StopCoffeGifCommand.Execute(null);
+            _appShellViewModel.StopCoffeeGifCommand.Execute(null);
         }
     }
 }

@@ -11,7 +11,7 @@ namespace Petty
     {
         public MainActivity()
         {
-            var messenger = MauiApplication.Current.Services.GetService<IMessenger>();
+            var messenger = IPlatformApplication.Current.Services.GetService<IMessenger>();
             messenger.Register<StartPettyGuardService>(this, (recipient, message) => PettyGuardAndroidService.Start());
             messenger.Register<StopPettyGuardService>(this, (recipient, message) => PettyGuardAndroidService.Stop());
         }

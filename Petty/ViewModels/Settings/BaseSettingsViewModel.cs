@@ -29,7 +29,7 @@ namespace Petty.ViewModels.Settings
         [ObservableProperty] private List<InformationPerceptionMode> _informationPerceptionModes;
 
         /// <summary>
-        /// todo: formating not working https://github.com/dotnet/maui/issues/14854
+        /// todo: formatting not working https://github.com/dotnet/maui/issues/14854
         /// </summary>
         public string SelectedInformationPerceptionMode
         {
@@ -38,14 +38,14 @@ namespace Petty.ViewModels.Settings
         }
 
         [RelayCommand]
-        private async Task ApplyDefaultSettings()
+        private async Task ApplyDefaultSettingsAsync()
         {
             TempBaseSettings = new PettySQLite.Models.BaseSettings();
             await GoBackPageAsync();
         }
 
         [RelayCommand]
-        private async Task ApplySettings()
+        private async Task ApplySettingsAsync()
         {
             await GoBackPageAsync();
         }

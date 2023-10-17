@@ -8,16 +8,9 @@
 
             if (Settings == default)
             {
-                try
-                {
-                    var settings = new Settings() { BaseSettings = new(), VoiceSettings = new() };
-                    databaseService.CreateOrUpdateAsync(settings).Wait();
-                    Settings = settings;
-                }
-                catch (Exception ex)
-                {
-                    loggerService.Log(ex);
-                }
+                var settings = new Settings() { BaseSettings = new(), VoiceSettings = new() };
+                databaseService.CreateOrUpdateAsync(settings).Wait();
+                Settings = settings;
             }
         }
 
