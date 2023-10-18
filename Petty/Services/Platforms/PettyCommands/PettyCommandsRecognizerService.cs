@@ -6,20 +6,12 @@ using System.Reflection;
 
 namespace Petty.Services.Platforms.PettyCommands
 {
-    public class PettyCommandsService : Service
+    public class PettyCommandsService(
+        IMessenger _messenger,
+        VoiceService _voiceService,
+        SpeechRecognizerService _speechRecognizerService) 
+        : Service
     {
-        public PettyCommandsService(
-            IMessenger messenger,
-            VoiceService voiceService,
-            LoggerService loggerService,
-            SpeechRecognizerService speechRecognizerService)
-            : base(loggerService)
-        {
-            _messenger = messenger;
-            _voiceService = voiceService;
-            _speechRecognizerService = speechRecognizerService;
-        }
-
         static PettyCommandsService()
         {
             PettyCommands = new();
@@ -35,10 +27,7 @@ namespace Petty.Services.Platforms.PettyCommands
             }
         }
 
-        private readonly IMessenger _messenger;
-        private readonly VoiceService _voiceService;
         private readonly static SemaphoreSlim _locker = new(1, 1);
-        private readonly SpeechRecognizerService _speechRecognizerService;
 
         public event Action<IPettyCommand> BroadcastPettyCommand;
 

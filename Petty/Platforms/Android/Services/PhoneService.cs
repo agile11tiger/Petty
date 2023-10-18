@@ -10,9 +10,9 @@ namespace Petty.Services.Platforms
             var telUri = global::Android.Net.Uri.Parse($"tel:{phoneNumber}");
             var callIntent = new Intent(Intent.ActionCall, telUri);
             callIntent.AddFlags(ActivityFlags.NewTask);
-            var result = null != callIntent.ResolveActivity(packageManager);
+            var isAllowed = null != callIntent.ResolveActivity(packageManager);
 
-            if (!string.IsNullOrWhiteSpace(phoneNumber) && result == true)
+            if (!string.IsNullOrWhiteSpace(phoneNumber) && isAllowed == true)
             {
                 MauiApplication.Current.BaseContext.StartActivity(callIntent);
                 return true;

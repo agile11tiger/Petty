@@ -6,14 +6,8 @@ using System.Globalization;
 
 namespace Petty.Services.Local.Localization
 {
-    public class LocalizationService : Service
+    public class LocalizationService(IMessenger _messenger) : Service
     {
-        public LocalizationService(LoggerService loggerService, IMessenger messenger) : base(loggerService)
-        {
-            _messenger = messenger;
-        }
-
-        private readonly IMessenger _messenger;
         public readonly Dictionary<string, Language> SupportedCultures = new()
         {
             { "en-US", new Language { Name = AppResources.LanguageEnglish, CultureInfo = new CultureInfo("en-US")} },

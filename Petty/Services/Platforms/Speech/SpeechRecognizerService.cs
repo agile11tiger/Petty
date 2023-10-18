@@ -10,22 +10,13 @@ using static Petty.Services.Platforms.Speech.VoskModelInfos;
 
 namespace Petty.Services.Platforms.Speech
 {
-    public class SpeechRecognizerService : Service, IDisposable
+    public class SpeechRecognizerService(
+        IMessenger _messenger,
+        WebRequestsService _webRequestsService,
+        UserMessagesService _userMessagesService,
+        AudioRecorderService _audioRecorderService) 
+        : Service, IDisposable
     {
-        public SpeechRecognizerService(
-            IMessenger messenger,
-            LoggerService loggerService,
-            WebRequestsService webRequestsService,
-            UserMessagesService userMessagesService,
-            AudioRecorderService audioRecorderService)
-            : base(loggerService)
-        {
-            _messenger = messenger;
-            _webRequestsService = webRequestsService;
-            _userMessagesService = userMessagesService;
-            _audioRecorderService = audioRecorderService;
-        }
-
         private const int RESULT_START_MESSAGE_INDEX = 14;
         private const int RESULT_EMPTY_MESSAGE_LENGTH = 17;// "{\n  \"text\" : \"\"\n}"
         private const int PARTIAL_RESULT_START_MESSAGE_INDEX = 17;
@@ -36,14 +27,10 @@ namespace Petty.Services.Platforms.Speech
         private Model _recognizerModel;
         private VoskRecognizer _recognizer;
         private bool _isRecognizingFromDisk;
-        private readonly IMessenger _messenger;
         private string _speechCache = string.Empty;
         private SpeechRecognizerResult _speechRecognizerResult;
-        private readonly WebRequestsService _webRequestsService;
         private readonly List<float> _silenceThresholds = new();
         private readonly static SemaphoreSlim _locker = new(1, 1);
-        private readonly UserMessagesService _userMessagesService;
-        private readonly AudioRecorderService _audioRecorderService;
 
         private event Action<SpeechRecognizerResult> BroadcastSpeech;
 

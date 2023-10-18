@@ -8,10 +8,6 @@ namespace Petty.Services.Local.PermissionsFolder
     /// <remarks>https://learn.microsoft.com/en-us/dotnet/maui/platform-integration/appmodel/permissions?tabs=android</remarks>
     public class PermissionService : Service
     {
-        public PermissionService(LoggerService loggerService) : base(loggerService)
-        {
-        }
-
         private Dictionary<string, Task<PermissionStatus>> _permissions;
         private Dictionary<string, Task<PermissionStatus>> _allPermissions;
 

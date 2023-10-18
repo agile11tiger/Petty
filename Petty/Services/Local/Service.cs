@@ -2,9 +2,9 @@
 {
     public abstract class Service
     {
-        protected Service(LoggerService loggerService)
+        protected Service()
         {
-            _loggerService = loggerService;
+            _loggerService = MauiProgram.ServiceProvider.GetService<LoggerService>();
         }
 
         protected readonly LoggerService _loggerService;

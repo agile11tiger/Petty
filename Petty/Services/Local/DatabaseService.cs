@@ -1,14 +1,8 @@
 ﻿namespace Petty.Services.Local
 {
-    public class DatabaseService : Service
+    public class DatabaseService(ApplicationDbContext applicationDbContext) : Service
     {
-        public DatabaseService(ApplicationDbContext applicationDbContext, LoggerService loggerService)
-            : base(loggerService)
-        {
-            ApplicationDbContext = applicationDbContext;
-        }
-
-        public ApplicationDbContext ApplicationDbContext { get; set; }
+        public ApplicationDbContext ApplicationDbContext => applicationDbContext;
 
         public async Task CreateOrUpdateAsync<T>(T item) where T : class, IDatabaseItem
         {

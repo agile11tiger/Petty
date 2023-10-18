@@ -4,7 +4,7 @@ namespace Petty.Services.Local
 {
     public class VoiceService : Service
     {
-        public VoiceService(LoggerService loggerService, SettingsService settingsService) : base(loggerService)
+        public VoiceService(SettingsService settingsService)
         {
             _tokenSource = new CancellationTokenSource();
             _speechOptions = new SpeechOptions()

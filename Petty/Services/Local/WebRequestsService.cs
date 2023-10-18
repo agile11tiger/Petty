@@ -7,10 +7,6 @@ namespace Petty.Services.Local
     /// </summary>
     public class WebRequestsService : Service
     {
-        public WebRequestsService(LoggerService loggerService) : base(loggerService)
-        {
-        }
-
         private readonly HttpClient _client = new();
 
         public async Task DownloadAsync(

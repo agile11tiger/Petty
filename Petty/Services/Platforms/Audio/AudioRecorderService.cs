@@ -13,7 +13,6 @@
         /// Creates a new instance of the <see cref="AudioRecorderService"/>.
         /// </summary>
         public AudioRecorderService(IAudioStream audioStream, LoggerService loggerService, WaveRecorderService waveRecorderService)
-            : base(loggerService)
         {
             Initialize();
             _audioStream = audioStream;

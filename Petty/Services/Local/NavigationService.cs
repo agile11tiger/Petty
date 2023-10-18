@@ -4,14 +4,8 @@ namespace Petty.Services.Local
 {
     public class NavigationService : Service
     {
-        public NavigationService(LoggerService loggerService)
-            : base(loggerService)
-        {
-        }
-
         //TODO: change
-        public Task InitializeAsync() => GoToAsync(
-            string.IsNullOrEmpty("_settingsService.AuthAccessToken") ? "Login" : "Main");
+        public Task InitializeAsync() => GoToAsync(string.IsNullOrEmpty("_settingsService.AuthAccessToken") ? "Login" : "Main");
 
         public Task GoToAsync(string route, IDictionary<string, object> routeParameters = null)
         {

@@ -4,10 +4,6 @@ namespace Petty.Services.Platforms.Audio
 {
     public class WaveRecorderService : Service
     {
-        public WaveRecorderService(LoggerService loggerService) : base(loggerService)
-        {
-        }
-
         private int _byteCount;
         private BinaryWriter _writer;
         private string _audioFilePath;

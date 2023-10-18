@@ -4,21 +4,8 @@ using Petty.Views.Components;
 
 namespace Petty.Services.Local.UserMessages
 {
-    public class UserMessagesService : Service
+    public class UserMessagesService(VoiceService _voiceService, IPopupNavigation _popupNavigation) : Service
     {
-        public UserMessagesService(
-            VoiceService voiceService,
-            LoggerService loggerService,
-            IPopupNavigation popupNavigation)
-            : base(loggerService)
-        {
-            _voiceService = voiceService;
-            _popupNavigation = popupNavigation;
-        }
-
-        private readonly VoiceService _voiceService;
-        private readonly IPopupNavigation _popupNavigation;
-
         public async Task SendMessageAsync(DisplayAlertPage displayAlertPage)
         {
             await _popupNavigation.PushAsync(displayAlertPage);

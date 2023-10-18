@@ -2,21 +2,9 @@
 
 namespace Petty.Services.Local.Phone
 {
-    public class BatteryService : Service, ILifeCycle
+    public class BatteryService(IBattery _battery, VoiceService _voiceService) : Service, ILifeCycle
     {
-        public BatteryService(
-            IBattery battery,
-            VoiceService voiceService,
-            LoggerService loggerService)
-            : base(loggerService)
-        {
-            _battery = battery;
-            _voiceService = voiceService;
-        }
-
         private long _isSleeping;
-        private readonly IBattery _battery;
-        private readonly VoiceService _voiceService;
         public bool IsStarting { get; private set; }
         public int BatteryChargeLevel => (int)_battery.ChargeLevel * 100;
 

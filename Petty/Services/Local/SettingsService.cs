@@ -2,7 +2,7 @@
 {
     public class SettingsService : Service
     {
-        public SettingsService(LoggerService loggerService, ApplicationDbContext applicationDbContext, DatabaseService databaseService) : base(loggerService)
+        public SettingsService(DatabaseService databaseService)
         {
             Settings = databaseService.ApplicationDbContext.Settings.FirstOrDefault();
 
