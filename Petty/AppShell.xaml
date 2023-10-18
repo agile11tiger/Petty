@@ -87,7 +87,7 @@
                                      WidthRequest="50"
                                      HeightRequest="70">
                     <Image Opacity="1"
-                           Source="moon.svg"
+                           Source="eye.png"
                            Aspect="AspectFill"
                            VerticalOptions="Center"
                            HorizontalOptions="Center"/>

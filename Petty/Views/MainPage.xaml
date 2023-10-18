@@ -34,9 +34,9 @@
             </tabs:MaterialUnderlinedTabItem>
             <tabs:TabButton TranslationY="-20"
                             ButtonPadding="15"
-                            ButtonCircleSize="80"
-                            ButtonWidthRequest="100"
-                            ButtonHeightRequest="100"
+                            ButtonCircleSize="90"
+                            ButtonWidthRequest="90"
+                            ButtonHeightRequest="90"
                             Shadow="{StaticResource tabBarMainButtonShadow}"
                             ButtonBackgroundColor="{StaticResource Primary}"
                             IconImageSource="{Binding PettyGuardIconImageSource}"
