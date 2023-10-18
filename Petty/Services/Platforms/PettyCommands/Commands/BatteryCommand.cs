@@ -18,10 +18,7 @@ namespace Petty.Services.Platforms.PettyCommands.Commands
 
         public async Task<bool> TryExecuteAsync()
         {
-            await _userMessagesService.SendMessageAsync(
-                AppResources.BatteryCharging,
-                AppResources.ButtonOk,
-                InformationDeliveryModes.VoiceAlert);
+            await _userMessagesService.SendMessageAsync(AppResources.BatteryCharging, deliveryMode: InformationDeliveryModes.VoiceAlert);
             return true;
         }
     }

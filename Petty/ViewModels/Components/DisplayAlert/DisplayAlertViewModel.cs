@@ -4,7 +4,7 @@ namespace Petty.ViewModels.Components.DisplayAlert
 {
     public partial class DisplayAlertViewModel : ViewModelBase
     {
-        public DisplayAlertViewModel(IList<ILink> links, string cancel = null, string title = null, string accept = null)
+        public DisplayAlertViewModel(IList<ILink> links, string title = null, string cancel = null, string accept = null)
         {
             Links = links;
             _titleLabel = title;

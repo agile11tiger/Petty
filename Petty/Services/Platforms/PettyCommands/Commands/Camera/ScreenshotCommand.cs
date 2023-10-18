@@ -14,7 +14,7 @@ namespace Petty.Services.Platforms.PettyCommands.Commands.Camera
             try
             {
                 if (!Screenshot.Default.IsCaptureSupported)
-                    await _userMessagesService.SendMessageAsync(AppResources.UserMessageCommandNotSupported, AppResources.ButtonOk);
+                    await _userMessagesService.SendMessageAsync(AppResources.UserMessageCommandNotSupported);
 
                 var screenResult = await Screenshot.Default.CaptureAsync();
                 var sourceStream = await screenResult.OpenReadAsync(ScreenshotFormat.Jpeg);

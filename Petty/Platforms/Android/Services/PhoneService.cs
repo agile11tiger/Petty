@@ -1,24 +1,23 @@
 ﻿using Android.Content;
+using Petty.Resources.Localization;
+using Petty.Services.Local.UserMessages;
 
 namespace Petty.Services.Platforms
 {
     public partial class PhoneService
     {
-        public bool Call(string phoneNumber)
+        public async Task<bool> CallAsync(string phoneNumber)
         {
             var packageManager = MauiApplication.Current.BaseContext.PackageManager;
             var telUri = global::Android.Net.Uri.Parse($"tel:{phoneNumber}");
             var callIntent = new Intent(Intent.ActionCall, telUri);
             callIntent.AddFlags(ActivityFlags.NewTask);
-            var isAllowed = null != callIntent.ResolveActivity(packageManager);
 
-            if (!string.IsNullOrWhiteSpace(phoneNumber) && isAllowed == true)
-            {
-                MauiApplication.Current.BaseContext.StartActivity(callIntent);
-                return true;
-            }
+            if (string.IsNullOrWhiteSpace(phoneNumber) && callIntent.ResolveActivity(packageManager) == null)
+                return await _userMessagesService.SendMessageAsync(AppResources.UserMessageCommandNotAvailable, deliveryMode:InformationDeliveryModes.VoiceAlert);
 
-            return false;
+            MauiApplication.Current.BaseContext.StartActivity(callIntent);
+            return true;
         }
     }
 }

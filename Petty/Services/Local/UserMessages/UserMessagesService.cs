@@ -1,4 +1,6 @@
 ﻿using Mopups.Interfaces;
+using Mopups.Pages;
+using Petty.Resources.Localization;
 using Petty.ViewModels.Components.DisplayAlert;
 using Petty.Views.Components;
 
@@ -6,21 +8,49 @@ namespace Petty.Services.Local.UserMessages
 {
     public class UserMessagesService(VoiceService _voiceService, IPopupNavigation _popupNavigation) : Service
     {
-        public async Task SendMessageAsync(DisplayAlertPage displayAlertPage)
+        /// <summary>
+        /// Send message to user
+        /// </summary>
+        /// <returns>Default return false. This means that the user did not click the Accept button.
+        /// Thus, if he clicks on the accept button, it will return true.
+        /// </returns>
+        public async Task<bool> SendMessageAsync(
+            string message,
+            string title = null,
+            string cancel = "Ok",
+            string accept = null,
+            InformationDeliveryModes deliveryMode = InformationDeliveryModes.DisplayAlertInApp)
         {
-            await _popupNavigation.PushAsync(displayAlertPage);
-            //await Application.Current.MainPage.DisplayAlert(null, "Lol\r\nLolWithLink", "accept", "cancel");
+            if (cancel == "Ok")
+                cancel = AppResources.ButtonOk;
+
+            if (deliveryMode == InformationDeliveryModes.DisplayAlertInApp)
+                return await SendMessageAsync(await CreateDisplayAlertPageAsync([new RawLink(message)], title, cancel, accept, false));
+            else if (deliveryMode == InformationDeliveryModes.DisplayAlertOutsideApp)
+                ShowOutsideApplicationAsync();
+            else if (deliveryMode == InformationDeliveryModes.DisplayAlertOutsideAppOnLockedScreen)
+                ShowOutsideApplicationOnLockedScreenAsync();
+            else if (deliveryMode == InformationDeliveryModes.VoiceAlert)
+                await _voiceService.SpeakAsync(message);
+
+            return false;
         }
 
-        public async Task<DisplayAlertPage> CreateDisplayAlertPage(
-            IList<ILink> message,
-            string cancel = null,
-            string title = null,
-            bool isLazy = false,
-            string accept = null)
+        public async Task<bool> SendMessageAsync(DisplayAlertPage displayAlertPage)
         {
-            var displayAlertViewModel = new DisplayAlertViewModel(message, cancel, title, accept);
-            var displayAlertPage = new DisplayAlertPage(displayAlertViewModel);
+            await _popupNavigation.PushAsync(displayAlertPage, false);
+            return await displayAlertPage.GetResultAsync();
+        }
+
+        public async Task<DisplayAlertPage> CreateDisplayAlertPageAsync(
+            IList<ILink> message,
+            string title = null,
+            string cancel = null,
+            string accept = null,
+            bool isLazy = false)
+        {
+            var displayAlertViewModel = new DisplayAlertViewModel(message, title, cancel, accept);
+            var displayAlertPage = new DisplayAlertPage(displayAlertViewModel, this);
 
             if (isLazy)
             {
@@ -38,65 +68,20 @@ namespace Petty.Services.Local.UserMessages
             return displayAlertPage;
         }
 
-        public async Task SendMessageAsync(
-            string message,
-            string cancel,
-            InformationDeliveryModes deliveryMode = InformationDeliveryModes.DisplayAlertInApp,
-            string accept = "",
-            string title = "")
+        public async Task RemovePageAsync(PopupPage popupPage)
         {
-            if (deliveryMode == InformationDeliveryModes.DisplayAlertInApp)
-                await SendRequestAsync(message, cancel, accept, title);
-            else if (deliveryMode == InformationDeliveryModes.DisplayAlertOutsideApp)
-                ShowOutsideApplication();
-            else if (deliveryMode == InformationDeliveryModes.DisplayAlertOutsideAppOnLockedScreen)
-                ShowOutsideApplicationOnLockedScreen();
-            else if (deliveryMode == InformationDeliveryModes.VoiceAlert)
-                await _voiceService.SpeakAsync(message);
+            await _popupNavigation.RemovePageAsync(popupPage);
         }
 
-        public async Task<bool> SendRequestAsync(string message, string cancel, string accept = "", string title = "")
-        {
-            var answer = false;
-
-            try
-            {
-                var isAnswerReceived = false;
-
-                if (!Thread.CurrentThread.IsBackground)
-                    answer = await Application.Current.MainPage.DisplayAlert(title, message, accept, cancel);
-                else
-                {
-                    Application.Current.MainPage.Dispatcher.Dispatch(async () =>
-                    {
-                        //todo: need custom display alert with the addition of a "more details" button.
-                        answer = await Application.Current.MainPage.DisplayAlert(title, message, accept, cancel);
-                        isAnswerReceived = true;
-                    });
-
-                    while (!isAnswerReceived)
-                        await Task.Delay(500);
-                }
-
-            }
-            catch (Exception ex)
-            {
-                _loggerService.Log(ex);
-            }
-
-            return answer;
-        }
-
-        public void ShowOutsideApplication()
+        private void ShowOutsideApplicationAsync()
         {
             //todo: NotImplementedException
             throw new NotImplementedException();
         }
 
-        public void ShowOutsideApplicationOnLockedScreen()
+        private void ShowOutsideApplicationOnLockedScreenAsync()
         {
             throw new NotImplementedException();
         }
-
     }
 }

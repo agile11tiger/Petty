@@ -835,6 +835,15 @@ namespace Petty.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The command is not available at the moment..
+        /// </summary>
+        internal static string UserMessageCommandNotAvailable {
+            get {
+                return ResourceManager.GetString("UserMessageCommandNotAvailable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This command is not supported on this device..
         /// </summary>
         internal static string UserMessageCommandNotSupported {

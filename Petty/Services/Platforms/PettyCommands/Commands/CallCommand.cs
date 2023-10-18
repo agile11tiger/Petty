@@ -40,14 +40,14 @@ namespace Petty.Services.Platforms.PettyCommands.Commands
             try
             {
                 if (_contacts == default)
-                    await InitialiseContactsAsync();
+                    await InitializeContactsAsync();
 
                 var contactName = _textContainingTheCommand[_textContainingTheCommand.LastIndexOf(Name)..];
 
                 if (_contacts.TryGetValue(contactName, out Contact value))
-                    _phoneService.Call(value.Phones.First().ToString());
+                    await _phoneService.CallAsync(value.Phones.First().ToString());
                 else
-                    await _userMessagesService.SendMessageAsync(_localizationService.Get(nameof(AppResources.UserMessageContactNotFound), contactName), AppResources.ButtonOk);
+                    await _userMessagesService.SendMessageAsync(_localizationService.Get(nameof(AppResources.UserMessageContactNotFound), contactName));
 
                 return true;
             }
@@ -59,7 +59,7 @@ namespace Petty.Services.Platforms.PettyCommands.Commands
             return false;
         }
 
-        private async Task InitialiseContactsAsync()
+        private async Task InitializeContactsAsync()
         {
             _contacts = [];
 

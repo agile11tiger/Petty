@@ -378,6 +378,9 @@
   <data name="UserMessageCheckNetworkConnection" xml:space="preserve">
     <value>Проверьте соединение к сети и попробуйте снова.</value>
   </data>
+  <data name="UserMessageCommandNotAvailable" xml:space="preserve">
+    <value>В данный момент команда недоступна.</value>
+  </data>
   <data name="UserMessageCommandNotSupported" xml:space="preserve">
     <value>Эта команда не поддерживается на этом устройстве.</value>
   </data>

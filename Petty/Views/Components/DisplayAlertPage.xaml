@@ -78,7 +78,7 @@
                                             </FormattedString>
                                         </Label.FormattedText>
                                         <Label.GestureRecognizers>
-                                            <TapGestureRecognizer Tapped="Link_TappedAsync" CommandParameter="{Binding Action}"/>
+                                            <TapGestureRecognizer Tapped="LinkTappedAsync" CommandParameter="{Binding Action}"/>
                                         </Label.GestureRecognizers>
                                     </Label>
                                 </DataTemplate>
@@ -99,14 +99,14 @@
                            IsVisible="{Binding IsVisibleAcceptButton}"
                            TextColor="{StaticResource DisplayAlertButton}">
                         <Label.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="LinkAcceptTapped"/>
+                            <TapGestureRecognizer Tapped="LinkAcceptAsyncTapped"/>
                         </Label.GestureRecognizers>
                     </Label>
                     <Label Text="{Binding CancelButton}"
                            IsVisible="{Binding IsVisibleCancelButton}"
                            TextColor="{StaticResource DisplayAlertButton}">
                         <Label.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="LinkCancelTapped"/>
+                            <TapGestureRecognizer Tapped="LinkCancelAsyncTapped"/>
                         </Label.GestureRecognizers>
                     </Label>
                 </HorizontalStackLayout>

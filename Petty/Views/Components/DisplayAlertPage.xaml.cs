@@ -1,32 +1,59 @@
 using Mopups.Pages;
+using Petty.Services.Local.UserMessages;
 using Petty.ViewModels.Components.DisplayAlert;
 
 namespace Petty.Views.Components;
 
 public partial class DisplayAlertPage : PopupPage
 {
-    public DisplayAlertPage(DisplayAlertViewModel displayAlertViewModel)
+    public DisplayAlertPage(DisplayAlertViewModel displayAlertViewModel, UserMessagesService userMessagesService)
     {
         BindingContext = _displayAlertViewModel = displayAlertViewModel;
+        _userMessagesService = userMessagesService;
+
+        if (displayAlertViewModel.AcceptButton != null)
+            _waiter = new AutoResetEvent(false);
+
         InitializeComponent();
         _diplayAlertPage.BackgroundColor = new Color(0, 0, 0, 0.59f);
     }
 
-    public readonly DisplayAlertViewModel _displayAlertViewModel;
+    private bool _result;
+    private readonly AutoResetEvent _waiter;
+    private DisplayAlertViewModel _displayAlertViewModel;
+    private readonly UserMessagesService _userMessagesService;
 
-    private async void Link_TappedAsync(object sender, TappedEventArgs e)
+    private async void LinkTappedAsync(object sender, TappedEventArgs e)
     {
         await (e.Parameter as Func<Task>)();
     }
 
-    private void LinkAcceptTapped(object sender, TappedEventArgs e)
+    private async void LinkAcceptAsyncTapped(object sender, TappedEventArgs e)
     {
-        //todo implement 
-        base.OnBackButtonPressed();
+        _result = true;
+        await _userMessagesService.RemovePageAsync(this);
     }
 
-    private void LinkCancelTapped(object sender, TappedEventArgs e)
+    private async void LinkCancelAsyncTapped(object sender, TappedEventArgs e)
     {
-        base.OnBackButtonPressed();
+        await _userMessagesService.RemovePageAsync(this);
+    }
+
+    protected override void OnDisappearing()
+    {
+        if (_displayAlertViewModel.AcceptButton != null)
+            _waiter.Set();
+
+        base.OnDisappearing();
+    }
+
+    public async Task<bool> GetResultAsync()
+    {
+        return _displayAlertViewModel.AcceptButton != null
+            && await Task.Run(() =>
+            {
+                _waiter.WaitOne();
+                return _result;
+            });
     }
 }

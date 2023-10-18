@@ -39,7 +39,12 @@ namespace Petty.ViewModels
         {
             if (!IsStartingPettyGuardAndroidService)
                 _messenger.Send<StartPettyGuardService>();
-            else if (await _userMessagesService.SendRequestAsync(AppResources.UserMessageDisablePettyGuard, AppResources.ButtonNo, AppResources.ButtonYes))
+            else if (await _userMessagesService.SendMessageAsync(
+                AppResources.UserMessageDisablePettyGuard,
+                null,
+                AppResources.ButtonNo,
+                AppResources.ButtonYes,
+                InformationDeliveryModes.DisplayAlertInApp))
                 _messenger.Send<StopPettyGuardService>();
         }
 
@@ -76,18 +81,13 @@ namespace Petty.ViewModels
             foreach (var command in PettyCommandsService.PettyCommands.Values)
             {
                 if (command.ExtendedDescription != null)
-                    commands.Add(new Link([$"{listNumber++}", command.Name, command.Description],
-                        async () => await _userMessagesService.SendMessageAsync(
-                            await _userMessagesService.CreateDisplayAlertPage(
-                                [new RawLink(command.ExtendedDescription)],
-                                AppResources.ButtonOk,
-                                $"{AppResources.Command} " +
-                                $"{command.Name}"))));
+                    commands.Add(new Link([$"{listNumber++}", command.Name, command.Description], async () => 
+                        await _userMessagesService.SendMessageAsync(command.ExtendedDescription, $"{AppResources.Command} {command.Name}")));
                 else
                     commands.Add(new Link([$"{listNumber++}", command.Name, command.Description]));
             }
 
-            return await _userMessagesService.CreateDisplayAlertPage(commands, AppResources.ButtonOk, AppResources.TitleCommands, true);
+            return await _userMessagesService.CreateDisplayAlertPageAsync(commands, AppResources.TitleCommands, AppResources.ButtonOk, null, true);
         }
 
         private void OnSpeechReceived(object obj, SpeechRecognizerResult speechRecognizerResult)

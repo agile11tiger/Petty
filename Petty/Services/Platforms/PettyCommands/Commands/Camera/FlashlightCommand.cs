@@ -26,7 +26,7 @@ namespace Petty.Services.Platforms.PettyCommands.Commands.Camera
             catch (FeatureNotSupportedException ex)
             {
                 _loggerService.Log(ex);
-                await _userMessagesService.SendMessageAsync(AppResources.UserMessageCommandNotSupported, AppResources.ButtonOk);
+                await _userMessagesService.SendMessageAsync(AppResources.UserMessageCommandNotSupported);
             }
             catch (Exception ex)
             {

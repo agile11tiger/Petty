@@ -15,7 +15,7 @@ namespace Petty.Services.Platforms.PettyCommands.Commands.Camera
             try
             {
                 if (!MediaPicker.Default.IsCaptureSupported)
-                    await _userMessagesService.SendMessageAsync(AppResources.UserMessageCommandNotSupported, AppResources.ButtonOk);
+                    await _userMessagesService.SendMessageAsync(AppResources.UserMessageCommandNotSupported);
 
                 var photo = await MediaPicker.Default.CapturePhotoAsync();
 

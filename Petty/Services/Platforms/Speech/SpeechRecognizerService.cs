@@ -85,7 +85,7 @@ namespace Petty.Services.Platforms.Speech
         public async Task RecognizeFromDiskAsync(Action<string, bool> updateResult, string filePath)
         {
             if (_isRecognizingFromDisk)
-                await _userMessagesService.SendMessageAsync(AppResources.UserMessageTryLater, AppResources.ButtonOk);
+                await _userMessagesService.SendMessageAsync(AppResources.UserMessageTryLater);
 
             if (await TryInitializeRecognizer())
             {
@@ -132,13 +132,14 @@ namespace Petty.Services.Platforms.Speech
             if (!Directory.Exists(voskModelInfo.Path))
             {
                 if (Connectivity.Current.NetworkAccess == NetworkAccess.None)
-                    return await _userMessagesService.SendRequestAsync(AppResources.UserMessageCheckNetworkConnection, AppResources.ButtonOk);
+                    return await _userMessagesService.SendMessageAsync(AppResources.UserMessageCheckNetworkConnection);
 
-                if (!await _userMessagesService.SendRequestAsync(
+                if (!await _userMessagesService.SendMessageAsync(
                     AppResources.UserMessageDownloadVoskModelMessage,
+                    AppResources.TitleDownloading,
                     AppResources.ButtonLater,
                     AppResources.ButtonDownload,
-                    AppResources.TitleDownloading))
+                    InformationDeliveryModes.DisplayAlertInApp))
                     return false;
 
                 await _webRequestsService.DownloadAsync(
