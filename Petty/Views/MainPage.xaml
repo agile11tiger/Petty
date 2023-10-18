@@ -16,10 +16,12 @@
 
     <Grid RowDefinitions="9*, *">
         <ContentView>
-            <Label x:Name="_lol" Text="lol" />
+            <VerticalStackLayout VerticalOptions="Center">
+                <Label x:Name="_lol" Text="lol" />
+            </VerticalStackLayout>
         </ContentView>
         <tabs:TabHostView Margin="0"
-                          Grid.Row="3"
+                          Grid.Row="1"
                           Shadow="{StaticResource tabBarShadow}"
                           BackgroundColor="{StaticResource TabBarBackground}">
             <tabs:MaterialUnderlinedTabItem Label="{x:Static resources:AppResources.PageLeaderboard}" 
@@ -32,11 +34,11 @@
                     <TapGestureRecognizer Command="{Binding GoToLeaderboardCommand}"/>
                 </tabs:MaterialUnderlinedTabItem.GestureRecognizers>
             </tabs:MaterialUnderlinedTabItem>
-            <tabs:TabButton TranslationY="-20"
+            <tabs:TabButton WidthRequest="90"
+                            HeightRequest="90"
+                            TranslationY="-20"
                             ButtonPadding="15"
                             ButtonCircleSize="90"
-                            ButtonWidthRequest="90"
-                            ButtonHeightRequest="90"
                             Shadow="{StaticResource tabBarMainButtonShadow}"
                             ButtonBackgroundColor="{StaticResource Primary}"
                             IconImageSource="{Binding PettyGuardIconImageSource}"
