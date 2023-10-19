@@ -1,7 +1,6 @@
-﻿namespace PettySQLite.Models
+﻿namespace PettySQLite.Models;
+
+public interface IDatabaseItem
 {
-    public interface IDatabaseItem
-    {
-        int Id { get; set; }
-    }
+    int Id { get; set; }
 }

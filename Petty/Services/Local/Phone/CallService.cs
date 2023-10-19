@@ -1,6 +1,5 @@
-﻿namespace Petty.Services.Local.Phone
+﻿namespace Petty.Services.Local.Phone;
+
+internal class CallService
 {
-    internal class CallService
-    {
-    }
 }

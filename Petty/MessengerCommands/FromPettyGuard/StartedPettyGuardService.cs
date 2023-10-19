@@ -1,7 +1,6 @@
-﻿namespace Petty.PlatformsShared.MessengerCommands.FromPettyGuard
+﻿namespace Petty.PlatformsShared.MessengerCommands.FromPettyGuard;
+
+public class StartedPettyGuardService
 {
-    public class StartedPettyGuardService
-    {
-        public bool IsStarted { get; set; }
-    }
+    public bool IsStarted { get; set; }
 }

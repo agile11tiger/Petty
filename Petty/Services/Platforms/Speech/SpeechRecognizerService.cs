@@ -7,280 +7,278 @@ using Petty.Services.Platforms.Audio;
 using System.IO.Compression;
 using Vosk;
 using static Petty.Services.Platforms.Speech.VoskModelInfos;
+namespace Petty.Services.Platforms.Speech;
 
-namespace Petty.Services.Platforms.Speech
+public class SpeechRecognizerService(
+    IMessenger _messenger,
+    WebRequestsService _webRequestsService,
+    UserMessagesService _userMessagesService,
+    AudioRecorderService _audioRecorderService) 
+    : Service, IDisposable
 {
-    public class SpeechRecognizerService(
-        IMessenger _messenger,
-        WebRequestsService _webRequestsService,
-        UserMessagesService _userMessagesService,
-        AudioRecorderService _audioRecorderService) 
-        : Service, IDisposable
+    private const int RESULT_START_MESSAGE_INDEX = 14;
+    private const int RESULT_EMPTY_MESSAGE_LENGTH = 17;// "{\n  \"text\" : \"\"\n}"
+    private const int PARTIAL_RESULT_START_MESSAGE_INDEX = 17;
+    private const int PARTIAL_RESULT_EMPTY_MESSAGE_LENGTH = 20;// "{\n  \"partial\" : \"\"\n}
+    private const string REALTIME_DATA_FILE_PATH = "speechRecognizerRealtimeData.wav";
+
+    private bool _isAcceptWaveform;
+    private Model _recognizerModel;
+    private VoskRecognizer _recognizer;
+    private bool _isRecognizingFromDisk;
+    private string _speechCache = string.Empty;
+    private SpeechRecognizerResult _speechRecognizerResult;
+    private readonly List<float> _silenceThresholds = new();
+    private readonly static SemaphoreSlim _locker = new(1, 1);
+
+    private event Action<SpeechRecognizerResult> BroadcastSpeech;
+
+    /// <summary>
+    /// Gets/sets a value indicating the signal threshold that determines silence.
+    /// If the recorder is being over or under aggressive when detecting silence, 
+    /// you can alter this value to achieve different results.
+    /// </summary>
+    /// <remarks>Defaults to .15.  Value should be between 0 and 1.</remarks>
+    public float SilenceThreshold { get; private set; } = .03f;
+
+    /// <summary>
+    /// Try start the speech recognizer.
+    /// </summary>
+    public async Task<bool> TryStartAsync(Action<SpeechRecognizerResult> subscriber)
     {
-        private const int RESULT_START_MESSAGE_INDEX = 14;
-        private const int RESULT_EMPTY_MESSAGE_LENGTH = 17;// "{\n  \"text\" : \"\"\n}"
-        private const int PARTIAL_RESULT_START_MESSAGE_INDEX = 17;
-        private const int PARTIAL_RESULT_EMPTY_MESSAGE_LENGTH = 20;// "{\n  \"partial\" : \"\"\n}
-        private const string REALTIME_DATA_FILE_PATH = "speechRecognizerRealtimeData.wav";
+        await _locker.WaitAsync();
 
-        private bool _isAcceptWaveform;
-        private Model _recognizerModel;
-        private VoskRecognizer _recognizer;
-        private bool _isRecognizingFromDisk;
-        private string _speechCache = string.Empty;
-        private SpeechRecognizerResult _speechRecognizerResult;
-        private readonly List<float> _silenceThresholds = new();
-        private readonly static SemaphoreSlim _locker = new(1, 1);
-
-        private event Action<SpeechRecognizerResult> BroadcastSpeech;
-
-        /// <summary>
-        /// Gets/sets a value indicating the signal threshold that determines silence.
-        /// If the recorder is being over or under aggressive when detecting silence, 
-        /// you can alter this value to achieve different results.
-        /// </summary>
-        /// <remarks>Defaults to .15.  Value should be between 0 and 1.</remarks>
-        public float SilenceThreshold { get; private set; } = .03f;
-
-        /// <summary>
-        /// Try start the speech recognizer.
-        /// </summary>
-        public async Task<bool> TryStartAsync(Action<SpeechRecognizerResult> subscriber)
+        try
         {
-            await _locker.WaitAsync();
-
-            try
+            if (BroadcastSpeech == null)
             {
-                if (BroadcastSpeech == null)
-                {
-                    if (!await TryInitializeRecognizer())
-                        return false;
-
-                    _audioRecorderService.StartRecording(OnBroadcastAudioRecorderData);
-                }
-
-                BroadcastSpeech += subscriber;
-                return true;
-            }
-            finally { _locker.Release(); }
-        }
-
-        /// <summary>
-        /// Stop the speech recognizer.
-        /// </summary>
-        public async Task StopAsync(Action<SpeechRecognizerResult> subscriber)
-        {
-            await _locker.WaitAsync();
-
-            try
-            {
-                if (BroadcastSpeech.GetInvocationList().Length == 1)
-                    _audioRecorderService.StopRecording(OnBroadcastAudioRecorderData);
-
-                BroadcastSpeech -= subscriber;
-            }
-            finally { _locker.Release(); }
-        }
-
-        public async Task RecognizeFromDiskAsync(Action<string, bool> updateResult, string filePath)
-        {
-            if (_isRecognizingFromDisk)
-                await _userMessagesService.SendMessageAsync(AppResources.UserMessageTryLater);
-
-            if (await TryInitializeRecognizer())
-            {
-                _isRecognizingFromDisk = true;
-                using var reader = File.OpenRead(filePath);
-                await Recognize(reader, updateResult);
-                _isRecognizingFromDisk = false;
-            }
-        }
-
-        public void Dispose()
-        {
-            throw new NotImplementedException();
-        }
-
-        private async Task<bool> TryInitializeRecognizer()
-        {
-            if (_recognizer != null)
-                return true;
-
-            var voskModelInfo = GetModelInfo();
-
-            try
-            {
-                if (await CheckModelFolderAsync(voskModelInfo))
-                {
-                    _recognizerModel = new Model(voskModelInfo.Path);
-                    _recognizer = new VoskRecognizer(_recognizerModel, _audioRecorderService.PreferredSampleRate);
-                    return true;
-                }
-            }
-            catch (Exception ex)
-            {
-                _loggerService.Log(ex);
-            }
-
-            return false;
-        }
-
-        private async Task<bool> CheckModelFolderAsync(VoskModelInfo voskModelInfo)
-        {
-            CheckAndDeleteIfCorruptedFiles(voskModelInfo);
-
-            if (!Directory.Exists(voskModelInfo.Path))
-            {
-                if (Connectivity.Current.NetworkAccess == NetworkAccess.None)
-                    return await _userMessagesService.SendMessageAsync(AppResources.UserMessageCheckNetworkConnection);
-
-                if (!await _userMessagesService.SendMessageAsync(
-                    AppResources.UserMessageDownloadVoskModelMessage,
-                    AppResources.TitleDownloading,
-                    AppResources.ButtonLater,
-                    AppResources.ButtonDownload,
-                    InformationDeliveryModes.DisplayAlertInApp))
+                if (!await TryInitializeRecognizer())
                     return false;
 
-                await _webRequestsService.DownloadAsync(
-                    new Uri(voskModelInfo.Uri),
-                    voskModelInfo.ArchivePath,
-                    (percentages) => _messenger.Send(new UpdateProgressBar() { Percentages = percentages }));
+                _audioRecorderService.StartRecording(OnBroadcastAudioRecorderData);
             }
 
-            if (File.Exists(voskModelInfo.ArchivePath))
-            {
-                ZipFile.ExtractToDirectory(voskModelInfo.ArchivePath, voskModelInfo.DataPath);
-                File.Delete(voskModelInfo.ArchivePath);
-            }
-
+            BroadcastSpeech += subscriber;
             return true;
         }
+        finally { _locker.Release(); }
+    }
 
-        private void CheckAndDeleteIfCorruptedFiles(VoskModelInfo voskModelInfo)
+    /// <summary>
+    /// Stop the speech recognizer.
+    /// </summary>
+    public async Task StopAsync(Action<SpeechRecognizerResult> subscriber)
+    {
+        await _locker.WaitAsync();
+
+        try
         {
-            if (File.Exists(voskModelInfo.ArchivePath))
+            if (BroadcastSpeech.GetInvocationList().Length == 1)
+                _audioRecorderService.StopRecording(OnBroadcastAudioRecorderData);
+
+            BroadcastSpeech -= subscriber;
+        }
+        finally { _locker.Release(); }
+    }
+
+    public async Task RecognizeFromDiskAsync(Action<string, bool> updateResult, string filePath)
+    {
+        if (_isRecognizingFromDisk)
+            await _userMessagesService.SendMessageAsync(AppResources.UserMessageTryLater);
+
+        if (await TryInitializeRecognizer())
+        {
+            _isRecognizingFromDisk = true;
+            using var reader = File.OpenRead(filePath);
+            await Recognize(reader, updateResult);
+            _isRecognizingFromDisk = false;
+        }
+    }
+
+    public void Dispose()
+    {
+        throw new NotImplementedException();
+    }
+
+    private async Task<bool> TryInitializeRecognizer()
+    {
+        if (_recognizer != null)
+            return true;
+
+        var voskModelInfo = GetModelInfo();
+
+        try
+        {
+            if (await CheckModelFolderAsync(voskModelInfo))
             {
-                var fileInfo = new FileInfo(voskModelInfo.ArchivePath);
-
-                if (fileInfo.Length != voskModelInfo.ArchiveByteSize)
-                    File.Delete(voskModelInfo.ArchivePath);
-            }
-
-            if (Directory.Exists(voskModelInfo.Path))
-            {
-                var directoryInfo = new DirectoryInfo(voskModelInfo.Path);
-                var directoryLength = directoryInfo.EnumerateFiles("*", SearchOption.AllDirectories).Sum(file => file.Length);
-
-                if (directoryLength != voskModelInfo.ByteSize)
-                    Directory.Delete(voskModelInfo.Path, true);
+                _recognizerModel = new Model(voskModelInfo.Path);
+                _recognizer = new VoskRecognizer(_recognizerModel, _audioRecorderService.PreferredSampleRate);
+                return true;
             }
         }
-
-        private bool skip;
-        private async void OnBroadcastAudioRecorderData(byte[] recorderData)
+        catch (Exception ex)
         {
-            if (skip)
-                return;
-
-            skip = true;
-            BroadcastSpeech?.Invoke(new SpeechRecognizerResult() { IsResultSpeech = true, Speech = "пэтти характеристики телефона", NotifyCommandRecognized = OnCommandRecognized });
-            return;
-            if (_isAcceptWaveform && CanSkipRecognize(recorderData))
-                return;
-
-            //Returns a value indicating whether the speech has ended or not.
-            //Presumably, when receiving a bunch of zeros, that is, silence.
-            _isAcceptWaveform = _recognizer.AcceptWaveform(recorderData, recorderData.Length);
-            _speechRecognizerResult = new SpeechRecognizerResult() { NotifyCommandRecognized = OnCommandRecognized };
-
-            if (_isAcceptWaveform)
-            {
-                _speechRecognizerResult.Speech = _recognizer.Result();
-
-                if (_speechRecognizerResult.Speech.Length == RESULT_EMPTY_MESSAGE_LENGTH)
-                    return;
-
-                _speechRecognizerResult.Speech = _speechRecognizerResult.Speech[RESULT_START_MESSAGE_INDEX..^3];
-                _speechRecognizerResult.IsResultSpeech = true;
-            }
-            else
-            {
-                _speechRecognizerResult.Speech = _recognizer.PartialResult();
-
-                if (_speechRecognizerResult.Speech.Length == PARTIAL_RESULT_EMPTY_MESSAGE_LENGTH)
-                    return;
-
-                _speechRecognizerResult.Speech = _speechRecognizerResult.Speech[PARTIAL_RESULT_START_MESSAGE_INDEX..^3];
-                _speechRecognizerResult.IsPartialSpeech = true;
-            }
-
-            if (_speechRecognizerResult.Speech.EndsWith(AppResources.SpeechCommandPoint))
-            {
-                _speechRecognizerResult.Speech = _recognizer.FinalResult();
-                _speechRecognizerResult.Speech = _speechRecognizerResult.Speech[RESULT_START_MESSAGE_INDEX..^3];
-                _speechRecognizerResult.IsFinalSpeech = true;
-                _speechRecognizerResult.IsPartialSpeech = false;
-                BroadcastSpeech?.Invoke(_speechRecognizerResult);
-                return;
-            }
-
-            //isAcceptWaveform mean that result() called and we should send result
-            //We dont ignore result even if it's the same. Since we need to separate completed pieces
-            if (_isAcceptWaveform || !_speechRecognizerResult.Speech.Reverse().SequenceEqual(_speechCache.Reverse()))
-            {
-                _speechCache = _speechRecognizerResult.Speech;
-                BroadcastSpeech?.Invoke(_speechRecognizerResult);
-            }
+            _loggerService.Log(ex);
         }
 
-        private void OnCommandRecognized()
+        return false;
+    }
+
+    private async Task<bool> CheckModelFolderAsync(VoskModelInfo voskModelInfo)
+    {
+        CheckAndDeleteIfCorruptedFiles(voskModelInfo);
+
+        if (!Directory.Exists(voskModelInfo.Path))
         {
-            _recognizer.Reset();
-        }
+            if (Connectivity.Current.NetworkAccess == NetworkAccess.None)
+                return await _userMessagesService.SendMessageAsync(AppResources.UserMessageCheckNetworkConnection);
 
-        private bool CanSkipRecognize(byte[] recorderData)
-        {
-            var level = AudioFunctions.CalculateLevel(recorderData);
-            _silenceThresholds.Add(level);
-
-            if (_silenceThresholds.Count > 180) //~1min
-            {
-                SilenceThreshold = _silenceThresholds.Average();
-                _silenceThresholds.Clear();
-            }
-
-            if (level > SilenceThreshold) // skip silence bytes
+            if (!await _userMessagesService.SendMessageAsync(
+                AppResources.UserMessageDownloadVoskModelMessage,
+                AppResources.TitleDownloading,
+                AppResources.ButtonLater,
+                AppResources.ButtonDownload,
+                InformationDeliveryModes.DisplayAlertInApp))
                 return false;
 
-            return true;
+            await _webRequestsService.DownloadAsync(
+                new Uri(voskModelInfo.Uri),
+                voskModelInfo.ArchivePath,
+                (percentages) => _messenger.Send(new UpdateProgressBar() { Percentages = percentages }));
         }
 
-        private async Task Recognize(Stream reader, Action<string, bool> updateResult)
+        if (File.Exists(voskModelInfo.ArchivePath))
         {
-            int bytesRead;
-            string result;
-            byte[] buffer = new byte[4096];
+            ZipFile.ExtractToDirectory(voskModelInfo.ArchivePath, voskModelInfo.DataPath);
+            File.Delete(voskModelInfo.ArchivePath);
+        }
 
-            while ((bytesRead = await reader.ReadAsync(buffer)) > 0)
+        return true;
+    }
+
+    private void CheckAndDeleteIfCorruptedFiles(VoskModelInfo voskModelInfo)
+    {
+        if (File.Exists(voskModelInfo.ArchivePath))
+        {
+            var fileInfo = new FileInfo(voskModelInfo.ArchivePath);
+
+            if (fileInfo.Length != voskModelInfo.ArchiveByteSize)
+                File.Delete(voskModelInfo.ArchivePath);
+        }
+
+        if (Directory.Exists(voskModelInfo.Path))
+        {
+            var directoryInfo = new DirectoryInfo(voskModelInfo.Path);
+            var directoryLength = directoryInfo.EnumerateFiles("*", SearchOption.AllDirectories).Sum(file => file.Length);
+
+            if (directoryLength != voskModelInfo.ByteSize)
+                Directory.Delete(voskModelInfo.Path, true);
+        }
+    }
+
+    private bool skip;
+    private async void OnBroadcastAudioRecorderData(byte[] recorderData)
+    {
+        if (skip)
+            return;
+
+        skip = true;
+        BroadcastSpeech?.Invoke(new SpeechRecognizerResult() { IsResultSpeech = true, Speech = "пэтти характеристики телефона", NotifyCommandRecognized = OnCommandRecognized });
+        return;
+        if (_isAcceptWaveform && CanSkipRecognize(recorderData))
+            return;
+
+        //Returns a value indicating whether the speech has ended or not.
+        //Presumably, when receiving a bunch of zeros, that is, silence.
+        _isAcceptWaveform = _recognizer.AcceptWaveform(recorderData, recorderData.Length);
+        _speechRecognizerResult = new SpeechRecognizerResult() { NotifyCommandRecognized = OnCommandRecognized };
+
+        if (_isAcceptWaveform)
+        {
+            _speechRecognizerResult.Speech = _recognizer.Result();
+
+            if (_speechRecognizerResult.Speech.Length == RESULT_EMPTY_MESSAGE_LENGTH)
+                return;
+
+            _speechRecognizerResult.Speech = _speechRecognizerResult.Speech[RESULT_START_MESSAGE_INDEX..^3];
+            _speechRecognizerResult.IsResultSpeech = true;
+        }
+        else
+        {
+            _speechRecognizerResult.Speech = _recognizer.PartialResult();
+
+            if (_speechRecognizerResult.Speech.Length == PARTIAL_RESULT_EMPTY_MESSAGE_LENGTH)
+                return;
+
+            _speechRecognizerResult.Speech = _speechRecognizerResult.Speech[PARTIAL_RESULT_START_MESSAGE_INDEX..^3];
+            _speechRecognizerResult.IsPartialSpeech = true;
+        }
+
+        if (_speechRecognizerResult.Speech.EndsWith(AppResources.SpeechCommandPoint))
+        {
+            _speechRecognizerResult.Speech = _recognizer.FinalResult();
+            _speechRecognizerResult.Speech = _speechRecognizerResult.Speech[RESULT_START_MESSAGE_INDEX..^3];
+            _speechRecognizerResult.IsFinalSpeech = true;
+            _speechRecognizerResult.IsPartialSpeech = false;
+            BroadcastSpeech?.Invoke(_speechRecognizerResult);
+            return;
+        }
+
+        //isAcceptWaveform mean that result() called and we should send result
+        //We dont ignore result even if it's the same. Since we need to separate completed pieces
+        if (_isAcceptWaveform || !_speechRecognizerResult.Speech.Reverse().SequenceEqual(_speechCache.Reverse()))
+        {
+            _speechCache = _speechRecognizerResult.Speech;
+            BroadcastSpeech?.Invoke(_speechRecognizerResult);
+        }
+    }
+
+    private void OnCommandRecognized()
+    {
+        _recognizer.Reset();
+    }
+
+    private bool CanSkipRecognize(byte[] recorderData)
+    {
+        var level = AudioFunctions.CalculateLevel(recorderData);
+        _silenceThresholds.Add(level);
+
+        if (_silenceThresholds.Count > 180) //~1min
+        {
+            SilenceThreshold = _silenceThresholds.Average();
+            _silenceThresholds.Clear();
+        }
+
+        if (level > SilenceThreshold) // skip silence bytes
+            return false;
+
+        return true;
+    }
+
+    private async Task Recognize(Stream reader, Action<string, bool> updateResult)
+    {
+        int bytesRead;
+        string result;
+        byte[] buffer = new byte[4096];
+
+        while ((bytesRead = await reader.ReadAsync(buffer)) > 0)
+        {
+            _recognizer.AcceptWaveform(buffer, bytesRead);
+            result = _recognizer.PartialResult();
+
+            if (result.Length > PARTIAL_RESULT_EMPTY_MESSAGE_LENGTH)
             {
-                _recognizer.AcceptWaveform(buffer, bytesRead);
-                result = _recognizer.PartialResult();
-
-                if (result.Length > PARTIAL_RESULT_EMPTY_MESSAGE_LENGTH)
-                {
-                    result = result[PARTIAL_RESULT_START_MESSAGE_INDEX..^3];
-                    updateResult(result, false);
-                }
+                result = result[PARTIAL_RESULT_START_MESSAGE_INDEX..^3];
+                updateResult(result, false);
             }
+        }
 
-            result = _recognizer.FinalResult();
+        result = _recognizer.FinalResult();
 
-            if (result.Length > RESULT_EMPTY_MESSAGE_LENGTH)
-            {
-                result = result[RESULT_START_MESSAGE_INDEX..^3];
-                updateResult(result, true);
-            }
+        if (result.Length > RESULT_EMPTY_MESSAGE_LENGTH)
+        {
+            result = result[RESULT_START_MESSAGE_INDEX..^3];
+            updateResult(result, true);
         }
     }
 }

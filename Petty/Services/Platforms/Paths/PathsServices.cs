@@ -1,6 +1,5 @@
-﻿namespace Petty.Services.Platforms.Paths
+﻿namespace Petty.Services.Platforms.Paths;
+
+public partial class PathsService : Service
 {
-    public partial class PathsService : Service
-    {
-    }
 }

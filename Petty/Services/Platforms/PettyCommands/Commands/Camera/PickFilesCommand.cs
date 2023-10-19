@@ -1,32 +1,30 @@
 ﻿using CommunityToolkit.Mvvm.Messaging;
 using Petty.Resources.Localization;
 using Petty.Services.Platforms.PettyCommands.Commands.Base;
+namespace Petty.Services.Platforms.PettyCommands.Commands.Camera;
 
-namespace Petty.Services.Platforms.PettyCommands.Commands.Camera
+public class PickFilesCommand : PettyCommand, IPettyCommand
 {
-    public class PickFilesCommand : PettyCommand, IPettyCommand
+    public string Name => AppResources.CommandPickFiles;
+    public string Description => AppResources.CommandPickFilesDescription;
+
+    public async Task<bool> TryExecuteAsync()
     {
-        public string Name => AppResources.CommandPickFiles;
-        public string Description => AppResources.CommandPickFilesDescription;
-
-        public async Task<bool> TryExecuteAsync()
+        try
         {
-            try
-            {
-                var files = await FilePicker.Default.PickMultipleAsync();
+            var files = await FilePicker.Default.PickMultipleAsync();
 
-                if (files.Any())
-                {
-                    _messager.Send(files);
-                    return true;
-                }
-            }
-            catch (Exception ex)
+            if (files.Any())
             {
-                _loggerService.Log(ex);
+                _messager.Send(files);
+                return true;
             }
-
-            return false;
         }
+        catch (Exception ex)
+        {
+            _loggerService.Log(ex);
+        }
+
+        return false;
     }
 }

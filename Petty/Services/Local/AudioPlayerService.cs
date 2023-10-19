@@ -1,23 +1,21 @@
 ﻿using Plugin.Maui.Audio;
+namespace Petty.Services.Local;
 
-namespace Petty.Services.Local
+public class AudioPlayerService
 {
-    public class AudioPlayerService
+    public AudioPlayerService(IAudioManager audioManager)
     {
-        public AudioPlayerService(IAudioManager audioManager)
-        {
-            _audioManager = audioManager;
-        }
+        _audioManager = audioManager;
+    }
 
-        public const string SCREENSHOT = "screenshot.mp3";
+    public const string SCREENSHOT = "screenshot.mp3";
 
-        private readonly IAudioManager _audioManager;
+    private readonly IAudioManager _audioManager;
 
-        public async Task PlayAsync(string fileName, CancellationToken cancellationToken = default)
-        {
-            var fileStream = await FileSystem.OpenAppPackageFileAsync(fileName);
-            var audioPlayer = _audioManager.CreateAsyncPlayer(fileStream);
-            await audioPlayer.PlayAsync(cancellationToken);
-        }
+    public async Task PlayAsync(string fileName, CancellationToken cancellationToken = default)
+    {
+        var fileStream = await FileSystem.OpenAppPackageFileAsync(fileName);
+        var audioPlayer = _audioManager.CreateAsyncPlayer(fileStream);
+        await audioPlayer.PlayAsync(cancellationToken);
     }
 }

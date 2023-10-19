@@ -1,29 +1,27 @@
-﻿using Petty.Helpres;
+﻿using Petty.Helpers;
+namespace Petty.Services.Local;
 
-namespace Petty.Services.Local
+public class NavigationService : Service
 {
-    public class NavigationService : Service
+    //TODO: change
+    public Task InitializeAsync() => GoToAsync(string.IsNullOrEmpty("_settingsService.AuthAccessToken") ? "Login" : "Main");
+
+    public Task GoToAsync(string route, IDictionary<string, object> routeParameters = null)
     {
-        //TODO: change
-        public Task InitializeAsync() => GoToAsync(string.IsNullOrEmpty("_settingsService.AuthAccessToken") ? "Login" : "Main");
+        var shellNavigation = new ShellNavigationState(route);
 
-        public Task GoToAsync(string route, IDictionary<string, object> routeParameters = null)
-        {
-            var shellNavigation = new ShellNavigationState(route);
+        return routeParameters != null
+            ? Shell.Current.GoToAsync(shellNavigation, true, routeParameters)
+            : Shell.Current.GoToAsync(shellNavigation, true);
+    }
 
-            return routeParameters != null
-                ? Shell.Current.GoToAsync(shellNavigation, true, routeParameters)
-                : Shell.Current.GoToAsync(shellNavigation, true);
-        }
+    public async Task PopToMainAsync()
+    {
+        await GoToAsync($"//{RoutesHelper.MAIN}");
+    }
 
-        public async Task PopToMainAsync()
-        {
-            await GoToAsync($"//{RoutesHelper.MAIN}");
-        }
-
-        public async Task GoBackAsync()
-        {
-            await GoToAsync($"..");
-        }
+    public async Task GoBackAsync()
+    {
+        await GoToAsync($"..");
     }
 }

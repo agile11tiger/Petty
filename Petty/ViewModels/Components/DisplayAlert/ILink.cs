@@ -1,7 +1,6 @@
-﻿namespace Petty.ViewModels.Components.DisplayAlert
+﻿namespace Petty.ViewModels.Components.DisplayAlert;
+
+public interface ILink
 {
-    public interface ILink
-    {
-        bool IsRawLink => false;
-    }
+    bool IsRawLink => false;
 }

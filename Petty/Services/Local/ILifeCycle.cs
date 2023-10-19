@@ -1,9 +1,8 @@
-﻿namespace Petty.Services.Local
+﻿namespace Petty.Services.Local;
+
+public interface ILifeCycle
 {
-    public interface ILifeCycle
-    {
-        bool IsStarting { get; }
-        void Start();
-        void Stop();
-    }
+    bool IsStarting { get; }
+    void Start();
+    void Stop();
 }

@@ -1,7 +1,6 @@
-﻿namespace Petty.PlatformsShared.MessengerCommands.FromPettyGuard
+﻿namespace Petty.PlatformsShared.MessengerCommands.FromPettyGuard;
+
+public class StoppedPettyGuardService
 {
-    public class StoppedPettyGuardService
-    {
-        public bool IsStopped { get; set; }
-    }
+    public bool IsStopped { get; set; }
 }

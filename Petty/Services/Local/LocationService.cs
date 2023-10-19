@@ -1,6 +1,5 @@
-﻿namespace Petty.Services.Local
+﻿namespace Petty.Services.Local;
+
+public class LocationService : Service
 {
-    public class LocationService : Service
-    {
-    }
 }

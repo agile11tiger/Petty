@@ -1,29 +1,27 @@
-﻿using Petty.Helpres;
+﻿using Petty.Helpers;
 using Petty.ViewModels.Base;
+namespace Petty.ViewModels;
 
-namespace Petty.ViewModels
+public partial class MainViewModel : ViewModelBase
 {
-    public partial class MainViewModel : ViewModelBase
+    [ObservableProperty] private bool _isSelectedTabBarItem;
+    [ObservableProperty] private string _pettyGuardIconImageSource = "play.png";
+
+    [RelayCommand]
+    private async Task GoToSettingsAsync()
     {
-        [ObservableProperty] private bool _isSelectedTabBarItem;
-        [ObservableProperty] private string _pettyGuardIconImageSource = "play.png";
+        await _navigationService.GoToAsync(RoutesHelper.SETTINGS);
+        IsSelectedTabBarItem = false;
+    }
 
-        [RelayCommand]
-        private async Task GoToSettingsAsync()
-        {
-            await _navigationService.GoToAsync(RoutesHelper.SETTINGS);
-            IsSelectedTabBarItem = false;
-        }
+    [RelayCommand]
+    private async Task GoToSpeechSimulatorAsync()
+    {
+        await _navigationService.GoToAsync(RoutesHelper.SPEECH_SIMULATOR);
+    }
 
-        [RelayCommand]
-        private async Task GoToSpeechSimulatorAsync()
-        {
-            await _navigationService.GoToAsync(RoutesHelper.SPEECH_SIMULATOR);
-        }
-
-        [RelayCommand]
-        private async Task GoToLeaderboardAsync()
-        {
-        }
+    [RelayCommand]
+    private async Task GoToLeaderboardAsync()
+    {
     }
 }

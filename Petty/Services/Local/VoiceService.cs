@@ -1,53 +1,51 @@
 ﻿using Petty.Services.Platforms.PettyCommands.Commands.Base;
+namespace Petty.Services.Local;
 
-namespace Petty.Services.Local
+public class VoiceService : Service
 {
-    public class VoiceService : Service
+    public VoiceService(SettingsService settingsService)
     {
-        public VoiceService(SettingsService settingsService)
+        _tokenSource = new CancellationTokenSource();
+        _speechOptions = new SpeechOptions()
         {
-            _tokenSource = new CancellationTokenSource();
-            _speechOptions = new SpeechOptions()
-            {
-                Pitch = (float)settingsService.Settings.VoiceSettings.Pitch,// 0.0 - 2.0
-                Volume = (float)settingsService.Settings.VoiceSettings.Volume, // 0.0 - 1.0
-            };
-        }
+            Pitch = (float)settingsService.Settings.VoiceSettings.Pitch,// 0.0 - 2.0
+            Volume = (float)settingsService.Settings.VoiceSettings.Volume, // 0.0 - 1.0
+        };
+    }
 
-        private SpeechOptions _speechOptions;
-        private CancellationTokenSource _tokenSource;
+    private SpeechOptions _speechOptions;
+    private CancellationTokenSource _tokenSource;
 
-        public async Task SpeakAsync(string speech)
+    public async Task SpeakAsync(string speech)
+    {
+        await TextToSpeech.Default.SpeakAsync(speech, _speechOptions, _tokenSource.Token);
+    }
+
+    public async Task SpeakAsync(string speech, VoiceSettings voiceSettings)
+    {
+        var speechOptions = new SpeechOptions
         {
-            await TextToSpeech.Default.SpeakAsync(speech, _speechOptions, _tokenSource.Token);
-        }
+            Pitch = voiceSettings.Pitch,
+            Volume = voiceSettings.Volume
+        };
+        await TextToSpeech.Default.SpeakAsync(speech, speechOptions, _tokenSource.Token);
+    }
 
-        public async Task SpeakAsync(string speech, VoiceSettings voiceSettings)
-        {
-            var speechOptions = new SpeechOptions
-            {
-                Pitch = voiceSettings.Pitch,
-                Volume = voiceSettings.Volume
-            };
-            await TextToSpeech.Default.SpeakAsync(speech, speechOptions, _tokenSource.Token);
-        }
+    public void CancelSpeech()
+    {
+        if (_tokenSource.IsCancellationRequested)
+            return;
 
-        public void CancelSpeech()
-        {
-            if (_tokenSource.IsCancellationRequested)
-                return;
+        _tokenSource.Cancel();
+    }
 
-            _tokenSource.Cancel();
-        }
+    public void PlayCommandExecutionFailed(IPettyCommand command)
+    {
 
-        public void PlayCommandExecutionFailed(IPettyCommand command)
-        {
+    }
 
-        }
+    public void PlayCommandExecutionSuccessed(IPettyCommand command)
+    {
 
-        public void PlayCommandExecutionSuccessed(IPettyCommand command)
-        {
-
-        }
     }
 }

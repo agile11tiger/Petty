@@ -1,48 +1,47 @@
-﻿namespace Petty.Services.Platforms.Paths
+﻿namespace Petty.Services.Platforms.Paths;
+
+public partial class PathsService
 {
-    public partial class PathsService
+    public const string MONOTYPE_CORSIVA_PATH = "Petty.Resources.Fonts.MonotypeCorsiva.ttf";
+    public static string ScreenshotsPath
     {
-        public const string MONOTYPE_CORSIVA_PATH = "Petty.Resources.Fonts.MonotypeCorsiva.ttf";
-        public static string ScreenshotsPath
+        get
         {
-            get
-            {
-                var screenshotsPath = Android.OS.Environment.GetExternalStoragePublicDirectory(Android.OS.Environment.DirectoryPictures).Path;
+            var screenshotsPath = Android.OS.Environment.GetExternalStoragePublicDirectory(Android.OS.Environment.DirectoryPictures).Path;
 
-                //Unlikely since this is a base folder.
-                if (!Directory.Exists(screenshotsPath))
-                    Directory.CreateDirectory(screenshotsPath, UnixFileMode.GroupWrite | UnixFileMode.GroupRead);
+            //Unlikely since this is a base folder.
+            if (!Directory.Exists(screenshotsPath))
+                Directory.CreateDirectory(screenshotsPath, UnixFileMode.GroupWrite | UnixFileMode.GroupRead);
 
-                return screenshotsPath;
-            }
+            return screenshotsPath;
         }
+    }
 
-        public static string PicturesPath
+    public static string PicturesPath
+    {
+        get
         {
-            get
-            {
-                var picturesPath = Android.OS.Environment.GetExternalStoragePublicDirectory(Android.OS.Environment.DirectoryPictures).Path;
+            var picturesPath = Android.OS.Environment.GetExternalStoragePublicDirectory(Android.OS.Environment.DirectoryPictures).Path;
 
-                //Unlikely since this is a base folder.
-                if (!Directory.Exists(picturesPath))
-                    Directory.CreateDirectory(picturesPath, UnixFileMode.GroupWrite | UnixFileMode.GroupRead);
+            //Unlikely since this is a base folder.
+            if (!Directory.Exists(picturesPath))
+                Directory.CreateDirectory(picturesPath, UnixFileMode.GroupWrite | UnixFileMode.GroupRead);
 
-                return picturesPath;
-            }
+            return picturesPath;
         }
+    }
 
-        public static string VideoPath
+    public static string VideoPath
+    {
+        get
         {
-            get
-            {
-                var videoPath = Android.OS.Environment.GetExternalStoragePublicDirectory(Android.OS.Environment.DirectoryMovies).Path;
+            var videoPath = Android.OS.Environment.GetExternalStoragePublicDirectory(Android.OS.Environment.DirectoryMovies).Path;
 
-                //Unlikely since this is a base folder.
-                if (!Directory.Exists(videoPath))
-                    Directory.CreateDirectory(videoPath, UnixFileMode.GroupWrite | UnixFileMode.GroupRead);
+            //Unlikely since this is a base folder.
+            if (!Directory.Exists(videoPath))
+                Directory.CreateDirectory(videoPath, UnixFileMode.GroupWrite | UnixFileMode.GroupRead);
 
-                return videoPath;
-            }
+            return videoPath;
         }
     }
 }

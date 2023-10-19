@@ -1,51 +1,50 @@
-﻿namespace Petty.Services.Platforms.Audio
+﻿namespace Petty.Services.Platforms.Audio;
+
+public interface IAudioStream
 {
-    public interface IAudioStream
-    {
-        /// <summary>
-        /// Occurs when there's an error while capturing audio.
-        /// </summary>
-        event Action<Exception> ExceptionCatched;
+    /// <summary>
+    /// Occurs when there's an error while capturing audio.
+    /// </summary>
+    event Action<Exception> ExceptionCatched;
 
-        /// <summary>
-        /// Gets a value indicating if the audio stream is active.
-        /// </summary>
-        bool IsActive { get; }
+    /// <summary>
+    /// Gets a value indicating if the audio stream is active.
+    /// </summary>
+    bool IsActive { get; }
 
-        /// <summary>
-        /// Gets the sample rate.
-        /// </summary>
-        /// <value>
-        /// The sample rate.
-        /// </value>
-        int SampleRate { get; }
+    /// <summary>
+    /// Gets the sample rate.
+    /// </summary>
+    /// <value>
+    /// The sample rate.
+    /// </value>
+    int SampleRate { get; }
 
-        /// <summary>
-        /// Gets the channel count.
-        /// </summary>
-        /// <value>
-        /// The channel count.
-        /// </value>
-        int ChannelCount { get; }
+    /// <summary>
+    /// Gets the channel count.
+    /// </summary>
+    /// <value>
+    /// The channel count.
+    /// </value>
+    int ChannelCount { get; }
 
-        /// <summary>
-        /// Gets bits per sample.
-        /// </summary>
-        int BitsPerSample { get; }
+    /// <summary>
+    /// Gets bits per sample.
+    /// </summary>
+    int BitsPerSample { get; }
 
-        /// <summary>
-        /// Starts the audio stream.
-        /// </summary>
-        void Start(Action<byte[]> subscriber);
+    /// <summary>
+    /// Starts the audio stream.
+    /// </summary>
+    void Start(Action<byte[]> subscriber);
 
-        /// <summary>
-        /// Stops the audio stream.
-        /// </summary>
-        void Stop(Action<byte[]> subscriber);
+    /// <summary>
+    /// Stops the audio stream.
+    /// </summary>
+    void Stop(Action<byte[]> subscriber);
 
-        /// <summary>
-        /// Flushes any audio bytes in memory but not yet broadcast out to any listeners.
-        /// </summary>
-        void Flush();
-    }
+    /// <summary>
+    /// Flushes any audio bytes in memory but not yet broadcast out to any listeners.
+    /// </summary>
+    void Flush();
 }

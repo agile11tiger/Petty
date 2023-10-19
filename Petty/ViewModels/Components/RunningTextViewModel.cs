@@ -1,70 +1,68 @@
 ﻿using Petty.ViewModels.Base;
+namespace Petty.ViewModels.Components;
 
-namespace Petty.ViewModels.Components
+public partial class RunningTextViewModel : ViewModelBase
 {
-    public partial class RunningTextViewModel : ViewModelBase
+    public RunningTextViewModel()
     {
-        public RunningTextViewModel()
-        {
-            _runningText = string.Join(";", Enumerable.Range(1, 100));
-            _runningTextStart = _runningText.Length * _runningTextStartCoefficient;
-            _runningTextMaximumWidthRequest = _runningTextStart + 5; //+5 is length for last chars
-            StartRunningTextThread();
-        }
+        _runningText = string.Join(";", Enumerable.Range(1, 100));
+        _runningTextStart = _runningText.Length * _runningTextStartCoefficient;
+        _runningTextMaximumWidthRequest = _runningTextStart + 5; //+5 is length for last chars
+        StartRunningTextThread();
+    }
 
-        [ObservableProperty] private string _runningText;
-        [ObservableProperty] private double _runningTextStart;
-        [ObservableProperty] private double _runningTextMaximumWidthRequest;
-        private volatile bool _isStopRunningTextLine;
-        private readonly double _runningTextStartCoefficient = 6.5;
-        private readonly int _runningTextLeftBorderCoefficient = 55;
-        private readonly EventWaitHandle _runningTextLocker = new AutoResetEvent(false);
+    [ObservableProperty] private string _runningText;
+    [ObservableProperty] private double _runningTextStart;
+    [ObservableProperty] private double _runningTextMaximumWidthRequest;
+    private volatile bool _isStopRunningTextLine;
+    private readonly double _runningTextStartCoefficient = 6.5;
+    private readonly int _runningTextLeftBorderCoefficient = 55;
+    private readonly EventWaitHandle _runningTextLocker = new AutoResetEvent(false);
 
-        private void StartRunningTextThread()
+    private void StartRunningTextThread()
+    {
+        new Thread(() =>
         {
-            new Thread(() =>
+            try
             {
-                try
+                _runningTextLocker.WaitOne();
+                var translationXInitialValue = RunningTextStart;
+
+                while (true)
                 {
-                    _runningTextLocker.WaitOne();
-                    var translationXInitialValue = RunningTextStart;
+                    RunningTextStart = translationXInitialValue;
+                    var leftTextBorder = -translationXInitialValue / RunningText.Length * _runningTextLeftBorderCoefficient;
 
-                    while (true)
+                    while (leftTextBorder < RunningTextStart--)
                     {
-                        RunningTextStart = translationXInitialValue;
-                        var leftTextBorder = -translationXInitialValue / RunningText.Length * _runningTextLeftBorderCoefficient;
+                        Thread.Sleep(15);
 
-                        while (leftTextBorder < RunningTextStart--)
-                        {
-                            Thread.Sleep(15);
-
-                            if (_isStopRunningTextLine)
-                                _runningTextLocker.WaitOne();
-                        }
+                        if (_isStopRunningTextLine)
+                            _runningTextLocker.WaitOne();
                     }
                 }
-                catch (Exception ex)
-                {
-                    _loggerService.Log(ex);
-                }
-                finally
-                {
-                    Monitor.Exit(_runningTextLocker);
-                }
-            }).Start();
-        }
+            }
+            catch (Exception ex)
+            {
+                _loggerService.Log(ex);
+            }
+            finally
+            {
+                Monitor.Exit(_runningTextLocker);
+            }
+        }).Start();
+    }
 
-        [RelayCommand]
-        private void StartRunningText()
-        {
-            _isStopRunningTextLine = false;
-            _runningTextLocker.Set();
-        }
+    [RelayCommand]
+    private void StartRunningText()
+    {
+        _isStopRunningTextLine = false;
+        _runningTextLocker.Set();
+    }
 
-        [RelayCommand]
-        private void StopRunningText()
-        {
-            _isStopRunningTextLine = true;
-        }
+    [RelayCommand]
+    private void StopRunningText()
+    {
+        _isStopRunningTextLine = true;
     }
 }

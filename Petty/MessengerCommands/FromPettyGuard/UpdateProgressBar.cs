@@ -1,7 +1,6 @@
-﻿namespace Petty.PlatformsShared.MessengerCommands.FromPettyGuard
+﻿namespace Petty.PlatformsShared.MessengerCommands.FromPettyGuard;
+
+public class UpdateProgressBar
 {
-    public class UpdateProgressBar
-    {
-        public double Percentages { get; set; }
-    }
+    public double Percentages { get; set; }
 }

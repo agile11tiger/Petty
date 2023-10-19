@@ -1,6 +1,5 @@
-﻿namespace Petty.MessengerCommands.ToPettyGuard
+﻿namespace Petty.MessengerCommands.ToPettyGuard;
+
+public class StartPettyGuardService
 {
-    public class StartPettyGuardService
-    {
-    }
 }

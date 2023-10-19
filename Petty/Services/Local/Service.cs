@@ -1,12 +1,11 @@
-﻿namespace Petty.Services.Local
-{
-    public abstract class Service
-    {
-        protected Service()
-        {
-            _loggerService = MauiProgram.ServiceProvider.GetService<LoggerService>();
-        }
+﻿namespace Petty.Services.Local;
 
-        protected readonly LoggerService _loggerService;
+public abstract class Service
+{
+    protected Service()
+    {
+        _loggerService = MauiProgram.ServiceProvider.GetService<LoggerService>();
     }
+
+    protected readonly LoggerService _loggerService;
 }
