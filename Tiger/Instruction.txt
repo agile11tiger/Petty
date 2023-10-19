@@ -1,0 +1,4 @@
+add Tiger folder to ..\Documents\Visual Studio 2022\Templates\ItemTemplates\C#
+example: C:\Users\11nat\Documents\Visual Studio 2022\Templates\ItemTemplates\C#
+
+icon take from https://www.iconarchive.com/show/childrens-book-animals-icons-by-iconarchive/Tiger-icon.html
