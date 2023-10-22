@@ -556,7 +556,7 @@ namespace Petty.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Read — all information is displayed on the screen..
+        ///   Looks up a localized string similar to Read.
         /// </summary>
         internal static string InformationPerceptionModeRead {
             get {
@@ -565,7 +565,16 @@ namespace Petty.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ReadOrVoice — all information is displayed or spoken..
+        ///   Looks up a localized string similar to all information is displayed on the screen.
+        /// </summary>
+        internal static string InformationPerceptionModeReadDescription {
+            get {
+                return ResourceManager.GetString("InformationPerceptionModeReadDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ReadOrVoice.
         /// </summary>
         internal static string InformationPerceptionModeReadOrVoice {
             get {
@@ -574,7 +583,16 @@ namespace Petty.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Voice — all information is spoken..
+        ///   Looks up a localized string similar to all information is displayed or spoken.
+        /// </summary>
+        internal static string InformationPerceptionModeReadOrVoiceDescription {
+            get {
+                return ResourceManager.GetString("InformationPerceptionModeReadOrVoiceDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Voice.
         /// </summary>
         internal static string InformationPerceptionModeVoice {
             get {
@@ -583,7 +601,16 @@ namespace Petty.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Current language:.
+        ///   Looks up a localized string similar to all information is spoken.
+        /// </summary>
+        internal static string InformationPerceptionModeVoiceDescription {
+            get {
+                return ResourceManager.GetString("InformationPerceptionModeVoiceDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Current language (will only be applied after restarting the application):.
         /// </summary>
         internal static string LabelSettingsCurrentLanguage {
             get {
@@ -615,24 +642,6 @@ namespace Petty.Resources.Localization {
         internal static string LabelSettingsVolume {
             get {
                 return ResourceManager.GetString("LabelSettingsVolume", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to English.
-        /// </summary>
-        internal static string LanguageEnglish {
-            get {
-                return ResourceManager.GetString("LanguageEnglish", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Russian.
-        /// </summary>
-        internal static string LanguageRussian {
-            get {
-                return ResourceManager.GetString("LanguageRussian", resourceCulture);
             }
         }
         

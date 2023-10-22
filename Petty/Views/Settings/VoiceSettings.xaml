@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="Petty.Views.Settings.VoiceSettingsPage"
+             x:DataType="viewModelsSettings:VoiceSettingsViewModel"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:resources="clr-namespace:Petty.Resources.Localization"
+             xmlns:viewModelsSettings="clr-namespace:Petty.ViewModels.Settings">
+
+    <Grid Margin="10"
+          ColumnDefinitions="*, 2*,*"
+          RowDefinitions="50,1,50,1,100,1,100">
+
+        <Label Grid.Row="0" Grid.Column="0" Text="{x:Static resources:AppResources.LabelSettingsVolume}"/>
+        <StackLayout Spacing="0"
+                     Grid.Row="0"
+                     Grid.Column="1"
+                     Grid.ColumnSpan="2"
+                     VerticalOptions="Center">
+            <Label HorizontalOptions="Center" Text="{Binding VolumeValueText}"/>
+            <Slider Value="{Binding VolumeValue}" Maximum="{Binding VolumeMaxValue}"/>
+        </StackLayout>
+        <BoxView Grid.Row="1" Grid.ColumnSpan="3"/>
+
+        <Label Grid.Row="2" Grid.Column="0" Text="{x:Static resources:AppResources.LabelSettingsPitch}"/>
+        <StackLayout Spacing="0"
+                     Grid.Row="2"
+                     Grid.Column="1"
+                     Grid.ColumnSpan="2"
+                     VerticalOptions="Center">
+            <Label HorizontalOptions="Center" Text="{Binding PitchValueText}"/>
+            <Slider Value="{Binding PitchValue}" Maximum="{Binding PitchMaxValue}"/>
+        </StackLayout>
+        <BoxView Grid.Row="3" Grid.ColumnSpan="3"/>
+        <Editor Keyboard="Text"
+                Grid.Row="4"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                IsSpellCheckEnabled="false"
+                Text="{Binding Speech}"/>
+        <Button Grid.Row="4"
+                Grid.Column="2"
+                HeightRequest="40"
+                Command="{Binding SpeakCommand}"
+                Text="{x:Static resources:AppResources.ButtonSpeak}"/>
+        <BoxView Grid.Row="5" Grid.ColumnSpan="3"/>
+
+        <HorizontalStackLayout Spacing="20"
+                               Grid.Row="6" 
+                               Grid.ColumnSpan="3" 
+                               VerticalOptions="Center"
+                               HorizontalOptions="Center">
+            <Button MinimumWidthRequest="130" 
+                    BackgroundColor="{StaticResource Gray700}"
+                    Command="{Binding ApplyDefaultSettingsCommand}"
+                    Text="{x:Static resources:AppResources.ButtonDefault}"/>
+            <Button MinimumWidthRequest="130" 
+                    Command="{Binding ApplySettingsCommand}"
+                    Text="{x:Static resources:AppResources.ButtonApply}"/>
+        </HorizontalStackLayout>
+    </Grid>
+
+</ContentPage>

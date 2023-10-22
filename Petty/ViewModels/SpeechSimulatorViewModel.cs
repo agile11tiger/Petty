@@ -7,8 +7,8 @@ using Petty.Services.Local.UserMessages;
 using Petty.Services.Platforms.PettyCommands;
 using Petty.Services.Platforms.Speech;
 using Petty.ViewModels.Base;
-using Petty.ViewModels.Components.DisplayAlert;
-using Petty.Views.Components;
+using Petty.ViewModels.DisplayAlert;
+using Petty.Views.Controls;
 namespace Petty.ViewModels;
 
 public partial class SpeechSimulatorViewModel : ViewModelBase
@@ -63,27 +63,27 @@ public partial class SpeechSimulatorViewModel : ViewModelBase
     private async Task<DisplayAlertPage> CreateDisplayAlertPageAsync()
     {
         var listNumber = 0;
-        var commands = new List<ILink> { new RawLink(AppResources.TitlePunctuationWords, true) };
+        var commands = new List<ILink> { new RawLink(AppResources.TitlePunctuationWords, isTitle: true) };
 
         foreach (var punctuation in PunctuationRecognizer.Punctuations)
         {
             if (punctuation.Key == AppResources.SpeechCommandNewLine)
-                commands.Add(new Link([$"{listNumber++}", punctuation.Key, string.Empty]));
+                commands.Add(new Link([punctuation.Key, string.Empty], listNumber++));
             else
-                commands.Add(new Link([$"{listNumber++}", punctuation.Key, punctuation.Value]));
+                commands.Add(new Link([punctuation.Key, punctuation.Value], listNumber++));
         }
 
         listNumber = 0;
         commands.Add(new RawLink(string.Empty));
-        commands.Add(new RawLink(AppResources.UsefulFeatures, true));
+        commands.Add(new RawLink(AppResources.UsefulFeatures, isTitle: true));
 
         foreach (var command in PettyCommandsService.PettyCommands.Values)
         {
             if (command.ExtendedDescription != null)
-                commands.Add(new Link([$"{listNumber++}", command.Name, command.Description], async () => 
+                commands.Add(new Link([command.Name, command.Description], listNumber++, async () => 
                     await _userMessagesService.SendMessageAsync(command.ExtendedDescription, $"{AppResources.Command} {command.Name}")));
             else
-                commands.Add(new Link([$"{listNumber++}", command.Name, command.Description]));
+                commands.Add(new Link([command.Name, command.Description], listNumber++));
         }
 
         return await _userMessagesService.CreateDisplayAlertPageAsync(commands, AppResources.TitleCommands, AppResources.ButtonOk, null, true);
@@ -95,7 +95,7 @@ public partial class SpeechSimulatorViewModel : ViewModelBase
         //resultSpeech == finalSpeech 
         //Depends on how to call either because of silence or manually because of the point.
         if (_sentences.Count == 0)
-            _sentences.AddRange(new string[] { string.Empty, string.Empty }); //add empty place for resultSpeech and partrialSpeech
+            _sentences.AddRange(new string[] { string.Empty, string.Empty }); //add empty place for resultSpeech and partialSpeech
 
         if (speechRecognizerResult.IsPartialSpeech)
             _sentences[^1] = speechRecognizerResult.Speech;

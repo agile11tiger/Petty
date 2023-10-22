@@ -1,6 +1,8 @@
 ﻿using Petty.Extensions;
 using Petty.Resources.Localization;
 using Petty.ViewModels.Base;
+using Petty.ViewModels.DisplayAlert;
+using System.Windows.Input;
 namespace Petty.ViewModels.Settings;
 
 public partial class BaseSettingsViewModel : ViewModelBase
@@ -10,30 +12,51 @@ public partial class BaseSettingsViewModel : ViewModelBase
         _databaseService = databaseService;
         _settingsService = settingsService;
         _tempBaseSettings = settingsService.Settings.BaseSettings.CloneJson();
-        _languages = _localizationService.SupportedCultures.Values.ToList();
-        _informationPerceptionModes = new()
-        {
-            //carefully, sequence from PettySQLite.Models.InformationPerceptionModes
-            new InformationPerceptionMode() { Id = 0, ModeName = $"0. {AppResources.InformationPerceptionModeReadOrVoice}" },
-            new InformationPerceptionMode() { Id = 1, ModeName = $"1. {AppResources.InformationPerceptionModeRead}" },
-            new InformationPerceptionMode() { Id = 2, ModeName = $"2. {AppResources.InformationPerceptionModeVoice}" },
-        };
+        var languagesListNumber = 0;
+        _languages = _localizationService.SupportedCultures.Values
+            .Select(lang =>
+            {
+                if (lang.CultureInfo.Name == _tempBaseSettings.LanguageType)
+                    _pickerLanguageSelectedItemName = lang.Name;
+
+                return new PickerLink(lang.Name, languagesListNumber++);
+            }).ToList();
+        //carefully, sequence from PettySQLite.Models.InformationPerceptionModes
+        _informationPerceptionModes =
+        [
+            new PickerLink($"{AppResources.InformationPerceptionModeReadOrVoice} — {AppResources.InformationPerceptionModeReadOrVoiceDescription}", 0, AppResources.InformationPerceptionModeReadOrVoice),
+            new PickerLink($"{AppResources.InformationPerceptionModeRead} — {AppResources.InformationPerceptionModeReadDescription}", 1, AppResources.InformationPerceptionModeRead),
+            new PickerLink($"{AppResources.InformationPerceptionModeVoice} — {AppResources.InformationPerceptionModeVoiceDescription}", 2, AppResources.InformationPerceptionModeVoice),
+        ];
+        _informationPerceptionModeSelectedItemName = _informationPerceptionModes[(int)_tempBaseSettings.InformationPerceptionMode].SelectedLinkText;
     }
 
-    private string _informationPerceptionMode;
     private readonly DatabaseService _databaseService;
     private readonly SettingsService _settingsService;
-    [ObservableProperty] private List<Language> _languages;
+    [ObservableProperty] private List<PickerLink> _languages;
+    [ObservableProperty] private string _pickerLanguageSelectedItemName;
+    [ObservableProperty] private List<PickerLink> _informationPerceptionModes;
+    [ObservableProperty] private string _informationPerceptionModeSelectedItemName;
     [ObservableProperty] private PettySQLite.Models.BaseSettings _tempBaseSettings;
-    [ObservableProperty] private List<InformationPerceptionMode> _informationPerceptionModes;
 
-    /// <summary>
-    /// todo: formatting not working https://github.com/dotnet/maui/issues/14854
-    /// </summary>
-    public string SelectedInformationPerceptionMode
+    [RelayCommand]
+    private void SetLanguage(ILink link)
     {
-        get => _informationPerceptionMode;
-        set => SetProperty(ref _informationPerceptionMode, value.Substring(3, value.IndexOf('(')));
+        if (link != null)
+        {
+            PickerLanguageSelectedItemName = (link as PickerLink).SelectedLinkText;
+            TempBaseSettings.LanguageType = _localizationService.SupportedCultures.Values.ElementAt(link.Index).CultureInfo.Name;
+        }
+    }
+
+    [RelayCommand]
+    private void SetInformationPerceptionMode(ILink link)
+    {
+        if (link != null)
+        {
+            InformationPerceptionModeSelectedItemName = (link as PickerLink).SelectedLinkText;
+            TempBaseSettings.InformationPerceptionMode = (InformationPerceptionModes)link.Index;
+        }
     }
 
     [RelayCommand]
@@ -57,13 +80,7 @@ public partial class BaseSettingsViewModel : ViewModelBase
 
         if (needSoftRestart)
             _localizationService.SetCulture(_localizationService.SupportedCultures[_settingsService.Settings.BaseSettings.LanguageType].CultureInfo, true);
-        else
-            await _navigationService.GoBackAsync();
-    }
-
-    public class InformationPerceptionMode
-    {
-        public int Id { get; set; }
-        public string ModeName { get; set; }
+        
+        await _navigationService.GoBackAsync();
     }
 }

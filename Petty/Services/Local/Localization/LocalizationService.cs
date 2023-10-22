@@ -9,8 +9,8 @@ public class LocalizationService(IMessenger _messenger) : Service
 {
     public readonly Dictionary<string, Language> SupportedCultures = new()
     {
-        { "en-US", new Language { Name = AppResources.LanguageEnglish, CultureInfo = new CultureInfo("en-US")} },
-        { "ru-RU", new Language { Name = AppResources.LanguageRussian, CultureInfo = new CultureInfo("ru-RU")} }
+        { "en-US", new Language { Name = "English", CultureInfo = new CultureInfo("en-US")} },
+        { "ru-RU", new Language { Name = "Русский", CultureInfo = new CultureInfo("ru-RU")} }
     };
 
     public bool IsRussianLanguage => CultureInfo.CurrentCulture.Name == "ru-RU";

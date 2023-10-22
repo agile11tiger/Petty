@@ -4,6 +4,19 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
 
+    <!-- TODO: change to this: https://www.gradientmagic.com/collection/lightbg/gradient/1571400294220
+     when maui background will supply collection of lineargradientbrush.
+     I checked in the css it`s not working too. 
+     this can do it https://learn.microsoft.com/en-us/dotnet/maui/user-interface/graphics/paint-->
+
+    <Style TargetType="ContentPage" ApplyToDerivedTypes="True">
+        <Setter Property="Background">
+            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                <GradientStop Color="#ddd" Offset="0" />
+                <GradientStop Color="#ccc" Offset="1.0" />
+            </LinearGradientBrush>
+        </Setter>
+    </Style>
     <Style TargetType="ActivityIndicator">
         <Setter Property="Color" Value="{StaticResource Primary}" />
     </Style>

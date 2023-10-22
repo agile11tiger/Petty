@@ -117,20 +117,35 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>AppResources.resx</DependentUpon>
     </Compile>
-    <Compile Update="Views\Components\DisplayAlertPage.xaml.cs">
-      <DependentUpon>DisplayAlertPage.xaml</DependentUpon>
+    <Compile Update="Views\DisplayAlert.xaml.cs">
+      <DependentUpon>DisplayAlert.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\DiagnosticsPettyPage.xaml.cs">
-      <DependentUpon>DiagnosticsPettyPage.xaml</DependentUpon>
+    <Compile Update="Views\Controls\Picker\PickerView.xaml.cs">
+      <DependentUpon>PickerView.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\Settings\SettingsPage.xaml.cs">
-      <DependentUpon>SettingsPage.xaml</DependentUpon>
+    <Compile Update="Views\Controls\YinYangSpinner\YinYangSpinnerView.xaml.cs">
+      <DependentUpon>YinYangSpinnerView.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\Settings\VoiceSettingsPage.xaml.cs">
-      <DependentUpon>VoiceSettingsPage.xaml</DependentUpon>
+    <Compile Update="Views\DiagnosticsPetty.xaml.cs">
+      <DependentUpon>DiagnosticsPetty.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\SpeechSimulatorPage.xaml.cs">
-      <DependentUpon>SpeechSimulatorPage.xaml</DependentUpon>
+    <Compile Update="Views\Main.xaml.cs">
+      <DependentUpon>Main.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Settings\BaseSettings.xaml.cs">
+      <DependentUpon>BaseSettings.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Settings\Settings.xaml.cs">
+      <DependentUpon>Settings.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Settings\VoiceSettings.xaml.cs">
+      <DependentUpon>VoiceSettings.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\SpeechSimulator.xaml.cs">
+      <DependentUpon>SpeechSimulator.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\SplashScreen.xaml.cs">
+      <DependentUpon>SplashScreen.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
 
@@ -154,34 +169,28 @@
     <MauiXaml Update="AppShellCss.xaml">
       <Generator></Generator>
     </MauiXaml>
-    <MauiXaml Update="Views\Components\DisplayAlertPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </MauiXaml>
-    <MauiXaml Update="Views\Components\YinYangSpinner.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </MauiXaml>
-    <MauiXaml Update="Views\MainPage.xaml">
+    <MauiXaml Update="Views\Main.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
     <MauiXaml Update="Views\MainPageCss.xaml">
       <Generator></Generator>
     </MauiXaml>
-    <MauiXaml Update="Views\DiagnosticsPettyPage.xaml">
+    <MauiXaml Update="Views\DiagnosticsPetty.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
-    <MauiXaml Update="Views\Settings\BaseSettingsPage.xaml">
+    <MauiXaml Update="Views\Settings\BaseSettings.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
-    <MauiXaml Update="Views\Settings\SettingsPage.xaml">
+    <MauiXaml Update="Views\Settings\Settings.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
-    <MauiXaml Update="Views\Settings\VoiceSettingsPage.xaml">
+    <MauiXaml Update="Views\Settings\VoiceSettings.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
-    <MauiXaml Update="Views\SpeechSimulatorPage.xaml">
+    <MauiXaml Update="Views\SpeechSimulator.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
-    <MauiXaml Update="Views\SplashScreenPage.xaml">
+    <MauiXaml Update="Views\SplashScreen.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
   </ItemGroup>

@@ -1,16 +1,10 @@
 ﻿using Plugin.Maui.Audio;
 namespace Petty.Services.Local;
 
-public class AudioPlayerService
+public class AudioPlayerService(IAudioManager audioManager) : Service
 {
-    public AudioPlayerService(IAudioManager audioManager)
-    {
-        _audioManager = audioManager;
-    }
-
+    private readonly IAudioManager _audioManager; 
     public const string SCREENSHOT = "screenshot.mp3";
-
-    private readonly IAudioManager _audioManager;
 
     public async Task PlayAsync(string fileName, CancellationToken cancellationToken = default)
     {

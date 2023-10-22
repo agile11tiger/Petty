@@ -1,19 +1,18 @@
 ﻿using CommunityToolkit.Mvvm.Messaging;
 using Petty.PlatformsShared.MessengerCommands.FromPettyGuard;
 using Petty.ViewModels.Base;
-using Petty.ViewModels.Components;
+using Petty.Views.Controls;
 namespace Petty.ViewModels;
 
 public partial class AppShellViewModel : ViewModelBase
 {
     public AppShellViewModel(IMessenger messenger, RunningTextViewModel runningTextViewModel)
     {
-        _messenger = messenger;
         _runningTextViewModel = runningTextViewModel;
         messenger.Register<UpdateProgressBar>(this, (recipient, message) => UpdateProgressSomeBackgroundWorking(message.Percentages));
     }
 
-    private readonly IMessenger _messenger;
+    private bool _isFlyoutOpen;
     [ObservableProperty] private string _title;
     [ObservableProperty] private bool _isRunningProgressBar;
     [ObservableProperty] private bool _isVisibleQuestionIcon;
@@ -23,21 +22,24 @@ public partial class AppShellViewModel : ViewModelBase
 
     public IAsyncRelayCommand ShowQuestionIconInfo;
     public Action InvalidateProgressBar { get; set; }
-
-    [RelayCommand]
-    private async Task StartCoffeeGifAsync()
+    public bool IsFlyoutOpen
     {
-        await Task.Run(async () =>
+        get => _isFlyoutOpen;
+        set 
         {
-            await Task.Delay(3000);
-            IsAnimationPlayingCoffeeGif = true;
-        });
-    }
+            if (!_isFlyoutOpen) //opening now
+            {
+                RunningTextViewModel.StartRunningTextCommand.Execute(null);
+                IsAnimationPlayingCoffeeGif = true;
+            }
+            else
+            {
+                RunningTextViewModel.StopRunningTextCommand.Execute(null);
+                IsAnimationPlayingCoffeeGif = false;
+            }
 
-    [RelayCommand]
-    private void StopCoffeeGif()
-    {
-        IsAnimationPlayingCoffeeGif = false;
+            SetProperty(ref _isFlyoutOpen, value);
+        } 
     }
 
     [RelayCommand]

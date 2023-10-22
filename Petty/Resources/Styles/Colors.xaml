@@ -21,6 +21,7 @@
     <Color x:Key="Gray999">#111</Color>
     <Color x:Key="PSText">#999</Color>
     <Color x:Key="Shadow">Black</Color>
+    <Color x:Key="Text">#333</Color>
 
     <!--flyout-->
     <Color x:Key="FlyoutHeaderRunningText">#f5a</Color>
@@ -42,6 +43,10 @@
     <Color x:Key="DisplayAlertText">White</Color>
     <Color x:Key="DisplayAlertSeparator">#777</Color>
     <Color x:Key="DisplayAlertButton">#fb58aa</Color>
+
+    <!--Settings-->
+    <Color x:Key="SettingsSeparator">#999</Color>
+    <Color x:Key="TouchEffect">#aaa</Color>
 
     <!--base-->
     <Color x:Key="Switcher">Green</Color>

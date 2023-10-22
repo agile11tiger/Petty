@@ -283,16 +283,25 @@
     <value>Information perception method:</value>
   </data>
   <data name="InformationPerceptionModeRead" xml:space="preserve">
-    <value>Read — all information is displayed on the screen.</value>
+    <value>Read</value>
+  </data>
+  <data name="InformationPerceptionModeReadDescription" xml:space="preserve">
+    <value>all information is displayed on the screen</value>
   </data>
   <data name="InformationPerceptionModeReadOrVoice" xml:space="preserve">
-    <value>ReadOrVoice — all information is displayed or spoken.</value>
+    <value>ReadOrVoice</value>
+  </data>
+  <data name="InformationPerceptionModeReadOrVoiceDescription" xml:space="preserve">
+    <value>all information is displayed or spoken</value>
   </data>
   <data name="InformationPerceptionModeVoice" xml:space="preserve">
-    <value>Voice — all information is spoken.</value>
+    <value>Voice</value>
+  </data>
+  <data name="InformationPerceptionModeVoiceDescription" xml:space="preserve">
+    <value>all information is spoken</value>
   </data>
   <data name="LabelSettingsCurrentLanguage" xml:space="preserve">
-    <value>Current language:</value>
+    <value>Current language (will only be applied after restarting the application):</value>
   </data>
   <data name="LabelSettingsPitch" xml:space="preserve">
     <value>Pitch</value>
@@ -302,12 +311,6 @@
   </data>
   <data name="LabelSettingsVolume" xml:space="preserve">
     <value>Volume</value>
-  </data>
-  <data name="LanguageEnglish" xml:space="preserve">
-    <value>English</value>
-  </data>
-  <data name="LanguageRussian" xml:space="preserve">
-    <value>Russian</value>
   </data>
   <data name="PageAbout" xml:space="preserve">
     <value>About</value>

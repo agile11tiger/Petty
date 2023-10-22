@@ -20,6 +20,5 @@
         <Setter Property="Shell.TabBarForegroundColor" Value="Black" />
         <Setter Property="Shell.TabBarTitleColor" Value="Black" />
         <Setter Property="Shell.TabBarUnselectedColor" Value="Black" />
-
     </Style>
 </ResourceDictionary>

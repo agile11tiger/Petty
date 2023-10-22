@@ -5,10 +5,11 @@
        xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
        xmlns:resources="clr-namespace:Petty.Resources.Localization"
-       xmlns:circularProgressBar="clr-namespace:Petty.ViewModels.Components.CircularProgressBar"
+       xmlns:circularProgressBar="clr-namespace:Petty.Views.Controls.CircularProgressBar"
        FlyoutBehavior="Flyout"
-       FlyoutBackgroundColor="{StaticResource FlyoutBackground}"
-       FlyoutHeaderBehavior="CollapseOnScroll">
+       FlyoutHeaderBehavior="CollapseOnScroll"
+       FlyoutIsPresented="{Binding IsFlyoutOpen}"
+       FlyoutBackgroundColor="{StaticResource FlyoutBackground}">
 
     <Shell.Resources>
         <ResourceDictionary Source="/AppShellCss.xaml"/>
@@ -27,7 +28,7 @@
                                                                      IsVisible="{Binding IsRunningProgressBar}"
                                                                      Percentages="{Binding ProgressBarPercentages}">
                     <circularProgressBar:CircularProgressBarGraphicsView.Drawable>
-                        <circularProgressBar:CircularProgressBarDrawble/>
+                        <circularProgressBar:CircularProgressBarDrawable/>
                     </circularProgressBar:CircularProgressBarGraphicsView.Drawable>
                 </circularProgressBar:CircularProgressBarGraphicsView>
                 <ImageButton WidthRequest="40"
@@ -45,58 +46,48 @@
                   ColumnDefinitions="*,*"
                   RowDefinitions="100,100,50"
                   BackgroundColor="{StaticResource FlyoutHeaderBackground}">
-                <!--TODO: VerticalTextAlignment doesn`t work here. I don`t know, why?-->
-                <VerticalStackLayout Grid.Row="0" Grid.Column="0" BackgroundColor="{StaticResource FlyoutHeaderPart1}">
+                <VerticalStackLayout Grid.Row="0" Grid.Column="0" Padding="0,10" BackgroundColor="{StaticResource FlyoutHeaderPart1}">
                     <Image Source="play.png" 
-                           Aspect="AspectFit" 
-                           VerticalOptions="Fill"
+                           Aspect="AspectFit"
                            HorizontalOptions="Fill"/>
                     <Label Text="first"
-                           VerticalTextAlignment="Center"
                            HorizontalTextAlignment="Center"/>
                 </VerticalStackLayout>
-                <VerticalStackLayout Grid.Row="0" Grid.Column="1" BackgroundColor="{StaticResource FlyoutHeaderPart2}">
+                <VerticalStackLayout Grid.Row="0" Grid.Column="1" Padding="0,10" BackgroundColor="{StaticResource FlyoutHeaderPart2}">
                     <Image Source="play.png"
                            Aspect="AspectFit"
-                           VerticalOptions="Fill"
                            HorizontalOptions="Fill"/>
                     <Label Text="second"
-                           VerticalTextAlignment="Center"
                            HorizontalTextAlignment="Center"/>
                 </VerticalStackLayout>
-                <VerticalStackLayout Grid.Row="1" Grid.Column="0" BackgroundColor="{StaticResource FlyoutHeaderPart3}">
+                <VerticalStackLayout Grid.Row="1" Grid.Column="0" Padding="0,10" BackgroundColor="{StaticResource FlyoutHeaderPart3}">
                     <Image Source="play.png"
                            Aspect="AspectFit"
-                           VerticalOptions="Fill"
                            HorizontalOptions="Fill"/>
                     <Label Text="third"
                            VerticalTextAlignment="Center"
                            HorizontalTextAlignment="Center"/>
                 </VerticalStackLayout>
-                <VerticalStackLayout Grid.Row="1" Grid.Column="1" BackgroundColor="{StaticResource FlyoutHeaderPart4}">
+                <VerticalStackLayout Grid.Row="1" Grid.Column="1" Padding="0,10" BackgroundColor="{StaticResource FlyoutHeaderPart4}">
                     <Image Source="play.png"
                            Aspect="AspectFit"
-                           VerticalOptions="Fill"
                            HorizontalOptions="Fill"/>
                     <Label Text="fourth"
                            VerticalTextAlignment="Center"
                            HorizontalTextAlignment="Center"/>
                 </VerticalStackLayout>
-                <VerticalStackLayout Grid.RowSpan="2"
-                                     Grid.ColumnSpan="2"
-                                     WidthRequest="50"
-                                     HeightRequest="70">
+                <VerticalStackLayout Grid.RowSpan="2" Grid.ColumnSpan="2" WidthRequest="50" HeightRequest="70">
                     <Image Opacity="1"
                            Source="eye.png"
                            Aspect="AspectFill"
-                           VerticalOptions="Center"
                            HorizontalOptions="Center"/>
                     <Label Text="{x:Static resources:AppResources.PagePetty}"
                            FontAttributes="Bold"
                            VerticalTextAlignment="Center"
                            HorizontalTextAlignment="Center"/>
                 </VerticalStackLayout>
-                <Label MaxLines ="1"
+                <Label x:DataType="viewModels:AppShellViewModel"
+                       MaxLines ="1"
                        Grid.Row="2" 
                        Grid.ColumnSpan="2"
                        HorizontalOptions="End"
@@ -104,7 +95,7 @@
                        Text="{Binding RunningTextViewModel.RunningText}"
                        TextColor="{StaticResource FlyoutHeaderRunningText}"
                        TranslationX="{Binding RunningTextViewModel.RunningTextStart}"
-                       MaximumWidthRequest="{Binding RunningTextViewModel.RunningTextMaximumWidthRequest, Mode=OneTime}" />
+                       WidthRequest="{Binding RunningTextViewModel.RunningTextWidthRequest}" />
             </Grid>            
         </DataTemplate>
     </Shell.FlyoutHeaderTemplate>

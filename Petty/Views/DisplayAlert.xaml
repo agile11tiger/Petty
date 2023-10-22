@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Mopups:PopupPage x:Name="this"
+                  x:DataType="displayAlert:DisplayAlertViewModel"
+                  x:Class="Petty.ViewModels.DisplayAlert.DisplayAlertPage"
+                  xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                  xmlns:Mopups="clr-namespace:Mopups.Pages;assembly=Mopups"
+                  xmlns:resources="clr-namespace:Petty.Resources.Localization"
+                  xmlns:displayAlert="clr-namespace:Petty.ViewModels.DisplayAlert"
+                  IsVisible="true">
+
+    <VerticalStackLayout Padding="15"
+                         VerticalOptions="Center"
+                         HorizontalOptions="Center">
+        <Border StrokeThickness="0"
+                StrokeShape="RoundRectangle 5"
+                BackgroundColor="{StaticResource DisplayAlertBackground}">
+            <Grid ColumnDefinitions="*"
+                  Margin="0,20,0,0"
+                  RowDefinitions="Auto,1,*,1,50">
+                <Label Grid.Row="0"
+                       FontSize="Medium"
+                       Margin="20,0,20,5"
+                       FontAttributes="Bold"
+                       Text="{Binding TitleLabel}"
+                       IsVisible="{Binding IsVisibleTitleLabel}"
+                       TextColor="{StaticResource DisplayAlertText}"/>
+                <BoxView Grid.Row="1" 
+                         IsVisible="{Binding IsVisibleTitleLabel}"
+                         Color="{StaticResource DisplayAlertSeparator}"/>
+                <CollectionView x:Name="_links"
+                                Grid.Row="2"
+                                Margin="20,0"
+                                MaximumHeightRequest="500"
+                                ItemsSource="{Binding Links}"
+                                SelectedItem="{Binding SelectedLink}"
+                                SelectionMode="{Binding SelectionMode}"
+                                SelectionChangedCommand="{Binding SelectionChangedCommand}"
+                                SelectionChangedCommandParameter="{Binding Source={x:Reference this}, Path=.}">
+                    <CollectionView.ItemTemplate>
+                        <displayAlert:LinkDataTemplateSelector>
+                            <displayAlert:LinkDataTemplateSelector.PickerLinkTemplate>
+                                <DataTemplate x:DataType="displayAlert:PickerLink">
+                                    <Label FontSize="Large" Margin="0,0,0,15" TextColor="{StaticResource DisplayAlertText}">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="{Binding Index}" />
+                                                <Span Text=". " />
+                                                <Span Text="{Binding Text}"/>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                        <VisualStateManager.VisualStateGroups>
+                                            <VisualStateGroup Name="CommonStates">
+                                                <VisualState Name="Normal"/>
+                                                <VisualState Name="Selected">
+                                                    <VisualState.Setters>
+                                                        <Setter Property="BackgroundColor" Value="{StaticResource DisplayAlertBackground}" />
+                                                    </VisualState.Setters>
+                                                </VisualState>
+                                            </VisualStateGroup>
+                                        </VisualStateManager.VisualStateGroups>
+                                    </Label>
+                                </DataTemplate>
+                            </displayAlert:LinkDataTemplateSelector.PickerLinkTemplate>
+                            <displayAlert:LinkDataTemplateSelector.RawLinkTemplate>
+                                <DataTemplate x:DataType="displayAlert:RawLink">
+                                    <Label Text="{Binding Text}" 
+                                           TextColor="{StaticResource DisplayAlertText}">
+                                        <Label.Triggers>
+                                            <DataTrigger TargetType="Label" Binding="{Binding IsTitle}" Value="true">
+                                                <Setter Property="FontSize" Value="Medium" />
+                                            </DataTrigger>
+                                        </Label.Triggers>
+                                    </Label>
+                                </DataTemplate>
+                            </displayAlert:LinkDataTemplateSelector.RawLinkTemplate>
+                            <displayAlert:LinkDataTemplateSelector.LinkTextTemplate>
+                                <DataTemplate x:DataType="displayAlert:Link">
+                                    <Label TextColor="{StaticResource DisplayAlertText}">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="{Binding Index}"/>
+                                                <Span Text=". "/>
+                                                <Span Text="{Binding Name}"/>
+                                                <Span Text=" — "/>
+                                                <Span Text="{Binding Description}"/>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                </DataTemplate>
+                            </displayAlert:LinkDataTemplateSelector.LinkTextTemplate>
+                            <displayAlert:LinkDataTemplateSelector.LinkTemplate>
+                                <DataTemplate x:DataType="displayAlert:Link">
+                                    <Label TextColor="{StaticResource DisplayAlertText}">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="{Binding Index}"/>
+                                                <Span Text=". "/>
+                                                <Span Text="{Binding Name}"/>
+                                                <Span Text=" — "/>
+                                                <Span Text="{Binding Description}"/>
+                                                <Span Text=" "/>
+                                                <Span Text="{x:Static resources:AppResources.ButtonMoreDetails}"
+                                                      TextColor="{StaticResource DisplayAlertButton}"/>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                        <Label.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding Source={x:Reference this},
+                                                                                    Path=BindingContext.LinkTappedCommand}" 
+                                                                  CommandParameter="{Binding Action}"/>
+                                        </Label.GestureRecognizers>
+                                    </Label>
+                                </DataTemplate>
+                            </displayAlert:LinkDataTemplateSelector.LinkTemplate>
+                        </displayAlert:LinkDataTemplateSelector>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+                <BoxView Grid.Row="3"
+                         IsVisible="{Binding IsVisibleTitleLabel}"
+                         Color="{StaticResource DisplayAlertSeparator}"/>
+                <HorizontalStackLayout Grid.Row="4" 
+                                       Spacing="20"
+                                       Margin="20,10"
+                                       HorizontalOptions="End"
+                                       VerticalOptions="Center"
+                                       IsVisible="{Binding IsVisibleFooter} ">
+                    <Label Text="{Binding AcceptButton}"
+                           IsVisible="{Binding IsVisibleAcceptButton}"
+                           TextColor="{StaticResource DisplayAlertButton}">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer  Command="{Binding AcceptCommand}" 
+                                                   CommandParameter="{Binding Source={x:Reference this}, Path=.}"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <Label Text="{Binding CancelButton}"
+                           IsVisible="{Binding IsVisibleCancelButton}"
+                           TextColor="{StaticResource DisplayAlertButton}">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding CancelCommand}"
+                                                  CommandParameter="{Binding Source={x:Reference this}, Path=.}"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                </HorizontalStackLayout>
+            </Grid>
+            <Border.Shadow>
+                <Shadow Brush="{StaticResource Shadow}"
+                        Offset="5,5"
+                        Radius="30"
+                        Opacity="0.3"/>
+            </Border.Shadow>
+        </Border>
+    </VerticalStackLayout>
+</Mopups:PopupPage>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView x:Name="this"
+             x:DataType="controls:PickerView"
+             x:Class="Petty.Views.Controls.Picker.PickerView"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:Petty.Views.Controls.Picker"
+             xmlns:displayAlert="clr-namespace:Petty.ViewModels.DisplayAlert">
+
+    <ContentView.ControlTemplate>
+        <ControlTemplate>
+            <VerticalStackLayout Spacing="10" VerticalOptions="Center">
+                <Label Text="{TemplateBinding SelectedItemName}" HorizontalOptions="Center"/>
+                <BoxView Color="{TemplateBinding SelectedItemNameUnderlineColor}" HeightRequest="1"/>
+                <VerticalStackLayout.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="ShowPickerAsync"/>
+                </VerticalStackLayout.GestureRecognizers>
+            </VerticalStackLayout>
+        </ControlTemplate>
+    </ContentView.ControlTemplate>
+</ContentView>

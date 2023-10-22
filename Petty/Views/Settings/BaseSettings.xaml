@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:DataType="settings:BaseSettingsViewModel"
+             x:Class="Petty.Views.Settings.BaseSettingsPage"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:settings="clr-namespace:Petty.ViewModels.Settings"
+             xmlns:resources="clr-namespace:Petty.Resources.Localization"
+             xmlns:controls="clr-namespace:Petty.Views.Controls.Picker">
+    
+    <ScrollView>
+        <Grid Margin="10"
+              ColumnDefinitions="2*, *"
+              RowDefinitions="50,1,50,1,100">
+
+            <Label Grid.Row="0" Grid.Column="0" Text="{x:Static resources:AppResources.LabelSettingsCurrentLanguage}"/>
+            <controls:PickerView Grid.Row="0"
+                                 Grid.Column="1"
+                                 ItemsSource="{Binding Languages}"
+                                 ClosingCommand="{Binding SetLanguageCommand}"
+                                 SelectedItemName="{Binding PickerLanguageSelectedItemName}"/>
+            <BoxView Grid.Row="1" Grid.ColumnSpan="2"/>
+
+            <Label Grid.Row="2" Grid.Column="0" Text="{x:Static resources:AppResources.InformationPerceptionMode}"/>
+            <controls:PickerView Grid.Row="2"
+                                 Grid.Column="1"
+                                 WidthRequest="140"
+                                 ItemsSource="{Binding InformationPerceptionModes}"
+                                 ClosingCommand="{Binding SetInformationPerceptionModeCommand}"
+                                 SelectedItemName="{Binding InformationPerceptionModeSelectedItemName}"/>
+            <BoxView Grid.Row="3" Grid.ColumnSpan="2"/>
+
+            <StackLayout Spacing="20" 
+                         Grid.Row="4" 
+                         Grid.ColumnSpan="2" 
+                         Orientation="Horizontal" 
+                         VerticalOptions="Center"
+                         HorizontalOptions="Center">
+                <Button MinimumWidthRequest="130" 
+                        BackgroundColor="{StaticResource Gray700}"
+                        Command="{Binding ApplyDefaultSettingsCommand}"
+                        Text="{x:Static resources:AppResources.ButtonDefault}"/>
+                <Button MinimumWidthRequest="130" 
+                        Command="{Binding ApplySettingsCommand}"
+                        Text="{x:Static resources:AppResources.ButtonApply}"/>
+            </StackLayout>
+        </Grid>
+    </ScrollView>
+</ContentPage>

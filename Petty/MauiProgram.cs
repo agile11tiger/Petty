@@ -15,14 +15,15 @@ using Petty.Services.Platforms;
 using Petty.Services.Platforms.Audio;
 using Petty.Services.Platforms.PettyCommands;
 using Petty.Services.Platforms.Speech;
-using Petty.ViewModels.Components;
-using Petty.ViewModels.Components.YinYangSpinner;
+using Petty.Views.Controls;
+using Petty.Views.Controls.YinYangSpinner;
 using Petty.ViewModels.Settings;
 using Petty.Views;
 using Petty.Views.Settings;
 using Plugin.Maui.Audio;
 using Sharpnado.Tabs;
 using SkiaSharp.Views.Maui.Handlers;
+using static Microsoft.Extensions.DependencyInjection.Extensions.ServiceCollectionDescriptorExtensions;
 
 //https://learn.microsoft.com/en-us/dotnet/maui/platform-integration/device/flashlight?tabs=android#:~:text=%5B-,assembly,-%3A%20UsesFeature(%22android.hardware.camera%22
 [assembly: UsesFeature("android.hardware.camera", Required = false)]
@@ -36,10 +37,10 @@ public static class MauiProgram
         var builder = MauiApp.CreateBuilder();
         builder
             .UseMauiApp<App>()
-            .UseMauiCommunityToolkit()
-            //https://stackoverflow.com/questions/72463558/how-to-play-an-audio-file-net-maui
-            //.UseMauiCommunityToolkitMediaElement()  https://stackoverflow.com/questions/75525722/correct-way-to-set-net-maui-mediaelement-source-from-code
             .UseSharpnadoTabs(loggerEnable: false)
+            .UseMauiCommunityToolkit()
+            //todo https://stackoverflow.com/questions/72463558/how-to-play-an-audio-file-net-maui
+            //.UseMauiCommunityToolkitMediaElement()  https://stackoverflow.com/questions/75525722/correct-way-to-set-net-maui-mediaelement-source-from-code
             .ConfigureMopups()
             .ConfigureMauiHandlers(handlers => { handlers.AddHandler<YinYangSpinnerSKCanvasView, SKCanvasViewHandler>(); })
             .ConfigureEssentials(essentials =>
@@ -78,11 +79,6 @@ public static class MauiProgram
 
     private static LoggerService _loggerService;
     public static IServiceProvider ServiceProvider { get; private set; }
-
-    public static void UpdateServicesAfterRestart()
-    {
-        //todo implement
-    }
 
     private static void HandleUnobservedException(object sender, UnobservedTaskExceptionEventArgs e)
     {

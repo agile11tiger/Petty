@@ -20,7 +20,7 @@ public class CallCommand : PettyCommand, IPettyCommand
     public bool NeedFullText => true;
     public string Name => AppResources.CommandCall;
     public string Description => AppResources.CommandCallDescription;
-    public string ExtendedDescription => AppResources.CommandCallExtendedDescription;
+    public string ExtendedDescription => _localizationService.IsRussianLanguage ? AppResources.CommandCallExtendedDescription : null;
 
     public bool CheckCommandCompliance(string text)
     {

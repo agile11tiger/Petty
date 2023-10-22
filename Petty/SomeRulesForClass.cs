@@ -1,6 +1,6 @@
 ﻿namespace Petty;
 
-/*All errors are caught and logged, the application should work in any case, even if some of its components are unavailable.*/
+/*All errors are caught and logged, the application should work in any case, even if some of its controls are unavailable.*/
 //all variables, parameters, fields, properties, methods and etc sort BY GROUPS(all groups i will show below) then BY LENGTH
 internal class SomeRulesForClass : IDisposable
 {

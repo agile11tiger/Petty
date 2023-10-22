@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="Petty.Views.SplashScreenPage"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:Petty.Views.Controls.YinYangSpinner">
+
+    <controls:YinYangSpinnerView x:Name="_yinYangSpinner"/>
+</ContentPage>

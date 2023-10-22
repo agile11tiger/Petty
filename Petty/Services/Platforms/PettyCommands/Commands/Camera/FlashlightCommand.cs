@@ -7,7 +7,7 @@ public class FlashlightCommand : PettyCommand, IPettyCommand
     private bool _isTurnOn;
     public string Name => AppResources.CommandFlashlight;
     public string Description => AppResources.CommandFlashlightDescription;
-    public string ExtendedDescription => _localizationService.IsRussianLanguage ? AppResources.CommandFlashlightExtendedDescription : null;
+    public string ExtendedDescription => AppResources.CommandFlashlightExtendedDescription;
 
     public async Task<bool> TryExecuteAsync()
     {

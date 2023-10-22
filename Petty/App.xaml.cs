@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.Messaging;
 using Petty.Helpers;
 using Petty.MessengerCommands.Application;
+using Petty.Views.Controls;
 using System.Globalization;
 namespace Petty;
 
@@ -13,7 +14,7 @@ public partial class App : Application
         NavigationService navigationService,
         LocalizationService localizationService)
     {
-        Initilize(localizationService, versionTracking);
+        Initialize(localizationService, versionTracking);
         //TODO: По желанию поддержать две темы и в настройках давать выбор.
         //https://learn.microsoft.com/en-us/dotnet/maui/user-interface/theming
         //https://www.youtube.com/watch?v=0cY8iCz50fI&ab_channel=DanielHindrikes
@@ -23,14 +24,16 @@ public partial class App : Application
         {
             MainPage.Dispatcher.Dispatch(() =>
             {
-                MauiProgram.UpdateServicesAfterRestart();
-                MainPage = new AppShell(appShellViewModel, navigationService);//REQUIRE RUN MAIN THREAD
+                //Application.Current.Quit(); not good
+                //todo: on net8 not working
+                //MainPage = new AppShell(appShellViewModel);//REQUIRE RUN MAIN THREAD
+                //not working https://github.com/Metlina/XamarinRestartAndroidAppOnCrash/blob/master/RestartAndroidForms/RestartAndroidForms.Android/MyApplication.cs
             });
         });
         InitializeComponent();
 
 
-        MainPage = new AppShell(appShellViewModel, navigationService); //new SplashScreenPage();
+        MainPage = new AppShell(appShellViewModel); //new SplashScreenPage();
         //_ = EndSplash(appShellViewModel, navigationService);
     }
 
@@ -41,11 +44,11 @@ public partial class App : Application
         await Task.Delay(5000);
         MainThread.BeginInvokeOnMainThread(() =>
         {
-            MainPage = new AppShell(appShellViewModel, navigationService);
+            MainPage = new AppShell(appShellViewModel);
         });
     }
 
-    private void Initilize(LocalizationService localizationService, IVersionTracking versionTracking)
+    private void Initialize(LocalizationService localizationService, IVersionTracking versionTracking)
     {
         var language = Preferences.Default.Get<string>(SharedPreferencesHelper.LANGUAGE, null);
 

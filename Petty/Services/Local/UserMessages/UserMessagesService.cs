@@ -1,8 +1,9 @@
 ﻿using Mopups.Interfaces;
 using Mopups.Pages;
 using Petty.Resources.Localization;
-using Petty.ViewModels.Components.DisplayAlert;
-using Petty.Views.Components;
+using Petty.ViewModels.DisplayAlert;
+using Petty.Views.Controls;
+using System.Collections;
 namespace Petty.Services.Local.UserMessages;
 
 public class UserMessagesService(VoiceService _voiceService, IPopupNavigation _popupNavigation) : Service
@@ -24,7 +25,7 @@ public class UserMessagesService(VoiceService _voiceService, IPopupNavigation _p
             cancel = AppResources.ButtonOk;
 
         if (deliveryMode == InformationDeliveryModes.DisplayAlertInApp)
-            return await SendMessageAsync(await CreateDisplayAlertPageAsync([new RawLink(message)], title, cancel, accept, false));
+            return await SendMessageAsync(await CreateDisplayAlertPageAsync(new List<RawLink>([new(message)]),title, cancel, accept, false));
         else if (deliveryMode == InformationDeliveryModes.DisplayAlertOutsideApp)
             ShowOutsideApplicationAsync();
         else if (deliveryMode == InformationDeliveryModes.DisplayAlertOutsideAppOnLockedScreen)
@@ -35,21 +36,22 @@ public class UserMessagesService(VoiceService _voiceService, IPopupNavigation _p
         return false;
     }
 
-    public async Task<bool> SendMessageAsync(DisplayAlertPage displayAlertPage)
+    public async Task<bool> SendMessageAsync(DisplayAlertPage displayAlertPage, bool needResult = false)
     {
         await _popupNavigation.PushAsync(displayAlertPage, false);
-        return await displayAlertPage.GetResultAsync();
+        return needResult && await displayAlertPage.DisplayAlertViewModel.GetResultAsync(displayAlertPage);
     }
 
     public async Task<DisplayAlertPage> CreateDisplayAlertPageAsync(
-        IList<ILink> message,
+        IList message,
         string title = null,
         string cancel = null,
         string accept = null,
-        bool isLazy = false)
+        bool isLazy = false,
+        SelectionMode selectionMode = SelectionMode.None)
     {
-        var displayAlertViewModel = new DisplayAlertViewModel(message, title, cancel, accept);
-        var displayAlertPage = new DisplayAlertPage(displayAlertViewModel, this);
+        var displayAlertViewModel = new DisplayAlertViewModel(message, title, cancel, accept, this, selectionMode);
+        var displayAlertPage = new DisplayAlertPage(displayAlertViewModel);
 
         if (isLazy)
         {
@@ -69,7 +71,7 @@ public class UserMessagesService(VoiceService _voiceService, IPopupNavigation _p
 
     public async Task RemovePageAsync(PopupPage popupPage)
     {
-        await _popupNavigation.RemovePageAsync(popupPage);
+        await _popupNavigation.RemovePageAsync(popupPage, true);
     }
 
     private void ShowOutsideApplicationAsync()
