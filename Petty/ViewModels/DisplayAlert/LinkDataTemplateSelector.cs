@@ -9,9 +9,9 @@ public class LinkDataTemplateSelector : DataTemplateSelector
 
     protected override DataTemplate OnSelectTemplate(object item, BindableObject container)
     {
-        return item is PickerLink ? PickerLinkTemplate 
+        return item is PickerLink ? PickerLinkTemplate
             : item is RawLink ? RawLinkTemplate
-            : ((Link)item).Action != null ? LinkTemplate 
+            : ((Link)item).Action != null ? LinkTemplate
             : LinkTextTemplate;
     }
 }

@@ -1,9 +1,7 @@
 ﻿using Mopups.Pages;
 using Petty.Services.Local.UserMessages;
 using Petty.ViewModels.Base;
-using Petty.Views.Controls;
 using System.Collections;
-using System.Collections.ObjectModel;
 using System.Windows.Input;
 namespace Petty.ViewModels.DisplayAlert;
 
@@ -69,13 +67,13 @@ public partial class DisplayAlertViewModel : ViewModelBase
     {
         await CloseAsync(displayAlertPage);
     }
-        
+
     [RelayCommand]
     private async Task LinkTappedAsync(Func<Task> func)
     {
         await func();
     }
-        
+
     [RelayCommand]
     private async Task AcceptAsync(PopupPage displayAlertPage)
     {

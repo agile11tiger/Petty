@@ -13,7 +13,7 @@ public class SpeechRecognizerService(
     IMessenger _messenger,
     WebRequestsService _webRequestsService,
     UserMessagesService _userMessagesService,
-    AudioRecorderService _audioRecorderService) 
+    AudioRecorderService _audioRecorderService)
     : Service, IDisposable
 {
     private const int RESULT_START_MESSAGE_INDEX = 14;

@@ -1,8 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.Messaging;
 using Petty.Helpers;
-using Petty.MessengerCommands.Application;
 using Petty.ViewModels.Base;
-using System.Globalization;
 namespace Petty.ViewModels;
 
 public partial class MainViewModel(IMessenger _messenger) : ViewModelBase

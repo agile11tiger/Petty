@@ -2,7 +2,6 @@
 using Mopups.Pages;
 using Petty.Resources.Localization;
 using Petty.ViewModels.DisplayAlert;
-using Petty.Views.Controls;
 using System.Collections;
 namespace Petty.Services.Local.UserMessages;
 
@@ -25,7 +24,7 @@ public class UserMessagesService(VoiceService _voiceService, IPopupNavigation _p
             cancel = AppResources.ButtonOk;
 
         if (deliveryMode == InformationDeliveryModes.DisplayAlertInApp)
-            return await SendMessageAsync(await CreateDisplayAlertPageAsync(new List<RawLink>([new(message)]),title, cancel, accept, false));
+            return await SendMessageAsync(await CreateDisplayAlertPageAsync(new List<RawLink>([new(message)]), title, cancel, accept, false));
         else if (deliveryMode == InformationDeliveryModes.DisplayAlertOutsideApp)
             ShowOutsideApplicationAsync();
         else if (deliveryMode == InformationDeliveryModes.DisplayAlertOutsideAppOnLockedScreen)

@@ -1,9 +1,6 @@
 ﻿using Android.App;
-using Android.Content;
 using Android.Content.PM;
 using CommunityToolkit.Mvvm.Messaging;
-using Java.Lang;
-using Petty.MessengerCommands.Application;
 using Petty.MessengerCommands.ToPettyGuard;
 using System.Diagnostics;
 namespace Petty;

@@ -3,7 +3,7 @@ namespace Petty.Services.Local;
 
 public class AudioPlayerService(IAudioManager audioManager) : Service
 {
-    private readonly IAudioManager _audioManager; 
+    private readonly IAudioManager _audioManager;
     public const string SCREENSHOT = "screenshot.mp3";
 
     public async Task PlayAsync(string fileName, CancellationToken cancellationToken = default)

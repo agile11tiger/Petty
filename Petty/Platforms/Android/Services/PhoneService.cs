@@ -13,7 +13,7 @@ public partial class PhoneService
         callIntent.AddFlags(ActivityFlags.NewTask);
 
         if (string.IsNullOrWhiteSpace(phoneNumber) && callIntent.ResolveActivity(packageManager) == null)
-            return await _userMessagesService.SendMessageAsync(AppResources.UserMessageCommandNotAvailable, deliveryMode:InformationDeliveryModes.VoiceAlert);
+            return await _userMessagesService.SendMessageAsync(AppResources.UserMessageCommandNotAvailable, deliveryMode: InformationDeliveryModes.VoiceAlert);
 
         MauiApplication.Current.BaseContext.StartActivity(callIntent);
         return true;

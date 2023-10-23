@@ -1,6 +1,4 @@
 using Mopups.Pages;
-using Petty.Services.Local.UserMessages;
-using Petty.ViewModels.DisplayAlert;
 namespace Petty.ViewModels.DisplayAlert;
 
 public partial class DisplayAlertPage : PopupPage

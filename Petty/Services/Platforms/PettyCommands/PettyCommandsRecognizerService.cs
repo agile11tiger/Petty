@@ -8,7 +8,7 @@ namespace Petty.Services.Platforms.PettyCommands;
 public class PettyCommandsService(
     IMessenger _messenger,
     VoiceService _voiceService,
-    SpeechRecognizerService _speechRecognizerService) 
+    SpeechRecognizerService _speechRecognizerService)
     : Service
 {
     static PettyCommandsService()

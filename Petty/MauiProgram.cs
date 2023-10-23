@@ -15,15 +15,16 @@ using Petty.Services.Platforms;
 using Petty.Services.Platforms.Audio;
 using Petty.Services.Platforms.PettyCommands;
 using Petty.Services.Platforms.Speech;
-using Petty.Views.Controls;
-using Petty.Views.Controls.YinYangSpinner;
 using Petty.ViewModels.Settings;
 using Petty.Views;
+using Petty.Views.Controls;
+using Petty.Views.Controls.Magic;
+using Petty.Views.Controls.YinYangSpinner;
 using Petty.Views.Settings;
 using Plugin.Maui.Audio;
 using Sharpnado.Tabs;
+using SkiaSharp.Views.Maui.Controls.Hosting;
 using SkiaSharp.Views.Maui.Handlers;
-using static Microsoft.Extensions.DependencyInjection.Extensions.ServiceCollectionDescriptorExtensions;
 
 //https://learn.microsoft.com/en-us/dotnet/maui/platform-integration/device/flashlight?tabs=android#:~:text=%5B-,assembly,-%3A%20UsesFeature(%22android.hardware.camera%22
 [assembly: UsesFeature("android.hardware.camera", Required = false)]
@@ -37,12 +38,17 @@ public static class MauiProgram
         var builder = MauiApp.CreateBuilder();
         builder
             .UseMauiApp<App>()
+            .UseSkiaSharp()
             .UseSharpnadoTabs(loggerEnable: false)
             .UseMauiCommunityToolkit()
             //todo https://stackoverflow.com/questions/72463558/how-to-play-an-audio-file-net-maui
             //.UseMauiCommunityToolkitMediaElement()  https://stackoverflow.com/questions/75525722/correct-way-to-set-net-maui-mediaelement-source-from-code
             .ConfigureMopups()
-            .ConfigureMauiHandlers(handlers => { handlers.AddHandler<YinYangSpinnerSKCanvasView, SKCanvasViewHandler>(); })
+            .ConfigureMauiHandlers(handlers =>
+            {
+                handlers.AddHandler<YinYangSpinnerSKCanvasView, SKCanvasViewHandler>();
+                handlers.AddHandler<GradientView, SKCanvasViewHandler>();
+            })
             .ConfigureEssentials(essentials =>
             {
                 essentials.UseVersionTracking();

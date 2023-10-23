@@ -10,7 +10,7 @@ public partial class RunningTextViewModel : ViewModelBase
         _runningTextWidthRequest = _runningTextStart + 5; //+5 is length for last chars
         StartRunningTextThread();
     }
-    
+
     private volatile bool _isStopRunningTextLine;
     private readonly double _runningTextStartCoefficient = 6.5;
     private readonly int _runningTextLeftBorderCoefficient = 55;

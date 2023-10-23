@@ -1,8 +1,8 @@
 ﻿namespace Petty.Services.Platforms.Audio;
 
 /// <summary>
-	/// A service that records audio on the device's microphone input.
-	/// </summary> 
+/// A service that records audio on the device's microphone input.
+/// </summary> 
 /// <remarks>
 /// https://github.com/NateRickard/Plugin.AudioRecorder/blob/master/Plugin.AudioRecorder.Shared/AudioRecorderService.cs
 /// https://github.com/Dan0398/XamarinVoskSample

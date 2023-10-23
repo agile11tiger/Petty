@@ -46,7 +46,8 @@ internal class SomeRulesForClass : IDisposable
     }
 
     //-------------------- upper case fields
-    private const string CONST_FIELD = "";
+    private const string PRIVATE_CONST_FIELD = "";
+    public const string PUBLIC_CONST_FIELD = "";
     //---------------------------------
 
     //-------------------------- private fields
@@ -60,6 +61,7 @@ internal class SomeRulesForClass : IDisposable
     private readonly string _readonlyField;
     private static List<string> _staticList;
     private List<string> _list = new List<string>();
+    private readonly static string _privateReadonlyStaticField = "";
     //--------------------------
 
     //-------------------------- events, delegates

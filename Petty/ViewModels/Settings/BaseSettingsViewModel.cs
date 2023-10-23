@@ -2,7 +2,6 @@
 using Petty.Resources.Localization;
 using Petty.ViewModels.Base;
 using Petty.ViewModels.DisplayAlert;
-using System.Windows.Input;
 namespace Petty.ViewModels.Settings;
 
 public partial class BaseSettingsViewModel : ViewModelBase
@@ -80,7 +79,7 @@ public partial class BaseSettingsViewModel : ViewModelBase
 
         if (needSoftRestart)
             _localizationService.SetCulture(_localizationService.SupportedCultures[_settingsService.Settings.BaseSettings.LanguageType].CultureInfo, true);
-        
+
         await _navigationService.GoBackAsync();
     }
 }

@@ -8,7 +8,6 @@ using Petty.Services.Platforms.PettyCommands;
 using Petty.Services.Platforms.Speech;
 using Petty.ViewModels.Base;
 using Petty.ViewModels.DisplayAlert;
-using Petty.Views.Controls;
 namespace Petty.ViewModels;
 
 public partial class SpeechSimulatorViewModel : ViewModelBase
@@ -80,7 +79,7 @@ public partial class SpeechSimulatorViewModel : ViewModelBase
         foreach (var command in PettyCommandsService.PettyCommands.Values)
         {
             if (command.ExtendedDescription != null)
-                commands.Add(new Link([command.Name, command.Description], listNumber++, async () => 
+                commands.Add(new Link([command.Name, command.Description], listNumber++, async () =>
                     await _userMessagesService.SendMessageAsync(command.ExtendedDescription, $"{AppResources.Command} {command.Name}")));
             else
                 commands.Add(new Link([command.Name, command.Description], listNumber++));

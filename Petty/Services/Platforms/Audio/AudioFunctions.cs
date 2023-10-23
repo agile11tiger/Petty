@@ -2,9 +2,9 @@
 namespace Petty.Services.Platforms.Audio;
 
 /// <summary>
-	/// Contains functions used to work with audio recording.
-	/// </summary>
-	public static class AudioFunctions
+/// Contains functions used to work with audio recording.
+/// </summary>
+public static class AudioFunctions
 {
     private const float MAX_8_BITS_SIGNED = byte.MaxValue;
     private const float MAX_8_BITS_UNSIGNED = 0xff;

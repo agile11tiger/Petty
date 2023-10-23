@@ -25,7 +25,7 @@ public partial class AppShellViewModel : ViewModelBase
     public bool IsFlyoutOpen
     {
         get => _isFlyoutOpen;
-        set 
+        set
         {
             if (!_isFlyoutOpen) //opening now
             {
@@ -39,7 +39,7 @@ public partial class AppShellViewModel : ViewModelBase
             }
 
             SetProperty(ref _isFlyoutOpen, value);
-        } 
+        }
     }
 
     [RelayCommand]
