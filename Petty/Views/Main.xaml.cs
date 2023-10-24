@@ -1,27 +1,11 @@
-using Petty.Resources.Localization;
-using Petty.Services.Local.PermissionsFolder;
 namespace Petty.Views;
 
 public partial class MainPage : ContentPage
 {
-    public MainPage(
-        MainViewModel mainViewModel,
-        AppShellViewModel appShellViewModel,
-        PermissionService permissionService)
+    public MainPage(MainViewModel mainViewModel)
     {
         BindingContext = mainViewModel;
-        _appShellViewModel = appShellViewModel;
-        _permissionService = permissionService;
+        Behaviors.Add(new EventToCommandBehavior { EventName = nameof(NavigatedTo), Command = mainViewModel.NavigatedToCommand });
         InitializeComponent();
-    }
-
-    private readonly PermissionService _permissionService;
-    private readonly AppShellViewModel _appShellViewModel;
-
-    protected override async void OnNavigatedTo(NavigatedToEventArgs args)
-    {
-        base.OnNavigatedTo(args);
-        _appShellViewModel.Title = AppResources.PagePetty;
-        await _permissionService.GetAllPermissionsAsync();
     }
 }

@@ -1,6 +1,5 @@
 ﻿using Mopups.Pages;
 using Petty.Services.Local.UserMessages;
-using Petty.ViewModels.Base;
 using System.Collections;
 using System.Windows.Input;
 namespace Petty.ViewModels.DisplayAlert;
@@ -63,6 +62,15 @@ public partial class DisplayAlertViewModel : ViewModelBase
     }
 
     [RelayCommand]
+    private void Disappearing()
+    {
+        ClosingCommand?.Execute(SelectedLink);
+
+        if (AcceptButton != null)
+            _waiter.Set();
+    }
+
+    [RelayCommand]
     private async Task SelectionChangedAsync(PopupPage displayAlertPage)
     {
         await CloseAsync(displayAlertPage);
@@ -85,15 +93,6 @@ public partial class DisplayAlertViewModel : ViewModelBase
     private async Task CancelAsync(PopupPage displayAlertPage)
     {
         await CloseAsync(displayAlertPage);
-    }
-
-    [RelayCommand]
-    private void HandleDisappearing()
-    {
-        ClosingCommand?.Execute(SelectedLink);
-
-        if (AcceptButton != null)
-            _waiter.Set();
     }
 
     private async Task CloseAsync(PopupPage displayAlertPage)

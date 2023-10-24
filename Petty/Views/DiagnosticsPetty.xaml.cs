@@ -1,21 +1,11 @@
-using Petty.Resources.Localization;
-
 namespace Petty.Views;
 
 public partial class DiagnosticPettyPage : ContentPage
 {
-    public DiagnosticPettyPage(AppShellViewModel appShellViewModel, DiagnosticPettyViewModel diagnosticPettyViewModel)
+    public DiagnosticPettyPage(DiagnosticPettyViewModel diagnosticPettyViewModel)
     {
         BindingContext = diagnosticPettyViewModel;
-        _appShellViewModel = appShellViewModel;
+        Behaviors.Add(new EventToCommandBehavior { EventName = nameof(NavigatedTo), Command = diagnosticPettyViewModel.NavigatedToCommand });
         InitializeComponent();
-    }
-
-    private readonly AppShellViewModel _appShellViewModel;
-
-    protected override void OnNavigatedTo(NavigatedToEventArgs args)
-    {
-        base.OnNavigatedTo(args);
-        _appShellViewModel.Title = AppResources.PageDiagnostics;
     }
 }

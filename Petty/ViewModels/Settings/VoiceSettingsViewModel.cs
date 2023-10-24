@@ -1,32 +1,20 @@
 ﻿using Petty.Extensions;
 using Petty.Resources.Localization;
-using Petty.ViewModels.Base;
 namespace Petty.ViewModels.Settings;
 
-public partial class VoiceSettingsViewModel : ViewModelBase
+public partial class VoiceSettingsViewModel(VoiceService voiceService, DatabaseService databaseService, SettingsService settingsService)
+    : ViewModelBase
 {
-    public VoiceSettingsViewModel(VoiceService voiceService, DatabaseService databaseService, SettingsService settingsService)
-    {
-        _voiceService = voiceService;
-        _databaseService = databaseService;
-        _settingsService = settingsService;
-        _tempVoiceSettings = settingsService.Settings.VoiceSettings.CloneJson();
-    }
-
-    private VoiceSettings _tempVoiceSettings;
-    private readonly VoiceService _voiceService;
-    private readonly DatabaseService _databaseService;
-    private readonly SettingsService _settingsService;
+    private VoiceSettings _tempVoiceSettings = settingsService.Settings.VoiceSettings.CloneJson();
+    private readonly VoiceService _voiceService = voiceService;
+    private readonly DatabaseService _databaseService = databaseService;
+    private readonly SettingsService _settingsService = settingsService;
     [ObservableProperty] private string _speech = AppResources.EditorVoiceTestSpeech;
 
     //https://learn.microsoft.com/en-us/dotnet/maui/platform-integration/device-media/text-to-speech?tabs=android#:~:text=Maximum-,Pitch,-0
     public float PitchMaxValue { get => 2; }
     public float VolumeMaxValue { get => 1; }
-
-    public string PitchValueText
-    {
-        get => _localizationService.Get(nameof(AppResources.LabelSettingsValue), PitchValue);
-    }
+    public string PitchValueText { get => _localizationService.Get(nameof(AppResources.LabelSettingsValue), PitchValue); }
 
     public float PitchValue
     {
@@ -59,6 +47,12 @@ public partial class VoiceSettingsViewModel : ViewModelBase
             OnPropertyChanged(nameof(VolumeValue));
             OnPropertyChanged(nameof(VolumeValueText));
         }
+    }
+
+    [RelayCommand]
+    private void NavigatedTo(NavigatedToEventArgs args)
+    {
+        _appShellViewModel.Title = AppResources.PageVoiceSettings;
     }
 
     [RelayCommand]

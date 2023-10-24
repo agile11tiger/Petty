@@ -1,6 +1,5 @@
 ﻿using Petty.Extensions;
 using Petty.Resources.Localization;
-using Petty.ViewModels.Base;
 using Petty.ViewModels.DisplayAlert;
 namespace Petty.ViewModels.Settings;
 
@@ -37,6 +36,12 @@ public partial class BaseSettingsViewModel : ViewModelBase
     [ObservableProperty] private List<PickerLink> _informationPerceptionModes;
     [ObservableProperty] private string _informationPerceptionModeSelectedItemName;
     [ObservableProperty] private PettySQLite.Models.BaseSettings _tempBaseSettings;
+
+    [RelayCommand]
+    private void NavigatedTo(NavigatedToEventArgs args)
+    {
+        _appShellViewModel.Title = AppResources.PageBaseSettings;
+    }
 
     [RelayCommand]
     private void SetLanguage(ILink link)

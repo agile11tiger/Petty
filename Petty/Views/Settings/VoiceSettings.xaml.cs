@@ -1,22 +1,12 @@
-using Petty.Resources.Localization;
 using Petty.ViewModels.Settings;
-
 namespace Petty.Views.Settings;
 
 public partial class VoiceSettingsPage : ContentPage
 {
-    public VoiceSettingsPage(AppShellViewModel appShellViewModel, VoiceSettingsViewModel voiceSettings)
+    public VoiceSettingsPage(VoiceSettingsViewModel voiceSettings)
     {
         BindingContext = voiceSettings;
+        Behaviors.Add(new EventToCommandBehavior { EventName = nameof(NavigatedTo), Command = voiceSettings.NavigatedToCommand });
         InitializeComponent();
-        _appShellViewModel = appShellViewModel;
-    }
-
-    private readonly AppShellViewModel _appShellViewModel;
-
-    protected override void OnNavigatedTo(NavigatedToEventArgs args)
-    {
-        base.OnNavigatedTo(args);
-        _appShellViewModel.Title = AppResources.PageVoiceSettings;
     }
 }

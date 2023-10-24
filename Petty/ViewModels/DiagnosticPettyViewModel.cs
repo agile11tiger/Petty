@@ -1,9 +1,11 @@
-﻿using Petty.ViewModels.Base;
+﻿using Petty.Resources.Localization;
 namespace Petty.ViewModels;
 
-public partial class DiagnosticPettyViewModel : ViewModelBase
+public partial class DiagnosticPettyViewModel() : ViewModelBase
 {
-    public DiagnosticPettyViewModel()
+    [RelayCommand]
+    private void NavigatedTo(NavigatedToEventArgs args)
     {
+        _appShellViewModel.Title = AppResources.PageDiagnostics;
     }
 }

@@ -1,5 +1,4 @@
-﻿using Petty.ViewModels.Base;
-namespace Petty.Views.Controls;
+﻿namespace Petty.Views.Controls;
 
 public partial class RunningTextViewModel : ViewModelBase
 {

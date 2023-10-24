@@ -20,8 +20,10 @@ public abstract partial class ViewModelBase : ObservableObject
     private long _isBusy;
     protected LoggerService _loggerService;
     protected NavigationService _navigationService;
+    private AppShellViewModel _appShellViewModelCache;
     protected LocalizationService _localizationService;
     protected IAsyncRelayCommand _initializeAsyncCommand;
+    protected AppShellViewModel _appShellViewModel => _appShellViewModelCache ?? MauiProgram.ServiceProvider.GetService<AppShellViewModel>();
     [ObservableProperty] private bool _isInitialized;
     public bool IsBusy => Interlocked.Read(ref _isBusy) > 0;
 

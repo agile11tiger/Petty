@@ -6,7 +6,6 @@ using Petty.Resources.Localization;
 using Petty.Services.Local.UserMessages;
 using Petty.Services.Platforms.PettyCommands;
 using Petty.Services.Platforms.Speech;
-using Petty.ViewModels.Base;
 using Petty.ViewModels.DisplayAlert;
 namespace Petty.ViewModels;
 
@@ -31,6 +30,22 @@ public partial class SpeechSimulatorViewModel : ViewModelBase
     [ObservableProperty] private Color _startStopButtonBackground;
     [ObservableProperty] private bool _isStartingPettyGuardAndroidService;
     [ObservableProperty] private string _speech = AppResources.UserMessagePettySpeechSimulatorPlaceholder;
+
+    [RelayCommand]
+    private async Task Appearing()
+    {
+        //await Task.Delay(10); //Otherwise, the question mark is shown before moving to a new page.
+        _appShellViewModel.Title = AppResources.PageSpeechSimulator;
+        _appShellViewModel.IsVisibleQuestionIcon = true;
+        _appShellViewModel.ShowQuestionIconInfo = ShowQuestionIconInfoCommand;
+    }
+
+    [RelayCommand]
+    private void Disappearing()
+    {
+        _appShellViewModel.IsVisibleQuestionIcon = false;
+        _appShellViewModel.ShowQuestionIconInfo = null;
+    }
 
     [RelayCommand]
     private async Task StartStopPettyGuardAndroidServiceAsync()

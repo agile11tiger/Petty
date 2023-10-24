@@ -1,11 +1,13 @@
 ﻿using Petty.Helpers;
-using Petty.ViewModels.Base;
+using Petty.Resources.Localization;
 namespace Petty.ViewModels.Settings;
 
 public partial class SettingsViewModel : ViewModelBase
 {
-    public SettingsViewModel()
+    [RelayCommand]
+    private void NavigatedTo(NavigatedToEventArgs args)
     {
+        _appShellViewModel.Title = AppResources.PageVoiceSettings;
     }
 
     [RelayCommand]
