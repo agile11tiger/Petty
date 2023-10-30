@@ -117,11 +117,32 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="BatteryCharging" xml:space="preserve">
-    <value>Yay! Food</value>
+  <data name="BaseSettingsCurrentLanguage" xml:space="preserve">
+    <value>Current language (will only be applied after restarting the application):</value>
   </data>
-  <data name="BatteryFull" xml:space="preserve">
-    <value>I'm full</value>
+  <data name="BaseSettingsHapticalFeedback" xml:space="preserve">
+    <value>Haptic feedback:</value>
+  </data>
+  <data name="BaseSettingsMode" xml:space="preserve">
+    <value>Information perception method:</value>
+  </data>
+  <data name="BaseSettingsModeRead" xml:space="preserve">
+    <value>Read</value>
+  </data>
+  <data name="BaseSettingsModeReadDescription" xml:space="preserve">
+    <value>all information is displayed on the screen</value>
+  </data>
+  <data name="BaseSettingsModeReadOrVoice" xml:space="preserve">
+    <value>ReadOrVoice</value>
+  </data>
+  <data name="BaseSettingsModeReadOrVoiceDescription" xml:space="preserve">
+    <value>all information is displayed or spoken</value>
+  </data>
+  <data name="BaseSettingsModeVoice" xml:space="preserve">
+    <value>Voice</value>
+  </data>
+  <data name="BaseSettingsModeVoiceDescription" xml:space="preserve">
+    <value>all information is spoken</value>
   </data>
   <data name="ButtonApply" xml:space="preserve">
     <value>Apply</value>
@@ -171,23 +192,50 @@
   <data name="CommandBattery" xml:space="preserve">
     <value>battery charge</value>
   </data>
+  <data name="CommandBatteryCharging" xml:space="preserve">
+    <value>Yay! Food</value>
+  </data>
   <data name="CommandBatteryDescription" xml:space="preserve">
     <value>notifies you of the current battery charge</value>
   </data>
+  <data name="CommandBatteryFull" xml:space="preserve">
+    <value>I'm full</value>
+  </data>
   <data name="CommandCall" xml:space="preserve">
     <value>call</value>
+  </data>
+  <data name="CommandCallContactHaveSeveralPhoneNumbers" xml:space="preserve">
+    <value>{0} has several numbers which one to choose?</value>
+  </data>
+  <data name="CommandCallContactNotFound" xml:space="preserve">
+    <value>{0} not found.</value>
   </data>
   <data name="CommandCallDescription" xml:space="preserve">
     <value>makes a call if the given user was found in your contacts list.</value>
   </data>
   <data name="CommandCallExtendedDescription" xml:space="preserve">
-    <value />
+    <value>Makes a call if the given user was found in your contacts list. If several contacts with a given name are found, then a choice is offered and you need to answer: “zero”, “first” or “one”, etc. up to 9 inclusive, no longer supported.</value>
+  </data>
+  <data name="CommandCallNotPhoneNumbers" xml:space="preserve">
+    <value>{0} phone number was not found.</value>
+  </data>
+  <data name="CommandCallSelectNumberFromList" xml:space="preserve">
+    <value>Select number from the list.</value>
   </data>
   <data name="CommandDeviceInfo" xml:space="preserve">
     <value>device info</value>
   </data>
   <data name="CommandDeviceInfoDescription" xml:space="preserve">
     <value>notifies you about the phone's characteristics</value>
+  </data>
+  <data name="CommandDial" xml:space="preserve">
+    <value>dial</value>
+  </data>
+  <data name="CommandDialDescription" xml:space="preserve">
+    <value>dials a phone number, dialing is supported both with and without the +1 prefix. After dialing, you need to check that the number you dialed is correct and say “call.”</value>
+  </data>
+  <data name="CommandExceptionInCode" xml:space="preserve">
+    <value>Sorry, there was an error in my code and the command couldn't be executed. Cry, cry.</value>
   </data>
   <data name="CommandFlashlight" xml:space="preserve">
     <value>flashlight</value>
@@ -231,6 +279,12 @@
   <data name="CommandScreenshotDescription" xml:space="preserve">
     <value>takes a screenshot.</value>
   </data>
+  <data name="CommandsTitle" xml:space="preserve">
+    <value>Commands</value>
+  </data>
+  <data name="CommandsTitleUsefulFeatures" xml:space="preserve">
+    <value>Useful features:</value>
+  </data>
   <data name="CommandTakePhoto" xml:space="preserve">
     <value>take photo</value>
   </data>
@@ -242,6 +296,12 @@
   </data>
   <data name="CommandTakeVideoDescription" xml:space="preserve">
     <value>opens a window for creating a video file</value>
+  </data>
+  <data name="CommandWordCancel" xml:space="preserve">
+    <value>cancel</value>
+  </data>
+  <data name="CommandWordNo" xml:space="preserve">
+    <value>no</value>
   </data>
   <data name="DeviceInfo" xml:space="preserve">
     <value>Device information</value>
@@ -276,42 +336,6 @@
   <data name="DeviceInfoWidth" xml:space="preserve">
     <value>Width</value>
   </data>
-  <data name="EditorVoiceTestSpeech" xml:space="preserve">
-    <value>Hello leather bag, how are you?</value>
-  </data>
-  <data name="InformationPerceptionMode" xml:space="preserve">
-    <value>Information perception method:</value>
-  </data>
-  <data name="InformationPerceptionModeRead" xml:space="preserve">
-    <value>Read</value>
-  </data>
-  <data name="InformationPerceptionModeReadDescription" xml:space="preserve">
-    <value>all information is displayed on the screen</value>
-  </data>
-  <data name="InformationPerceptionModeReadOrVoice" xml:space="preserve">
-    <value>ReadOrVoice</value>
-  </data>
-  <data name="InformationPerceptionModeReadOrVoiceDescription" xml:space="preserve">
-    <value>all information is displayed or spoken</value>
-  </data>
-  <data name="InformationPerceptionModeVoice" xml:space="preserve">
-    <value>Voice</value>
-  </data>
-  <data name="InformationPerceptionModeVoiceDescription" xml:space="preserve">
-    <value>all information is spoken</value>
-  </data>
-  <data name="LabelSettingsCurrentLanguage" xml:space="preserve">
-    <value>Current language (will only be applied after restarting the application):</value>
-  </data>
-  <data name="LabelSettingsPitch" xml:space="preserve">
-    <value>Pitch</value>
-  </data>
-  <data name="LabelSettingsValue" xml:space="preserve">
-    <value>Value: {0}</value>
-  </data>
-  <data name="LabelSettingsVolume" xml:space="preserve">
-    <value>Volume</value>
-  </data>
   <data name="PageAbout" xml:space="preserve">
     <value>About</value>
   </data>
@@ -339,41 +363,8 @@
   <data name="PageVoiceSettings" xml:space="preserve">
     <value>Voice</value>
   </data>
-  <data name="SpeechCommandBracket" xml:space="preserve">
-    <value>bracket</value>
-  </data>
-  <data name="SpeechCommandColon" xml:space="preserve">
-    <value>сolon</value>
-  </data>
-  <data name="SpeechCommandComma" xml:space="preserve">
-    <value>сomma</value>
-  </data>
-  <data name="SpeechCommandExclamationMark" xml:space="preserve">
-    <value>exclamation mark</value>
-  </data>
-  <data name="SpeechCommandNewLine" xml:space="preserve">
-    <value>new line</value>
-  </data>
-  <data name="SpeechCommandPoint" xml:space="preserve">
-    <value>point</value>
-  </data>
-  <data name="SpeechCommandQuestionMark" xml:space="preserve">
-    <value>question mark</value>
-  </data>
-  <data name="SpeechCommandQuote" xml:space="preserve">
-    <value>quote</value>
-  </data>
-  <data name="TitleCommands" xml:space="preserve">
-    <value>Commands</value>
-  </data>
   <data name="TitleDownloading" xml:space="preserve">
     <value>Downloading</value>
-  </data>
-  <data name="TitlePunctuationWords" xml:space="preserve">
-    <value>Words for punctuation marks:</value>
-  </data>
-  <data name="UsefulFeatures" xml:space="preserve">
-    <value>Useful features:</value>
   </data>
   <data name="UserMessageCheckNetworkConnection" xml:space="preserve">
     <value>Check your network connection and try again.</value>
@@ -383,9 +374,6 @@
   </data>
   <data name="UserMessageCommandNotSupported" xml:space="preserve">
     <value>This command is not supported on this device.</value>
-  </data>
-  <data name="UserMessageContactNotFound" xml:space="preserve">
-    <value>{0} not found.</value>
   </data>
   <data name="UserMessageDisablePettyGuard" xml:space="preserve">
     <value>Are you sure you want to disable Petty's protection?</value>
@@ -401,12 +389,24 @@
 There is a solution!!! 
 Petty speech simulator will help you in this difficult task. 
 Just start talking and it will show you what people hear.
-Your speech will be here, good luck!)</value>
+Learn to speak clearly, good luck!)</value>
   </data>
   <data name="UserMessagePettyStartStopRemark" xml:space="preserve">
     <value>P.S. This button starts and stops Petty's voice assistant throughout the application.</value>
   </data>
   <data name="UserMessageTryLater" xml:space="preserve">
     <value>This operation is already in progress. Please try again later.</value>
+  </data>
+  <data name="VoiceSettingsEditorVoiceTestSpeech" xml:space="preserve">
+    <value>Hello leather bag, how are you?</value>
+  </data>
+  <data name="VoiceSettingsPitch" xml:space="preserve">
+    <value>Pitch</value>
+  </data>
+  <data name="VoiceSettingsValue" xml:space="preserve">
+    <value>Value: {0}</value>
+  </data>
+  <data name="VoiceSettingsVolume" xml:space="preserve">
+    <value>Volume</value>
   </data>
 </root>

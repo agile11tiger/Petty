@@ -7,6 +7,7 @@ public abstract partial class ViewModelBase : ObservableObject
         _loggerService = MauiProgram.ServiceProvider.GetService<LoggerService>();
         _navigationService = MauiProgram.ServiceProvider.GetService<NavigationService>();
         _localizationService = MauiProgram.ServiceProvider.GetService<LocalizationService>();
+        _settingsService = MauiProgram.ServiceProvider.GetService<SettingsService>();
         _initializeAsyncCommand =
             new AsyncRelayCommand(
                 async () =>
@@ -18,14 +19,22 @@ public abstract partial class ViewModelBase : ObservableObject
     }
 
     private long _isBusy;
-    protected LoggerService _loggerService;
-    protected NavigationService _navigationService;
-    private AppShellViewModel _appShellViewModelCache;
-    protected LocalizationService _localizationService;
-    protected IAsyncRelayCommand _initializeAsyncCommand;
+    private readonly AppShellViewModel _appShellViewModelCache;
+    protected readonly LoggerService _loggerService;
+    protected readonly SettingsService _settingsService;
+    protected readonly NavigationService _navigationService;
+    protected readonly LocalizationService _localizationService;
+    protected readonly IAsyncRelayCommand _initializeAsyncCommand;
+    protected PettySQLite.Models.Settings _settings => _settingsService.Settings;
     protected AppShellViewModel _appShellViewModel => _appShellViewModelCache ?? MauiProgram.ServiceProvider.GetService<AppShellViewModel>();
     [ObservableProperty] private bool _isInitialized;
     public bool IsBusy => Interlocked.Read(ref _isBusy) > 0;
+
+    public void HapticFeedback()
+    {
+        if (_settings.BaseSettings.IsHapticFeedback)
+            Microsoft.Maui.Devices.HapticFeedback.Default.Perform(HapticFeedbackType.Click);
+    }
 
     public virtual Task InitializeAsync()
     {

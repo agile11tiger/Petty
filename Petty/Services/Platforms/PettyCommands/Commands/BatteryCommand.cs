@@ -17,7 +17,7 @@ public class BatteryCommand : PettyCommand, IPettyCommand
 
     public async Task<bool> TryExecuteAsync()
     {
-        await _userMessagesService.SendMessageAsync(AppResources.BatteryCharging, deliveryMode: InformationDeliveryModes.VoiceAlert);
+        await _userMessagesService.SendMessageAsync(AppResources.CommandBatteryCharging, deliveryMode: InformationDeliveryModes.VoiceAlert);
         return true;
     }
 }

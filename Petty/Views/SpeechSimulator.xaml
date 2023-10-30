@@ -17,11 +17,7 @@
                      Orientation="Horizontal" 
                      VerticalOptions="Center"
                      HorizontalOptions="CenterAndExpand" >
-            <Button MinimumWidthRequest="130" 
-                    Command="{Binding ClearSpeechCommand}"
-                    BackgroundColor="{StaticResource Button}"
-                    Text="{x:Static resources:AppResources.ButtonClear}"/>
-            <Button MinimumWidthRequest="130" 
+            <Button MinimumWidthRequest="180" 
                     BackgroundColor="{Binding StartStopButtonBackground}"
                     Text="{x:Static resources:AppResources.ButtonStartStop}"
                     Command="{Binding StartStopPettyGuardAndroidServiceCommand}"/>

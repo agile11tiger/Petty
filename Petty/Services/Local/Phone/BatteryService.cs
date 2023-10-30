@@ -39,9 +39,9 @@ public class BatteryService(IBattery _battery, VoiceService _voiceService) : Ser
 
         var speech = e.State switch
         {
-            BatteryState.Charging => AppResources.BatteryCharging,
+            BatteryState.Charging => AppResources.CommandBatteryCharging,
             BatteryState.Discharging => null,
-            BatteryState.Full => AppResources.BatteryFull,
+            BatteryState.Full => AppResources.CommandBatteryFull,
             BatteryState.NotCharging => null,
             BatteryState.NotPresent => null,
             BatteryState.Unknown => null,

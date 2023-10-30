@@ -1,5 +1,14 @@
-﻿namespace Petty;
+﻿using System.Diagnostics.CodeAnalysis;
+namespace Petty;
 
+[SuppressMessage("Usage", "IDE0060")]
+[SuppressMessage("Usage", "IDE1006")]
+[SuppressMessage("Usage", "IDE0051")]
+[SuppressMessage("Usage", "IDE0044")]
+[SuppressMessage("Usage", "IDE0090")]
+[SuppressMessage("Usage", "IDE0028")]
+[SuppressMessage("Usage", "IDE0052")]
+[SuppressMessage("Usage", "IDE0059")]
 /*All errors are caught and logged, the application should work in any case, even if some of its controls are unavailable.*/
 //all variables, parameters, fields, properties, methods and etc sort BY GROUPS(all groups i will show below) then BY LENGTH
 internal class SomeRulesForClass : IDisposable

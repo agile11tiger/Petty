@@ -7,6 +7,11 @@ namespace Petty.Services.Local.UserMessages;
 
 public class UserMessagesService(VoiceService _voiceService, IPopupNavigation _popupNavigation) : Service
 {
+    public async Task<bool> SendVoiceMessageAsync(string message)
+    {
+        return await SendMessageAsync(message, deliveryMode: InformationDeliveryModes.VoiceAlert);
+    }
+
     /// <summary>
     /// Send message to user
     /// </summary>
@@ -35,10 +40,10 @@ public class UserMessagesService(VoiceService _voiceService, IPopupNavigation _p
         return false;
     }
 
-    public async Task<bool> SendMessageAsync(DisplayAlertPage displayAlertPage, bool needResult = false)
+    public async Task<bool> SendMessageAsync(DisplayAlertPage displayAlertPage)
     {
         await _popupNavigation.PushAsync(displayAlertPage, false);
-        return needResult && await displayAlertPage.DisplayAlertViewModel.GetResultAsync(displayAlertPage);
+        return await displayAlertPage.DisplayAlertViewModel.GetResultAsync(displayAlertPage);
     }
 
     public async Task<DisplayAlertPage> CreateDisplayAlertPageAsync(

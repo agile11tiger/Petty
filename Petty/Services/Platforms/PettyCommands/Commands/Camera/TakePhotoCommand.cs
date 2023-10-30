@@ -7,7 +7,7 @@ namespace Petty.Services.Platforms.PettyCommands.Commands.Camera;
 public class TakePhotoCommand : PettyCommand, IPettyCommand
 {
     public string Name => AppResources.CommandTakePhoto;
-    public string Description => AppResources.CommandTakeVideo;
+    public string Description => AppResources.CommandTakePhotoDescription;
 
     public async Task<bool> TryExecuteAsync()
     {
@@ -20,11 +20,12 @@ public class TakePhotoCommand : PettyCommand, IPettyCommand
 
             if (photo != null)
             {
+
                 var picturePath = Path.Combine(PathsService.PicturesPath, $"Picture_{DateTime.Now:yy.MM.dd_hh-mm-ss}.jpg");
                 using Stream sourceStream = await photo.OpenReadAsync();
                 using FileStream localFileStream = File.OpenWrite(picturePath);
                 await sourceStream.CopyToAsync(localFileStream);
-                _messager.Send(new FileResult(picturePath));
+                _messenger.Send(new FileResult(picturePath));
                 return true;
             }
         }

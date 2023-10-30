@@ -16,7 +16,7 @@ namespace PettySQLite.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.11")
+                .HasAnnotation("ProductVersion", "8.0.0-rc.2.23480.1")
                 .HasAnnotation("Proxies:ChangeTracking", false)
                 .HasAnnotation("Proxies:CheckEquality", false)
                 .HasAnnotation("Proxies:LazyLoading", true);
@@ -27,6 +27,9 @@ namespace PettySQLite.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("InformationPerceptionMode")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("IsHapticFeedback")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");

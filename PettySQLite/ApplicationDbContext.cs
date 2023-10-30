@@ -6,7 +6,7 @@ public class ApplicationDbContext : DbContext
 {
     public ApplicationDbContext()
     {
-        Database.EnsureDeleted();
+        //Database.EnsureDeleted();
         //Database.EnsureCreated();
 
         if (!Initialized)

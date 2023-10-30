@@ -179,12 +179,12 @@ public class SpeechRecognizerService(
     private bool skip;
     private async void OnBroadcastAudioRecorderData(byte[] recorderData)
     {
-        if (skip)
-            return;
+        //if (skip)
+        //    return;
 
-        skip = true;
-        BroadcastSpeech?.Invoke(new SpeechRecognizerResult() { IsResultSpeech = true, Speech = "пэтти характеристики телефона", NotifyCommandRecognized = OnCommandRecognized });
-        return;
+        //skip = true;
+        //BroadcastSpeech?.Invoke(new SpeechRecognizerResult() { IsResultSpeech = true, Speech = "пэтти характеристики телефона", NotifyCommandRecognized = OnCommandRecognized });
+        //return;
         if (_isAcceptWaveform && CanSkipRecognize(recorderData))
             return;
 
@@ -225,7 +225,7 @@ public class SpeechRecognizerService(
         }
 
         //isAcceptWaveform mean that result() called and we should send result
-        //We dont ignore result even if it's the same. Since we need to separate completed pieces
+        //We don`t ignore result even if it's the same. Since we need to separate completed pieces
         if (_isAcceptWaveform || !_speechRecognizerResult.Speech.Reverse().SequenceEqual(_speechCache.Reverse()))
         {
             _speechCache = _speechRecognizerResult.Speech;

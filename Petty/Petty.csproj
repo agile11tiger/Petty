@@ -1,13 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net8.0-android</TargetFrameworks>
+		<TargetFrameworks>net8.0;net8.0-android</TargetFrameworks>
 		<!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
 		<!-- <TargetFrameworks>$(TargetFrameworks);net7.0-tizen</TargetFrameworks> -->
-		<OutputType>Exe</OutputType>
+    <OutputType Condition="'$(TargetFramework)' != 'net8.0'">Exe</OutputType>
 		<RootNamespace>Petty</RootNamespace>
-		<UseMaui>true</UseMaui>
 		<SingleProject>true</SingleProject>
+    <UseMaui>true</UseMaui>
 		<ImplicitUsings>enable</ImplicitUsings>
 
 		<!-- Display name -->
@@ -43,6 +43,22 @@
 
 		<!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
 		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
+		<AndroidResource Remove="Services\Platforms\Audio\**" />
+		<AndroidResource Remove="Services\Platforms\Speech\**" />
+		<Compile Remove="Services\Platforms\Audio\**" />
+		<Compile Remove="Services\Platforms\Speech\**" />
+		<EmbeddedResource Remove="Services\Platforms\Audio\**" />
+		<EmbeddedResource Remove="Services\Platforms\Speech\**" />
+		<MauiCss Remove="Services\Platforms\Audio\**" />
+		<MauiCss Remove="Services\Platforms\Speech\**" />
+		<MauiXaml Remove="Services\Platforms\Audio\**" />
+		<MauiXaml Remove="Services\Platforms\Speech\**" />
+		<None Remove="Services\Platforms\Audio\**" />
+		<None Remove="Services\Platforms\Speech\**" />
+		<Compile Remove="MessengerCommands\FromPettyGuard\SpeechRecognizerResult.cs" />
+		<Compile Remove="MessengerCommands\FromPettyGuard\UpdateProgressBar.cs" />
+		<Compile Remove="Services\Local\NumberParsingService.cs" />
+		<Compile Remove="Services\Local\WebRequestsService.cs" />
 		<MauiAsset Remove="Resources\Raw\musicReferences.txt" />
 		<MauiImage Remove="Resources\Images\imagesReferences.txt" />
     
@@ -109,6 +125,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\PettySQLite\PettySQLite.csproj" />
+    <ProjectReference Include="..\SpeechEngine\SpeechEngine.csproj" />
   </ItemGroup>
 
   <ItemGroup>

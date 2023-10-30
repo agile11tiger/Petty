@@ -21,7 +21,6 @@ public class LocalizationService(IMessenger _messenger) : Service
         Thread.CurrentThread.CurrentUICulture = cultureInfo;
         CultureInfo.CurrentCulture = cultureInfo;
         CultureInfo.CurrentUICulture = cultureInfo;
-        Preferences.Default.Set(SharedPreferencesHelper.LANGUAGE, cultureInfo.Name);
 
         if (needSoftRestart)
             _messenger.Send<RestartApplication>(new RestartApplication() { CultureInfo = cultureInfo });

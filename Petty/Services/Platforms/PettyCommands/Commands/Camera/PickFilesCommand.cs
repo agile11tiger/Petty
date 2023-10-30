@@ -16,7 +16,7 @@ public class PickFilesCommand : PettyCommand, IPettyCommand
 
             if (files.Any())
             {
-                _messager.Send(files);
+                _messenger.Send(files);
                 return true;
             }
         }

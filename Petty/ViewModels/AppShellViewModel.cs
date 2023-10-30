@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.Messaging;
 using Petty.PlatformsShared.MessengerCommands.FromPettyGuard;
 using Petty.Views.Controls;
+using SpeechEngine.Audio;
 namespace Petty.ViewModels;
 
 public partial class AppShellViewModel : ViewModelBase
@@ -8,7 +9,7 @@ public partial class AppShellViewModel : ViewModelBase
     public AppShellViewModel(IMessenger messenger, RunningTextViewModel runningTextViewModel)
     {
         _runningTextViewModel = runningTextViewModel;
-        messenger.Register<UpdateProgressBar>(this, (recipient, message) => UpdateProgressSomeBackgroundWorking(message.Percentages));
+        messenger.Register<SpeechModelDownloadingProgressBar>(this, (recipient, message) => UpdateProgressSomeBackgroundWorking(message.Percentages));
     }
 
     private bool _isFlyoutOpen;
@@ -44,6 +45,8 @@ public partial class AppShellViewModel : ViewModelBase
     [RelayCommand]
     private async Task TapQuestionIconAsync()
     {
+        HapticFeedback();
+
         if (ShowQuestionIconInfo != null)
             await ShowQuestionIconInfo.ExecuteAsync(null);
     }

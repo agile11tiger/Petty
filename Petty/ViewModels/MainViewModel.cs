@@ -2,9 +2,10 @@
 using Petty.Helpers;
 using Petty.Resources.Localization;
 using Petty.Services.Local.PermissionsFolder;
+using Petty.Services.Platforms.PettyCommands;
 namespace Petty.ViewModels;
 
-public partial class MainViewModel(IMessenger _messenger, PermissionService _permissionService) : ViewModelBase
+public partial class MainViewModel(PermissionService _permissionService, PettyCommandsService pettyCommandsService) : ViewModelBase
 {
     [ObservableProperty] private bool _isSelectedTabBarItem;
     [ObservableProperty] private string _pettyGuardIconImageSource = "play.png";
@@ -19,6 +20,7 @@ public partial class MainViewModel(IMessenger _messenger, PermissionService _per
     [RelayCommand]
     private async Task GoToSettingsAsync()
     {
+        HapticFeedback();
         await _navigationService.GoToAsync(RoutesHelper.SETTINGS);
         IsSelectedTabBarItem = false;
     }
@@ -26,11 +28,13 @@ public partial class MainViewModel(IMessenger _messenger, PermissionService _per
     [RelayCommand]
     private async Task GoToSpeechSimulatorAsync()
     {
+        HapticFeedback();
         await _navigationService.GoToAsync(RoutesHelper.SPEECH_SIMULATOR);
     }
 
     [RelayCommand]
     private async Task GoToLeaderboardAsync()
     {
+        HapticFeedback();
     }
 }

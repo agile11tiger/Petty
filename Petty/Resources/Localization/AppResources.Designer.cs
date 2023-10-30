@@ -61,20 +61,83 @@ namespace Petty.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Yay! Food.
+        ///   Looks up a localized string similar to Current language (will only be applied after restarting the application):.
         /// </summary>
-        internal static string BatteryCharging {
+        internal static string BaseSettingsCurrentLanguage {
             get {
-                return ResourceManager.GetString("BatteryCharging", resourceCulture);
+                return ResourceManager.GetString("BaseSettingsCurrentLanguage", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to I&apos;m full.
+        ///   Looks up a localized string similar to Haptic feedback:.
         /// </summary>
-        internal static string BatteryFull {
+        internal static string BaseSettingsHapticalFeedback {
             get {
-                return ResourceManager.GetString("BatteryFull", resourceCulture);
+                return ResourceManager.GetString("BaseSettingsHapticalFeedback", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Information perception method:.
+        /// </summary>
+        internal static string BaseSettingsMode {
+            get {
+                return ResourceManager.GetString("BaseSettingsMode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Read.
+        /// </summary>
+        internal static string BaseSettingsModeRead {
+            get {
+                return ResourceManager.GetString("BaseSettingsModeRead", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to all information is displayed on the screen.
+        /// </summary>
+        internal static string BaseSettingsModeReadDescription {
+            get {
+                return ResourceManager.GetString("BaseSettingsModeReadDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ReadOrVoice.
+        /// </summary>
+        internal static string BaseSettingsModeReadOrVoice {
+            get {
+                return ResourceManager.GetString("BaseSettingsModeReadOrVoice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to all information is displayed or spoken.
+        /// </summary>
+        internal static string BaseSettingsModeReadOrVoiceDescription {
+            get {
+                return ResourceManager.GetString("BaseSettingsModeReadOrVoiceDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Voice.
+        /// </summary>
+        internal static string BaseSettingsModeVoice {
+            get {
+                return ResourceManager.GetString("BaseSettingsModeVoice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to all information is spoken.
+        /// </summary>
+        internal static string BaseSettingsModeVoiceDescription {
+            get {
+                return ResourceManager.GetString("BaseSettingsModeVoiceDescription", resourceCulture);
             }
         }
         
@@ -223,11 +286,29 @@ namespace Petty.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Yay! Food.
+        /// </summary>
+        internal static string CommandBatteryCharging {
+            get {
+                return ResourceManager.GetString("CommandBatteryCharging", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to notifies you of the current battery charge.
         /// </summary>
         internal static string CommandBatteryDescription {
             get {
                 return ResourceManager.GetString("CommandBatteryDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to I&apos;m full.
+        /// </summary>
+        internal static string CommandBatteryFull {
+            get {
+                return ResourceManager.GetString("CommandBatteryFull", resourceCulture);
             }
         }
         
@@ -241,6 +322,24 @@ namespace Petty.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} has several numbers which one to choose?.
+        /// </summary>
+        internal static string CommandCallContactHaveSeveralPhoneNumbers {
+            get {
+                return ResourceManager.GetString("CommandCallContactHaveSeveralPhoneNumbers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} not found..
+        /// </summary>
+        internal static string CommandCallContactNotFound {
+            get {
+                return ResourceManager.GetString("CommandCallContactNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to makes a call if the given user was found in your contacts list..
         /// </summary>
         internal static string CommandCallDescription {
@@ -250,11 +349,29 @@ namespace Petty.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Makes a call if the given user was found in your contacts list. If several contacts with a given name are found, then a choice is offered and you need to answer: “zero”, “first” or “one”, etc. up to 9 inclusive, no longer supported..
         /// </summary>
         internal static string CommandCallExtendedDescription {
             get {
                 return ResourceManager.GetString("CommandCallExtendedDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} phone number was not found..
+        /// </summary>
+        internal static string CommandCallNotPhoneNumbers {
+            get {
+                return ResourceManager.GetString("CommandCallNotPhoneNumbers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select number from the list..
+        /// </summary>
+        internal static string CommandCallSelectNumberFromList {
+            get {
+                return ResourceManager.GetString("CommandCallSelectNumberFromList", resourceCulture);
             }
         }
         
@@ -273,6 +390,33 @@ namespace Petty.Resources.Localization {
         internal static string CommandDeviceInfoDescription {
             get {
                 return ResourceManager.GetString("CommandDeviceInfoDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to dial.
+        /// </summary>
+        internal static string CommandDial {
+            get {
+                return ResourceManager.GetString("CommandDial", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to dials a phone number, dialing is supported both with and without the +1 prefix. After dialing, you need to check that the number you dialed is correct and say “call.”.
+        /// </summary>
+        internal static string CommandDialDescription {
+            get {
+                return ResourceManager.GetString("CommandDialDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sorry, there was an error in my code and the command couldn&apos;t be executed. Cry, cry..
+        /// </summary>
+        internal static string CommandExceptionInCode {
+            get {
+                return ResourceManager.GetString("CommandExceptionInCode", resourceCulture);
             }
         }
         
@@ -403,6 +547,24 @@ namespace Petty.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Commands.
+        /// </summary>
+        internal static string CommandsTitle {
+            get {
+                return ResourceManager.GetString("CommandsTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Useful features:.
+        /// </summary>
+        internal static string CommandsTitleUsefulFeatures {
+            get {
+                return ResourceManager.GetString("CommandsTitleUsefulFeatures", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to take photo.
         /// </summary>
         internal static string CommandTakePhoto {
@@ -435,6 +597,24 @@ namespace Petty.Resources.Localization {
         internal static string CommandTakeVideoDescription {
             get {
                 return ResourceManager.GetString("CommandTakeVideoDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to cancel.
+        /// </summary>
+        internal static string CommandWordCancel {
+            get {
+                return ResourceManager.GetString("CommandWordCancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to no.
+        /// </summary>
+        internal static string CommandWordNo {
+            get {
+                return ResourceManager.GetString("CommandWordNo", resourceCulture);
             }
         }
         
@@ -538,114 +718,6 @@ namespace Petty.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Hello leather bag, how are you?.
-        /// </summary>
-        internal static string EditorVoiceTestSpeech {
-            get {
-                return ResourceManager.GetString("EditorVoiceTestSpeech", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Information perception method:.
-        /// </summary>
-        internal static string InformationPerceptionMode {
-            get {
-                return ResourceManager.GetString("InformationPerceptionMode", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Read.
-        /// </summary>
-        internal static string InformationPerceptionModeRead {
-            get {
-                return ResourceManager.GetString("InformationPerceptionModeRead", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to all information is displayed on the screen.
-        /// </summary>
-        internal static string InformationPerceptionModeReadDescription {
-            get {
-                return ResourceManager.GetString("InformationPerceptionModeReadDescription", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to ReadOrVoice.
-        /// </summary>
-        internal static string InformationPerceptionModeReadOrVoice {
-            get {
-                return ResourceManager.GetString("InformationPerceptionModeReadOrVoice", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to all information is displayed or spoken.
-        /// </summary>
-        internal static string InformationPerceptionModeReadOrVoiceDescription {
-            get {
-                return ResourceManager.GetString("InformationPerceptionModeReadOrVoiceDescription", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Voice.
-        /// </summary>
-        internal static string InformationPerceptionModeVoice {
-            get {
-                return ResourceManager.GetString("InformationPerceptionModeVoice", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to all information is spoken.
-        /// </summary>
-        internal static string InformationPerceptionModeVoiceDescription {
-            get {
-                return ResourceManager.GetString("InformationPerceptionModeVoiceDescription", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Current language (will only be applied after restarting the application):.
-        /// </summary>
-        internal static string LabelSettingsCurrentLanguage {
-            get {
-                return ResourceManager.GetString("LabelSettingsCurrentLanguage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Pitch.
-        /// </summary>
-        internal static string LabelSettingsPitch {
-            get {
-                return ResourceManager.GetString("LabelSettingsPitch", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Value: {0}.
-        /// </summary>
-        internal static string LabelSettingsValue {
-            get {
-                return ResourceManager.GetString("LabelSettingsValue", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Volume.
-        /// </summary>
-        internal static string LabelSettingsVolume {
-            get {
-                return ResourceManager.GetString("LabelSettingsVolume", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to About.
         /// </summary>
         internal static string PageAbout {
@@ -727,110 +799,11 @@ namespace Petty.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to bracket.
-        /// </summary>
-        internal static string SpeechCommandBracket {
-            get {
-                return ResourceManager.GetString("SpeechCommandBracket", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to сolon.
-        /// </summary>
-        internal static string SpeechCommandColon {
-            get {
-                return ResourceManager.GetString("SpeechCommandColon", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to сomma.
-        /// </summary>
-        internal static string SpeechCommandComma {
-            get {
-                return ResourceManager.GetString("SpeechCommandComma", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to exclamation mark.
-        /// </summary>
-        internal static string SpeechCommandExclamationMark {
-            get {
-                return ResourceManager.GetString("SpeechCommandExclamationMark", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to new line.
-        /// </summary>
-        internal static string SpeechCommandNewLine {
-            get {
-                return ResourceManager.GetString("SpeechCommandNewLine", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to point.
-        /// </summary>
-        internal static string SpeechCommandPoint {
-            get {
-                return ResourceManager.GetString("SpeechCommandPoint", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to question mark.
-        /// </summary>
-        internal static string SpeechCommandQuestionMark {
-            get {
-                return ResourceManager.GetString("SpeechCommandQuestionMark", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to quote.
-        /// </summary>
-        internal static string SpeechCommandQuote {
-            get {
-                return ResourceManager.GetString("SpeechCommandQuote", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Commands.
-        /// </summary>
-        internal static string TitleCommands {
-            get {
-                return ResourceManager.GetString("TitleCommands", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Downloading.
         /// </summary>
         internal static string TitleDownloading {
             get {
                 return ResourceManager.GetString("TitleDownloading", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Words for punctuation marks:.
-        /// </summary>
-        internal static string TitlePunctuationWords {
-            get {
-                return ResourceManager.GetString("TitlePunctuationWords", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Useful features:.
-        /// </summary>
-        internal static string UsefulFeatures {
-            get {
-                return ResourceManager.GetString("UsefulFeatures", resourceCulture);
             }
         }
         
@@ -858,15 +831,6 @@ namespace Petty.Resources.Localization {
         internal static string UserMessageCommandNotSupported {
             get {
                 return ResourceManager.GetString("UserMessageCommandNotSupported", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to {0} not found..
-        /// </summary>
-        internal static string UserMessageContactNotFound {
-            get {
-                return ResourceManager.GetString("UserMessageContactNotFound", resourceCulture);
             }
         }
         
@@ -902,7 +866,7 @@ namespace Petty.Resources.Localization {
         ///There is a solution!!! 
         ///Petty speech simulator will help you in this difficult task. 
         ///Just start talking and it will show you what people hear.
-        ///Your speech will be here, good luck!).
+        ///Learn to speak clearly, good luck!).
         /// </summary>
         internal static string UserMessagePettySpeechSimulatorPlaceholder {
             get {
@@ -925,6 +889,42 @@ namespace Petty.Resources.Localization {
         internal static string UserMessageTryLater {
             get {
                 return ResourceManager.GetString("UserMessageTryLater", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hello leather bag, how are you?.
+        /// </summary>
+        internal static string VoiceSettingsEditorVoiceTestSpeech {
+            get {
+                return ResourceManager.GetString("VoiceSettingsEditorVoiceTestSpeech", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pitch.
+        /// </summary>
+        internal static string VoiceSettingsPitch {
+            get {
+                return ResourceManager.GetString("VoiceSettingsPitch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Value: {0}.
+        /// </summary>
+        internal static string VoiceSettingsValue {
+            get {
+                return ResourceManager.GetString("VoiceSettingsValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Volume.
+        /// </summary>
+        internal static string VoiceSettingsVolume {
+            get {
+                return ResourceManager.GetString("VoiceSettingsVolume", resourceCulture);
             }
         }
     }

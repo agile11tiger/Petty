@@ -1,4 +1,7 @@
-﻿using Android.App;
+﻿#if ANDROID
+using Android.App;
+using Petty.Platforms.Android.Services.Audio;
+#endif
 using CommunityToolkit.Maui;
 using CommunityToolkit.Mvvm.Messaging;
 using Microsoft.Extensions.Logging;
@@ -7,14 +10,11 @@ using Mopups.Interfaces;
 using Mopups.Services;
 using Petty.Extensions;
 using Petty.Helpers;
-using Petty.Platforms.Android.Services.Audio;
 using Petty.Services.Local.PermissionsFolder;
 using Petty.Services.Local.Phone;
 using Petty.Services.Local.UserMessages;
 using Petty.Services.Platforms;
-using Petty.Services.Platforms.Audio;
 using Petty.Services.Platforms.PettyCommands;
-using Petty.Services.Platforms.Speech;
 using Petty.ViewModels.Settings;
 using Petty.Views;
 using Petty.Views.Controls;
@@ -25,10 +25,17 @@ using Plugin.Maui.Audio;
 using Sharpnado.Tabs;
 using SkiaSharp.Views.Maui.Controls.Hosting;
 using SkiaSharp.Views.Maui.Handlers;
+using SpeechEngine.Audio;
+using SpeechEngine.Speech;
+using SpeechEngine.Services;
+using Microsoft.Extensions.DependencyInjection;
+using SpeechEngine;
 
+#if ANDROID
 //https://learn.microsoft.com/en-us/dotnet/maui/platform-integration/device/flashlight?tabs=android#:~:text=%5B-,assembly,-%3A%20UsesFeature(%22android.hardware.camera%22
 [assembly: UsesFeature("android.hardware.camera", Required = false)]
 [assembly: UsesFeature("android.hardware.camera.autofocus", Required = false)]
+#endif
 namespace Petty;
 
 public static class MauiProgram
@@ -39,7 +46,7 @@ public static class MauiProgram
         builder
             .UseMauiApp<App>()
             .UseSkiaSharp()
-            .UseSharpnadoTabs(loggerEnable: false)
+            .UseSharpnadoTabs(loggerEnable: true, true)
             .UseMauiCommunityToolkit()
             //todo https://stackoverflow.com/questions/72463558/how-to-play-an-audio-file-net-maui
             //.UseMauiCommunityToolkitMediaElement()  https://stackoverflow.com/questions/75525722/correct-way-to-set-net-maui-mediaelement-source-from-code
@@ -84,7 +91,7 @@ public static class MauiProgram
     }
 
     private static LoggerService _loggerService;
-    public static IServiceProvider ServiceProvider { get; private set; }
+    public static IServiceProvider ServiceProvider { get; set; }
 
     private static void HandleUnobservedException(object sender, UnobservedTaskExceptionEventArgs e)
     {
@@ -103,9 +110,12 @@ public static class MauiProgram
             .AddSingleton<VoiceService>()
             .AddSingleton<PhoneService>()
             .AddSingleton<LoggerService>()
+            .AddSingleton<AudioRecorder>()
+            .AddSingleton<SpeechImprover>()
             .AddSingleton<BatteryService>()
             .AddSingleton<DatabaseService>()
             .AddSingleton<SettingsService>()
+            .AddSingleton<SpeechRecognizer>()
             .AddSingleton<NavigationService>()
             .AddSingleton<PermissionService>()
             .AddSingleton<WebRequestsService>()
@@ -113,18 +123,22 @@ public static class MauiProgram
             .AddSingleton<LocalizationService>()
             .AddSingleton<UserMessagesService>()
             .AddSingleton<PettyCommandsService>()
-            .AddSingleton<AudioRecorderService>()
-            .AddSingleton<SpeechRecognizerService>()
-            .AddSingleton<IAudioStream, AudioStream>()
-            .AddSingleton<IMessenger, WeakReferenceMessenger>()
+            .AddSingleton<NumberParsingService>()
+            .AddSingleton<SpeechCommandRecognizer>()
             .AddSingleton<IBattery>(Battery.Default)
+            .AddSingleton<ILoggerService, LoggerService>()
             .AddSingleton<IDeviceInfo>(DeviceInfo.Current)
             .AddSingleton<IAudioManager>(AudioManager.Current)
+            .AddSingleton<IMessenger, WeakReferenceMessenger>()
             .AddSingleton<IDeviceDisplay>(DeviceDisplay.Current)
             .AddSingleton<IPopupNavigation>(MopupService.Instance)
             .AddSingleton<IVersionTracking>(VersionTracking.Default)
+            .AddSingleton<ISpeechEngineParametersService, SpeechEngineParametersService>()
+#if ANDROID
+            .AddSingleton<IAudioStream, AudioStream>()
+#endif
 
-            .AddTransient<WaveRecorderService>();
+            .AddTransient<WaveRecorder>();
 
         return builder;
     }
@@ -133,7 +147,7 @@ public static class MauiProgram
     {
         builder.Services
             .AddSingletonWithShellRoute<MainPage, MainViewModel>(RoutesHelper.MAIN)
-            .AddSingletonWithShellRoute<SettingsPage, SettingsViewModel>(RoutesHelper.SETTINGS)
+            .AddTransientWithShellRoute<SettingsPage, SettingsViewModel>(RoutesHelper.SETTINGS) //todo change to singleton, if i do now than touch effect not working
             .AddSingletonWithShellRoute<SpeechSimulatorPage, SpeechSimulatorViewModel>(RoutesHelper.SPEECH_SIMULATOR)
             .AddTransientWithShellRoute<BaseSettingsPage, BaseSettingsViewModel>($"{RoutesHelper.SETTINGS}/{RoutesHelper.BASE_SETTINGS}")
             .AddTransientWithShellRoute<DiagnosticPettyPage, DiagnosticPettyViewModel>($"{RoutesHelper.SETTINGS}/{RoutesHelper.DIAGNOSTICS}")

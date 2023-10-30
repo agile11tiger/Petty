@@ -24,11 +24,12 @@ public class PermissionService : Service
 
         _permissions = new Dictionary<string, Task<PermissionStatus>>
         {
+            [nameof(Permissions.Vibrate)] = RequestPermissionAsync<Permissions.Vibrate>(),
+            [nameof(Permissions.Flashlight)] = RequestPermissionAsync<Permissions.Flashlight>(),
             [nameof(Permissions.StorageRead)] = RequestPermissionAsync<Permissions.StorageRead>(),
             [nameof(Permissions.StorageWrite)] = RequestPermissionAsync<Permissions.StorageWrite>(),
+            [nameof(Permissions.ContactsRead)] = RequestPermissionAsync<Permissions.ContactsRead>(),
             [nameof(Permissions.Camera)] = RequestPermissionAsync<Permissions.Camera>(),
-            [nameof(Permissions.Flashlight)] = RequestPermissionAsync<Permissions.Flashlight>(),
-            [nameof(Permissions.Flashlight)] = RequestPermissionAsync<Permissions.ContactsRead>(),
         };
         await Task.WhenAll(_permissions.Values.ToArray<Task<PermissionStatus>>());
         return _permissions;

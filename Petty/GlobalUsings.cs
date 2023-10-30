@@ -7,3 +7,5 @@ global using Petty.ViewModels;
 global using Petty.ViewModels.Base;
 global using PettySQLite;
 global using PettySQLite.Models;
+global using Petty.Resources.Localization;
+

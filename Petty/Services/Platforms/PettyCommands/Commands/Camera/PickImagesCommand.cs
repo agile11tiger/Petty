@@ -16,7 +16,7 @@ public class PickImagesCommand : PettyCommand, IPettyCommand
 
             if (images != null)
             {
-                _messager.Send(images);
+                _messenger.Send(images);
                 return true;
             }
         }

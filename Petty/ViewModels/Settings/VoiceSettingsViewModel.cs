@@ -2,19 +2,19 @@
 using Petty.Resources.Localization;
 namespace Petty.ViewModels.Settings;
 
-public partial class VoiceSettingsViewModel(VoiceService voiceService, DatabaseService databaseService, SettingsService settingsService)
+public partial class VoiceSettingsViewModel(
+    VoiceService _voiceService, 
+    DatabaseService _databaseService, 
+    SettingsService _settingsService)
     : ViewModelBase
 {
-    private VoiceSettings _tempVoiceSettings = settingsService.Settings.VoiceSettings.CloneJson();
-    private readonly VoiceService _voiceService = voiceService;
-    private readonly DatabaseService _databaseService = databaseService;
-    private readonly SettingsService _settingsService = settingsService;
-    [ObservableProperty] private string _speech = AppResources.EditorVoiceTestSpeech;
+    private VoiceSettings _tempVoiceSettings = _settingsService.Settings.VoiceSettings.CloneJson();
+    [ObservableProperty] private string _speech = AppResources.VoiceSettingsEditorVoiceTestSpeech;
 
     //https://learn.microsoft.com/en-us/dotnet/maui/platform-integration/device-media/text-to-speech?tabs=android#:~:text=Maximum-,Pitch,-0
     public float PitchMaxValue { get => 2; }
     public float VolumeMaxValue { get => 1; }
-    public string PitchValueText { get => _localizationService.Get(nameof(AppResources.LabelSettingsValue), PitchValue); }
+    public string PitchValueText { get => _localizationService.Get(nameof(AppResources.VoiceSettingsValue), PitchValue); }
 
     public float PitchValue
     {
@@ -32,7 +32,7 @@ public partial class VoiceSettingsViewModel(VoiceService voiceService, DatabaseS
 
     public string VolumeValueText
     {
-        get => _localizationService.Get(nameof(AppResources.LabelSettingsValue), VolumeValue);
+        get => _localizationService.Get(nameof(AppResources.VoiceSettingsValue), VolumeValue);
     }
 
     public float VolumeValue
@@ -58,12 +58,14 @@ public partial class VoiceSettingsViewModel(VoiceService voiceService, DatabaseS
     [RelayCommand]
     private async Task SpeakAsync()
     {
+        HapticFeedback();
         await _voiceService.SpeakAsync(Speech, _tempVoiceSettings);
     }
 
     [RelayCommand]
     private async Task ApplyDefaultSettingsAsync()
     {
+        HapticFeedback();
         _tempVoiceSettings = new PettySQLite.Models.VoiceSettings();
         await GoBackAsync();
     }
@@ -71,6 +73,7 @@ public partial class VoiceSettingsViewModel(VoiceService voiceService, DatabaseS
     [RelayCommand]
     private async Task ApplySettingsAsync()
     {
+        HapticFeedback();
         await GoBackAsync();
     }
 

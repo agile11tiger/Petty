@@ -9,6 +9,7 @@ using CommunityToolkit.Mvvm.Messaging;
 using Petty.PlatformsShared.MessengerCommands.FromPettyGuard;
 using Petty.Services.Platforms.PettyCommands;
 using Petty.Services.Platforms.PettyCommands.Commands.Base;
+namespace Petty;
 
 /// <summary>
 /// https://learn.microsoft.com/ru-ru/xamarin/android/app-fundamentals/services/creating-a-service/
@@ -26,9 +27,9 @@ public class PettyGuardAndroidService : Android.App.Service
 {
     public PettyGuardAndroidService()
     {
-        _pettyCommandsService = IPlatformApplication.Current.Services.GetService<PettyCommandsService>();
-        _messager = IPlatformApplication.Current.Services.GetService<IMessenger>();
+        _messenger = IPlatformApplication.Current.Services.GetService<IMessenger>();
         _loggerService = IPlatformApplication.Current.Services.GetService<LoggerService>();
+        _pettyCommandsService = IPlatformApplication.Current.Services.GetService<PettyCommandsService>();
     }
 
     private const int NOTIFICATION_ID = 1;
@@ -38,7 +39,7 @@ public class PettyGuardAndroidService : Android.App.Service
     private const string NOTIFICATION_CHANNEL_NAME = "notification";
 
     private static bool _isStarting;
-    private readonly IMessenger _messager;
+    private readonly IMessenger _messenger;
     private readonly LoggerService _loggerService;
     private readonly PettyCommandsService _pettyCommandsService;
 
@@ -86,7 +87,7 @@ public class PettyGuardAndroidService : Android.App.Service
             {
                 await StopForegroundServiceAsync();
                 _isStarting = false;
-                _messager.Send(new StoppedPettyGuardService { IsStopped = !_isStarting });
+                _messenger.Send(new StoppedPettyGuardService { IsStopped = !_isStarting });
             }
             catch (Exception ex)
             {
@@ -108,7 +109,7 @@ public class PettyGuardAndroidService : Android.App.Service
                 if (intent.Action == START_SERVICE)
                 {
                     var isStared = _isStarting = await TryStartForegroundServiceAsync();
-                    _messager.Send(new StartedPettyGuardService { IsStarted = isStared });
+                    _messenger.Send(new StartedPettyGuardService { IsStarted = isStared });
                 }
             }
             catch (Exception ex)
@@ -130,7 +131,7 @@ public class PettyGuardAndroidService : Android.App.Service
 
     private async Task<bool> TryStartForegroundServiceAsync()
     {
-        var isStarted = await _pettyCommandsService.TryStartAsync(OnBroadcastPettyCommand);
+        var isStarted = await _pettyCommandsService.TryStartAsync();
 
         if (Build.VERSION.SdkInt >= BuildVersionCodes.O && GetSystemService(Context.NotificationService) is NotificationManager notifcationManager)
             CreateNotificationChannel(notifcationManager);
@@ -152,14 +153,9 @@ public class PettyGuardAndroidService : Android.App.Service
         return isStarted;
     }
 
-    private void OnBroadcastPettyCommand(IPettyCommand pettyCommand)
-    {
-        _messager.Send(pettyCommand);
-    }
-
     private async Task StopForegroundServiceAsync()
     {
-        await _pettyCommandsService.StopAsync(OnBroadcastPettyCommand);
+        await _pettyCommandsService.StopAsync();
         StopForeground(true);
         StopSelf();
     }

@@ -42,7 +42,7 @@ public partial class PickerView : ContentView
             _pickerPage.DisplayAlertViewModel.ClosingCommand = _closingCommand;
         }
 
-        await _userMessagesService.SendMessageAsync(_pickerPage, true);
+        await _userMessagesService.SendMessageAsync(_pickerPage);
     }
 
     private void HandleClosing(ILink link)

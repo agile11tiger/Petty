@@ -24,7 +24,7 @@ public class TakeVideoCommand : PettyCommand, IPettyCommand
                 using Stream sourceStream = await video.OpenReadAsync();
                 using FileStream localFileStream = File.OpenWrite(videoPath);
                 await sourceStream.CopyToAsync(localFileStream);
-                _messager.Send(new FileResult(videoPath));
+                _messenger.Send(new FileResult(videoPath));
                 return true;
             }
         }

@@ -17,7 +17,7 @@ public class PickVideoFilesCommand : PettyCommand, IPettyCommand
 
             if (videoFiles != null)
             {
-                _messager.Send(videoFiles);
+                _messenger.Send(videoFiles);
                 return true;
             }
         }

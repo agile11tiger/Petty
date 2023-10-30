@@ -1,4 +1,5 @@
 using Petty.ViewModels.Settings;
+using PettySQLite.Models;
 namespace Petty.Views.Settings;
 
 public partial class VoiceSettingsPage : ContentPage

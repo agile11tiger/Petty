@@ -14,7 +14,9 @@ public partial class AudioRecorderService : Service
     /// </summary>
     public AudioRecorderService(IAudioStream audioStream, LoggerService loggerService, WaveRecorderService waveRecorderService)
     {
+#if ANDROID
         Initialize();
+#endif
         _audioStream = audioStream;
         _waveRecorderService = waveRecorderService;
     }

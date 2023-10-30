@@ -117,11 +117,32 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="BatteryCharging" xml:space="preserve">
-    <value>Ура! Еда</value>
+  <data name="BaseSettingsCurrentLanguage" xml:space="preserve">
+    <value>Текущий язык (применится только после перезапуска приложения):</value>
   </data>
-  <data name="BatteryFull" xml:space="preserve">
-    <value>Я наелся</value>
+  <data name="BaseSettingsHapticalFeedback" xml:space="preserve">
+    <value>Тактильная обратная связь:</value>
+  </data>
+  <data name="BaseSettingsMode" xml:space="preserve">
+    <value>Способ восприятия информации:</value>
+  </data>
+  <data name="BaseSettingsModeRead" xml:space="preserve">
+    <value>Чтение</value>
+  </data>
+  <data name="BaseSettingsModeReadDescription" xml:space="preserve">
+    <value>вся информация отображается на экране</value>
+  </data>
+  <data name="BaseSettingsModeReadOrVoice" xml:space="preserve">
+    <value>ЧтениеИлиГолос</value>
+  </data>
+  <data name="BaseSettingsModeReadOrVoiceDescription" xml:space="preserve">
+    <value>вся информация отображается или произносится</value>
+  </data>
+  <data name="BaseSettingsModeVoice" xml:space="preserve">
+    <value>Голос</value>
+  </data>
+  <data name="BaseSettingsModeVoiceDescription" xml:space="preserve">
+    <value>вся информация произносится</value>
   </data>
   <data name="ButtonApply" xml:space="preserve">
     <value>Применить</value>
@@ -171,26 +192,54 @@
   <data name="CommandBattery" xml:space="preserve">
     <value>заряд батареи</value>
   </data>
+  <data name="CommandBatteryCharging" xml:space="preserve">
+    <value>Ура! Еда</value>
+  </data>
   <data name="CommandBatteryDescription" xml:space="preserve">
     <value>уведомляет о текущем заряде батареи</value>
   </data>
+  <data name="CommandBatteryFull" xml:space="preserve">
+    <value>Я наелся</value>
+  </data>
   <data name="CommandCall" xml:space="preserve">
     <value>позвони</value>
+  </data>
+  <data name="CommandCallContactHaveSeveralPhoneNumberCommandCallContactHaveFewPhoneNumbers" xml:space="preserve">
+    <value>У {0} есть несколько номеров, который выбрать?</value>
+  </data>
+  <data name="CommandCallContactNotFound" xml:space="preserve">
+    <value>{0} не найден.</value>
   </data>
   <data name="CommandCallDescription" xml:space="preserve">
     <value>делает вызов, если данный пользователь был найден в вашем списке контактов.</value>
   </data>
   <data name="CommandCallExtendedDescription" xml:space="preserve">
-    <value>Делает вызов, если данный пользователь был найден в вашем списке контактов. Для вашего удобства добавлено склонение имен и фамилий, при условии, сначало имя, потом фамилия, дальше все остальное.
+    <value>Делает вызов, если данный пользователь был найден в вашем списке контактов. Если найдено несколько контактов с данным названием, то предлагается выбор и нужно ответить: "нулевой" или "ноль", "первый" или "один" и т.д до 9 включительно, больше не поддерживается.
+Для вашего удобства добавлено склонение имен и фамилий, при условии, сначало имя, потом фамилия, дальше все остальное.
 Все символы кроме букв удаляются, поэтому у контакта "Тигр Тигров9 (друг)" останется "Тигр Тигров друг" и будут доступны следующие команды:
 1. Петти позвони Тигр Тигров друг
 2. Петти позвони Тигру Тигрову друг</value>
+  </data>
+  <data name="CommandCallNotPhoneNumbers" xml:space="preserve">
+    <value>У {0} номер телефона не найден.</value>
+  </data>
+  <data name="CommandCallSelectNumberFromList" xml:space="preserve">
+    <value>Выберите номер из списка.</value>
   </data>
   <data name="CommandDeviceInfo" xml:space="preserve">
     <value>характеристики телефона</value>
   </data>
   <data name="CommandDeviceInfoDescription" xml:space="preserve">
     <value>уведомляет о характеристиках телефона</value>
+  </data>
+  <data name="CommandDial" xml:space="preserve">
+    <value>набери</value>
+  </data>
+  <data name="CommandDialDescription" xml:space="preserve">
+    <value>набирает номер телефона, поддерживается набор, как с префиксом +7 или 8, так и без. После набора нужно проверить правильность набраного номера и сказать "позвони" или "позвонить".</value>
+  </data>
+  <data name="CommandExceptionInCode" xml:space="preserve">
+    <value>Прости, в моем коде произошла ошибка и не получилось выполнить команду. Плак, плак.</value>
   </data>
   <data name="CommandFlashlight" xml:space="preserve">
     <value>фонарик</value>
@@ -214,7 +263,7 @@
     <value>выбрать файлы</value>
   </data>
   <data name="CommandPickFilesDescription" xml:space="preserve">
-    <value>отрывает список для выбора файлов</value>
+    <value>открывает список для выбора файлов</value>
   </data>
   <data name="CommandPickImages" xml:space="preserve">
     <value>выбрать фото</value>
@@ -234,6 +283,12 @@
   <data name="CommandScreenshotDescription" xml:space="preserve">
     <value>делает снимок экрана.</value>
   </data>
+  <data name="CommandsTitle" xml:space="preserve">
+    <value>Команды</value>
+  </data>
+  <data name="CommandsTitleUsefulFeatures" xml:space="preserve">
+    <value>Полезные фичи:</value>
+  </data>
   <data name="CommandTakePhoto" xml:space="preserve">
     <value>сделать фото</value>
   </data>
@@ -245,6 +300,12 @@
   </data>
   <data name="CommandTakeVideoDescription" xml:space="preserve">
     <value>открывает окно для создания видео файла</value>
+  </data>
+  <data name="CommandWordCancel" xml:space="preserve">
+    <value>отмена</value>
+  </data>
+  <data name="CommandWordNo" xml:space="preserve">
+    <value>нет</value>
   </data>
   <data name="DeviceInfo" xml:space="preserve">
     <value>Информация об устройстве</value>
@@ -279,42 +340,6 @@
   <data name="DeviceInfoWidth" xml:space="preserve">
     <value>Ширина</value>
   </data>
-  <data name="EditorVoiceTestSpeech" xml:space="preserve">
-    <value>Привет, кожаный мешок, как дела?</value>
-  </data>
-  <data name="InformationPerceptionMode" xml:space="preserve">
-    <value>Способ восприятия информации:</value>
-  </data>
-  <data name="InformationPerceptionModeRead" xml:space="preserve">
-    <value>Чтение</value>
-  </data>
-  <data name="InformationPerceptionModeReadDescription" xml:space="preserve">
-    <value>вся информация отображается на экране</value>
-  </data>
-  <data name="InformationPerceptionModeReadOrVoice" xml:space="preserve">
-    <value>ЧтениеИлиГолос</value>
-  </data>
-  <data name="InformationPerceptionModeReadOrVoiceDescription" xml:space="preserve">
-    <value>вся информация отображается или произносится</value>
-  </data>
-  <data name="InformationPerceptionModeVoice" xml:space="preserve">
-    <value>Голос</value>
-  </data>
-  <data name="InformationPerceptionModeVoiceDescription" xml:space="preserve">
-    <value>вся информация произносится</value>
-  </data>
-  <data name="LabelSettingsCurrentLanguage" xml:space="preserve">
-    <value>Текущий язык (применится только после перезапуска приложения):</value>
-  </data>
-  <data name="LabelSettingsPitch" xml:space="preserve">
-    <value>Подача</value>
-  </data>
-  <data name="LabelSettingsValue" xml:space="preserve">
-    <value>Значение: {0}</value>
-  </data>
-  <data name="LabelSettingsVolume" xml:space="preserve">
-    <value>Громкость</value>
-  </data>
   <data name="PageAbout" xml:space="preserve">
     <value>Информация</value>
   </data>
@@ -342,41 +367,8 @@
   <data name="PageVoiceSettings" xml:space="preserve">
     <value>Голос</value>
   </data>
-  <data name="SpeechCommandBracket" xml:space="preserve">
-    <value>скобка</value>
-  </data>
-  <data name="SpeechCommandColon" xml:space="preserve">
-    <value>двоеточие</value>
-  </data>
-  <data name="SpeechCommandComma" xml:space="preserve">
-    <value>запятая</value>
-  </data>
-  <data name="SpeechCommandExclamationMark" xml:space="preserve">
-    <value>восклицательный знак</value>
-  </data>
-  <data name="SpeechCommandNewLine" xml:space="preserve">
-    <value>новая строка</value>
-  </data>
-  <data name="SpeechCommandPoint" xml:space="preserve">
-    <value>точка</value>
-  </data>
-  <data name="SpeechCommandQuestionMark" xml:space="preserve">
-    <value>вопросительный знак</value>
-  </data>
-  <data name="SpeechCommandQuote" xml:space="preserve">
-    <value>кавычки</value>
-  </data>
-  <data name="TitleCommands" xml:space="preserve">
-    <value>Команды</value>
-  </data>
   <data name="TitleDownloading" xml:space="preserve">
     <value>Скачивание</value>
-  </data>
-  <data name="TitlePunctuationWords" xml:space="preserve">
-    <value>Слова для знаков пунктуации:</value>
-  </data>
-  <data name="UsefulFeatures" xml:space="preserve">
-    <value>Полезные фичи:</value>
   </data>
   <data name="UserMessageCheckNetworkConnection" xml:space="preserve">
     <value>Проверьте соединение к сети и попробуйте снова.</value>
@@ -386,9 +378,6 @@
   </data>
   <data name="UserMessageCommandNotSupported" xml:space="preserve">
     <value>Эта команда не поддерживается на этом устройстве.</value>
-  </data>
-  <data name="UserMessageContactNotFound" xml:space="preserve">
-    <value>{0} не найдет.</value>
   </data>
   <data name="UserMessageDisablePettyGuard" xml:space="preserve">
     <value>Вы точно хотите отключить защиту Пэтти?</value>
@@ -404,12 +393,24 @@
 Решение есть!!! 
 Петти тренажер для речи поможет вам в этом непростом деле. 
 Просто начни говорить, а он покажет, что слышат люди. 
-Здесь будет ваша речь, удачи!)</value>
+Научись говорить внятно, удачи!)</value>
   </data>
   <data name="UserMessagePettyStartStopRemark" xml:space="preserve">
     <value>П.С. Это кнопка запускает и останавливает голосового помощника Петти во всем приложении.</value>
   </data>
   <data name="UserMessageTryLater" xml:space="preserve">
     <value>Эта операция уже выполняется. Пожалуйста, повторите попытку позже.</value>
+  </data>
+  <data name="VoiceSettingsEditorVoiceTestSpeech" xml:space="preserve">
+    <value>Привет, кожаный мешок, как дела?</value>
+  </data>
+  <data name="VoiceSettingsPitch" xml:space="preserve">
+    <value>Подача</value>
+  </data>
+  <data name="VoiceSettingsValue" xml:space="preserve">
+    <value>Значение: {0}</value>
+  </data>
+  <data name="VoiceSettingsVolume" xml:space="preserve">
+    <value>Громкость</value>
   </data>
 </root>

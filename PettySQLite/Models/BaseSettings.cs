@@ -9,4 +9,5 @@ public partial class BaseSettings : IDatabaseItem
 
     public string LanguageType = CultureInfo.CurrentCulture.Name;
     public InformationPerceptionModes InformationPerceptionMode { get; set; }
+    public bool IsHapticFeedback { get; set; } = true;
 }

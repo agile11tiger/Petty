@@ -1,9 +1,10 @@
 ﻿using Microsoft.Extensions.Logging;
+using SpeechEngine.Services;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 namespace Petty.Services.Local;
 
-public class LoggerService
+public class LoggerService: ILoggerService
 {
     public void Log(
         Exception exception,
@@ -25,5 +26,4 @@ public class LoggerService
     {
         Debug.WriteLine($"{DateTime.UtcNow}. {sourceFilePath}. {memberName}. {sourceLineNumber}.\r\n{message}\r\n{exception}");
     }
-
 }

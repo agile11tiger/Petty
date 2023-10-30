@@ -1,4 +1,5 @@
-﻿namespace Petty.Services.Local;
+﻿using Microsoft.EntityFrameworkCore;
+namespace Petty.Services.Local;
 
 public class DatabaseService(ApplicationDbContext applicationDbContext) : Service
 {
@@ -6,9 +7,9 @@ public class DatabaseService(ApplicationDbContext applicationDbContext) : Servic
 
     public async Task CreateOrUpdateAsync<T>(T item) where T : class, IDatabaseItem
     {
-        if (Contains<T>(item.Id, out T result))
+        if (Contains<T>(item.Id))
         {
-            await UpdateAsync<T>(result);
+            await UpdateAsync<T>(item);
         }
         else
         {
@@ -37,9 +38,13 @@ public class DatabaseService(ApplicationDbContext applicationDbContext) : Servic
         ApplicationDbContext.ChangeTracker.Clear();
     }
 
-    public bool Contains<T>(int id, out T result) where T : class
+    public bool Contains<T>(int id) where T : class
     {
-        result = ApplicationDbContext.Find<T>(id);
+        var result = ApplicationDbContext.Find<T>(id);
+
+        if (result != default)
+            ApplicationDbContext.Entry(result).State = EntityState.Detached;
+
         return result != default;
     }
 }

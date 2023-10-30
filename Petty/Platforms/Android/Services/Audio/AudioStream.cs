@@ -1,6 +1,7 @@
 ﻿using Android.Media;
 using Petty.Services.Local.PermissionsFolder;
 using Petty.Services.Platforms.Audio;
+using SpeechEngine.Audio;
 namespace Petty.Platforms.Android.Services.Audio;
 
 internal class AudioStream : IAudioStream
@@ -45,7 +46,6 @@ internal class AudioStream : IAudioStream
     private static readonly object _locker = new();
 
     private event Action<byte[]> BroadcastData;
-    public event Action<bool> ActiveStatusChanged;
     public event Action<Exception> ExceptionCatched;
 
     public int ChannelCount => _audioRecord.ChannelCount;

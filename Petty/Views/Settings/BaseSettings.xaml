@@ -10,9 +10,9 @@
     <ScrollView>
         <Grid Margin="10"
               ColumnDefinitions="2*, *"
-              RowDefinitions="50,1,50,1,100">
+              RowDefinitions="50,1,50,1,50,1,100">
 
-            <Label Grid.Row="0" Grid.Column="0" Text="{x:Static resources:AppResources.LabelSettingsCurrentLanguage}"/>
+            <Label Grid.Row="0" Grid.Column="0" Text="{x:Static resources:AppResources.BaseSettingsCurrentLanguage}"/>
             <controls:PickerView Grid.Row="0"
                                  Grid.Column="1"
                                  ItemsSource="{Binding Languages}"
@@ -20,7 +20,7 @@
                                  SelectedItemName="{Binding PickerLanguageSelectedItemName}"/>
             <BoxView Grid.Row="1" Grid.ColumnSpan="2"/>
 
-            <Label Grid.Row="2" Grid.Column="0" Text="{x:Static resources:AppResources.InformationPerceptionMode}"/>
+            <Label Grid.Row="2" Grid.Column="0" Text="{x:Static resources:AppResources.BaseSettingsMode}"/>
             <controls:PickerView Grid.Row="2"
                                  Grid.Column="1"
                                  WidthRequest="140"
@@ -29,8 +29,15 @@
                                  SelectedItemName="{Binding InformationPerceptionModeSelectedItemName}"/>
             <BoxView Grid.Row="3" Grid.ColumnSpan="2"/>
 
+            <Label Grid.Row="4" Grid.Column="0" Text="{x:Static resources:AppResources.BaseSettingsHapticalFeedback}"/>
+            <Switch Grid.Row="4"
+                    Grid.Column="1"
+                    HorizontalOptions="Center"
+                    IsToggled="{Binding TempBaseSettings.IsHapticFeedback}"/>
+            <BoxView Grid.Row="5" Grid.ColumnSpan="2"/>
+
             <StackLayout Spacing="20" 
-                         Grid.Row="4" 
+                         Grid.Row="6" 
                          Grid.ColumnSpan="2" 
                          Orientation="Horizontal" 
                          VerticalOptions="Center"

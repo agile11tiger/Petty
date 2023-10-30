@@ -7,7 +7,7 @@ public abstract class PettyCommand
 {
     static PettyCommand()
     {
-        _messager = MauiProgram.ServiceProvider.GetService<IMessenger>();
+        _messenger = MauiProgram.ServiceProvider.GetService<IMessenger>();
         _pathsService = MauiProgram.ServiceProvider.GetService<PathsService>();
         _loggerService = MauiProgram.ServiceProvider.GetService<LoggerService>();
         _audioPlayerService = MauiProgram.ServiceProvider.GetService<AudioPlayerService>();
@@ -15,7 +15,7 @@ public abstract class PettyCommand
         _userMessagesService = MauiProgram.ServiceProvider.GetService<UserMessagesService>();
     }
 
-    protected static readonly IMessenger _messager;
+    protected static readonly IMessenger _messenger;
     protected static readonly PathsService _pathsService;
     protected static readonly LoggerService _loggerService;
     protected static readonly AudioPlayerService _audioPlayerService;

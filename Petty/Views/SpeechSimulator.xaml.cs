@@ -2,7 +2,7 @@ namespace Petty.Views;
 
 public partial class SpeechSimulatorPage : ContentPage
 {
-    public SpeechSimulatorPage(SpeechSimulatorViewModel speechSimulatorViewModel, AppShellViewModel appShellViewModel)
+    public SpeechSimulatorPage(SpeechSimulatorViewModel speechSimulatorViewModel)
     {
         BindingContext = speechSimulatorViewModel;
         Behaviors.Add(new EventToCommandBehavior { EventName = nameof(Appearing), Command = speechSimulatorViewModel.AppearingCommand });

@@ -73,18 +73,21 @@ public partial class DisplayAlertViewModel : ViewModelBase
     [RelayCommand]
     private async Task SelectionChangedAsync(PopupPage displayAlertPage)
     {
+        HapticFeedback();
         await CloseAsync(displayAlertPage);
     }
 
     [RelayCommand]
     private async Task LinkTappedAsync(Func<Task> func)
     {
+        HapticFeedback();
         await func();
     }
 
     [RelayCommand]
     private async Task AcceptAsync(PopupPage displayAlertPage)
     {
+        HapticFeedback();
         _isAccepted = true;
         await CloseAsync(displayAlertPage);
     }
@@ -92,6 +95,7 @@ public partial class DisplayAlertViewModel : ViewModelBase
     [RelayCommand]
     private async Task CancelAsync(PopupPage displayAlertPage)
     {
+        HapticFeedback();
         await CloseAsync(displayAlertPage);
     }
 

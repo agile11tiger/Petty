@@ -7,6 +7,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Petty", "Petty\Petty.csproj
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PettySQLite", "PettySQLite\PettySQLite.csproj", "{32B41AC5-47A6-44ED-8868-264A2253A0B7}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PettyUnitTests", "PettyUnitTests\PettyUnitTests.csproj", "{2788C2A2-0192-44D8-BACB-A7BA883F5F54}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpeechEngine", "SpeechEngine\SpeechEngine.csproj", "{D2F87AF1-7919-4B2A-9810-4BA8F9147152}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,6 +27,14 @@ Global
 		{32B41AC5-47A6-44ED-8868-264A2253A0B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{32B41AC5-47A6-44ED-8868-264A2253A0B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{32B41AC5-47A6-44ED-8868-264A2253A0B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2788C2A2-0192-44D8-BACB-A7BA883F5F54}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2788C2A2-0192-44D8-BACB-A7BA883F5F54}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2788C2A2-0192-44D8-BACB-A7BA883F5F54}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2788C2A2-0192-44D8-BACB-A7BA883F5F54}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D2F87AF1-7919-4B2A-9810-4BA8F9147152}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2F87AF1-7919-4B2A-9810-4BA8F9147152}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2F87AF1-7919-4B2A-9810-4BA8F9147152}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2F87AF1-7919-4B2A-9810-4BA8F9147152}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

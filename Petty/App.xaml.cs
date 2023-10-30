@@ -8,12 +8,13 @@ public partial class App : Application
 {
     public App(
         IMessenger messenger,
+        SettingsService settingsService,
         IVersionTracking versionTracking,
         AppShellViewModel appShellViewModel,
         NavigationService navigationService,
         LocalizationService localizationService)
     {
-        Initialize(localizationService, versionTracking);
+        Initialize(localizationService, settingsService);
         //TODO: По желанию поддержать две темы и в настройках давать выбор.
         //https://learn.microsoft.com/en-us/dotnet/maui/user-interface/theming
         //https://www.youtube.com/watch?v=0cY8iCz50fI&ab_channel=DanielHindrikes
@@ -47,11 +48,8 @@ public partial class App : Application
         });
     }
 
-    private void Initialize(LocalizationService localizationService, IVersionTracking versionTracking)
+    private void Initialize(LocalizationService localizationService, SettingsService settingsService)
     {
-        var language = Preferences.Default.Get<string>(SharedPreferencesHelper.LANGUAGE, null);
-
-        if (language is not null)
-            localizationService.SetCulture(new CultureInfo(language));
+        localizationService.SetCulture(new CultureInfo(settingsService.Settings.BaseSettings.LanguageType));
     }
 }
